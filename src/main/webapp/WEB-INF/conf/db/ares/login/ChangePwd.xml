@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ChangePwd" desc="修改密码" ibatisStatement="SYS_USER.updatePassWordByUserId">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<!--过滤响应信息，并对数据字典进行解析-->
+		<field name="USER_ID" length="20" type="C" desc="用户名称"  required="true"/>
+		<field name="USER_PSW" length="32" type="C" desc="原密码"  required="true"/>
+		<field name="USER_NEWPSW" length="32" type="C" desc="新密码"  required="true"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

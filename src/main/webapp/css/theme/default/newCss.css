@@ -1,0 +1,840 @@
+.hiden {
+	display: none;
+}
+
+a {
+	color: rgb(56, 117, 153);
+	cursor: pointer;
+}
+
+.moneyS {
+	font-size: 15px;
+	color: green;
+	font-weight: bold;
+}
+
+/* 渐变色   */
+.gradient_css {
+	filter: progid :                 DXImageTransform.Microsoft.gradient (  
+		       
+		      startColorstr =        
+		        '#FFFFFF', endColorstr =                 '#CDCDCD' );
+	/* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF),
+		to(#CDCDCD) ); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #FFFFFF, #CDCDCD);
+	/* for firefox 3.6+ */
+}
+
+.DateBg {
+	background: url("../../images/core/date_img.png") no-repeat scroll 98%
+		50% transparent;
+	width: 120px;
+	border: 1px solid rgb(211, 211, 211);
+	height: 22px;
+}
+
+.input_title {
+	font-size: 12px;
+	text-align: left;
+	height: 30px;
+	font-weight: bold;
+	line-height: 30px;
+	color: rgb(85, 85, 85);
+	border: 1px solid #E4E4E4;
+	padding-left: 8px;
+	border-bottom: 0;
+}
+
+.addBut {
+	border: 1px solid #888;
+	padding: 1px 3px;
+	cursor: pointer;
+	display: blcok;
+	float: right;
+}
+
+.iceBut {
+	border: 1px solid #888;
+	padding: 1px 3px;
+	cursor: pointer;
+	display: blcok;
+	float: right;
+}
+
+.delBut {
+	border: 1px solid #888;
+	padding: 1px 3px;
+	cursor: pointer;
+	display: blcok;
+	float: right;
+}
+
+.div_message {
+	border: 1px solid #DEDEDE;
+	border-radius: 5px;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.cardOuter {
+	height: 130px;
+}
+
+.acctCard {
+	cursor: pointer;
+	width: 280px;
+	height: 120px;
+	padding: 0px 0px;
+	text-align: left;
+	background-image: url("../../images/card/card_mop.png");
+	border-radius: 0.4em 0.4em 0.4em 0.4em;
+	margin-top: 0px;
+	border: 1px solid #eee;
+	-moz-box-shadow: 1px 4px 0px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 1px 4px 0px rgba(0, 0, 0, .2);
+	box-shadow: 1px 4px 0px rgba(0, 0, 0, .2);
+}
+
+.panel_handle {
+	cursor: pointer;
+}
+
+.bg_mop {
+	background-image: url("../../images/card/card_mop.png");
+}
+
+.bg_hkd {
+	background-image: url("../../images/card/card_hkd.png");
+}
+
+.bg_muti {
+	background-image: url("../../images/card/card_muti.png");
+}
+
+.acctCard:hover {
+	border: 1px solid #aac;
+	-moz-box-shadow: 2px 5px 2px rgba(0, 0, 0, .3);
+	-webkit-box-shadow: 2px 5px 2px rgba(0, 0, 0, .3);
+	box-shadow: 2px 5px 2px rgba(0, 0, 0, .3);
+}
+
+.acctCard .selected {
+	width: 57px;
+	height: 57px;
+	background-image: url("../../images/card/card_selected.png");
+	background-repeat: no-repeat;
+	float: right;
+	margin-right: -6px;
+	margin-top: -54px;
+}
+
+.acctCard .card_head {
+	color: #387599;
+	font-size: 15px;
+	margin-left: 10px;
+	margin-top: 15px;
+}
+
+.acctCard .card_content {
+	margin-top: 6px;
+	height: 80px;
+	width: 270px;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.whitebg {
+	background-color: #fff;
+	background-image: none;
+}
+
+/* **中银澳分行收款人卡片修正* */
+.cardPayee {
+	background-image: url("../../images/card/card_payee.jpg");
+	width: 263px;
+	float: none;
+}
+
+.cardPayee .selected {
+	margin-top: -48px;
+}
+
+.acctCardContact .acctCard {
+	background-image: url("../../images/card/card_payee.jpg");
+	width: 263px;
+	float: none;
+}
+
+.acctCardContact .acctCard .selected {
+	margin-top: -48px;
+}
+
+/* 首页各个模块的标题栏样式 渐变色   */
+.column_tittle {
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+	height: 25px;
+	line-height: 25px;
+	padding: 3px 5px;
+	border-bottom: 1px solid #dfdfdf;
+	filter: progid :           DXImageTransform.Microsoft.gradient (       
+		   startColorstr =     
+		     '#FFFFFF', endColorstr =           '#F1F1F1' ); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF),
+		to(#F1F1F1) ); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #FFFFFF, #F1F1F1);
+	/* for firefox 3.6+ */
+}
+
+/* 
+ *	左侧卡片区切换按钮样式   ---start
+ *	TAB按钮默认  height: 30px;  width:60px;
+ *	如果宽度不够，可在调用页面进行设置，切记：加上记得的唯一标识
+ *	可参考 demo/newIndex/charts.html
+ */
+.minePanelHeader {
+	height: 30px;
+	border-width: 1px 1px 0;
+	border-style: solid solid none;
+	border-color: #E1E1E1;
+	border-bottom: 1px solid #9fafb5;
+}
+
+.minePanelHeader .tab_title {
+	color: rgb(85, 85, 85);
+	float: left;
+	padding-left: 5px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.TAB_BG {
+	filter: progid :           DXImageTransform.Microsoft.gradient (       
+		   startColorstr =     
+		     '#E0E0E0', endColorstr =           '#F1F1F1' ); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#E0E0E0),
+		to(#F1F1F1) ); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #E0E0E0, #F1F1F1);
+	/* for firefox 3.6+ */
+}
+
+.minePanelHeader ul.card-tabs {
+	float: right;
+	margin: 0px !important;
+	padding: 0px;
+	height: 20px;
+}
+
+.minePanelHeader ul.card-tabs li {
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.minePanelHeader ul.card-tabs a:hover {
+	line-height: 28px;
+	width: 60px;
+	background-color: rgb(255, 255, 238);
+	margin-top: 2px;
+	color: rgb(51, 51, 51);
+	font-weight: bold;
+}
+
+.minePanelHeader ul.card-tabs a {
+	margin-top: 2px;
+	float: left;
+	margin-right: 2px;
+	display: block;
+	text-align: center;
+	width: 60px;
+	text-decoration: none;
+	line-height: 28px;
+	outline: 0px none;
+	color: rgb(119, 119, 119);
+	background-color: rgb(243, 243, 243);
+}
+
+.minePanelHeader ul.card-tabs a.current {
+	width: 58px;
+	line-height: 29px;
+	cursor: default;
+	margin-top: 1px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(255, 255, 255);
+	border-width: 1px 1px 0;
+	border-style: solid solid none;
+	border-color: #899799;
+	-moz-box-shadow: 0px 2px 3px rgb(150, 150, 150) inset;
+	/* For Firefox3.6+ */
+	-webkit-box-shadow: 0px 2px 3px rgb(150, 150, 150) inset;
+	/* For Chrome5+, Safari5+ */
+	box-shadow: 0px 2px 3px rgb(150, 150, 150) inset;
+	/* For Latest Opera */
+}
+/* 左侧卡片区切换按钮样式                 ---end */
+
+/**公共卡片樣式**/
+.panel_handle {
+	font-size: 13px;
+	text-align: left;
+	height: 30px;
+	font-weight: bold;
+	line-height: 30px;
+	color: rgb(85, 85, 85);
+	border: 1px solid #E4E4E4;
+	border-bottom: 0;
+	background-color: rgb(210, 210, 210);
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	clear: both;
+}
+
+.panel_handle .selected {
+	color: black;
+	float: right;
+	font-weight: bold;
+}
+
+.panel_handle_content .title {
+	background-color: rgba(0, 0, 0, 0);
+	float: left;
+	padding-left: 5px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+.TAB_BG {
+	background-color: #eee;
+}
+
+.bg_white {
+	background-color: rgb(255, 255, 255);
+}
+
+.TAB_CARD {
+	
+}
+
+.TAB_PANEL {
+	min-width: 280px;
+	height: 380px;
+	border: 1px solid #E4E4E4;
+	padding: 8px 5px;
+	overflow: hidden;
+}
+
+.TAB_PANEL .cardMessage {
+	color: blue;
+	text-align: center;
+}
+
+.outerPanel {
+	height: 
+}
+
+.TAB_BOTTOM_HAVE {
+	background-color: #faa;
+}
+
+.TAB_BOTTOM {
+	margin-bottom: 18px;
+}
+
+.TAB_BOTTOM .div_left {
+	width: 49.8%;
+	height: 15px;
+	background-color: #E2E2E2;
+	float: left;
+	border-bottom-left-radius: 0.4em;
+	text-align: center;
+	margin-right: 0.2%;
+}
+
+.TAB_BOTTOM .div_right {
+	width: 49.8%;
+	height: 15px;
+	background-color: #E2E2E2;
+	float: left;
+	border-bottom-right-radius: 0.4em;
+	text-align: center;
+	margin-left: 0.2%;
+}
+/* .TAB_BOTTOM .div_left:hover {
+	background-color: #abc;
+}
+.TAB_BOTTOM .div_right:hover {
+	background-color: #abc;
+} */
+
+.TAB_BOTTOM .img_down {
+	margin: auto auto;
+	margin-top: 5px;
+}
+
+.TAB_BOTTOM .img_up {
+	margin: auto auto;
+}
+
+.TAB_BOTTOM_HAVE {
+	background-color: #FFFF00;
+}
+
+/** 公共卡片樣式  --end **/
+
+/**  完成頁面    **/
+.result-page {
+	
+}
+
+.result-page .panel-left {
+	width: 770px;
+	float: left;
+}
+
+.result-page .panel-right {
+	width: 230;
+	overflow-x: hidden;
+	float: left;
+	padding-left: 10px;
+}
+
+.result-page .success {
+	background: url("../../images/core/msg_ok.png") no-repeat scroll left
+		top transparent;
+}
+
+.result-page .error {
+	background: url("../../images/core/msg_no.png") no-repeat scroll left
+		top transparent;
+}
+
+.result-page .warn {
+	background: url("../../images/core/msg_no.png") no-repeat scroll left
+		top transparent;
+}
+
+.result-page .msg_div {
+	height: 120px;
+	border: 1px solid rgb(204, 204, 204);
+	width: 100%;
+}
+
+.result-page .msg_pic {
+	width: 53px;
+	height: 57px;
+	float: left;
+	margin-top: 32px;
+	margin-left: 100px;
+}
+
+.result-page .msg_span {
+	line-height: 30px;
+	padding-top: 30px;
+	padding-left: 20px;
+	float: left;
+	text-align: left;
+	width: 64%;
+}
+.result-page .successSpan {
+	background-color: #E3E3E3;
+	line-height: 120px;
+	width: 80px;
+	float: right;
+	text-align: center;
+	font-weight: bold;
+}
+.result-page .div_panel {
+	width: 100%;
+	border: 1px solid rgb(204, 204, 204);
+	border-top: none;
+	border-radius: 0 0 7px 7px;
+	float: left;
+	min-height: 328px;
+}
+/**  溫馨提示    **/
+.div_tips {
+	padding-top: 10px;
+	text-align: left;
+}
+
+.div_tips .tips_content {
+	border: 1px solid rgb(222, 222, 222);
+	border-radius: 5px 5px 5px 5px;
+	padding: 10px;
+	margin-top: 5px;
+	font-size: 14px;
+}
+
+.div_tips .tips_content .tips_text {
+	padding-left: 10px;
+	line-height: 20px;
+}
+
+.div_tips .tips_content .tips_title {
+	width: 17px;
+	height: 17px;
+	background-image: url('../../images/core/tips_title.png');
+	padding-bottom: 3px;
+	float: left;
+}
+
+.div_tips .tips_header>div {
+	width: 91px;
+	height: 21px;
+	background-image: url('../../images/core/tips.png');
+}
+/**  自定義複選框   **/
+.icheckbox {
+	clear: both;
+	border: 1px solid rgb(211, 211, 211);
+	width: 99.6%;
+	height: 25px;
+	vertical-align: middle;
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.icheckbox_main {
+	text-align: center;
+	height: 25px;
+	width: 26px;
+	border-width: 0 1px 0 0;
+	border-style: none solid none none;
+	border-color: #d3d3d3;
+	float: left;
+	line-height: 25px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.icheckbox_label {
+	font-size: 12px;
+	float: left;
+	padding-top: 5px;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.icheckbox_main>img {
+	margin-top: 3px;
+	height: 17px;
+	width: 17px;
+}
+
+.delete>img {
+	height: 22px;
+	width: 22px;
+}
+
+.clear {
+	clear: both;
+}
+
+/**刪除彈出窗樣式 **/
+.showWindow ul {
+	list-style: none;
+	width: 280px;
+}
+
+.showWindow ul li {
+	list-style: none;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+}
+
+.showWindow .result-partB ul {
+	list-style: none;
+	width: 280px;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
+.showWindow .result-partB ul li {
+	list-style: none;
+	height: 25px;
+	line-height: 25px;
+	text-align: left;
+}
+
+.showWindow.result-page .msg_pic {
+	width: 53px;
+	height: 57px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 60px;
+	margin-right: 20px;
+}
+
+.showWindow.result-page .msg_span {
+	line-height: 82px;
+	padding: 0 20px;
+	float: left;
+}
+
+.showWindow .result-partA {
+	text-align: left;
+	height: 82px;
+	line-height: 82px;
+	padding-left: 20px;
+	border: 1px solid rgb(204, 204, 204);
+	width: 612px;
+}
+
+.showWindow .result-partB {
+	width: 632px;
+	border-width: 0 1px 1px;
+	border-style: solid;
+	border-color: rgb(204, 204, 204);
+	height: 130px;
+}
+
+/**聯繫人卡片**/
+.muster .delButton {
+	border: 1px solid rgb(136, 136, 136);
+	padding: 1px 5px 1px 5px;
+	cursor: pointer;
+	border-radius: 0.4em 0.4em 0.4em 0.4em;
+}
+
+.muster .editButton {
+	border: 1px solid rgb(136, 136, 136);
+	padding: 1px 5px 1px 5px;
+	cursor: pointer;
+	border-radius: 0.4em 0.4em 0.4em 0.4em;
+	background-color: rgb(180, 238, 180);
+}
+
+.muster .delButton:hover,.editButton:hover {
+	background-image: url("../../images/core/23_04.png");
+	color: rgb(0, 0, 0);
+}
+
+.muster .muster_card {
+	border: 1px none rgba(241, 39, 242, 0.75);
+	width: 310px;
+	height: 193px;
+	margin: 0px 0px 0px 5px;
+	padding: 0px;
+	float: left;
+	background-image: url(../../images/card/payee_bg.png);
+}
+
+.muster .card_panel {
+	float: left;
+	border: 1px solid rgb(204, 204, 204);
+}
+
+.muster .muster_card table {
+	font-size: 14px;
+}
+
+.muster .muster_card .line {
+	height: 20px;
+}
+/* 圆角  */
+.muster .radius_css {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+/* 圆形头像 */
+.muster .round_avatar {
+	width: 90px;
+	height: 90px;
+	border-radius: 50px 50px 50px 50px;
+	overflow: hidden;
+	float: left;
+	margin-top: -20px;
+	margin-left: 15px;
+}
+
+.muster .round_avatar>img {
+	width: 90px;
+	height: 90px;
+}
+
+.muster .action {
+	float: right;
+	width: 175px;
+	height: 18px;
+	text-align: right;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.muster .action>span {
+	line-height: 15px;
+	color: #000;
+	margin-right: 10px;
+	height: 15px;
+}
+
+.muster .title {
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+	maring-left: 10px;
+	width: 1000px
+}
+
+.muster .musterTab {
+	background: -moz-linear-gradient(center top, rgb(224, 224, 224),
+		rgb(241, 241, 241) ) repeat scroll 0% 0% transparent;
+}
+
+.muster .musterTab ul.card-tabs li a {
+	width: 130px;
+}
+
+.muster .musterTab ul.card-tabs li a.current {
+	width: 125px;
+}
+
+.muster .musterTab ul.card-tabs li a.current:hover {
+	width: 125px;
+}
+
+.muster .beauBtn {
+	float: right;
+	background-image: url(../../images/core/enterAcct.png);
+	width: 98px;
+	text-align: center;
+	cursor: pointer;
+	height: 26px;
+	line-height: 26px;
+	margin-top: 2px;
+	margin-right: 5px;
+	color: #fff;
+}
+
+.muster .beauBtn:hover {
+	background-image: url(../../images/core/enterAcct_hover.png);
+	color: #000;
+}
+
+table.single-result {
+	width: 770px;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	margin-top: 10px;
+	line-height: 26px;
+	font-family: 'Microsoft YaHei' !important;
+	font-size: 13px;
+}
+
+table.single-result td.td-left {
+	width: 385px;
+	text-align: left;
+	padding-left: 6px;
+}
+
+table.single-result td.td-right {
+	width: 385px;
+	text-align: right;
+	padding-right: 6px;
+}
+/** 確認頁面和完成頁面的table樣式 **/
+table.confirmtable {
+	width: 810px;
+	text-align: center;
+	border: 3px solid rgb(244, 244, 244);
+	padding: 10px 0px 10px 0px;
+	margin-top: 20px;
+	line-height: 26px;
+	font-family: 'Microsoft YaHei' !important;
+	font-size: 13px;
+}
+
+table.confirmtable td.td-left {
+	width: 204px;
+	text-align: left;
+	padding-left: 6px;
+}
+
+table.confirmtable td.td-right {
+	width: 200px;
+	text-align: right;
+	padding-right: 6px;
+}
+
+/*确认页面单边显示*/
+table.confirmtableSingle {
+	width: 810px;
+	text-align: center;
+	border: 3px solid rgb(244, 244, 244);
+	padding: 10px 0px 10px 0px;
+	margin-top: 20px;
+	line-height: 26px;
+	font-family: 'Microsoft YaHei' !important;
+	font-size: 13px;
+}
+
+table.confirmtableSingle td.td-left {
+	width: 50%;
+	text-align: right;
+	padding-right: 10px;
+}
+
+table.confirmtableSingle td.td-right {
+	width: 50%;
+	text-align: left;
+	padding-left: 10px;
+}
+
+table.resulttable {
+	width: 100%;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	margin-top: 10px;
+	line-height: 26px;
+	font-family: 'Microsoft YaHei' !important;
+	font-size: 13px;
+}
+
+table.resulttable td.td-left {
+	width: 204px;
+	text-align: left;
+	padding-left: 6px;
+}
+
+table.resulttable td.td-right {
+	width: 200px;
+	text-align: right;
+	padding-right: 6px;
+}
+
+/*弹出框内结果页显示*/
+table.resulttableWindow {
+	width: 620px;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	margin-top: 10px;
+	line-height: 26px;
+	font-family: 'Microsoft YaHei' !important;
+	font-size: 13px;
+}
+
+table.resulttableWindow td.td-left {
+	width: 200px;
+	text-align: left;
+	padding-left: 6px;
+}
+
+table.resulttableWindow td.td-right {
+	width: 200px;
+	text-align: right;
+	padding-right: 6px;
+}

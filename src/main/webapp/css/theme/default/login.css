@@ -1,0 +1,447 @@
+@import "panel.css";
+body{
+	background-color: white;
+	font-family: 'Freight Sans', 'lucida grande',tahoma,verdana,arial,sans-serif !important;
+}
+input{
+	background-color: white;	
+}
+#window_keyboard{
+	position: absolute;
+	left: 684px;
+	top: 305px;
+	width: 0px;
+	height: 0x;
+	display: none;
+}
+body,div,ul,li,table {
+	margin: 0px;
+	padding: 0px;
+	border: 0px none none;
+}
+
+.ui-right {
+	float: right;
+}
+
+.ui-left {
+	float: left;
+}
+
+.ui-clear {
+	both: clear;
+}
+
+
+/*********************************************************/
+.tabs-language {
+	margin-left: 0;
+	padding-left: 0;
+	float: right;
+}
+
+.tabs-language ul {
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+	list-style: none;
+}
+
+.tabs-language ul li {
+	margin-left: 0;
+	margin-bottom: 0;
+	padding: 2px;
+	list-style: none;
+	display: inline;
+	color: #999;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.tabs-language ul li:hover {
+	padding: 2px;
+	color: #333;
+}
+
+.tabs-language ul li.current {
+	padding: 2px;
+	color: #000;
+}
+
+.loginDiv input,.loginDiv2 input{
+		height: 28px;
+		line-height: 28px;
+		font-size:15px;
+		font-family:verdana;
+		border:1px solid #ABADB3;
+}
+
+*button{
+	background: 			rgb(240,240,240) /*{a-bup-background-color}*/;
+}
+button{
+	border: 1px solid 		#888 /*{a-bup-border}*/;
+	background: 			rgb(240,240,240) /*{a-bup-background-color}*/;
+	font-weight: bold;
+	color: 					#000 /*{a-bup-color}*/;
+	font-size: 16px;
+	line-height:20px; 
+	padding: 10px 20px;
+	text-shadow: 0 1px  1px  #fff ;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff ), to( #ccc )); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff , #ccc ); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #fff , #ccc ); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff , #ccc ); /* IE10 */
+	background-image:      -o-linear-gradient( #fff , #ccc ); /* Opera 11.10+ */
+	background-image:         linear-gradient( #fff , #ccc );
+}
+
+
+button:hover{
+	border: 1px solid 		#888 /*{a-bup-border}*/;
+	background: 			#999 /*{a-bup-background-color}*/;
+	font-weight: bold;
+	color: 					#000 /*{a-bup-color}*/;
+	font-size: 16px;
+	line-height:20px; 
+	padding: 10px 20px;
+	text-shadow: 0 1px  3px  #fff ;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff ), to( #ff8 )); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff , #ff8 ); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #fff , #ff8 ); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff , #ff8 ); /* IE10 */
+	background-image:      -o-linear-gradient( #fff , #ff8 ); /* Opera 11.10+ */
+	background-image:         linear-gradient( #fff , #ff8 );
+	
+	-webkit-box-shadow: #555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	-moz-box-shadow: 	#555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	box-shadow: 		#555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	
+}
+button:active {	 
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	
+	-webkit-transform: 	translateY(1px);
+	-moz-transform: 	translateY(1px);
+	transform: 			translateY(1px); 
+}
+/***********************等待层相关样式****************************************/
+div.loading {
+	-webkit-border-radius: .4em;
+	-moz-border-radius: .4em;
+	border-radius: .4em;
+	border: 1px solid #999;
+	color: #000;
+	padding-left: 30px;
+	line-height: 30px;
+	height: 30px;
+	background: #fff url(../../images/core/load.gif) no-repeat 7px 7px;
+}
+
+
+img {
+	padding: 0px;
+	margin: 0px;
+}
+
+#form_panel{
+	width: 1024px;
+}
+
+#ads img {
+	width: 100%;
+	height: 100%;
+}
+
+span.nomal {
+	font-size: 14px;
+}
+
+span.small{
+	color: #383;
+	font-size: 14px;
+	cursor: pointer;
+	padding-right: 10px;
+	font-family: verdana;
+}
+
+span.send_small,span.send_again {
+	margin-top:5px;
+	color: #383;
+	font-size: 12px;
+	cursor: pointer;
+}
+span.error {
+	color: #f33;
+	font-size: 14px;
+}
+
+div.warn {
+	font-size: 12px;
+	padding-left: 60px;
+}
+
+
+a {
+	color: #555;
+}
+
+.hiden{
+	display: none;
+}
+.tabs-form {
+	margin-left: 0;
+	padding-left: 37px;
+}
+.tabs-form  ul {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+	float: left;
+	height: 35px;
+}
+
+.tabs-form  ul li {
+	float: left;
+	padding: 10px 0px 10px 0px;
+	width: 140px;
+	list-style: none;
+	color: #000;
+	font-size: 16px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.tabs-form  ul li:hover {
+	color: #333;
+}
+
+.tabs-form  ul li.current {
+	color: #000;
+	background-repeat: no-repeat;
+	width:140px;
+	background-image: url('../../images/login/bg_tab_1.png');
+}
+#main .cursorType{
+	cursor: pointer;
+} 
+.pac_div{
+	height: 28px;
+	line-height:28px; 
+	width: 50px;
+	float: left;
+}
+/************Table表单样式*********************/
+.x-form-invalid,textarea.x-form-invalid {
+	background: url("../../images/invalid_line.gif") repeat-x scroll center
+		bottom rgb(255, 255, 255);
+	border: 2px solid rgb(221, 120, 112);
+}
+
+.x-form-text {
+	vertical-align: middle;
+}
+
+.x-form-warn {
+	background-repeat: no-repeat;
+	background-image: url("../../images/core/exclamation.gif");
+	background-position: center;
+	/* display: inline-block; */
+	padding: 8px;
+}
+
+.pao-shadow {
+	padding: 2px;
+	margin: 0px;
+	min-height: 30px;
+	line-height: 30px;
+	font:13px;
+	-moz-border-radius: 7px 7px 7px 7px;
+	-webkit-border-radius: 7px 7px 7px 7px;
+	border-radius: 7px 7px 7px 7px;
+	/*IE*/
+	filter:progid:DXImageTransform.Microsoft.gradient( duration=0.9,startColorstr=#BFC8C8C8,endColorstr=#BFC8C8C8);
+	background-color: rgba(200, 200, 200, 0.8);
+}
+
+.pao_msg {
+	display: block;
+	min-width: 130px;
+	min-height: 30px;
+	color: rgb(87, 87, 87);
+	padding: 3px;
+	/*IE*/
+	filter:progid:DXImageTransform.Microsoft.gradient( duration=0.7,startColorstr=#BFFFFFFF,endColorstr=#BFFFFFFF);
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
+.pao_tag { /* background-color: #fff; */
+	background-repeat: no-repeat;
+	background-image: url("../../images/core/pao_bg.png");
+}
+
+.pao_tag.leftBottom {
+	position: absolute;
+	background-position: -10px;
+	left: -15px;
+	top: 5px;
+	padding-left: 20px;
+	padding-top: 30px;
+}
+
+#window_layer {
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	z-index: 120;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	position: fixed;
+}
+#login_main_div {
+	position: relative;
+	height: 303px; 
+	width: 467px; 
+	padding-top:7px; 
+	background-image: url('../../images/login/bg_form.jpg');
+	background-repeat: no-repeat; 	
+}
+#login_main_div .loginDiv,.loginDiv2{
+	right: 0px;
+	width: 430px;
+	height: 255px;
+	position: absolute
+}
+#login_main_div .login_warn{
+	height: 45px;
+	width: 430px;	
+}
+#login_main_div .login_warn li{
+	font-size: 12px;
+	width: 366px;
+	padding-left: 55px;
+	line-height: 20px;
+	text-align: left;
+	position: absolute
+}
+
+#login_main_div .loginDiv_inputs_left,.loginDiv_inputs_left2{
+	width: 310px;
+	height: 260px;
+	float:left;	
+}
+
+.loginDiv_inputs_left .login_inputs{
+	width: 320px;
+	height: 50px;
+	margin-top:20px;
+}
+.login_inputs ul{
+	height: 100%;
+}
+.loginDiv_inputs_left .login_inputs ul li{
+	height: 34px;
+	line-height: 35px;
+}
+
+.loginDiv_inputs_left2 .login_inputs{
+	width: 310px;
+	height: 39px;
+	margin-top: 12px;
+}
+
+.loginDiv_inputs_left2 .login_inputs ul li{
+	height: 34px;
+	line-height: 35px;
+}
+
+#login_main_div .loginBut{
+	position: absolute;
+	top: 320px;
+	right: 0px;
+}
+
+.loginDiv .loginDiv_inputs_right{
+	width:110px;
+	height: 210px;
+	float: right;
+	text-align: left;
+}
+.loginDiv .loginDiv_inputs_right ul{
+	height: 50%;
+	width: 100%;
+}
+
+.loginDiv .loginDiv_inputs_right li{
+	height: 60px;
+}
+
+.loginDiv .loginDiv_inputs_right li .small{
+	padding-top: 15px;
+}
+
+.loginDiv .code,.loginDiv2 .code{
+	padding-top: 10px;
+	color: #383;
+	font-size: 14px;
+	cursor: pointer;
+	padding-right: 10px;
+	font-family: verdana;
+}
+
+.loginDiv2 .loginDiv_inputs_right{
+	width:110px;
+	height: 210px;
+	float: right;
+	text-align: left;
+}
+.loginDiv2 .loginDiv_inputs_right ul{
+	height: 38%;
+	width: 100%;
+}
+.loginDiv2 .rigth_01{
+	height: 34px;
+	margin-top: 14px;
+}
+
+#login_main_div .login_input_c{
+	padding-left:3px;	
+}
+
+
+#login_main_div li{
+	list-style: none;
+	float:left;
+}
+#login_main_div .login_input_l{
+	min-width:110px;
+	padding-right: 5px;
+	text-align: right;
+}
+
+#login_main_div .input_current_S{
+	border:1px solid #006EBB;
+	box-shadow: rgb(46,145,249) -1px 0px 3px;
+	background-color: white;
+	color: black;
+}
+
+#login_main_div .password_input_div_img{
+	width:20px;
+	height:20px; 
+	position:relative;
+	top:-28px;
+	left:165px;
+	float: left;
+	background: url(../../images/core/debt_ji.gif) no-repeat right;
+	cursor: pointer;
+}
+#_ocx_password{
+	border: 1px solid #7F9DB9;
+	width: 162px;
+	height: 32px;
+	float:left;
+}

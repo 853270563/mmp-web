@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="roleApp"   desc="用户可下载应用">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="userID" length="100" type="C" desc="用户登录名"  required="true"/>
+		<field name="osType" length="1" type="C" desc="操作系统类型（1：Android， 2：IOS， 3：Android PAD； 4 ：IOS PAD）"  required="true"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field-list name="LIST" type="E">
+			<field name="APP_ID" length="20" type="C" desc="应用ID" /> 
+			<field name="APP_TYPE" length="1" type="C" desc="应用类型（1：原生，2：web；3：react）" /> 
+			<field name="APP_NAME" length="200" type="C" desc="应用名称" /> 
+			<field name="ICON_URL" length="200" type="C" desc="应用图标" /> 
+			<field name="LATEST_VERS" length="20" type="C" desc="最新版本" /> 
+			<field name="APP_PACKAGE" length="80" type="C" desc="应用PACKAGE" /> 
+			<field name="APP_ACTIVITY" length="80" type="C" desc="应用ACTIVITY" /> 
+			<field name="RES_PATH" length="200" type="C" desc="资源包名" /> 
+			<field name="RES_URL" length="1024" type="C" desc="资源包镜像地址" /> 
+			<field name="PLIST_FILE_PATH" length="200" type="C" desc="plist文件名" />
+			<field name="UPDATE_TIME" length="200" type="C" desc="更新时间" />
+			<field name="COMMENTS" length="200" type="C" desc="应用描述" />
+		</field-list>
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

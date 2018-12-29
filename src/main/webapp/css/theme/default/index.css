@@ -1,0 +1,366 @@
+body {
+	font-size: 14px; 
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	background-image: url(../../images/core/bg_body.jpg);
+}
+
+body,div,ul,li,img,table {
+	margin: 0px;
+	padding: 0px;
+	border: 0px none;
+}
+.ocx_style{
+	width:192px !important;
+	}
+img {
+	vertical-align: middle;
+}
+/* get rid of those system borders being generated for A tags */
+a:active {
+	outline: none;
+}
+
+:focus {
+	-moz-outline-style: none;
+}
+
+p {
+	word-wrap: break-word;
+}
+
+#ui-header-background {
+	background: rgb(5, 65, 119);
+	width: 100%;
+	padding-top: 300px;
+}
+
+#ui-header,#ui-footer {
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+}
+
+#ui-menubar { /* width: 100%;
+	position: fixed; */
+	
+}
+
+#ui-header {
+	top: 0px;
+	height: 124px;
+}
+
+#ui-header>div {
+	-moz-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#ui-helpInfo {
+	
+}
+
+/*yuanyou*/
+/* 	padding:88px 5px 5px 5px; */
+
+
+/* add by ypy 0625 对串流中的applet层进行控制 */
+#ui-menubar {   
+	position: fixed;
+	z-index: 101;
+    padding: 0px 5px 5px 5px;
+	margin: 0px; 
+ 	/* padding:88px 5px 5px 5px;  */
+	margin:0px 0px 0px 0px;
+	width: 1014px;
+	height: 35px;
+	background-color: rgb(245, 245, 245);
+	
+	-moz-border-radius-bottomleft: 		.4em ;
+	-webkit-border-bottom-left-radius: 	.4em ;
+	border-bottom-left-radius: 			.4em ;
+	-moz-border-radius-bottomright: 	.4em ;
+	-webkit-border-bottom-right-radius: .4em ;
+	border-bottom-right-radius: 		.4em ;
+	
+	-moz-box-shadow: #999 0 -1px 1px, 0px 2px 8px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: #999 0 -1px 1px, 0px 2px 8px rgba(0, 0, 0, 0.4);
+	box-shadow: #999 0 -1px 1px, 0px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#ui-submenubar {
+	position: fixed;
+	display: none;
+	z-index: 102;
+	top: 130px;
+	padding: 10px;
+	margin: 0px;
+	width: 1004px;
+	/* background-color: rgba(240,240,240,1);  */
+	background-color: rgba(255, 255, 255, 0.9);
+	/* min-height: 60px; */
+	overflow-y: true;
+	-webkit-box-shadow: #777 0 .1em 1px, /* border */    
+		  rgba(100, 100, 100, 0.5) 0 .2em 12px; /* drop shadow */
+	-moz-box-shadow: #777 0 .1em 1px, /* border */    
+		  rgba(100, 100, 100, 0.5) 0 .2em 12px; /* drop shadow */
+	box-shadow: #777 0 .1em 1px, /* border */       rgba(100, 100, 100, 0.5)
+		0 .2em 12px; /* drop shadow */
+}
+
+#ui-background {
+	display: none;
+	z-index: 100;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+}
+
+#ui-content {
+	width:100%;
+	min-height: 300px;
+}
+
+#ui-footer {
+	bottom: 0px;
+}
+
+#ui-footer-bar {
+	height: 35px;
+}
+
+/* #ui-header>div, */
+#ui-footer>div {
+	width: 1024px;
+}
+
+#ui-content>div {
+	min-height:600px;
+	width: 1014px;
+	background-color: #fff;
+	padding: 10px 5px;
+	-moz-border-radius-topleft: .4em;
+	-webkit-border-top-left-radius: .4em;
+	border-top-left-radius: .4em;
+	-moz-border-radius-topright: .4em;
+	-webkit-border-top-right-radius: .4em;
+	border-top-right-radius: .4em;
+	overflow: auto;
+}
+
+/* #ui-header div.ui-logobar {
+	height: 88px;
+}
+ */
+ /* add by ypy 0625 对串流中的applet层进行控制 */
+#ui-header div.ui-logobar {
+/* 	position: fixed;
+	z-index: 110; */
+	width: 1024px;
+	height: 88px;
+}
+/*   yuanyou
+width: 1024px;
+	height: 88px;
+*/
+
+#nav {
+	width: 100%;
+	align: center;
+	background-color: rgba(220, 220, 220, 1);
+	-moz-border-radius-bottomleft: 		.4em ;
+	-webkit-border-bottom-left-radius: 	.4em ;
+	border-bottom-left-radius: 			.4em ;
+	-moz-border-radius-bottomright: 	.4em ;
+	-webkit-border-bottom-right-radius: .4em ;
+	border-bottom-right-radius: 		.4em ;
+}
+
+#nav li {
+	list-style: none;
+	position: relative;
+}
+
+#nav li a,#nav li {
+	float: left;
+}
+
+.ui-right {
+	float: right;
+}
+
+.ui-left {
+	float: left;
+}
+
+.ui-clear {
+	both: clear;
+}
+
+.red {
+	color: red;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.green {
+	color: green;
+}
+
+.ui-body {
+	background: #fff;
+	border: 1px solid #aaa;
+	border-top: none;
+}
+
+span.ui-corner-all span.ui-icon {
+	float: right;
+	margin: 0 4px;
+}
+
+span.ui-corner-all span.ui-icon:hover {
+	position: relative;
+	top: 1px;
+}
+table.ui-form {
+	width: 100%;
+	line-height: 34px;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+table.ui-form td.td-label {
+	max-width: 50%;
+	text-align: right;
+	padding-right: 2px;
+	background: #F7F7F7;
+}
+
+table.ui-form td.td-input {
+	max-width: 75%;
+	text-align: left;
+	background: #EBF3FF;
+	padding-left:6px;
+}
+table.ui-form td.td-desc {
+	color: #666;
+	background: #EBF3FF;
+}
+
+div.loading {
+	padding-left: 30px;
+	line-height: 30px;
+	background: #fff url(../../css/images/wait.gif) no-repeat 5px 5px;
+}
+/* .mesWindow{border:#cfa972 1px solid;background:#fff;} 
+.msgTitle{background:#900 url(../images/tom.gif) no-repeat 5px 5px;padding-left:25px; MARGIN: 0px;HEIGHT: 20px;font-weight:bold;text-align:left;BORDER-BOTTOM: #999900 3px solid;COLOR: #fff; }
+.msgContent{margin:4px;}
+.mesWindow .close{height:15px;width:40px;border:none;cursor:pointer;text-decoration:underline;background:#fff} */
+
+.sysPoint_div{
+	border:1px solid rgb(204, 204, 204);
+	background-color: #F2F2F2;
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;
+	height: 260px;
+	width: 400px;
+	overflow: auto;
+	overflow-x:hidden;
+	position:fixed;
+	z-index:101;
+	right:5px;
+	top:1000px;
+}
+.sysPoint_div_menu{
+	width: 99%;
+	height: 30px;
+	margin-left: 2px;
+	-moz-border-radius-topleft: .4em;
+	-webkit-border-top-left-radius: .4em;
+	border-top-left-radius: .4em;
+	-moz-border-radius-topright: .4em;
+	-webkit-border-top-right-radius: .4em;
+	border-top-right-radius: .4em;
+	filter: progid :           DXImageTransform.Microsoft.gradient (       
+		   startColorstr =     
+		     '#FFFFFF', endColorstr =           '#C9C9C9' ); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF),
+		to(#C9C9C9) ); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #FFFFFF, #C9C9C9);
+}
+.sysPoint_div_menu .minimize{
+	background: url("../../images/sys/ll_09.png") no-repeat;
+}
+.sysPoint_div_menu .minimize:hover{
+	background: url("../../images/sys/ll_19.png") no-repeat;
+}
+.sysPoint_div_menu .maximize{
+	background: url("../../images/sys/ll_11.png") no-repeat;
+}
+.sysPoint_div_menu .maximize:hover{
+	background: url("../../images/sys/ll_20.png") no-repeat;
+}
+.sysPoint_div_menu .close{
+	background: url("../../images/sys/ll_13.png") no-repeat;
+}
+.sysPoint_div_menu .close:hover{
+	background: url("../../images/sys/ll_21_bak.png") no-repeat;
+}
+.sysPoint_div_menu_right{
+	height: 28px;
+	width: 80px;
+	float: right;	
+}
+.sysPoint_div_menu_left{
+	height: 28px;
+	width: 310px;
+	float: left;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+	line-height: 28px;
+	padding-left: 5px;
+}
+	
+.sysPoint_div_menu ul li{
+	list-style: none;
+	float: right;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+	margin-right: 5px;
+}
+.sysPoint_div_message{
+	width: 100%;
+	min-height: 200px;
+	background-color: white;
+}
+.sysPoint_div_title{
+	text-align: center;
+	width:100%;
+	font-size: 16px;
+	font-weight: bold;
+	padding-bottom: 15px;
+}
+.sysPoint_div_body{
+	background: url("../../images/sys/ll_06.png") no-repeat;
+	background-position: 230px 35px;
+	height: 217px;
+	width: 385px;
+	padding: 5px;
+	margin: 1px;
+	-moz-border-radius: .4em;
+	-webkit-border-radius: .4em;
+	border-radius: .4em;
+}
+.sysPoint_div_body span{
+	padding-left:10px;
+}
+	

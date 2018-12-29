@@ -1,0 +1,258 @@
+.panel { 
+	text-align: left;
+	background-color: rgb(255,255,255); 
+}
+
+.panel-header {
+	-moz-border-radius-topleft: 		.4em ;
+	-webkit-border-top-left-radius: 	.4em ;
+	border-top-left-radius: 			.4em ;
+	-moz-border-radius-topright: 		.4em ;
+	-webkit-border-top-right-radius: 	.4em ;
+	border-top-right-radius: 			.4em ;
+	position: relative;
+	padding: 5px;
+	color:#FFF;
+	background-color: #eee;
+}
+.panel-header_msg {
+	-moz-border-radius-topleft: 		.4em ;
+	-webkit-border-top-left-radius: 	.4em ;
+	border-top-left-radius: 			.4em ;
+	-moz-border-radius-topright: 		.4em ;
+	-webkit-border-top-right-radius: 	.4em ;
+	border-top-right-radius: 			.4em ;
+	position: relative;
+	padding: 5px;
+	font-weight: bold;
+	background-color: #eee;
+}
+
+
+.panel-body {
+	overflow: hiden;
+	border-top-width: 0px;
+}
+
+.panel-body-noheader {
+	border-top-width: 1px;
+}
+
+.panel-body-noborder {
+	border-width: 0px;
+}
+
+.panel-with-icon {
+	padding-left: 18px;
+}
+
+.panel-icon,.panel-tool {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	height: 16px;
+	overflow: hidden;
+}
+
+.panel-icon {
+	left: 5px;
+	width: 16px;
+}
+
+.panel-tool {
+	right: 5px;
+	width: auto;
+}
+
+.panel-tool a {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	opacity: 0.6;
+	filter: alpha(opacity =     60);
+	margin: 0 0 0 2px;
+	vertical-align: top;
+}
+
+.panel-tool a:hover {
+	opacity: 1;
+	filter: alpha(opacity =     50);
+	background-color: rgba(0,0,0,0.5);
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.panel-loading {
+	padding: 11px 0px 10px 30px;
+}
+
+.panel-noscroll {
+	overflow: hidden;
+}
+
+.panel-fit,.panel-fit body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+}
+
+.panel-loading {
+	background: url('../../images/core/loading.gif') no-repeat 10px 10px;
+}
+
+.panel-tool-close {
+	background: url('../../images/core/panel_tools.png') no-repeat -16px 0px;
+}
+
+.panel-tool-min {
+	background: url('../../images/core/panel_tools.png') no-repeat 0px 0px;
+}
+
+.panel-tool-max {
+	background: url('../../images/core/panel_tools.png') no-repeat 0px -16px;
+}
+
+.panel-tool-restore {
+	background: url('../../images/core/panel_tools.png') no-repeat -16px -16px;
+}
+
+.panel-tool-collapse {
+	background: url('../../images/core/panel_tools.png') no-repeat -32px 0;
+}
+
+.panel-tool-expand {
+	background: url('../../images/core/panel_tools.png') no-repeat -32px -16px;
+}
+
+.panel-header,.panel-body {
+	/* border-color: #95B8E7; */
+} 
+
+.panel-body {/* 
+	background-color: rgba(255,255,255,0.1); */
+	color: #000;
+}
+
+.panel-title {
+	font-weight: bold;
+	color: #0E2D5F;
+	height: 16px;
+	line-height: 16px;
+}
+
+.window {
+	/* border-width: 1px;
+	border-style: solid; */
+}
+
+.window {
+	padding: 8px;
+	width:100%;
+	height:100%;
+	/* background: transparent; */
+	/* padding: 0px 0px 6px 0px; */
+}
+
+.window-header {
+	cursor: move;
+}
+
+.window .window-body {
+	/* border-width: 1px; */
+	border-style: solid;
+	border-top-width: 0px;
+	overflow: auto;
+}
+
+.window .window-body-noheader {
+	border-top-width: 1px;
+}
+
+.window .window-header .panel-icon,.window .window-header .panel-tool {
+	top: 50%;
+	margin-top: -11px;
+}
+
+.window .window-header .panel-icon {
+	left: 1px;
+}
+
+.window .window-header .panel-tool {
+	right: 1px;
+}
+
+.window .window-header .panel-with-icon {
+	padding-left: 18px;
+}
+
+.window-proxy {
+	position: absolute;
+	overflow: hidden;
+}
+
+.window-proxy-mask {
+	position: absolute;
+	filter: alpha(opacity =     5);
+	opacity: 0.05;
+}
+
+.window-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	filter: alpha(opacity =     40);
+	opacity: 0.40;
+	font-size: 1px;
+	*zoom: 1;
+	overflow: hidden;
+}
+
+.window-shadow {
+	position: absolute;
+	padding: 5px;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	border-radius: 0.8em;
+	background-color: #fff;
+	border: 1px solid #ccc;   
+	-moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.5); 
+}
+
+.window-proxy {
+	border: 1px dashed #95B8E7;
+}
+
+.window-proxy-mask,.window-mask {
+	/* background: #ccc; */
+}
+/****************sessionTimeOut框体样式  begin*********************/
+	.timeout_title{
+		height: 30px;
+		line-height: 30px;
+		font-size:20px;
+		font-weight:bold;
+		padding-left:7px;
+		border-radius:5px 5px 0px 0px;
+		filter: progid : DXImageTransform.Microsoft.Gradient (startColorStr = rgb(255, 255, 255), endColorStr =rgb(210, 210, 210), gradientType ='0' );
+		background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(210, 210, 210) ) );
+		background: -moz-linear-gradient(top, rgb(255, 255, 255),rgb(210, 210, 210) );
+		background-image:     -ms-linear-gradient( rgb(255, 255, 255),rgb(210, 210, 210));
+		background: -o-linear-gradient(top, rgb(255, 255, 255), rgb(210, 210, 210));
+	}
+	.timeout_title ._div1{
+		float:left;
+	}
+	.timeout_title ._div2{
+		float:right;
+	}
+	.timeout_msg_body{
+		height: 260px;
+	}
+/****************sessionTimeOut框体样式  end*********************/

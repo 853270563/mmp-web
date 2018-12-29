@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_MOBILE_ROLE_MENU">
+	<!-- 动态查询 and 列表分页 A面菜单 -->
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="and" >
+		    P.DEL_FLAG ='0'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ROLE_ID">
+		<![CDATA[ T.ROLE_ID in ('$ROLE_ID$')]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="USER_ID">
+		<![CDATA[ T.ROLE_ID in (SELECT R.ROLE_ID FROM ${schema.configPlat}.SYS_USER_ROLE R, ${schema.configPlat}.SYS_USER H WHERE H.DEL_FLAG='0' AND R.USER_ID = H.ID AND H.LOGIN_NAME=#USER_ID#)]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="MENU_PAR_ID">
+		   P.MENU_PAR_NO = #MENU_PAR_ID#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="MENU_ID">
+		   P.MENU_NO = #MENU_ID#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="MENU_LEVEL">
+		   P.MENU_LEVEL = #MENU_LEVEL#
+		</isNotEmpty>
+		 <isNotEmpty prepend="and" >
+		    P.MENU_ABTYPE ='B'
+		 </isNotEmpty>
+	</sql>
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		 SELECT DISTINCT
+	        P.MENU_NO as MENU_ID,ifnull(A.FILE_ADDR,' ') as FILE_ADDR  ,P.MENU_NAME,P.MENU_URL,P.MENU_IMG,P.MENU_TYPE,P.MENU_PAR_NO  as MENU_PAR_ID
+	        FROM  ${schema.configPlat}.SYS_MOBILE_MENU P 
+	        LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  A ON P.Menu_Img=A.FILE_ID
+	        INNER JOIN ${schema.configPlat}.SYS_MOBILE_ROLE_MENU T  ON  P.MENU_NO=T.MENU_NO
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic> 
+		<![CDATA[ ORDER BY P.MENU_NO]]>
+	</sql>
+	<!-- 菜单更新最新时间 -->
+	<select id="QueryMenuUpdateTime" parameterClass="map" resultClass="java.util.HashMap">
+		select C.DESCRIPTION as MENU_UPDATE_TIME from ${schema.configPlat}.SYS_DICT C WHERE C.TYPE='ROOT' AND C.VALUE='MENU_UPDATE_TIME'
+	</select>
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+		<!-- 查询A面菜单 -->
+	<select id="queryMenuAtypeList" parameterClass="map" resultClass="java.util.HashMap">
+		 SELECT DISTINCT
+	      P.MENU_NO as MENU_ID,ifnull(A.FILE_ADDR,' ') as FILE_ADDR,P.MENU_NAME,P.MENU_URL,P.MENU_IMG,P.MENU_TYPE,P.MENU_PAR_NO  as MENU_PAR_ID,p.MENU_STATUS
+	      FROM  ${schema.configPlat}.SYS_MOBILE_MENU P 
+	      LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  A ON P.MENU_IMG=A.FILE_ID
+	      INNER JOIN ${schema.configPlat}.SYS_MOBILE_ROLE_MENU T  ON  P.MENU_NO=T.MENU_NO
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="and" >
+			    P.DEL_FLAG ='0'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ROLE_ID">
+				<![CDATA[ T.ROLE_ID in ('$ROLE_ID$')]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="USER_ID">
+				<![CDATA[ T.ROLE_ID in (SELECT R.ROLE_ID FROM ${schema.configPlat}.SYS_USER_ROLE  R, ${schema.configPlat}.SYS_USER H WHERE H.DEL_FLAG='0' AND R.USER_ID = H.ID AND H.LOGIN_NAME=#USER_ID#)]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="MENU_PAR_ID">
+			   P.MENU_PAR_NO = #MENU_PAR_ID#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" >
+			    P.MENU_ABTYPE ='A'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" >
+				P.MENU_STATUS ='0'
+			</isNotEmpty>
+		</dynamic> 
+		<![CDATA[ ORDER BY P.MENU_NO]]>
+	</select>
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			 SELECT
+                  COUNT('') CNT   FROM  ${schema.configPlat}.SYS_MOBILE_MENU P 
+              INNER JOIN ${schema.configPlat}.SYS_MOBILE_ROLE_MENU T  ON  P.MENU_NO=T.MENU_NO
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+		
+	<!-- 查询用户B面菜单 -->
+	<select id="queryMenuUserBtypeList" parameterClass="map" resultClass="java.util.HashMap">
+         SELECT
+		    P.MENU_NO            AS MENU_ID,
+		    ifnull(A.FILE_ADDR,' ') AS FILE_ADDR ,
+			ifnull(B.FILE_ADDR,' ') AS FILE_ADDRS ,
+		    P.MENU_NAME,
+		    P.MENU_URL,
+		    P.MENU_IMG,
+		    P.MENU_TYPE,
+		    P.MENU_PAR_NO AS MENU_PAR_ID
+		FROM
+		    ${schema.configPlat}.SYS_MOBILE_MENU P
+		LEFT JOIN
+		    ${schema.interPlat}.MZJ_FILES_DATA  A
+		ON
+		    P.Menu_Img=A.FILE_ID
+		LEFT JOIN
+		${schema.interPlat}.MZJ_FILES_DATA  B
+		ON
+		P.MENU_IMG=B.FILE_ID
+		LEFT JOIN
+		    ${schema.configPlat}.SYS_MOBILE_MENU m
+		ON
+		    m.menu_no=p.MENU_PAR_NO
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="and" >
+			    P.DEL_FLAG ='0'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="USER_ID">
+			     exists( select 1 from ${schema.configPlat}.SYS_MOBILE_ROLE_MENU T, ${schema.configPlat}.SYS_USER_ROLE ur, SYS_USER h 
+			     where ur.user_id = h.id and h.del_flag ='0' and P.MENU_NO=T.MENU_NO and t.role_id = ur.role_id and h.login_name =#USER_ID# )
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="MENU_PAR_ID">
+			   P.MENU_PAR_NO = #MENU_PAR_ID#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="MENU_ID">
+			   P.MENU_NO = #MENU_ID#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="MENU_LEVEL">
+			   P.MENU_LEVEL = #MENU_LEVEL#
+			</isNotEmpty>
+			 <isNotEmpty prepend="and" >
+			    P.MENU_ABTYPE ='B'
+			 </isNotEmpty>
+			 <isNotEmpty prepend="and" >
+			    P.MENU_STATUS ='0'
+			 </isNotEmpty>
+			 
+		</dynamic> 
+		<![CDATA[ order by  ifnull(m.MENU_SORT, p.MENU_SORT), p.MENU_NO]]>
+		
+	</select>
+	
+          
+          
+</sqlMap>
+

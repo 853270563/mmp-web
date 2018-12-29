@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+       default-lazy-init="false">
+
+    <description>Mybtis Configuration</description>
+
+    <!-- MyBatis begin -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="dataSource">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="cn.com.yitong"/>
+        <property name="typeAliasesSuperType" value="cn.com.yitong.common.persistence.BaseEntity"/>
+        <property name="mapperLocations" value="classpath:META-INF/mybatis/mappings/${jdbc.type}/**/*.xml"/>
+        <property name="configLocation" value="classpath:META-INF/mybatis/mybatis-config.xml"></property>
+    </bean>
+
+    <!-- 扫描basePackage下所有以@MyBatisRepository注解的接口-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="cn.com.yitong"/>
+        <property name="annotationClass" value="cn.com.yitong.common.persistence.annotation.MyBatisDao"/>
+    </bean>
+    <!-- MyBatis end -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" depends-on="sqlSessionFactory">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+</beans>

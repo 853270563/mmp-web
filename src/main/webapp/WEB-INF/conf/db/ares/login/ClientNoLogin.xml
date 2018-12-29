@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ClientNoLogin" desc="无回话登陆">
+	<!-- 请求报文 -->
+	<snd>
+	    <field name="deviceId" length="32" type="C" desc="设备标识" />
+	    <field name="appCode" length="32" type="C" desc="应用标识"/>
+		<field name="reuse" length="1" type="C" desc="是否复用已经存在的token：0-不复用，1-复用" />
+		<field name="token" length="32" type="C" desc="复用token"/>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+
+		<field name="skey" length="32" type="C" desc="密钥" />
+		<field name="token" length="32" type="C" desc="会话标识" />
+		<field name="UNIX_TIME" length="32" type="C" desc="服务器时间戳" />
+		<field name="reused" length="1" type="C" desc="是否能复用已经存在的token：0-不复用，1-复用" />
+	</rcv>
+</trans>

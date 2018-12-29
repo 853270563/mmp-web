@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_DEVICE_APPVER">
+
+	<select id="queryDeviceAppVer" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_APPVER T WHERE T.DEVICE_ID = #DEVICE_ID# and T.APP_ID = #APP_ID#
+    </select>
+    
+	<update id="updateByIdSelective" parameterClass="map">
+        <![CDATA[ update ${schema.configPlat}.ARES_DEVICE_APPVER ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="DEVICE_ID">DEVICE_ID = #DEVICE_ID#</isNotNull>
+            <isNotNull prepend="," property="APP_ID">APP_ID = #APP_ID#</isNotNull>
+            <isNotNull prepend="," property="APP_VER_ID">APP_VER_ID = #APP_VER_ID#</isNotNull>
+            <isNotNull prepend="," property="CREATE_TIME">CREATE_TIME = #CREATE_TIME#</isNotNull>
+            <isNotNull prepend="," property="UPDATE_TIME">UPDATE_TIME = #UPDATE_TIME#</isNotNull>
+        </dynamic>
+        <![CDATA[ where ID = #ID# ]]>
+    </update>
+
+    <!-- 保存设备应用版本关系-->
+	<insert id="insertDeviceAppVer" parameterClass="map">
+        INSERT INTO ${schema.configPlat}.ARES_DEVICE_APPVER
+	        (ID, DEVICE_ID, APP_ID, APP_VER_ID, CREATE_TIME)
+        VALUES 
+	        (#ID#, #DEVICE_ID#, #APP_ID#, #APP_VER_ID#, #CREATE_TIME#)
+    </insert>
+
+</sqlMap>
+

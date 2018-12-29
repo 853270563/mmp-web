@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ehcache updateCheck="false" name="defaultCache">
+
+	<diskStore path="java.io.tmpdir/ehcache/default" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		overflowToDisk="false" />
+
+    <cache name="sysCache" maxElementsInMemory="1000" eternal="true" overflowToDisk="false"/>
+
+    <!-- 缓存会话配置 -->
+    <cache name="SessionCache" maxElementsInMemory="1000" eternal="false"
+           timeToIdleSeconds="1800" timeToLiveSeconds="0" overflowToDisk="true"
+           maxElementsOnDisk="10000000" memoryStoreEvictionPolicy="LRU"/>
+
+</ehcache>

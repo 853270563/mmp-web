@@ -1,0 +1,144 @@
+body,div,ul,li,table {
+	margin: 0px;
+	padding: 0px;
+	border: 0px none none;
+}
+
+.ui-right {
+	float: right;
+}
+
+.ui-left {
+	float: left;
+}
+
+.ui-clear {
+	both: clear;
+}
+
+.red {
+	color: red;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.green {
+	color: green;
+}
+
+/************色块样式：可用于布局测试*********************/
+.bgC01 {
+	background-color: #999;
+}
+
+.bgC02 {
+	background-color: #f88;
+}
+
+.bgC03 {
+	background-color: #88f;
+}
+
+.bgC04 {
+	background-color: #8ff;
+}
+
+.bgC05 {
+	background-color: #ee0;
+}
+/*********************************************************/
+.tabs-language {
+	margin-left: 0;
+	padding-left: 0;
+	float: right;
+}
+
+.tabs-language ul {
+	margin-left: 0;
+	padding-left: 0;
+	display: inline;
+	list-style: none;
+}
+
+.tabs-language ul li {
+	margin-left: 0;
+	margin-bottom: 0;
+	padding: 2px;
+	list-style: none;
+	display: inline;
+	color: #999;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.tabs-language ul li:hover {
+	padding: 2px;
+	color: #333;
+}
+
+.tabs-language ul li.current {
+	padding: 2px;
+	color: #000;
+}
+*button{
+	background: 			rgb(240,240,240) /*{a-bup-background-color}*/;
+}
+button{
+	border: 1px solid 		#888 /*{a-bup-border}*/;
+	background: 			rgb(240,240,240) /*{a-bup-background-color}*/;
+	font-weight: bold;
+	color: 					#000 /*{a-bup-color}*/;
+	font-size: 16px;
+	line-height:20px; 
+	padding: 10px 20px;
+	text-shadow: 0 1px  1px  #fff ;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff ), to( #ccc )); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff , #ccc ); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #fff , #ccc ); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff , #ccc ); /* IE10 */
+	background-image:      -o-linear-gradient( #fff , #ccc ); /* Opera 11.10+ */
+	background-image:         linear-gradient( #fff , #ccc );
+}
+
+
+button:hover{
+	border: 1px solid 		#888 /*{a-bup-border}*/;
+	background: 			#999 /*{a-bup-background-color}*/;
+	font-weight: bold;
+	color: 					#000 /*{a-bup-color}*/;
+	font-size: 16px;
+	line-height:20px; 
+	padding: 10px 20px;
+	text-shadow: 0 1px  3px  #fff ;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff ), to( #ff8 )); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #fff , #ff8 ); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #fff , #ff8 ); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #fff , #ff8 ); /* IE10 */
+	background-image:      -o-linear-gradient( #fff , #ff8 ); /* Opera 11.10+ */
+	background-image:         linear-gradient( #fff , #ff8 );
+	
+	-webkit-box-shadow: #555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	-moz-box-shadow: 	#555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	box-shadow: 		#555 0 .1em 1px, /* border */ rgba(0,0,0,0.3) 0 .2em 6px; /* drop shadow */
+	
+}
+button:active {	 
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	
+	-webkit-transform: 	translateY(1px);
+	-moz-transform: 	translateY(1px);
+	transform: 			translateY(1px); 
+}
+/***********************等待层相关样式****************************************/
+div.loading {
+	-webkit-border-radius: .4em;
+	-moz-border-radius: .4em;
+	border-radius: .4em;
+	border: 1px solid #999;
+	color: #000;
+	padding-left: 30px;
+	line-height: 30px;
+	background: #fff url(../../images/core/load.gif) no-repeat 7px 7px;
+}

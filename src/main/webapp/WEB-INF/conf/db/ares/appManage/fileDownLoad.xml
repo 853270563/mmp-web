@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="fileDownLoad"   desc="下载应用资源包文件">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="RES_PATH" type="C" desc="资源包路径"  required="true"/>
+	</snd>
+</trans>

@@ -1,0 +1,43 @@
+body {
+	font-size: 13px;
+}
+
+.tabs-form  ul li {
+	float: left;
+	padding: 10px 0px 10px 0px;
+	width: 140px;
+	list-style: none;
+	color: #000;
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+}
+
+button {
+	font-size: 14px;
+}
+
+button:hover {
+	font-size: 14px;
+}
+
+span.small {
+	color: #383;
+	font-size: 12px;
+	cursor: pointer;
+	padding-right: 10px;
+	font-family: verdana;
+}
+
+.loginDiv input,.loginDiv2 input {
+	font-size: 13px;
+}
+
+.loginDiv .code,.loginDiv2 .code {
+	padding-top: 10px;
+	color: #383;
+	font-size: 12px;
+	cursor: pointer;
+	padding-right: 10px;
+	font-family: verdana;
+}

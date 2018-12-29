@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yitong.core.session.dao.MhhSessionDao">
+
+    <sql id="BaseColumnList">
+        SESSION_ID,CREATE_TIME,VISIT_TIME,INVALID_TIME,MSG_ID,
+        KEY,EVENT_ID,USER_ID,DEVICE_ID,SERVER_IP,
+        AUTH_STATUS,DATA,VERSION,MSGID_SET,ERROR_ID,ERROR_MSG
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{sessionId},#{createTime},#{visitTime},#{invalidTime},#{msgId},
+        #{key},#{eventId},#{userId},#{deviceId},#{serverIp},
+        #{authStatus},#{data},#{version},#{msgidSet},#{errorId},#{errorMsg}
+    </sql>
+
+    <sql id="TableClause"> ${schema.configPlat}.ARES_SESSION </sql>
+
+    <sql id="WhereClause4Id">
+        <where>
+            SESSION_ID = #{sessionId}
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="cn.com.yitong.core.session.model.MhhSession">
+        insert into
+        <include refid="TableClause"/>
+        (
+        <include refid="BaseColumnList"/>
+        ) values (
+        <include refid="BaseColumnValueList"/>
+        )
+    </insert>
+
+    <select id="queryById" parameterType="string" resultType="cn.com.yitong.core.session.model.MhhSession">
+        <include refid="public.SelectById"/>
+    </select>
+
+    <update id="updateById" parameterType="cn.com.yitong.core.session.model.MhhSession">
+        update
+        <include refid="TableClause"/>
+        <set>
+            VERSION = VERSION + 1,
+            CREATE_TIME=#{createTime},
+            VISIT_TIME=#{visitTime},
+            INVALID_TIME=#{invalidTime},
+            MSG_ID=#{msgId},
+            KEY=#{key},
+            EVENT_ID=#{eventId},
+            USER_ID=#{userId},
+            DEVICE_ID=#{deviceId},
+            SERVER_IP=#{serverIp},
+            AUTH_STATUS=#{authStatus},
+            DATA=#{data},
+            MSGID_SET=#{msgidSet},
+            ERROR_ID=#{errorId},
+            ERROR_MSG=#{errorMsg}
+        </set>
+        <include refid="WhereClause4Id"/>
+    </update>
+
+    <update id="updateByIdSelective" parameterType="cn.com.yitong.core.session.model.MhhSession">
+        update
+        <include refid="TableClause"/>
+        <set>
+            VERSION = VERSION + 1,
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="visitTime!=null">VISIT_TIME=#{visitTime},</if>
+            <if test="invalidTime!=null">INVALID_TIME=#{invalidTime},</if>
+            <if test="msgId!=null">MSG_ID=#{msgId},</if>
+            <if test="key!=null">KEY=#{key},</if>
+            <if test="eventId!=null">EVENT_ID=#{eventId},</if>
+            <if test="userId!=null">USER_ID=#{userId},</if>
+            <if test="deviceId!=null">DEVICE_ID=#{deviceId},</if>
+            <if test="serverIp!=null">SERVER_IP=#{serverIp},</if>
+            <if test="authStatus!=null">AUTH_STATUS=#{authStatus},</if>
+            <if test="data!=null">DATA=#{data},</if>
+            <if test="msgidSet!=null">MSGID_SET=#{msgidSet},</if>
+            <if test="errorId!=null">ERROR_ID=#{errorId},</if>
+            <if test="errorMsg!=null">ERROR_MSG=#{errorMsg}</if>
+        </set>
+        <include refid="WhereClause4Id"/>
+    </update>
+
+    <update id="deleteById" parameterType="string">
+        <include refid="public.DeleteById"/>
+    </update>
+
+    <select id="queryByCriteria" resultType="cn.com.yitong.core.session.model.MhhSession" parameterType="CriteriaQuery">
+        <include refid="public.Select4Query"/>
+    </select>
+
+    <select id="countByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Count4Query"/>
+    </select>
+
+    <select id="deleteByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Delete4Query"/>
+    </select>
+
+    <insert id="deleteSessionToBack" parameterType="string">
+        insert into ${schema.configPlat}.ARES_SESSION_HIS select * from ${schema.configPlat}.ARES_SESSION where session_id = #{sessionId}
+    </insert>
+</mapper>

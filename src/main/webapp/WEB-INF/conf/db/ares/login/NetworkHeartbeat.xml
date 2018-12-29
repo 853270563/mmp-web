@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="networkHeartbeat" desc="测试网络心跳">
+	<!-- 请求报文 -->
+	<snd>
+
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="NETWORK_STATUS" length="20" type="C" desc="网络状态" />
+	</rcv>
+</trans>

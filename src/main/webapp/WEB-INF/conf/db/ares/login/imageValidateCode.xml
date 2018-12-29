@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="imageValidateCode" desc="图片验证码">
+	<!-- 请求报文 -->
+	<snd>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+
+		<field name="imageBase64" type="C" desc="图片验证码base64串" />
+	</rcv>
+</trans>

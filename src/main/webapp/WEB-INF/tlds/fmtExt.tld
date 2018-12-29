@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+    
+  <description>JSTL 1.1 functions library</description>
+  <display-name>JSTL functions String Extends API</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>FmtExt</short-name>
+  <uri>http://www.yitong.com.cn/mbanking</uri>
+
+  <function>
+    <description>
+      	賬號格式化，四位隔开
+    </description>
+    <name>formatAcctNo</name>
+    <function-class>com.yitong.commons.taglib.JstlExtFunctions</function-class>
+    <function-signature>java.lang.String formatAcctNo(java.lang.String)</function-signature>
+    <example>
+      ${fmtExt:formatAcctNo("622588551918176")}
+    </example>
+  </function>   
+  
+  <function>
+    <description>
+      	币别中文名获取
+    </description>
+    <name>currency</name>
+    <function-class>com.yitong.commons.taglib.JstlExtFunctions</function-class>
+    <function-signature>java.lang.String currency(java.lang.String,java.lang.String)</function-signature>
+    <example>
+      ${fmtExt:currency("1412","01")}
+    </example>
+  </function>  
+  
+  <function>
+    <description>
+      	账户类型获取
+    </description>
+    <name>accountTypeName</name>
+    <function-class>com.yitong.commons.taglib.JstlExtFunctions</function-class>
+    <function-signature>java.lang.String accountTypeName(java.lang.String,java.lang.String)</function-signature>
+    <example>
+      ${fmtExt:accountTypeName("1412","01")}
+    </example>
+  </function> 
+  
+  <function>
+    <description>
+      	账户状态获取
+    </description>
+    <name>accountStatusName</name>
+    <function-class>com.yitong.commons.taglib.JstlExtFunctions</function-class>
+    <function-signature>java.lang.String accountStatusName(java.lang.String,java.lang.String)</function-signature>
+    <example>
+      ${fmtExt:accountStatusName("1412","01")}
+    </example>
+  </function> 
+  
+  <function>
+    <description>
+      	金额
+    </description>
+    <name>formatMoney</name>
+    <function-class>com.yitong.commons.taglib.JstlExtFunctions</function-class>
+    <function-signature>java.lang.String formatMoney(java.lang.String)</function-signature>
+    <example>
+      ${fmtExt:formatMoney("1000.00")}
+    </example>
+  </function>
+  
+</taglib>

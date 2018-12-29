@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_NOTE">
+	
+	<select id="selectUnPushNote" resultClass="java.util.HashMap">
+		Select
+			t.NOTE_ID,
+			t.APP_ID,
+			t.NOTE_TYP,
+			t.NOTE_TITLE,
+			t.SEND_BEGIN_TIME,
+			t.SEND_END_TIME,
+			t.IMP_FLG,
+			t.CREATE_TIME,
+			t.UPDATE_TIME,
+			t.AUDITOR_ID,
+			t.AUDIT_INFO,
+			t.AUDIT_TIME,
+			t.AUDIT_STATUS,
+			t.OPER_ID,
+			t.NOTE_STATUS
+		From
+			${schema.configPlat}.ARES_NOTE t
+		Where
+			t.NOTE_STATUS = '0'
+			and t.AUDIT_STATUS = '1'
+			and <![CDATA[ t.SEND_BEGIN_TIME <= NOW()
+			and (t.SEND_END_TIME >= NOW() or t.SEND_END_TIME is null)
+			 ]]>
+	</select>
+	
+	<update id="updateNoteStatus" parameterClass="map">
+		Update 
+			${schema.configPlat}.ARES_NOTE
+		Set 
+	        NOTE_STATUS = '1',
+	   		UPDATE_TIME = #UPDATE_TIME#
+	    Where
+	    	NOTE_ID = #NOTE_ID#
+	</update>
+	
+	<select id="loadAresNoteList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT
+			m.*
+		FROM (SELECT a.*,
+					(@rownum:= @rownum + 1) AS rownum
+				FROM
+					(SELECT t.*,
+							(SELECT @rownum:=0) r
+						FROM
+							${schema.configPlat}.ARES_NOTE t
+						WHERE t.AUDIT_STATUS = '1'
+						<![CDATA[
+						and t.SEND_BEGIN_TIME <= now() and ( t.SEND_END_TIME is null or t.SEND_END_TIME >= now() )
+						]]>
+						ORDER BY t.UPDATE_TIME DESC
+					) a limit #lastIndex#
+			) m where <![CDATA[m.rownum > #firstIndex#]]>
+	</select>
+	
+	<select id="loadAresNote" parameterClass="map" resultClass="java.util.HashMap">
+		Select
+			t.*
+		From
+			${schema.configPlat}.ARES_NOTE t
+		Where
+			t.NOTE_ID = #NOTE_ID#
+	</select>
+</sqlMap>

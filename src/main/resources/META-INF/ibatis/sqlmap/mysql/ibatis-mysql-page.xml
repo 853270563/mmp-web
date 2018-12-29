@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="public">
+
+    <!-- ibatis oracle 分页实现 -->
+    <!-- select * from (select row_.*, rownum rownum_ from ( select * from table ) row_ where rownum <= #endRow# ) where rownum_ > #startRow# -->
+
+    <!-- 分页前面包装部分 -->
+    <sql id="pageBegin">
+        <dynamic>
+            <isNotEmpty property="startRow">
+                <isNotEmpty property="endRow">
+                    <isLessEqual property="startRow"
+                                 compareValue="0">
+                        <![CDATA[ select row_.* from ( ]]>
+                    </isLessEqual>
+                    <isGreaterThan property="startRow"
+                                   compareValue="0">
+                        <![CDATA[ select * from (select row_.* from ( ]]>
+                    </isGreaterThan>
+                </isNotEmpty>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <!-- 分页后面包装部分 -->
+    <sql id="pageEnd">
+        <dynamic>
+            <isNotEmpty property="startRow">
+                <isNotEmpty property="endRow">
+                    <isLessEqual property="startRow" compareValue="0">
+                        <![CDATA[ ) row_ LIMIT 0,#endRow#]]>
+                    </isLessEqual>
+                    <isGreaterThan property="startRow" compareValue="0">
+                        <![CDATA[ ) row_ LIMIT #startRow#, #endRow#  ]]>
+                    </isGreaterThan>
+                </isNotEmpty>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+</sqlMap>
+

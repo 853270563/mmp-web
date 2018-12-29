@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="eraseDeviceResultRe" desc="擦除结果反馈" ibatisStatement="">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <field name="DEVICE_UUID" length="32" required="true" type="C" desc="设备唯一标识" />
+        <field name="RESULT" length="6" required="true" type="C" desc="设备擦除结果" />
+    </snd>
+    
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码-设备擦除结果" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+    </rcv>
+</trans>

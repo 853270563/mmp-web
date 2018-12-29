@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="getHtmlUpdateInfo"   desc="Html资源包更新">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="APP_ID" length="20" type="C" desc="应用编号"  required="true"/>
+		<field name="APP_VERS" length="8" type="C" desc="当前应用版本"  required="true"/>
+		<field name="USER_LOGIN_NAME" length="64" type="C" desc="用户登录名"  required="false"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="LATEST_VERS" length="8" type="C" desc="应用最新版本" /> 
+		<field name="WEB_RES_PATH" length="200" type="C" desc="WEB资源包路径" />
+		<field name="WEB_RES_URL" length="1024" type="C" desc="WEB资源包镜像地址" />
+		<field name="WEB_RES_SIZE" type="N" desc="WEB资源包大小" /> 
+		<field name="SECRET_KEY" type="C" desc="应用密钥" /> 
+		<field name="WEB_RES_FORCE_UPDATE" length="1" type="C" desc="web资源强制更行，0：不需强制更新，1：需要强制更新" /> 
+		<field-list name="LIST" type="E">
+			<field name="RES_UPDATE_PACK_PATH" length="200" type="C" desc="WEB升级包路径" /> 
+			<field name="RES_UPDATE_PACK_URL" length="1024" type="C" desc="WEB升级包镜像地址" /> 
+			<field name="RES_UPDATE_PACK_SIZE" type="N" desc="WEB升级包大小" /> 
+			<field name="RES_UPDATE_PACK_INDEX" type="N" desc="WEB升级包序列" /> 
+		</field-list>
+		<field name="RES_VERS_MEMO" length="2000" type="C" desc="版本更新描述" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

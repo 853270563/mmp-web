@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_DEVICE_APP">
+
+    <!-- 查询黑白名单列表 -->
+	<select id="queryByAppType" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_APP T WHERE T.APP_TYPE = #appType# and T.APP_SYSTEM in
+        <iterate property="appSystem" conjunction="," close=")" open="(" >
+            #appSystem[]#
+        </iterate>
+    </select>
+</sqlMap>
+

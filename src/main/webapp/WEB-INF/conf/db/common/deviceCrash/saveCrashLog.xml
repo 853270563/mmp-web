@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="saveCrashLog" desc="保存设备崩溃日志">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="DEVICE_ID" length="32" type="C" desc="设备ID" required="true"/>
+		<field name="DEVICE_MODEL" length="32" type="C" desc="设备型号（机型）"/>
+		<field name="DEVICE_SYSTEM" length="32" type="C" desc="设备系统+版本" />
+		<field name="APP_ID" length="32" type="C" desc="应用ID" />
+		<field name="APP_VERS_NO" length="32" type="C" desc="应用版本号" />
+		<field name="USER_ID" length="32" type="C" desc="用户ID" />
+		<field name="SESSION_ID" length="32" type="C" desc="会话ID" />
+		<field name="LOG_LEVEL" length="8" type="C" desc="日志级别" />
+		<field name="LOG_TIME" length="32" type="C" desc="日志记录时间" />
+		<field name="ERROR_INFO" type="C" desc="错误信息" />
+	</snd>
+
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

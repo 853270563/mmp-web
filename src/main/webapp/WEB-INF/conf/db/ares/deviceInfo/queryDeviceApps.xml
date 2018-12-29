@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryDeviceApps" desc="设备应用列表" ibatisStatement="">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <!-- 查询应用类型 0：查询黑名单，1：查询白名单，2：查询黑名单-白名单 -->
+        <field name="APP_TYPE" length="2" required="true" type="C" desc="应用类型0：黑名单，1：白名单，2：所有" />
+        <!-- 应用系统 1：IOS，2：Android，3：所有 -->
+        <field name="APP_SYSTEM" length="2" required="true" type="C" desc="应用系统1：IOS，2：Android，3：所有" />
+</snd>
+
+<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+
+        <!--黑名单列表 -->
+        <field-list name="black" type="E">
+            <field name="APP_CODE" length="100" type="C" desc="应用标识" />
+            <field name="APP_NAME" length="100" type="C" desc="应用名称" />
+        </field-list>
+
+        <!--白名单列表 -->
+        <field-list name="white" type="E">
+            <field name="APP_CODE" length="100" type="C" desc="应用标识" />
+            <field name="APP_NAME" length="100" type="C" desc="应用名称" />
+        </field-list>
+    </rcv>
+</trans>

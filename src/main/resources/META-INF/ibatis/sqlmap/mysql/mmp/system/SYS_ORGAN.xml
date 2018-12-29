@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_ORGAN">
+	<!--机构管理 -->
+	<!-- 动态条件 -->
+	<sql id="queryDynSql">
+        DEL_FLAG=0
+		<isNotEmpty prepend="and" property="ID">
+			<![CDATA[ t.ID = #ORG_ID# ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="PARENT_ID">
+			<![CDATA[ t.PARENT_ID = #ORG_PAR_ID# ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="GRADE">
+			<![CDATA[ t.GRADE = #ORG_LVL# ]]>
+		</isNotEmpty>
+	</sql>
+
+    <select id="queryById" parameterClass="string" resultClass="java.util.HashMap" >
+        <![CDATA[
+          select t.* from ${schema.configPlat}.SYS_ORGAN t where  DEL_FLAG=0 AND t.ID = #ORG_ID#
+        ]]>
+    </select>
+	
+	<select id="findList" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ 	
+			SELECT t.*
+			FROM ${schema.configPlat}.SYS_ORGAN t
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ 
+			DELETE FROM ${schema.configPlat}.SYS_ORGAN
+		]]>
+	</delete>
+	
+	<!--简体中文 -->
+	<select id="findAll_ZH" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			SELECT 
+				*
+			FROM ${schema.configPlat}.SYS_ORGAN t
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	
+	<select id="findorg" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			SELECT 
+				t.ID,t.NAME
+			FROM ${schema.configPlat}.SYS_ORGAN t
+				
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+</sqlMap>
+

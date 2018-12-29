@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="bizLogManager" class="cn.com.yitong.modules.ares.login.util.BizLogManager" />
+	
+	<bean id="springContextUtils" class="cn.com.yitong.common.utils.SpringContextUtils" />
+    
+    <bean class="cn.com.yitong.core.session.dao.DbSessionDao" depends-on="mhhSessionDao"/>
+       
+    <bean id="servCtlDao" class="cn.com.yitong.modules.ares.servCtl.dao.impl.ServCtlDatabaseDaoImpl" />
+   
+    <bean id="servCtlConfigDao" class="cn.com.yitong.modules.ares.servCtl.dao.impl.ServCtlConfigDBDao" />
+   
+    <bean id="servCtlService" class="cn.com.yitong.modules.ares.servCtl.service.ServCtlService">
+        <property name="servCtlConfigDao" ref="servCtlConfigDao" />
+        <property name="servCtlDao" ref="servCtlDao" />
+    </bean>
+
+    <bean id="logSessionTimeOut" class="cn.com.yitong.core.session.timeout.LogSessionTimeOut" init-method="init" />
+</beans>

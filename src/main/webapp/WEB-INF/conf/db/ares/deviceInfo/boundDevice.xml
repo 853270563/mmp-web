@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="boundDevice" desc="设备注册" ibatisStatement="">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <field name="DEVICE_UUID" length="32" required="true" type="C" desc="设备唯一标识" />
+        <field name="DEVICE_NAME" length="128" required="true" type="C" desc="设备名称" />
+        <field name="DEVICE_NO" length="64" required="true" type="C" desc="设备标签" />
+        <field name="DEVICE_MODEL" length="32" type="C" desc="设备型号" />
+        <field name="DEVICE_SERIAL" length="64" type="C" desc="设备串号" />
+        <field name="MAC_ADDRESS" length="128" type="C" desc="MAC地址" />
+        <field name="OS_TYPE" length="32" type="C" desc="系统类型" />
+        <field name="OS_VERSION" length="6" type="C" desc="系统版本	" />
+        <field name="IS_ROOT" length="6" type="C" desc="是否ROOT" />
+        <field name="CR_STAFF" length="32" required="true" type="C" desc="领用人ID" />
+        <field name="PASS_WORD" length="32" required="true" type="C" desc="密码" />
+    </snd>
+    
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码-注册结果" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+    </rcv>
+</trans>

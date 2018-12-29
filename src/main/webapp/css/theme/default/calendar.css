@@ -1,0 +1,95 @@
+#message_calendar{
+	width: 295px;
+	height: 210px;
+}
+
+#message_calendar .prev,.next{
+	width:27px;
+	height:25px;
+	cursor:pointer;
+}
+#message_calendar .prev div,.next div{
+	width:27px;
+	height:25px;
+}
+
+#tootip_week  td{
+	text-align: center;
+}
+
+#message_calendar .lr_table{
+	width: 280px;
+	height: 35px;
+	padding-top: 2px;
+}
+#message_calendar .lr_table tr td{
+	height: 28px;
+	line-height: 28px;
+	font-size: 16px;
+}
+
+#tootip_tab .a_left{
+	width: 26px;
+	float:left;
+	text-align: right;
+	display: block;
+	font-size: 17px;
+}
+
+.editbg_img1{
+	float:right;
+	display: block;
+	background-image: url("../../images/tootip/t_01.png");
+	background-position: 4px 14px;
+	background-repeat: no-repeat;
+	width: 13px;
+}
+.editbg_img2{
+	float:right;
+	display: block;
+	background-image: url("../../images/tootip/t_02.png");
+	background-position: 4px 14px;
+	background-repeat: no-repeat;
+	width: 13px;
+}
+.editbg_img3{
+	float:right;
+	display: block;
+	background-image: url("../../images/tootip/t_03.png");
+	background-position: 4px 14px;
+	background-repeat: no-repeat;
+	width: 13px;
+}
+.editbg_img4{
+	float:right;
+	display: block;
+	background-image: url("../../images/tootip/t_04.png");
+	background-position: 4px 14px;
+	background-repeat: no-repeat;
+	width: 13px;
+}
+.editbg_img5{
+	float:right;
+	display: block;
+	background-image: url("../../images/tootip/t_05.png");
+	background-position: 4px 14px;
+	background-repeat: no-repeat;
+	width: 13px;
+}
+.weekend_red{
+	color: #F55B08;
+}
+.holiday_red{
+	color: red;
+}
+#transparency{
+	filter:alpha(opacity=80); /*IE滤镜，透明度80%*/
+	-moz-opacity:0.2; /*Firefox私有，透明度80%*/
+	opacity:0.3;/*其他，透明度80%*/
+	float:left; 
+	width: 293px; 
+	height: 180px;
+	z-index: 1; 
+	margin:-35px 0px;
+	position:absolute; 
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yitong.modules.service.branch.dao.MgjBranchInfoDao">
+
+    <sql id="BaseColumnList">
+        BRCH_ID,PROV_ID,CITY_ID,TOWN_ID,BRCH_TYPE,
+        BRCH_NAME,BRCH_ADDR,BRCH_SERV,BRCH_SERV1,BRCH_SERV2,
+        BRCH_POST,BRCH_TRAF,BRCH_TEL1,BRCH_TEL2,VALID_FLAG,
+        POS_X,POS_Y,PUB_DATE,EDITOR_UID,EDITOR_DATE,
+        CHK_UID,CHK_DATE,ATM_TYPE
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{brchId},#{provId},#{cityId},#{townId},#{brchType},
+        #{brchName},#{brchAddr},#{brchServ},#{brchServ1},#{brchServ2},
+        #{brchPost},#{brchTraf},#{brchTel1},#{brchTel2},#{validFlag},
+        #{posX},#{posY},#{pubDate},#{editorUid},#{editorDate},
+        #{chkUid},#{chkDate},#{atmType}
+    </sql>
+
+    <sql id="TableClause"> ${schema.interPlat}.MGJ_BRANCH_INFO </sql>
+
+    <sql id="WhereClause4Id">
+        <where>
+            BRCH_ID = #{brchId}
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="cn.com.yitong.modules.service.branch.model.MgjBranchInfo">
+        insert into <include refid="TableClause" /> (
+        <include refid="BaseColumnList" />
+        ) values (
+        <include refid="BaseColumnValueList" />
+        )
+    </insert>
+
+    <select id="queryById" parameterType="string" resultType="cn.com.yitong.modules.service.branch.model.MgjBranchInfo">
+        <include refid="public.SelectById" />
+    </select>
+
+    <update id="updateById" parameterType="cn.com.yitong.modules.service.branch.model.MgjBranchInfo">
+        update <include refid="TableClause" />
+        <set>
+        PROV_ID=#{provId},
+        CITY_ID=#{cityId},
+        TOWN_ID=#{townId},
+        BRCH_TYPE=#{brchType},
+        BRCH_NAME=#{brchName},
+        BRCH_ADDR=#{brchAddr},
+        BRCH_SERV=#{brchServ},
+        BRCH_SERV1=#{brchServ1},
+        BRCH_SERV2=#{brchServ2},
+        BRCH_POST=#{brchPost},
+        BRCH_TRAF=#{brchTraf},
+        BRCH_TEL1=#{brchTel1},
+        BRCH_TEL2=#{brchTel2},
+        VALID_FLAG=#{validFlag},
+        POS_X=#{posX},
+        POS_Y=#{posY},
+        PUB_DATE=#{pubDate},
+        EDITOR_UID=#{editorUid},
+        EDITOR_DATE=#{editorDate},
+        CHK_UID=#{chkUid},
+        CHK_DATE=#{chkDate},
+        ATM_TYPE=#{atmType}
+        </set> <include refid="WhereClause4Id" />
+    </update>
+
+     <update id="updateByIdSelective" parameterType="cn.com.yitong.modules.service.branch.model.MgjBranchInfo">
+            update <include refid="TableClause" />
+            <set>
+                <if test="provId!=null">PROV_ID=#{provId},</if>
+                <if test="cityId!=null">CITY_ID=#{cityId},</if>
+                <if test="townId!=null">TOWN_ID=#{townId},</if>
+                <if test="brchType!=null">BRCH_TYPE=#{brchType},</if>
+                <if test="brchName!=null">BRCH_NAME=#{brchName},</if>
+                <if test="brchAddr!=null">BRCH_ADDR=#{brchAddr},</if>
+                <if test="brchServ!=null">BRCH_SERV=#{brchServ},</if>
+                <if test="brchServ1!=null">BRCH_SERV1=#{brchServ1},</if>
+                <if test="brchServ2!=null">BRCH_SERV2=#{brchServ2},</if>
+                <if test="brchPost!=null">BRCH_POST=#{brchPost},</if>
+                <if test="brchTraf!=null">BRCH_TRAF=#{brchTraf},</if>
+                <if test="brchTel1!=null">BRCH_TEL1=#{brchTel1},</if>
+                <if test="brchTel2!=null">BRCH_TEL2=#{brchTel2},</if>
+                <if test="validFlag!=null">VALID_FLAG=#{validFlag},</if>
+                <if test="posX!=null">POS_X=#{posX},</if>
+                <if test="posY!=null">POS_Y=#{posY},</if>
+                <if test="pubDate!=null">PUB_DATE=#{pubDate},</if>
+                <if test="editorUid!=null">EDITOR_UID=#{editorUid},</if>
+                <if test="editorDate!=null">EDITOR_DATE=#{editorDate},</if>
+                <if test="chkUid!=null">CHK_UID=#{chkUid},</if>
+                <if test="chkDate!=null">CHK_DATE=#{chkDate},</if>
+                <if test="atmType!=null">ATM_TYPE=#{atmType}</if>
+            </set> <include refid="WhereClause4Id" />
+     </update>
+
+
+    <update id="deleteById" parameterType="string">
+        <include refid="public.DeleteById" />
+    </update>
+
+    <select id="queryByCriteria" resultType="cn.com.yitong.modules.service.branch.model.MgjBranchInfo" parameterType="CriteriaQuery">
+        <include refid="public.Select4Query" />
+    </select>
+
+    <select id="countByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Count4Query" />
+    </select>
+
+    <select id="deleteByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Delete4Query" />
+    </select>
+</mapper>

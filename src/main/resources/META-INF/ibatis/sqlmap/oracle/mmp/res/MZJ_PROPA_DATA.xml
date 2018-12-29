@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MZJ_PROPA_DATA">
+
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="and" property="PRO_BUSI_TYPE">
+			P.PRO_BUSI_TYPE = #PRO_BUSI_TYPE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="ORGAN_LIMIT">
+			P.ORGAN_LIMIT = #ORGAN_LIMIT#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PROPA_NAME">
+			P.PROPA_NAME LIKE '%'||#PROPA_NAME#||'%'
+		</isNotEmpty> 
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT P.PROPA_ID,
+			P.FILE_ID,
+			P.PROPA_NAME,
+			P.PROPA_TYPE,
+			P.PRO_BUSI_TYPE,
+			P.PROPA_PIC,
+			P.PROPA_LVL,
+			P.PROPA_ORDE,
+			P.ORGAN_LIMIT,
+			Q.FILE_ADDR AS IMG_URL,
+			W.FILE_ADDR AS FILE_URL,
+			w.FILE_TYPE
+		FROM ${schema.interPlat}.MZJ_PROPA_DATA P
+		LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA Q ON P.PROPA_PIC=Q.FILE_ID
+		LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA W ON P.FILE_ID=W.FILE_ID
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="and">
+				P.STATUS = '1'
+			</isNotEmpty>
+			<isNotEmpty prepend="and">
+				P.VAILD_DATE > = SYSDATE
+			</isNotEmpty>
+			<include refid="queryDynSql" />
+		</dynamic> 
+		ORDER BY P.PROPA_ID
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT P.* FROM ${schema.interPlat}.MZJ_PROPA_DATA P
+	</select> 
+</sqlMap>
+

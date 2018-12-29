@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="BusiLogAdd" desc="行为日志提交">
+	<!-- 请求报文 -->
+	<snd>
+		<field name="MSG_ID" length="50" type="VARCHAR2" desc="消息ID" />
+		<field name="EVENT_ID" length="50" type="VARCHAR2" desc="事件ID" />
+		<field name="USER_ID" length="50" type="VARCHAR2" desc="用户ID" />
+		<field name="DEVICE_ID" length="50" type="VARCHAR2" desc="设备ID" />
+		<field name="SERVER_ID" length="50" type="VARCHAR2" desc="服务器ID" />
+		<field name="URL" length="50" type="VARCHAR2" desc="URL" />
+		<field name="APP_TAG" length="50" type="VARCHAR2" desc="APP标签" />
+		<field name="LOG_LEVEL" length="20" type="VARCHAR2" desc="LOG级别" />
+		<field name="LOG_TIME" length="20" type="VARCHAR2" desc="LOG时间" />
+		<field name="LOG_DATA" length="2000" type="VARCHAR2" desc="LOG数据" />
+		<field name="SESSION_ID" length="32" type="VARCHAR2" desc="sessionId" />
+
+		<field name="CHANNEL_ID" length="50" type="VARCHAR2" desc="应用下载渠道" />
+		<field name="APP_ID" length="64" type="VARCHAR2" desc="应用标识" />
+		<field name="APP_VERS" length="64" type="VARCHAR2" desc="版本号" />
+		<field name="IP_ADDR" length="64" type="VARCHAR2" desc="Ip地址" />
+		<field name="GPS" length="64" type="VARCHAR2" desc="GPS数据" />
+		<field name="PLACE" length="256" type="VARCHAR2" desc="位置" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

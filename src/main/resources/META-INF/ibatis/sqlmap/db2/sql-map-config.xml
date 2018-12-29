@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd" >
+<sqlMapConfig>
+
+	<properties resource="META-INF/res/ares.properties" />
+
+	<!--定义iBATIS自身应用信息 -->
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="200" maxSessions="100"
+		maxTransactions="20" useStatementNamespaces="true" />
+
+	<typeAlias alias="criteriaExample" type="cn.com.yitong.core.base.dao.CriteriaExample" />
+	<!-- page 公共提取 -->
+	<sqlMap resource="META-INF/ibatis/sqlmap/db2/ibatis-db2-page.xml" />
+
+</sqlMapConfig>
+
+

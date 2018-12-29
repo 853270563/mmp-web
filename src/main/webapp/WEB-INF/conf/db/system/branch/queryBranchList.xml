@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="queryBranchList" ibatisStatement="" desc="查询网点列表">
+	<!-- 请求报文 -->
+	<snd>  
+		<field name="CITY_ID" length="20" type="C" desc="所属城市"/>
+		<field name="TOWN_ID" length="20" type="C" desc="所属区县"/>
+		<field name="BRANCH_NAME" length="20" type="C" desc="网点名称"/>
+		<field name="POS_X" length="20" type="C" desc="经度"/>
+		<field name="POS_Y" length="20" type="C" desc="纬度"/>
+		<field name="RADIUS" length="20" type="C" desc="半径(单位米)"/>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E">
+			<field name="brchId" length="100" type="C" desc="网点编号" />
+			<field name="provId" length="100" type="C" desc="省份编号" />
+			<field name="cityId" length="100" type="C" desc="城市编号" />
+			<field name="townId" length="100" type="C" desc="城镇编号" />
+			<field name="brchType" length="100" type="C" desc="网点类型  0-综合网点  1-ATM" />
+			<field name="brchName" length="100" type="C" desc="网点名称" />
+			<field name="brchAddr" length="100" type="C" desc="网点地址" />
+			<field name="brchServ" length="100" type="C" desc="对私营业时间" />
+			<field name="brchServ1" length="100" type="C" desc="对公营业时间" />
+			<field name="brchServ2" length="100" type="C" desc="周末营业时间" />
+			<field name="brchPost" length="100" type="C" desc="邮编" />
+			<field name="brchTraf" length="100" type="C" desc="交通路线" />
+			<field name="brchTel1" length="100" type="C" desc="电话1" />
+			<field name="brchTel2" length="100" type="C" desc="brchTel2" />
+			<field name="posX" length="100" type="C" desc="坐标X" />
+			<field name="posY" length="100" type="C" desc="坐标Y" />
+			<field name="pubDate" length="100" type="C" desc="PUB_DATE" />
+			<field name="atmType" length="100" type="C" desc="ATM类型" />
+		</field-list>
+	</rcv>
+</trans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="saveAppVers"   desc="资源包上传">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="appId" length="100" type="C" desc="应用标识"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

@@ -1,0 +1,24 @@
+/* MENU */
+*{
+	font-size: 12px; 
+}
+.forbidEn{
+	display:none;
+}
+#nav { font-size:14px; } 
+
+#nav li a {
+	min-width:60px;
+}
+
+.minePanelHeader ul.card-tabs a { 
+	min-with:50px;
+	width: auto; 
+}
+.minePanelHeader ul.card-tabs a.current {
+	width: auto; 
+}
+
+.minePanelHeader ul.card-tabs a:hover {
+	width: auto;
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DEVICE_INFO">
+
+	<select id="queryByUuid" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_INFO T WHERE T.DEVICE_UUID = #deviceUuid#
+    </select>
+    
+    <update id="updateEraseById" parameterClass="map">
+		UPDATE ${schema.configPlat}.ARES_DEVICE_INFO T SET T.ERASE_FLAG = #ERASE_FLAG# WHERE T.DEVICE_UUID = #DEVICE_UUID#
+	</update>
+	
+	<delete id="undoBoundDevice" parameterClass="map">
+		<![CDATA[ delete from ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION where DEVICE_UUID = #deviceUuid# ]]>
+	</delete>
+	
+	<select id="queryRelationByDeviceUuid" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION T WHERE T.DEVICE_UUID = #deviceUuid#
+    </select>
+    
+    <select id="cntUserBoundDevice" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT COUNT(1) AS NUM FROM ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION T WHERE T.USER_ID = #userId#
+          AND EXISTS (SELECT 1 FROM ${schema.configPlat}.ARES_DEVICE_INFO A WHERE A.DEVICE_UUID = T.DEVICE_UUID)
+    </select>
+
+    <update id="updateById" parameterClass="map">
+       <![CDATA[ update ${schema.configPlat}.ARES_DEVICE_INFO ]]>
+       <dynamic prepend="set">
+	        DEVICE_NAME=#DEVICE_NAME#,
+	        DEVICE_NO=#DEVICE_NO#,
+	        DEVICE_MODEL=#DEVICE_MODEL#,
+	        DEVICE_SERIAL=#DEVICE_SERIAL#,
+	        MAC_ADDRESS=#MAC_ADDRESS#,
+	        OS_TYPE=#OS_TYPE#,
+	        OS_VERSION=#OS_VERSION#,
+	        IS_ROOT=#IS_ROOT#,
+	        LOCK_FLAG=#LOCK_FLAG#,
+	        ERASE_FLAG=#ERASE_FLAG#,
+            LOSE_FLAG=#LOSE_FLAG#,
+	        DEVICE_STATUS=#DEVICE_STATUS#,
+	        REMARK=#REMARK#,
+	        IPADDR=#IPADDR#,
+	        UPDATE_TIME=#UPDATE_TIME#
+        </dynamic>
+        <![CDATA[ where DEVICE_UUID = #DEVICE_UUID# ]]>
+    </update>
+	
+	<update id="updateByIdSelective" parameterClass="map">
+        <![CDATA[ update ${schema.configPlat}.ARES_DEVICE_INFO ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="DEVICE_NAME">DEVICE_NAME = #DEVICE_NAME#</isNotNull>
+            <isNotNull prepend="," property="DEVICE_NO">DEVICE_NO = #DEVICE_NO#</isNotNull>
+            <isNotNull prepend="," property="DEVICE_MODEL">DEVICE_MODEL = #DEVICE_MODEL#</isNotNull>
+            <isNotNull prepend="," property="DEVICE_SERIAL">DEVICE_SERIAL = #DEVICE_SERIAL#</isNotNull>
+            <isNotNull prepend="," property="MAC_ADDRESS">MAC_ADDRESS = #MAC_ADDRESS#</isNotNull>
+            <isNotNull prepend="," property="OS_TYPE">OS_TYPE = #OS_TYPE#</isNotNull>
+            <isNotNull prepend="," property="OS_VERSION">OS_VERSION = #OS_VERSION#</isNotNull>
+            <isNotNull prepend="," property="IS_ROOT">IS_ROOT = #IS_ROOT#</isNotNull>
+            <isNotNull prepend="," property="LOCK_FLAG">LOCK_FLAG = #LOCK_FLAG#</isNotNull>
+            <isNotNull prepend="," property="ERASE_FLAG">ERASE_FLAG = #ERASE_FLAG#</isNotNull>
+            <isNotNull prepend="," property="LOSE_FLAG">LOSE_FLAG = #LOSE_FLAG#</isNotNull>
+            <isNotNull prepend="," property="DEVICE_STATUS">DEVICE_STATUS = #DEVICE_STATUS#</isNotNull>
+            <isNotNull prepend="," property="REMARK">REMARK = #REMARK#</isNotNull>
+            <isNotNull prepend="," property="IPADDR">IPADDR = #IPADDR#</isNotNull>
+            <isNotNull prepend="," property="UPDATE_TIME">UPDATE_TIME = #UPDATE_TIME#</isNotNull>
+        </dynamic>
+        <![CDATA[ where DEVICE_UUID = #DEVICE_UUID# ]]>
+    </update>
+    
+    <select id="countByUuidAndUser" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION T WHERE T.DEVICE_UUID = #deviceUuid# AND T.USER_ID = #userId#
+    </select>
+    
+    <!-- 设备注册-->
+	<insert id="registerDevice" parameterClass="map">
+        INSERT INTO ${schema.configPlat}.ARES_DEVICE_INFO
+	        (DEVICE_UUID, DEVICE_NAME, DEVICE_NO, DEVICE_MODEL, DEVICE_SERIAL, MAC_ADDRESS, OS_TYPE, OS_VERSION, IS_ROOT, 
+	        LOCK_FLAG, ERASE_FLAG, LOSE_FLAG, DEVICE_STATUS, REMARK, IPADDR, UPDATE_TIME )
+        VALUES 
+	        (#DEVICE_UUID#, #DEVICE_NAME#, #DEVICE_NO#, #DEVICE_MODEL#, #DEVICE_SERIAL#, #MAC_ADDRESS#, #OS_TYPE#, #OS_VERSION#, 
+	        #IS_ROOT#, #LOCK_FLAG#, #ERASE_FLAG#, #LOSE_FLAG#, #DEVICE_STATUS#, #REMARK#, #IPADDR#, #UPDATE_TIME#)
+    </insert>
+	
+	<!-- 设备绑定用户-->
+	<insert id="boundDevice" parameterClass="map">
+		INSERT INTO ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION
+		(DEVICE_UUID, USER_ID, REGISTER_TIME) VALUES (#DEVICE_UUID#, #USER_ID#, #REGISTER_TIME#)
+	</insert> 
+    
+</sqlMap>
+
