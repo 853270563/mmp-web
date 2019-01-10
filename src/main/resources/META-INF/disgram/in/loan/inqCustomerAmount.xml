@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqCustomerAmount" desc="查询客户的授信情况">
+	<snd>
+		<field name="ID_TYPE" desc="证件类型" required="true" target="id_type" comment="110001	居民身份证
+																		021   	第一代居民身份证
+																		110003	临时居民身份证
+																		110005	户口簿
+																		110007	中国人民解放军军人身份证件
+																		110009	中国人民武装察身份证件
+																		110011	离休干部荣誉证
+																		110013	军官退休证
+																		110015	文职干部退休证
+																		110017	军事院校学员证
+																		110019	港澳居民往来内地通行证
+																		110021	台湾居民来往大陆通行证
+																		110023	中华人民共和国因私护照
+																		110025	中华人民共和国因公护照
+																		110027	外国护照
+																		110029	外国人永久居留证
+																		119998	系统使用的个人证件识别标识，在现实中不存在
+																		119999	其他个人证件识别标识
+																		Z00000	移植的不规范个人身份证件
+																				"/>
+		<field name="ID_NO" desc="证件号码" required="true" target="id_no" />
+		<field name="WORK_NUMBER" desc="客户经理" target="user_no" />
+		<field name="BUSS_TYPE" desc="业务类型" target="buss_type" comment="0单笔 1循环	"/>
+		<field name="CREDIT_STATUS" desc="合同状态" target="credit_status" comment="0	正常1结束2停用"/>
+	</snd>
+	<rcv>
+		<field name="CUSTOM_NAME" desc="姓名" required="true" target="custom_name" />
+		<field name="MOBILE" desc="电话" required="true" target="mobile" />
+		<field name="CUSTOMER_NO" desc="客户号" required="true" target="customer_no" />
+		<field name="WORK_NUMBER" desc="客户经理" target="user_no" />
+		<field name="WORK_NAME" desc="客户经理名称" target="user_name" />
+		<field name="TOTAL_NUMBER" desc="总量授信总笔数" target="total_number" />
+		<field name="TOTAL_AMOUNT" desc="总量授信总金额" target="total_amount" />
+		<field name="TOTALAMOUNTLIST" type="E" desc="列表" target="totalamountlist">
+			<field name="WORK_NUMBER" desc="客户经理" target="user_no" />
+			<field name="WORK_NAME" desc="客户经理名称" target="user_name" />
+			<field name="ORG_ID" desc="所属机构" target="req_bank_no" />
+			<field name="WORK_PHONE" desc="客户经理电话" target="mobile" />
+			<field name="LOAN_MONEY" desc="总量授信额度"  target="loan_money"/>
+			<field name="REST_TOTAL_MONEY" desc="总量授信余额" target="rest_total_money" />
+			<field name="TOTAL_AMOUNT_NO" desc="个人综合授信合同编号"  target="contract_no" />
+			<field name="PLEDGE_CONTRACT_NO" desc="最高额抵押合同编号" target="pledge_contract_no" />
+			<field name="START_DATE" desc="总量授信起始日期" target="start_date" comment="yyyy-MM-dd"/>
+			<field name="END_DATE" desc="总量授信到期日期" target="end_date"/>
+			<field name="TOTAL_STATUS" desc="总量授信状态" target="status" comment="0：正常 1：冻结 2：终止 3：到期 4注销"/>
+			<field name="BAR_CODE" desc="影像号" target="bar_code" />
+			<field name="BAR_DATE" desc="影像时间" target="bar_date" />
+			<field name="CREDITAMOUNTLIST" type="E" desc="列表" target="creditamountlist">
+				<field name="BUSS_TYPE" desc="业务类型"  comment="0单笔  1循环" target="buss_type"/>
+				<field name="CONTRACT_NO" desc="借款合同编号"  target="contract_no"/>
+				<field name="LOAN_MONEY" desc="总额度" target="loan_money"/>
+				<field name="REST_MONEY" desc="可用额度" target="rest_money"/>
+				<field name="OVER_FLAG" desc="逾期标志" comment="01正常  02逾期  03呆滞  04呆账" target="over_flag"/>
+				<field name="PAY_DATE" desc="额度起始日期" target="pay_date"/>
+				<field name="EXPIRE_DATE" desc="额度到期日期" target="expire_date"/>
+				<field name="RATE_VALUE" desc="还款金额"  target="rate_value"/>
+				<field name="REPAY_WAY" desc="还款方式" comment="1等额本金  2等额本金  3先息后本  4一次性利随本清" target="repay_way"/>
+				<field name="BANK_ACCOUNT_NO" desc="还款账号"  target="bank_account_no"/>
+				<field name="PURPOSE_TYPE" desc="用途类型" comment="0其他  1消费  2经营  3按揭" target="purpose_type"/>
+				<field name="STATUS" desc="合同状态" comment="0正常   1结束  2停用" target="status"/>
+			</field>
+			<field name="CREDITAMOUNTLIST" type="E" desc="列表" target="pledgelist">
+				<field name="ID" desc="抵押物ID" target="id"/>
+				<field name="PLEDGE_NAME" desc="抵押物名称"  target="pledge_name"/>
+				<field name="HOUSE_ADDRESS" desc="抵押物地址" target="house_address"/>
+				<field name="HOUSE_WARRANTS" desc="抵押物权证号" target="house_warrants"/>
+				<field name="CONFIRM_VALUE" desc="抵押物评估价值" target="confirm_value"/>
+				<field name="PLEDGE_RATE" desc="抵押率" target="pledge_rate"/>
+				<field name="PLEDGE_AMOUNT" desc="抵押金额"  target="pledge_amount"/>
+				<field name="IMAGE_NO" desc="影像编号"  target="image_no"/>
+			</field>
+				<field name="REST_CORPUS" desc="贷款余额"  target="rest_corpus"/>
+				<field name="LAST_PAY_DATE" desc="最近还款日"  target="last_pay_date"/>
+				<field name="LAST_PAY_AMOUNT" desc="最近还款金额"  target="last_pay_amount"/>
+		</field>
+	</rcv>
+</trans>

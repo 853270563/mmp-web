@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0051.flw" desc="共有人修改接口">
+  <nodes>
+    <node id="be3dd5ee-2611-42ac-a579-4962b82a41c9" xPos="300" yPos="230" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0051" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="62b52bf5-e578-4c9e-8d5a-9beb64807757" xPos="300" yPos="330" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="timeOut/deleteTask" desc="嵌套流程路径,不含文件后缀"/>
+        <data key="TASK_ID" expr="${bar_code}" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="be3dd5ee-2611-42ac-a579-4962b82a41c9" to="62b52bf5-e578-4c9e-8d5a-9beb64807757"/>
+  </lines>
+</diagram>

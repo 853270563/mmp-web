@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqChangeCustomerAmount.flw" desc="风险客户合同变更列表">
+  <nodes>
+    <node id="39155ef2-472d-4291-89f9-1739cb64e231" xPos="340" yPos="130" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqCustomerAmount" desc="嵌套流程路径,不含文件后缀"/>
+      </data-map>
+    </node>
+    <node id="ee1a57a1-7c1e-47ab-8e8a-acd06fa330e2" xPos="340" yPos="220" Width="180" Height="40">
+      <desc>风险客户合同变更列表</desc>
+      <beanId>inqChangeCustomerAmountOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="39155ef2-472d-4291-89f9-1739cb64e231" to="ee1a57a1-7c1e-47ab-8e8a-acd06fa330e2"/>
+  </lines>
+</diagram>

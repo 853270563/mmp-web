@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="AresMpMsgTmpl" desc="模板消息推送">
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field-list name="LIST" type="E">
+			<field name="TYPE_ID" length="64" type="C" desc="消息类型ID" />
+			<field name="TYPE_NAME" length="32" type="C" desc="消息类型名称" />
+		</field-list>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

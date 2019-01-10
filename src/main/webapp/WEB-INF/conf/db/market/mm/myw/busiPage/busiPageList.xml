@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiPageList" desc="包列表查询"   ibatisStatement="MYW_BUSI_PACKAGE.queryBusiPageByOwer">
+	<snd>
+		<field name="PB_OWNER" type="C" length="20" desc="拥有者" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="jsonStr" type="C" length="8000" desc="json报文" />
+	</rcv>
+</trans>

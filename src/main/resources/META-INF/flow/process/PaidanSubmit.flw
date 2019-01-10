@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="paidanSubmit.flw" desc="派单提交">
+  <nodes>
+    <node id="2fd19f08-4bb2-47bc-be76-66e0b8e047aa" xPos="470" yPos="90" Width="180" Height="40">
+      <desc>创建序列</desc>
+      <beanId>seqCreateOp</beanId>
+      <data-map>
+        <data key="*SEQ_KEY" expr="ID" desc="序列KEY"/>
+      </data-map>
+    </node>
+    <node id="e4fb86a0-b68d-4ac2-a33a-0ac9dbbeca98" xPos="470" yPos="170" Width="180" Height="40">
+      <desc>插入派单数据</desc>
+      <beanId>dbInsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="MyDispach.insert" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="8cef3c8e-6e88-4a0f-a40a-c253bf39a021" xPos="470" yPos="250" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="2fd19f08-4bb2-47bc-be76-66e0b8e047aa" to="e4fb86a0-b68d-4ac2-a33a-0ac9dbbeca98"/>
+    <line desc="" condition="" from="e4fb86a0-b68d-4ac2-a33a-0ac9dbbeca98" to="8cef3c8e-6e88-4a0f-a40a-c253bf39a021"/>
+  </lines>
+</diagram>

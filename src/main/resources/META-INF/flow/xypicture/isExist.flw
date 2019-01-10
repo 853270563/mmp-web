@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="isExist.flw" desc="影像是否存在">
+  <nodes>
+    <node id="4893de4d-9053-4c4d-beea-dcdf3f0df2e0" xPos="470" yPos="40" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="4d98293e-1f89-4b80-b013-60f163e38f42" xPos="480" yPos="150" Width="180" Height="40">
+      <desc>判断是否存在</desc>
+      <beanId>isExistxyOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="4893de4d-9053-4c4d-beea-dcdf3f0df2e0" to="4d98293e-1f89-4b80-b013-60f163e38f42"/>
+  </lines>
+</diagram>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="notifyReceiptDetail.flw" desc="借据授信通知">
+  <nodes>
+    <node id="a37fb9d4-4cbe-46ae-a153-af71177fb72b" xPos="320" yPos="150" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/notifyReceiptDetail" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

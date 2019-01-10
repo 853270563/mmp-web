@@ -18,6 +18,7 @@ import java.util.Properties;
 
 /**
  * 代码生成配置管理工具类
+ * @author 李超（lc3@yitong.com.cn）
  */
 public class CodegenConfigUtils {
 
@@ -71,7 +72,9 @@ public class CodegenConfigUtils {
         String moduleName = props.getProperty("moduleName");
         if(StringUtils.hasText(moduleName)) {
             props.setProperty("basePackageName", props.getProperty("basePackageName") + "." + moduleName);
-            props.setProperty("sqlmapperOraclePath", props.getProperty("sqlmapperOraclePath") + "." + moduleName);
+            props.setProperty("sqlmapperPath", props.getProperty("sqlmapperPath") + "." + moduleName);
+            props.setProperty("sqlmapperDB2Path", props.getProperty("sqlmapperDB2Path") + "." + moduleName);
+            props.setProperty("sqlmapperMysqlPath", props.getProperty("sqlmapperMysqlPath") + "." + moduleName);
         }
     }
 
@@ -138,9 +141,39 @@ public class CodegenConfigUtils {
         return new File(getProjectPath(), replacePath(tplPath));
     }
 
-    public static File getMapperOraclePath() {
-        String tplPath = props.getProperty("sqlmapperOraclePath");
+    /**
+     * 获得Sql Mapper基本路径
+     * @return
+     */
+    public static File getMapperBasePath() {
+        String tplPath = props.getProperty("sqlmapperPath");
         return new File(getProjectPath() + "/../resources/META-INF/mybatis", replacePath(tplPath));
+    }
+
+    /**
+     * 获得Sql Mapper基本路径
+     * @return
+     */
+    public static File getMapperDB2Path() {
+        String tplPath = props.getProperty("sqlmapperDB2Path");
+        return new File(getProjectPath() + "/../resources/META-INF/mybatis", replacePath(tplPath));
+    }
+
+    /**
+     * 获得Sql Mapper基本路径
+     * @return
+     */
+    public static File getMapperMysqlPath() {
+        String tplPath = props.getProperty("sqlmapperMysqlPath");
+        return new File(getProjectPath() + "/../resources/META-INF/mybatis", replacePath(tplPath));
+    }
+    /**
+     * 获得页面基本路径
+     * @return
+     */
+    public static File getViewBasePath() {
+        String tplPath = props.getProperty("moduleName");
+        return new File(getProjectPath() + "/../webapp/WEB-INF/views/modules/", replacePath(tplPath));
     }
 
     /**
@@ -166,4 +199,9 @@ public class CodegenConfigUtils {
     public static Properties getConfigs() {
         return props;
     }
+
+    public static void main(String[] args) {
+        System.out.println(genConfigProperties());
+    }
+
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="act">
+<sql id="BaseColumnList">
+        ROCESS_INST_ID,ID,ACT_TYPE,
+        ACT_NAME,AUDIT_ACTION,AUDIT_CONTENT,AUDIT_TIME,AUDIT_USER ,UPDATE_DATE  ,CREATE_DATE           
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{ROCESS_INST_ID},#{ID},#{ACT_TYPE},
+        #{ACT_NAME},#{AUDIT_ACTION},#{AUDIT_CONTENT},#{AUDIT_TIME},#{AUDIT_USER},#{UPDATE_DATE},#{CREATE_DATE}
+    </sql>
+     <sql id="TableClause"> ${schema.busiPlat}.PUSH_PROCESS_ACT </sql>
+     <insert id="insert" parameterType="map">
+		        insert into
+		        <include refid="TableClause"/>
+		        (
+		        <include refid="BaseColumnList"/>
+		        ) values (
+		        <include refid="BaseColumnValueList"/>
+		        )
+		    </insert>
+</mapper>

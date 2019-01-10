@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/hg/citycode" desc="获取市级编码">
+	<snd>
+		<field name="PARENT_ID" desc="上级编码" required="true" />
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="省份列表">
+			<field name="AREA_ID" desc="省份编码" />
+			<field name="AREA_NAME" desc="市县名称" />
+			<field name="PARENT_ID" desc="上级编码" />
+		</field>
+	</rcv>
+</trans>

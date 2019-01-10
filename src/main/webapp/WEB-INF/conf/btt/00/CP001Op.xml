@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="CP001" desc="查询附属户 ">
+	<!-- 请求报文 -->
+	<snd>
+		<field name="ACCT_TYP" length="2" type="C" desc="账号类别" mapKey="ACCT_TYP" descName="ACCT_TYP_DESC" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<field-list name="LIST" desc="结果" type="E" xpath="respData/LIST/e">
+			<field name="ACCT_NO" length="32" type="C" desc="账号" />
+			<field name="ACCT_TYP" length="2" type="C" desc="账号类别" mapKey="ACCT_TYP" descName="ACCT_TYP_DESC" />
+			<field name="ACCT_TYP2" length="2" type="C" desc="账号类别(主机)"  />
+			<field name="CCY_NO" length="3" type="C" desc="币别" descName="CCY_DESC" xpath="CCY_CODE" /> 
+			<field name="CCY_NO" length="3" type="C" mapKey="CCY_TYP" descName="CCY_DESC" desc="币别" xpath="CCY_CODE"/> 
+			<!-- 0-正常 ,  00：正常；01：不动户；04：待销户；07：关户。 -->
+			<field name="ACCT_STATUS" length="2" type="C" desc="账号状态" mapKey="ACCT_STAT" descName="ACCT_STATUS_DESC" xpath="ACCT_STAT"/>
+		</field-list>
+	</rcv>
+</trans>

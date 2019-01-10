@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0029" excode="Borrower_APP02" desc="客户基础信息查询">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>             
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+			<field name="borrower_name" length="80" type="C" desc="借款人姓名" />
+			<field name="idcard" length="18" type="C" desc="证件号"/>
+			<field name="age" length="2" type="C" desc="年龄" />
+			<field name="borrower_phone_number" length="11" type="C" desc="手机号"/>
+			<field name="cert_date" length="15" type="C" desc="证件到期日" />
+			<field name="customer_type" length="20" type="C" desc="客户类型"/>
+			<field name="borrower_mail" length="50" type="C" desc="邮箱" />
+			<field name="apply_time" length="20" type="C" desc="申请时间"/>
+			<field name="real_estate_estimate" length="20" type="C" desc="房产估算值" />
+			<field name="total_credit_status" length="2" type="C" desc="授信总量状态" />
+			<field name="order_time" length="20" type="C" desc="接单时间"/>
+			<field name="borrower_address_pro" length="8" type="C" desc="居住地址_省" />
+			<field name="borrower_address_city" length="8" type="C" desc="居住地址_市" />
+			<field name="borrower_address_county" length="8" type="C" desc="居住地址_县" />
+			<field name="borrower_address_detail" length="100" type="C" desc="详细地址"/>
+			<field name="borrower_mari_status" length="20" type="C" desc="婚姻状态"/>
+			<field name="school_record" length="20" type="C" desc="学历" />
+			<field name="living_state" length="2" type="C" desc="居住状态"/>
+			<field name="related_bank_status" length="2" type="C" desc="是否为本行关联方"/>
+			<field name="related_bank_position" length="20" type="C" desc="关联方"/>
+			<field name="borrower_professional" length="20" type="C" desc="职业" />
+			<field name="borrower_company_name" length="50" type="C" desc="单位名称"/>
+			<field name="borrower_company_address" length="100" type="C" desc="单位地址"/>
+			<field name="borrower_title" length="50" type="C" desc="职称" />
+			<field name="company_phonecode" length="8" type="C" desc="单位联系方式_区号"/>
+			<field name="company_phone" length="20" type="C" desc="单位联系方式" />
+			<field name="borrower_industry" length="50" type="C" desc="所属行业"/>
+			<field name="spouse_name" length="50" type="C" desc="配偶-姓名" />
+			<field name="spouse_idcard" length="20" type="C" desc="配偶-证件号码"/>
+			<field name="spouse_phone" length="20" type="C" desc="配偶-手机号码"/>
+			<field name="spouse_commborr_statue" length="2" type="C" desc="配偶-是否共同借款人" />
+			<field name="spouse_company_name" length="100" type="C" desc="配偶-单位名称"/>
+			<field name="spouse_company_phonecode" length="8" type="C" desc="配偶-联系方式-区号" />
+			<field name="spouse_company_phone" length="20" type="C" desc="配偶-联系方式-号码" />
+			<field name="family_annual_income" length="20" type="C" desc="家庭年收入合计" />
+			<field name="other_annual_income" length="20" type="C" desc="其他年收入合计" />
+			<field name="annual_income_count" length="20" type="C" desc="年收入合计" />
+			<field name="annua_liabilities_count" length="20" type="C" desc="年负债合计" />
+			<field name="real_estate_num" length="5" type="C" desc="家庭房产数量" />
+			<field name="other_assets_cert" length="50" type="C" desc="其他资产证明" />
+			<!-- <field name="busi_entity_name" length="100" type="C" desc="经营实体-注册名称" />
+			<field name="busi_entity_credcode" length="50" type="C" desc="经营实体-统一社会信用代码"/> -->
+			<field name="busi_entity_setuptime" length="20" type="C" desc="经营实体-成立时间" />
+			<field name="busi_entity_scope" length="20" type="C" desc="经营实体-主营业务范围" />
+			<field name="busi_entity_Borrr" length="20" type="C" desc="经营实体-借款人与经济实体关系" />
+			<field name="register_company_name" length="100" type="C" desc="非自然人-经营实体"/>
+			<field name="is_register" length="2" type="C" desc="非自然人-是否工商登记	"/>	
+			<field name="register_no" length="100" type="C" desc="非自然人-登记注册号"/>
+			<field name="register_capital" length="100" type="C" desc="非自然人-注册资本"/>
+			<field name="remark" length="100" type="C" desc="备注"/>
+			<field name="id_address" length="100" type="C" desc="证件地址"/>
+		</body>
+	</rcv>
+</trans>

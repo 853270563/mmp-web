@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MyDispach">
+
+    <sql id="BaseColumnList">
+        ID,BORROWER_NAME,BORROWER_PHONE,IN_TIME,bar_code,
+        TASK_TYPE,STATE,WORK_NUMBER  ,HOURSE_ADDR,LONGITUDE,LATITUDE,RULEID,SUB_RULE_TYPE,OUT_COMPANY_ID,PROPERTY_PATTERN,APPLY_TIME,OUT_COMPANY_NAME,CUST_TYPE,FRIST_APPLY_ID,FRIST_APPLY_TIME
+    </sql>
+
+    <sql id="BaseColumnValueList"><!--区分大小写  -->
+        #{ID},#{BORROWER_NAME},#{BORROWER_PHONE},#{IN_TIME},#{BAR_CODE},
+        #{TASK_TYPE},#{STATE},#{WORK_NUMBER},#{HOURSE_ADDR},#{LONGITUDE},#{LATITUDE},#{RULEID},#{SUB_RULE_TYPE},#{OUT_COMPANY_ID},#{PROPERTY_PATTERN},#{APPLY_TIME},#{OUT_COMPANY_NAME},#{CUST_TYPE},
+        #{FRIST_APPLY_ID},#{FRIST_APPLY_TIME}
+    </sql>
+
+    <sql id="TableClause"> ${schema.busiPlat}.MY_DISPACH </sql>
+
+    <sql id="WhereClause4Id">
+        <where>
+            ID = #{ID}
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="map">
+        insert into <include refid="TableClause" /> (
+        <include refid="BaseColumnList" />
+        ) values (
+        <include refid="BaseColumnValueList" />
+        )
+    </insert>
+
+    <select id="queryById" parameterType="string" resultType="map">
+        <include refid="public.SelectById" />
+    </select>
+
+    <update id="updateById" parameterType="map">
+        update <include refid="TableClause" />
+        <set>
+        BORROWER_NAME=#{BORROWER_NAME},
+        BORROWER_PHONE=#{BORROWER_PHONE},
+        IN_TIME=#{IN_TIME},
+        BAR_CODE=#{BAR_CODE},
+        TASK_TYPE=#{TASK_TYPE},
+        STATE=#{STATE},
+        WORK_NUMBER  =#{WORK_NUMBER  }
+        </set> <include refid="WhereClause4Id" />
+    </update>
+
+     <update id="updateByIdSelective" parameterType="map">
+            update <include refid="TableClause" />
+            <set>
+                <if test="BORROWER_NAME!=null and BORROWER_NAME!=''">BORROWER_NAME=#{BORROWER_NAME},</if>
+                <if test="BORROWER_PHONE!=null and BORROWER_PHONE!=''">BORROWER_PHONE=#{BORROWER_PHONE},</if>
+                <if test="IN_TIME!=null and IN_TIME!=''">IN_TIME=#{IN_TIME},</if>
+                <if test="BAR_CODE!=null and BAR_CODE!=''">BAR_CODE=#{BAR_CODE},</if>
+                <if test="TASK_TYPE!=null and TASK_TYPE!=''">TASK_TYPE=#{TASK_TYPE},</if>
+                <if test="STATE!=null and STATE!=''">STATE=#{STATE},</if>
+                <if test="WORK_NUMBER  !=null and WORK_NUMBER  !=''">WORK_NUMBER  =#{WORK_NUMBER  }</if>
+            </set> <include refid="WhereClause4Id" />
+     </update>
+
+
+    <update id="deleteById" parameterType="string">
+        <include refid="public.DeleteById" />
+    </update>
+
+    <select id="queryByCriteria" resultType="map" parameterType="map">
+        <include refid="public.Select4Query" />
+    </select>
+
+    <select id="countByCriteria" resultType="int" parameterType="map">
+        <include refid="public.Count4Query" />
+    </select>
+
+    <select id="deleteByCriteria" resultType="int" parameterType="map">
+        <include refid="public.Delete4Query" />
+    </select>
+    
+    <select id="queryByMap" resultType="map" parameterType="map">
+     select  <include refid="BaseColumnList" />
+     from    <include refid="TableClause" />
+     <where>
+                <if test="ID!=null and ID!=''">and ID=#{ID} </if>
+                <if test="BORROWER_NAME!=null and BORROWER_NAME!=''">and BORROWER_NAME like '%'||#{BORROWER_NAME}||'%' </if>
+                
+                <if test="BORROWER_PHONE!=null and BORROWER_PHONE!=''">and BORROWER_PHONE=#{BORROWER_PHONE} </if>
+                
+                <if test="IN_TIME!=null and IN_TIME!=''">and IN_TIME=#{IN_TIME} </if>
+                <if test="BAR_CODE !=null and BAR_CODE !=''">and BAR_CODE =#{BAR_CODE} </if>
+                <if test="TASK_TYPE!=null and TASK_TYPE!=''">and TASK_TYPE=#{TASK_TYPE} </if>
+                <if test="STATE!=null and STATE!=''">and STATE=#{STATE} </if>
+                <if test="HOURSE_ADDR!=null and HOURSE_ADDR!=''">and HOURSE_ADDR like '%'||#{HOURSE_ADDR}||'%' </if>
+                <if test="WORK_NUMBER  !=null and WORK_NUMBER  !=''">and WORK_NUMBER  =#{WORK_NUMBER  }</if>
+     </where>
+    </select>
+</mapper>

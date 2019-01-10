@@ -1,8 +1,15 @@
 package cn.com.yitong.core.base;
 
-import cn.com.yitong.consts.AppConstants;
-import cn.com.yitong.consts.NS;
-import cn.com.yitong.framework.base.IBusinessContext;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.HttpStatus;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -10,14 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
+import cn.com.yitong.consts.AppConstants;
+import cn.com.yitong.consts.SessConsts;
+import cn.com.yitong.framework.base.IBusinessContext;
 
 /**
  * 网络方面的工具类
@@ -28,8 +30,8 @@ import java.util.Properties;
 public class WebUtils {
 
 
-	private static final Logger logger = LoggerFactory.getLogger(WebUtils.class);
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(WebUtils.class);
 	private static final ObjectMapper jsonMapper = new ObjectMapper();
 	private static final String RTN_CODE = "STATUS";
 	private static final String RTN_MSG = "MSG";
@@ -41,7 +43,8 @@ public class WebUtils {
 	 *            异常
 	 * @return
 	 */
-	public static void jsonExceptionHandler(HttpServletResponse response,Exception e) {
+	public static void jsonExceptionHandler(HttpServletResponse response,
+			Exception e) {
 		Map<String, Object> rtn = returnErrorMsg(null, null, e);
 		response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
 		response.setContentType("application/json;charset=UTF-8");
@@ -62,8 +65,10 @@ public class WebUtils {
 	public static void htmlExceptionHandler(HttpServletRequest request,
 			HttpServletResponse response, Exception e) {
 		try {
-			org.springframework.web.util.WebUtils.exposeErrorRequestAttributes(request, e, "mbank");
-			request.getRequestDispatcher("/WEB-INF/page/error/500.jsp").forward(request, response);
+			org.springframework.web.util.WebUtils.exposeErrorRequestAttributes(
+					request, e, "mbank");
+			request.getRequestDispatcher("/WEB-INF/page/error/500.jsp")
+					.forward(request, response);
 		} catch (Exception ex) {
 			logger.error("跳转500网页出错", ex);
 		}
@@ -78,7 +83,8 @@ public class WebUtils {
 	 *            错误信息
 	 * @return
 	 */
-	public static Map<String, Object> returnErrorMsg(Map<String, Object> rtn,String errorMsg) {
+	public static Map<String, Object> returnErrorMsg(Map<String, Object> rtn,
+			String errorMsg) {
 		return returnErrorMsg(rtn, errorMsg, null);
 	}
 
@@ -89,7 +95,8 @@ public class WebUtils {
 	 * @param msg
 	 * @return
 	 */
-	public static Map<String, Object> returnSuccessMsg(Map<String, Object> rtn,	String msg) {
+	public static Map<String, Object> returnSuccessMsg(Map<String, Object> rtn,
+			String msg) {
 		if (null == rtn) {
 			rtn = new HashMap<String, Object>(2);
 		}
@@ -210,7 +217,8 @@ public class WebUtils {
 		if (null == req) {
 			return null;
 		}
-		String userId = (String) req.getSession().getAttribute(NS.LOGIN_ID);
+		String userId = (String) req.getSession().getAttribute(
+				SessConsts.LOGIN_ID);
 		if (!StringUtils.hasText(userId) && null != ctx) {
 			userId = ctx.getParam("LOGIN_ID");
 		}
@@ -218,6 +226,16 @@ public class WebUtils {
 			return null;
 		}
 		return userId;
+	}
+
+	/**
+	 * @param request
+	 * @return  下载文件的Url前半部分
+	 */
+	public static String getDownloadUrl(HttpServletRequest request) {
+		String serverAddress = AppConstants.server_address;
+		String downloadUrl = "/" + serverAddress;
+		return downloadUrl;
 	}
 
 	/**
@@ -233,7 +251,7 @@ public class WebUtils {
 		try {
 			properties.load(inputStream);
 		} catch (IOException ex) {
-			logger.warn("读配置文件信息异常，异常原因：",ex);
+			ex.printStackTrace();
 		}
 		return properties;
 	}

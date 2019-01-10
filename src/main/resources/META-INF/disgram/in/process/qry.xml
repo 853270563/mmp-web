@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/process/qry" desc="流程查询">
+	<snd>
+		<field name="PROCESS_INST_ID" desc="流程ID" required="true" />
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="流程列表">
+			<field name="AUDIT_ACTION" desc="审批动作" required="true" comment="1-同意/0-不同意"/>
+			<field name="AUDIT_CONTENT" desc="审批内容" />
+			<field name="ACT_TYPE" desc="当前环节" comment="'1：发起环节2：审批环节3：发起人撤销';"/>
+			<field name="AUDIT_TIME" desc="审批时间" />
+			<field name="AUDIT_USER" desc="审批人" />
+		</field>
+	</rcv>
+</trans>

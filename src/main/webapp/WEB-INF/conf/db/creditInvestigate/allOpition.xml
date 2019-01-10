@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="allOpition" ibatisStatement="" desc="所有意见信息">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!-- 客户信息  -->
+		
+		<field  name="PAGE_NO" length="30" type="C" desc="第几页"  />
+		<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小"  /> 
+		<field  name="applySerialNo" length="10" type="C" desc="业务编号 "/>
+		<field  name="serialNo" length="10" type="C" desc="任务流水号"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		 <!-- 代办记录 -->
+        <field-list name="LIST" type="E">
+           <field name="phaseOpinion" client="phaseOpinion" type="C"   />  
+				<field name="mrPhaseOpinion" client="mrPhaseOpinion" type="C"  />  
+				<field name="endTime" client="endTime" type="C" />  
+				<field name="beginTime" client="beginTime" type="C" />  
+				<field name="orgName" client="orgName" type="C"  />  
+				<field name="userName" client="userName" type="C" />  
+				<field name="phaseName" client="phaseName" type="C" required="true"  default="20"    desc="当前阶段名称" />
+				<field name="termMonth" client="termMonth" type="C"  />
+				<field name="businessSum" client="businessSum" type="C"  />
+				<field name="businessCurrency" client="businessCurrency" type="C"  />  
+				<field name="customerName" client="customerName" type="C"  /> 
+        </field-list>
+	</rcv>
+</trans>

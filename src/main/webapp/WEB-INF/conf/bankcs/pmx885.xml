@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="TranDeQueryRate" desc="利率查询接口">
+	<snd>
+		<field name="bzh" length="2" type="C" desc="币种号" required="true"/>
+		<field name="czy" length="4" type="C" desc="操作员" required="true"/>
+		<field name="jgm" length="9" type="C" desc="机构码" required="true"/>
+		<field name="sblx" length="1" type="C" desc="设备类型" required="true"/>
+		<field name="jym" length="4" type="C" desc="交易码" required="true" />
+		<field name="wdlsh" length="8" type="C" desc="网点流水号" required="true"/>
+		<field name="llzl" length="3" type="C" desc="利率种类码" required="true"/>
+		<field name="qxm" length="3" type="C" desc="期限码" required="true" />
+		<field name="qyrq" length="8" type="C" desc="日期" required="true" />
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="70" type="C" desc="返回消息" />
+		<field name="zjlsh" length="8" type="C" desc="主机流水号" />
+		<field name="ll" length="8" type="C" desc="利率" />
+	</rcv>
+</trans>

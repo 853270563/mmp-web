@@ -1,0 +1,6 @@
+DISGRAM_ROOT=src/main/resources/META-INF/disgram/
+FLOW_ROOT=src/main/resources/META-INF/flow/
+NAME_RULE_FILE=doc/rule-field-name.md
+PROPERTY_ROOT=src/main/resources/META-INF/conf/
+STUDIO_VERSION=front.3.2
+WEB_DIST=target/web

@@ -1,7 +1,5 @@
 package cn.com.yitong.framework.util.io;
 
-import org.springframework.util.Assert;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +7,13 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.util.Assert;
 
 /**
  * 文件操作工具类 Created by wenin819@gmail.com on 2014-05-26.
@@ -137,8 +141,6 @@ public class FileUtils {
 			while ((len = fin.read(buffer, 0, 1024)) != -1) {
 				messageDigest.update(buffer, 0, len);
 			}
-			bigInteger = new BigInteger(1, messageDigest.digest());
-			md5Rresult = bigInteger.toString(16);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -150,6 +152,8 @@ public class FileUtils {
 				FileUtils.closeFileInputStream(fin);
 			}
 		}
+		bigInteger = new BigInteger(1, messageDigest.digest());
+		md5Rresult = bigInteger.toString(16);
 		return md5Rresult;
 	}
 

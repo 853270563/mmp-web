@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="loadNote"   desc="加载资讯通知">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="NOTE_ID" length="64" type="C" desc="资讯通知ID"  required="true"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<field name="NOTE_TYP" length="1" type="C" desc="公告类型" /> 
+		<field name="NOTE_TITLE" length="128" type="C" desc="公告标题" /> 
+		<field name="NOTE_CONTENT" length="2048" type="C" desc="公告内容" /> 
+		<field name="IMP_FLG" length="1" type="C" desc="重要度（1：一般，2：重要，3：非常重要）" /> 
+		<field name="MSG" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

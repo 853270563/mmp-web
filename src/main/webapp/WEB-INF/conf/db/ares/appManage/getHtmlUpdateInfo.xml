@@ -22,7 +22,6 @@
 			<field name="RES_UPDATE_PACK_SIZE" type="N" desc="WEB升级包大小" /> 
 			<field name="RES_UPDATE_PACK_INDEX" type="N" desc="WEB升级包序列" /> 
 		</field-list>
-		<field name="RES_VERS_MEMO" length="2000" type="C" desc="版本更新描述" />
 		<field name="MSG" length="100" type="C" desc="返回消息" /> 
 		<field name="STATUS" length="6" type="C" desc="返回码" />
 	</rcv>

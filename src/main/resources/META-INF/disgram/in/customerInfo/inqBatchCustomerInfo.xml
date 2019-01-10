@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/customerInfo/inqBatchCustomerInfo" desc="根据客户经理查询批量客户信息">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" target="user_no" required="true"/>
+		<field name="CUSTOM_NAME" desc="姓名" target="custom_name"/>
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="客户列表" target="customerlist">
+			<field name="CUSTOMER_NO" desc="客户号" target="customer_no"/>
+			<field name="NAME" desc="姓名" target="name"/>
+			<field name="SEX" desc="性别" target="sex" comment="0	未提供1	男2	女9	未知"/>
+			<field name="ETHNIC" desc="民族" target="ethnic"/>
+			<field name="SKID" desc="客户类型" target="customer_type" comment="01	自然人 02	非自然人"/>
+			<field name="ID_TYPE" desc="证件类型" target="id_type"/>
+			<field name="ID_NO" desc="证件号码" target="id_no"/>
+			<field name="BIRTHDAY" desc="出生日期" target="birthday"/>
+			<field name="ID_SIGN_ORG" desc="签发机关" target="id_sign_org"/>
+			<field name="ID_SATART_DATE" desc="证件起始日期" target="id_start_date"/>
+			<field name="ID_END_DATE" desc="证件到期日期" target="id_end_date"/>
+			<field name="ID_ADDRESS" desc="证件地址" target="id_address"/>
+			<field name="CERTIFICATE" desc="学历" target="certificate"/>
+			<field name="DEGREE" desc="学位" target="degree"/>
+			<field name="SCHOOL" desc="毕业学校" target="school"/>
+			<field name="MOBILE" desc="手机" target="mobile"/>
+			<field name="WX" desc="微信号" target="wx"/>
+			<field name="QQ" desc="QQ号" target="qq"/>
+			<field name="EMAIL" desc="电子邮箱" target="email"/>
+			<field name="FAX" desc="传真" target="fax"/>
+			<field name="FAMILY_ADDRESS" desc="居住地址" target="family_address"/>
+			<field name="FAMILY_ZIP" desc="居住邮编" target="family_zip"/>
+			<field name="FAMILY_STATUS" desc="居住状况" target="family_status"/>
+			<field name="COUNTRY_CODE" desc="国家" target="country_code"/>
+			<field name="COMM_ADDRESS" desc="通讯地址" target="comm_address"/>
+			<field name="COMM_ZIP" desc="通讯邮编" target="comm_zip"/>
+			<field name="POST" desc="职称" target="post"/>
+			<field name="OCCUPATION" desc="职业" target="occupation"/>
+			<field name="HEADSHIP" desc="职务" target="headship"/>
+			<field name="FAMILY_INCOME" desc="家庭年收入" target="family_income"/>
+			<field name="INCOME" desc="个人年收入" target="income"/>
+			<field name="COMPANY" desc="公司名称" target="company"/>
+			<field name="UNIT_TEL" desc="单位电话" target="unit_tel"/>
+			<field name="UNIT_ADDR" desc="单位地址" target="unit_addr"/>
+			<field name="MAJOR_IN" desc="行业" target="major_in"/>
+			<field name="CUSTOMER_PROPERTY" desc="客户性质" target="customer_property"/>
+			<field name="HOME_SALARY_INCOME" desc="家庭工资年收入" target="home_salary_income"/>
+			<field name="HOME_MANAGE_INCOME" desc="家庭经营年收入" target="home_manage_income"/>
+			<field name="HOME_OTHER_INCOME" desc="家庭其他年收入" target="home_other_income"/>
+			<field name="HOME_SUM_DEBT" desc="家庭年负债合计" target="home_sum_debt"/>
+			<field name="HOME_HOUSE_NUM" desc="家庭房产数量" target="home_house_num"/>
+			<field name="OTHER_ASSETS" desc="其他资产证明" target=".other_assets"/>
+			<field name="IS_EMPLOYEE" desc="是否本行员工" target="is_employee"/>
+			<field name="BANK_PARTNER" desc="本行关联方身份" target="bank_partner"/>
+			<field name="IS_RESIDENT" desc="是否居民" target="is_resident"/>
+			<field name="IS_FARM" desc="是否农户" target="is_farm"/>
+			<field name="BANK_CARD" desc="银行卡号" target="bank_card"/>
+			<field name="BELONG_BANK" desc="开户行" target="belong_bank"/>
+			<field name="ACCOUNT_TYPE" desc="账户类型" target="account_type"/>
+			<field name="WORK_YEAR" desc="工作时长" target="work_year"/>
+			<field name="LIVE_YEAR" desc="居住时长" target="live_year"/>
+			<field name="BEMARRIED" desc="婚姻状况" target="bemarried"/>
+			<field name="SPOUSE_ID_TYPE" desc="配偶姓名" target="spouse_name"/>
+			<field name="SPOUSE_ID_TYPE" desc="配偶证件类型" target="spouse_id_type"/>
+			<field name="SPOUSE_ID_NO" desc="配偶证件号码" target="spouse_id_no"/>
+			<field name="SPOUSE_MOBILE" desc="配偶电话" target="spouse_mobile"/>
+			<field name="SPOUSE_COMPANY" desc="配偶单位名称" target="spouse_company"/>
+			<field name="SPOUSE_MAJOR" desc="配偶单位行业" target="spouse_major"/>
+			<field name="SPOUSE_UNIT_TEL" desc="配偶单位电话" target="spouse_unit_tel"/>
+			<field name="SPOUSE_WORK_YEAR" desc="配偶工作时长" target="spouse_work_year"/>
+			<field name="APPLY_IP" desc="申请时IP" target="apply_ip"/>
+			<field name="APPLY_X" desc="申请时位置(X)" target="apply_x"/>
+			<field name="APPLY_Y" desc="申请时位置(Y)" target="apply_y"/>
+			<field name="MARKET_USER_NO" desc="营销人员" target="market_user_no"/>
+			<field name="USER_NO" desc="经理编号" target="user_no"/>
+		</field>
+	</rcv>
+</trans>

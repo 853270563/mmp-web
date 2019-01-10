@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="user">
+	<update id="update">
+		update 
+		${schema.configPla}
+		set ERR_LGN_CNT=5
+		where USER_ID=#{USER_ID}
+	
+	</update>
+</mapper>

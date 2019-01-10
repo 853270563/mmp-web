@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0020" excode="Track_APP02" desc="抢单列表">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="house_name" length="100" type="C" desc="房产名称" required="false"/>             
+			<field name="borrower_name" length="50" type="C" desc="客户姓名" required="false"/>              
+			<field name="borrower_phone" length="15" type="C" desc="手机号码" required="false"/>             
+			<field name="apply_time_start" length="20" type="C" desc="申请时间起" required="false"/>             
+			<field name="apply_time_end" length="20" type="C" desc="申请时间止" required="false"/> 
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="list" type="E" desc="列表">             
+				<field name="community_x" length="18" type="C" desc="小区经度"/>              
+				<field name="community_y" length="18" type="C" desc="小区纬度"/>              
+				<field name="borrower_name" length="50" type="C" desc="客户姓名"/>              
+				<field name="borrower_phone" length="15" type="C" desc="手机号"/>              
+				<field name="apply_time" length="20" type="C" desc="申请时间"/>             
+				<field name="house_name" length="100" type="C" desc="房产名称(片区)"/>             
+				<field name="borrower_idcard" length="18" type="C" desc="身份证"/>              
+				<field name="house_estimate_value" length="20" type="C" desc="房产预评估价值"/>               
+				<field name="address_pro" length="10" type="C" desc="房产地址-省"/>               
+				<field name="address_city" length="10" type="C" desc="房产地址-市"/>               
+				<field name="address_county" length="10" type="C" desc="房产地址-区"/>               
+				<field name="address_detail" length="100" type="C" desc="房产地址"/>              
+				<field name="bar_code" length="32" type="C" desc="条码号"/>  
+				<field name="borrower_type" length="10" type="C" desc="客户类型-01:新客户，02：存量客户，03：新增加抵押物"/>  
+			</field>  
+		</body>
+	</rcv>
+</trans>

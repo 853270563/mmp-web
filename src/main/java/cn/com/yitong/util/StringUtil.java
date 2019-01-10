@@ -1,22 +1,39 @@
 package cn.com.yitong.util;
 
-import cn.com.yitong.core.util.DictUtils;
-import org.dom4j.*;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.sql.Clob;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cn.com.yitong.core.util.DictUtils;
 
 public class StringUtil {
-
+	private static final Logger logger = LoggerFactory.getLogger(StringUtil.class);
 	/**
 	 * 根据交易号生成IBS系统的跳转页面路径
+	 * 
+	 * @param tranCode
+	 * @return
 	 */
 	public static String generyForwardPath(String tranCode) {
 		if (StringUtil.isEmpty(tranCode)) {
@@ -29,9 +46,8 @@ public class StringUtil {
 
 	public static String iso2utf8(String src) {
 		try {
-			if (isEmpty(src)) {
+			if (isEmpty(src))
 				return "";
-			}
 			return new String(src.getBytes("iso-8859-1"), "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			return "?";
@@ -40,9 +56,8 @@ public class StringUtil {
 
 	public static String iso2gbk(String src) {
 		try {
-			if (isEmpty(src)) {
+			if (isEmpty(src))
 				return "";
-			}
 			return new String(src.getBytes("iso-8859-1"), "gbk");
 		} catch (UnsupportedEncodingException e) {
 			return "?";
@@ -51,33 +66,30 @@ public class StringUtil {
 
 	/**
 	 * <li>判断字符串是否为空值</li> <li>NULL、空格均认为空值</li>
+	 * 
+	 * @param value
+	 * @return
 	 */
 	public static boolean isEmpty(String value) {
 		return null == value || "".equals(value.trim());
 	}
 
-	/**
-	 * <li>判断字符串是否为空值</li> <li>NULL、空格均认为空值</li>
-	 */
-	public static boolean isEmpty(Object value) {
-		return null == value || "".equals(value.toString().trim());
-	}
-
 	public static boolean isBlank(String str) {
 		int strLen;
-		if (str == null || (strLen = str.length()) == 0) {
+		if (str == null || (strLen = str.length()) == 0)
 			return true;
-		}
-		for (int i = 0; i < strLen; i++) {
-			if (!Character.isWhitespace(str.charAt(i))) {
+		for (int i = 0; i < strLen; i++)
+			if (!Character.isWhitespace(str.charAt(i)))
 				return false;
-			}
-		}
+
 		return true;
 	}
 
 	/**
 	 * 内容不为空
+	 * 
+	 * @param value
+	 * @return
 	 */
 	public static boolean isNotEmpty(String value) {
 		return null != value && !"".equals(value.trim());
@@ -85,6 +97,11 @@ public class StringUtil {
 
 	/**
 	 * 重复字符串 如 repeatString("a",3) ==> "aaa"
+	 * 
+	 * @author uke
+	 * @param src
+	 * @param repeats
+	 * @return
 	 */
 	public static String repeatString(String src, int repeats) {
 		if (null == src || repeats <= 0) {
@@ -100,6 +117,10 @@ public class StringUtil {
 
 	/**
 	 * 左对齐字符串 * lpadString("X",3); ==>" X" *
+	 * 
+	 * @param src
+	 * @param length
+	 * @return
 	 */
 	public static String lpadString(String src, int length) {
 		return lpadString(src, length, " ");
@@ -107,6 +128,11 @@ public class StringUtil {
 
 	/**
 	 * 以指定字符串填补空位，左对齐字符串 * lpadString("X",3,"0"); ==>"00X"
+	 * 
+	 * @param src
+	 * @param length
+	 * @param single
+	 * @return
 	 */
 	public static String lpadString(String src, int length, String single) {
 		if (src == null || length <= src.getBytes().length) {
@@ -118,6 +144,10 @@ public class StringUtil {
 
 	/**
 	 * 右对齐字符串 * rpadString("9",3)==>"9 "
+	 * 
+	 * @param src
+	 * @param byteLength
+	 * @return
 	 */
 	public static String rpadString(String src, int byteLength) {
 		return rpadString(src, byteLength, " ");
@@ -125,6 +155,11 @@ public class StringUtil {
 
 	/**
 	 * 以指定字符串填补空位，右对齐字符串 rpadString("9",3,"0")==>"900"
+	 * 
+	 * @param src
+	 * @param length
+	 * @param single
+	 * @return
 	 */
 	public static String rpadString(String src, int length, String single) {
 		if (src == null || length <= src.getBytes().length) {
@@ -136,6 +171,9 @@ public class StringUtil {
 
 	/**
 	 * 去除,分隔符，用于金额数值去格式化
+	 * 
+	 * @param value
+	 * @return
 	 */
 	public static String decimal(String value) {
 		if (null == value || "".equals(value.trim())) {
@@ -187,7 +225,7 @@ public class StringUtil {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return a;
 	}
@@ -260,6 +298,7 @@ public class StringUtil {
 			try {
 				return Integer.parseInt(String.valueOf(map.get(key)));
 			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return defValue;
@@ -278,6 +317,7 @@ public class StringUtil {
 			try {
 				return Float.parseFloat(map.get(key).toString());
 			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return defValue;
@@ -292,10 +332,11 @@ public class StringUtil {
 	 * @return
 	 */
 	public static String getString(Map map, String key, String defValue) {
-		if (null != map && isNotEmpty(key)) {
+		if (null != map && map.containsKey(key)) {
 			try {
-				return (String) map.get(key);
+				return map.get(key).toString();
 			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return defValue;
@@ -365,7 +406,7 @@ public class StringUtil {
 					args.put(key, value);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return args;
@@ -435,6 +476,7 @@ public class StringUtil {
 			bf.append(imgId).append(".").append(imgType);
 		} catch (Exception e) {
 			bf.append("");
+			logger.error(e.getMessage(), e);
 		}
 		return bf.toString();
 	}
@@ -459,7 +501,7 @@ public class StringUtil {
 				result = Integer.parseInt(s);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return result;
 	}
@@ -492,7 +534,7 @@ public class StringUtil {
 	 * @param elem
 	 * @throws java.io.IOException
 	 */
-	public static void formateXMLStr(Writer stringWriter, Element elem)
+	public static void formateXMLStr(Writer stringWriter, Document elem)
 			throws IOException {
 		OutputFormat of = new OutputFormat();
 		of.setIndent(true);
@@ -538,7 +580,7 @@ public class StringUtil {
 			xmlWriter.close();
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 			return xmlStr;
 		}
 		return stringWriter.toString();
@@ -718,6 +760,7 @@ public class StringUtil {
 		try {
 			return parseInt(str);
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			return def;
 		}
 	}
@@ -931,7 +974,7 @@ public class StringUtil {
 	 * @return
 	 */
 	public static String showLabel(String key, String itemType) {
-		return showLabel(key, itemType, "");
+		return DictUtils.getDictLabel(itemType, key, key);
 	}
 
 	/**
@@ -1039,39 +1082,14 @@ public class StringUtil {
 			// already uncapitalized
 			return str;
 		}
-		return new StringBuilder(strLen)
-				.append(Character.toLowerCase(firstChar))
-				.append(str.substring(1))
-				.toString();
+		return new StringBuilder(strLen).append(Character.toLowerCase(firstChar)).append(str.substring(1)).toString();
 	}
 
-	/**
-	 *
-	 * Description:将Clob对象转换为String对象,Blob处理方式与此相同
-	 *
-	 * @param clob
-	 * @return
-	 */
-	public static String oracleClob2Str(Clob clob) throws Exception {
-		if (clob == null || clob.length() <= 0){
-			return "";
-		}
-		return clob.getSubString(1, (int) clob.length());
-	}
-	
 	/**
 	 * 获取32位UUID
 	 * @return
 	 */
-	public static String uuid(){
+	public static String uuid() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
-	}
-
-	/**
-	 * obj ==> "" or string
-	 * @return
-	 */
-	public static String obj2String(Object obj){
-		return null == obj?"":obj.toString();
 	}
 }

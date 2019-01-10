@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ScheduleInfoQuery" desc="金融日历个人日程查询" ibatisStatement="PERS_SCHED.pageQuery">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		
+		<field name="SCHED_STIME" length="20" type="C" desc="日程起始时间" client="schedSTime" />
+		<field name="USER_ID" length="20" type="C" desc="用户表示ID" required="true"/>
+		<field name="SCHED_STIME_BEGIN" length="10" type="C" desc="开始时间的开始时间" required="false"/>
+		<field name="SCHED_STIME_END" length="10" type="C" desc="开始时间的结束时间" required="false"/>
+		<field name="SCHED_TIMESPAN_BEGIN" length="10" type="C" desc="提醒时间的开始时间" required="false"/>
+		<field name="SCHED_TIMESPAN_END" length="10" type="C" desc="提醒时间的结束时间" required="false"/>
+		<field name="SCHED_SUBJECT" length="50" type="C" desc="日程标题" />
+		<field name="NEXT_KEY" length="20" type="C" desc="起始记录号"  />
+		<field name="PAGE_SIZE" length="20" type="C" desc="页记录数" />
+		
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+			<field name="date" xpath="SCHED_STIME_CAL" length="20" type="C" desc="意向时间日期部分" />
+			<field name="SCHEDULEID" length="10" type="C" desc="日程编号ID"/>
+			<field name="SCHED_SUBJECT" length="50" type="C" desc="日程标题" />
+			<field name="SCHED_CONTENT" length="200" type="C" desc="日程内容" />
+			<field name="SCHED_STIME" length="50" type="C" desc="日程开始时间" />
+			<field name="SCHED_ETIME" length="50" type="C" desc="日程结束时间" />
+			<field name="SCHED_TIMESPAN" length="20" type="C" desc="日程提醒时间" />
+			<field name="SCHED_CTIME" length="20" type="C" desc="日程添加时间" />
+			<field name="SCHED_FULLEVENT" length="1" type="C" desc="是否全天事件" />
+			<field name="SCHED_REMIND" length="1" type="C" desc="是否提醒" />
+		</field-list>
+	</rcv>
+</trans>

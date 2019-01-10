@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TimeoutTaskUrge">
+
+	<sql id="BaseColumnList">
+		TASK_ID,WORK_NUMBER,URGE_COUNT
+	</sql>
+
+	<sql id="BaseColumnValueList">
+		#{TASK_ID},#{WORK_NUMBER},#{URGE_COUNT}
+	</sql>
+
+	<sql id="TableClause"> ${schema.busiPlat}.TIMEOUT_TASK_URGE </sql>
+
+	<sql id="WhereClause4Id">
+		<where>
+			TASK_ID = #{TASK_ID}
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="map">
+		insert into
+		<include refid="TableClause" />
+		(
+		<include refid="BaseColumnList" />
+		) values (
+		<include refid="BaseColumnValueList" />
+		)
+	</insert>
+
+	<select id="queryById" parameterType="map" resultType="map">
+		<include refid="public.SelectById" />
+	</select>
+
+	<update id="updateById" parameterType="map">
+		update
+		<include refid="TableClause" />
+		<set>
+			WORK_NUMBER=#{WORK_NUMBER},
+			URGE_COUNT=#{URGE_COUNT}
+		</set>
+		<include refid="WhereClause4Id" />
+	</update>
+
+	<update id="updateByIdSelective" parameterType="map">
+		update
+		<include refid="TableClause" />
+		<set>
+			<if test="WORK_NUMBER!=null and WORK_NUMBER!=''">WORK_NUMBER=#{WORK_NUMBER},</if>
+			<if test="URGE_COUNT!=null and URGE_COUNT!=''">URGE_COUNT=#{URGE_COUNT}</if>
+		</set>
+		<include refid="WhereClause4Id" />
+	</update>
+
+
+	<update id="deleteById" parameterType="string">
+		<include refid="public.DeleteById" />
+	</update>
+
+	<select id="queryByCriteria" resultType="map" parameterType="map">
+		<include refid="public.Select4Query" />
+	</select>
+
+	<select id="countByCriteria" resultType="int" parameterType="map">
+		<include refid="public.Count4Query" />
+	</select>
+
+	<select id="deleteByCriteria" resultType="int" parameterType="map">
+		<include refid="public.Delete4Query" />
+	</select>
+
+	<select id="queryByMap" resultType="map" parameterType="map">
+		select
+		<include refid="BaseColumnList" />
+		from
+		<include refid="TableClause" />
+		<where>
+			<if test="TASK_ID!=null and TASK_ID!=''">TASK_ID=#{TASK_ID} and</if>
+			<if test="WORK_NUMBER!=null and WORK_NUMBER!=''">WORK_NUMBER=#{WORK_NUMBER} and</if>
+			<if test="URGE_COUNT!=null and URGE_COUNT!=''">URGE_COUNT=#{URGE_COUNT}</if>
+		</where>
+	</select>
+
+
+	<select id="qryUrgeByWork" resultType="map" parameterType="map">
+		select
+		<include refid="BaseColumnList" />
+		from
+		<include refid="TableClause" />
+		<where>
+			<if test="WORK_NUMBER!=null and WORK_NUMBER!=''">WORK_NUMBER=#{WORK_NUMBER}</if>
+		</where>
+	</select>
+	
+	
+	
+	<select id="queryTaskNum" resultType="map" parameterType="map">
+		SELECT 
+		COUNT(*) AS TASK_NUMBER
+		FROM
+		<include refid="TableClause" />
+		<where>
+			<if test="WORK_NUMBER!=null and WORK_NUMBER!=''">WORK_NUMBER=#{WORK_NUMBER}</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="study.flw" desc="学习园地">
+  <nodes>
+    <node id="46b75bbb-503c-4af3-b76a-1015e8146989" xPos="270" yPos="60" Width="50" Height="50">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="c559b3a6-8a71-4cf7-8c64-20bbb55c3a26" xPos="270" yPos="150" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="stuty.querystudylist" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="f0068ef7-c366-4c17-9563-d84f068edce2" xPos="270" yPos="240" Width="180" Height="40">
+      <desc>更改资源url</desc>
+      <beanId>changePropaFileUrlOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="1073b7cb-b710-41a3-bb5c-3e5d3a4ce816" xPos="270" yPos="320" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="ed2fd4ac-27db-4bc1-ab7a-dcf3ee1e2620" xPos="270" yPos="430" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="46b75bbb-503c-4af3-b76a-1015e8146989" to="c559b3a6-8a71-4cf7-8c64-20bbb55c3a26"/>
+    <line desc="" condition="" from="c559b3a6-8a71-4cf7-8c64-20bbb55c3a26" to="f0068ef7-c366-4c17-9563-d84f068edce2"/>
+    <line desc="" condition="" from="f0068ef7-c366-4c17-9563-d84f068edce2" to="1073b7cb-b710-41a3-bb5c-3e5d3a4ce816"/>
+    <line desc="" condition="" from="1073b7cb-b710-41a3-bb5c-3e5d3a4ce816" to="ed2fd4ac-27db-4bc1-ab7a-dcf3ee1e2620"/>
+  </lines>
+</diagram>

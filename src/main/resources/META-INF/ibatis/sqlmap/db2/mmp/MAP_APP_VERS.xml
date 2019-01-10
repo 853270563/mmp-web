@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MAP_APP_VERS">
+	<!-- 查询等于当前版本的版本列表 -->
+	<select id="queryAppEqualVersList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT M.* FROM
+		(   SELECT
+		T.*,
+		A.APP_STATUS
+		FROM
+		${schema.configPlat}.ARES_APP_VERSION T LEFT JOIN
+		${schema.configPlat}.ARES_APP_INFO A ON
+		T.APP_ID = A.APP_ID
+		WHERE
+		( T.APP_ID = #APP_ID# or A.app_package = #APP_ID#) AND
+		<![CDATA[ T.APP_VERS_INDEX = #APP_VERS_INDEX# ]]>
+		AND T.APP_AUDIT_STATUS = '2' ) M
+		WHERE M.APP_STATUS = '1'
+		ORDER BY M.APP_VERS_INDEX DESC
+	</select>
+
+	<!-- 查询大于当前版本的版本列表 -->
+	<select id="queryAppVersList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT M.* FROM
+			(   SELECT 
+					T.*, 
+					A.APP_STATUS
+				FROM 
+					${schema.configPlat}.ARES_APP_VERSION T LEFT JOIN
+					${schema.configPlat}.ARES_APP_INFO A ON
+					T.APP_ID = A.APP_ID
+				WHERE 
+					( T.APP_ID = #APP_ID# or A.app_package = #APP_ID#) AND
+					<![CDATA[ T.APP_VERS_INDEX > #APP_VERS_INDEX# ]]>
+					AND T.APP_AUDIT_STATUS = '2' ) M
+		WHERE M.APP_STATUS = '1'
+		ORDER BY M.APP_VERS_INDEX DESC
+	</select>
+	
+	<!-- 查询请求版本序列 -->
+	<select id="loadAppVersIndex" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT M.* FROM
+			(	SELECT 
+					T.APP_VERS_INDEX AS APP_VERS_INDEX,
+					A.APP_STATUS AS APP_STATUS
+				FROM ${schema.configPlat}.ARES_APP_VERSION T LEFT JOIN 
+					${schema.configPlat}.ARES_APP_INFO A ON
+					T.APP_ID = A.APP_ID
+				WHERE ( T.APP_ID = #APP_ID# or A.app_package = #APP_ID#) AND
+					T.APP_VERS = #APP_VERS# 
+					AND T.APP_AUDIT_STATUS = '2') M
+		WHERE M.APP_STATUS = '1'
+	</select>
+	
+	<!-- 查询原始版本 -->
+	<select id="loadEarliestAppVers" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT M.* FROM
+			(	SELECT 
+					T.APP_VERS AS APP_VERS,
+					T.APP_VERS_INDEX AS APP_VERS_INDEX,
+					A.APP_STATUS AS APP_STATUS
+				FROM ${schema.configPlat}.ARES_APP_VERSION T LEFT JOIN 
+					${schema.configPlat}.ARES_APP_INFO A ON
+					T.APP_ID = A.APP_ID
+				WHERE ( T.APP_ID = #APP_ID# or A.app_package = #APP_ID#)
+					AND T.APP_AUDIT_STATUS = '2'
+					AND T.APP_VERS_INDEX = (
+						SELECT 
+								MIN(T1.APP_VERS_INDEX)
+						FROM 
+								${schema.configPlat}.ARES_APP_VERSION T1
+								left join ${schema.configPlat}.ARES_APP_INFO A1 on T1.APP_ID = A1.APP_ID
+						WHERE 
+								( T1.APP_ID = #APP_ID# or A1.app_package = #APP_ID# )
+					)
+			) M
+		WHERE M.APP_STATUS = '1'
+	</select>
+	
+	<!-- 查询应用类型 -->
+	<select id="loadResPath" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT V.*, A.*
+		FROM 
+			${schema.configPlat}.ARES_APP_VERSION V LEFT JOIN ${schema.configPlat}.ARES_APP_INFO A
+			ON V.APP_ID = A.APP_ID
+		WHERE ( V.APP_ID = #APP_ID# or A.app_package = #APP_ID# )
+			AND V.APP_VERS = #LATEST_VERS#
+			AND V.APP_AUDIT_STATUS = '2'
+	</select>
+
+	<!-- 查询当前用户机构 -->
+	<select id="selectUserOfficeId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT U.OFFICE_ID
+		FROM ${schema.configPlat}.SYS_USER U
+		WHERE U.LOGIN_NAME = #USER_LOGIN_NAME#
+		AND U.DEL_FLAG     = '0'
+	</select>
+	
+	<!-- 查询机构父和子机构信息 -->
+	<select id="selectUserOrgnInfo" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.ID,
+		  T.PARENT_IDS
+		FROM ${schema.configPlat}.SYS_ORGAN T
+		WHERE (T.ID = #OFFICE_ID#
+		OR locate(concat(concat(',',#OFFICE_ID#),','), T.PARENT_IDS)       > 0)
+		AND T.DEL_FLAG = '0'
+	</select>
+	
+	<select id="selectAppVersOrgn" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT
+				M.*
+		FROM
+				${schema.configPlat}.ARES_APP_VERSION_ORGN M
+		WHERE
+				M.APP_VERS_ID IN
+				<iterate conjunction="," property="appVersIdList" open="(" close=")">
+					'$appVersIdList[]$'
+				</iterate>
+	</select>
+
+	<!-- 查询应用系统信息 -->
+	<select id="selectAppOS"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT
+				M.*
+		FROM
+				${schema.configPlat}.ARES_APP_INFO M
+		WHERE
+				( M.APP_ID = #APP_ID# or M.app_package = #APP_ID#)
+	</select>
+	
+	<update id="updatePlistFilePath" parameterClass="java.util.Map">
+		UPDATE
+			${schema.configPlat}.ARES_APP_VERSION
+		SET
+			PLIST_FILE_PATH = #PLIST_FILE_PATH#,
+			RES_SIZE = #RES_SIZE#
+		WHERE
+			APP_VERS_ID = #APP_VERS_ID#
+	</update>
+	
+	<select id="queryAppVersInfo" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT
+			T.*,
+			A.SECRET_KEY
+		FROM
+			${schema.configPlat}.ARES_APP_VERSION T
+			LEFT JOIN ${schema.configPlat}.ARES_APP_INFO A
+			ON T.APP_ID = A.APP_ID
+		WHERE
+			T.RES_PATH = #RES_PATH#
+			OR T.RES_UPDATE_PACK_PATH = #RES_PATH#
+			OR T.PLIST_FILE_PATH = #RES_PATH#
+	</select>
+
+    <select id="queryAppVersByAppId" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        T.*
+        FROM
+        ${schema.configPlat}.ARES_APP_VERSION T
+        WHERE
+        T.APP_ID = #APP_ID# AND
+        T.APP_VERS = #APP_VERS#  fetch first 1 rows only
+    </select>
+    <select id = "selectAppVersList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        T.*
+        FROM
+        ${schema.configPlat}.ARES_APP_VERSION T
+        WHERE
+        T.APP_ID = #APP_ID# AND
+        T.APP_AUDIT_STATUS = '2'
+        ORDER BY
+        T.APP_VERS_INDEX DESC
+    </select>
+
+
+    <select id="getAppVersIndex" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT nvl(MAX(APP_VERS_INDEX),0)+1 AS APP_VERS_INDEX FROM ${schema.configPlat}.ARES_APP_VERSION WHERE APP_ID=#APP_ID#
+    </select>
+
+    <select id="selectMaxAppVers" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT MAX(double(trim(T.APP_VERS))) AS APP_VERS FROM ${schema.configPlat}.ARES_APP_VERSION T  WHERE T.APP_ID=#APP_ID#
+    </select>
+    <select id="selectMaxAppVersId" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT MAX(T.APP_VERS_ID) AS APP_VERS_ID  FROM ${schema.configPlat}.ARES_APP_VERSION T
+    </select>
+
+    <insert id = "insertAppVersion"  parameterClass="map">
+        insert into ${schema.configPlat}.ARES_APP_VERSION(
+        APP_VERS_ID,
+        APP_ID,
+        APP_VERS,
+        APP_SIZE,
+        APP_PATH,
+        APP_CREATE_USER,
+        APP_CREATE_DATE,
+        APP_PUBLISH_DATE,
+        APP_IS_UPDATE,
+        APP_VERS_INDEX,
+        APP_VERS_DESC,
+        APP_AUDIT_STATUS,
+        RES_TYPE,
+        RES_PATH,
+        RES_SIZE,
+        RES_UPDATE_PACK_PATH,
+        RES_UPDATE_PACK_SIZE,
+        APP_EXTEND_STATUS,
+        RES_UPLOAD_MODE,
+        RES_URL,
+        RES_UPDATE_PACK_URL,
+        PLIST_FILE_PATH)
+        values (
+        #APP_VERS_ID#,
+        #APP_ID#,
+        #APP_VERS#,
+        #APP_SIZE#,
+        #APP_PATH#,
+        #APP_CREATE_USER#,
+        #APP_CREATE_DATE#,
+        #APP_PUBLISH_DATE#,
+        #APP_IS_UPDATE#,
+        #APP_VERS_INDEX#,
+        #APP_VERS_DESC#,
+        #APP_AUDIT_STATUS#,
+        #RES_TYPE#,
+        #RES_PATH#,
+        #RES_SIZE#,
+        #RES_UPDATE_PACK_PATH#,
+        #RES_UPDATE_PACK_SIZE#,
+        #APP_EXTEND_STATUS#,
+        #RES_UPLOAD_MODE#,
+        #RES_URL#,
+        #RES_UPDATE_PACK_URL#,
+        #PLIST_FILE_PATH#)
+    </insert>
+    <update id="updateVers" parameterClass="map">
+    update 
+			${schema.configPlat}.ARES_APP_INFO
+		set 
+            LATEST_VER_ID=#APP_VERS#
+		where
+			APP_ID = #APP_ID#
+    </update>
+</sqlMap>
+

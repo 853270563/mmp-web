@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/handleLoanCheck" desc="贷后检查异常处理">
+	<snd>
+		<field name="ID" desc="检查ID" required="true" target="id" />
+		<field name="NOTE" desc="处理详情" required="true" target="note" />
+		<field name="IMAGELIST" type="E" desc="" target="imagelist">
+			<field name="IMAGE_TYPE" desc="影像类型" target="image_type"
+				comment="00	其他
+																		01   	身份证正面
+																		02	身份证反面
+																		03	户口簿
+																		11	房产证
+																		12	室内客厅
+																		13	室内
+																		14	门口
+																		15	楼栋门口
+																		16	小区门口
+																		17	房屋合影
+																		30	贷后凭证
+																		31	POS单据
+																		32	转账凭证
+																		33	取现凭证 
+																		" />
+			<field name="FILE_EXT" desc="文件后缀" target="file_ext" />
+			<field name="IMAGE_PATH" desc="图片路径" target="image_path" />
+			<field name="IMAGE_FLAG" desc="图片分表标识" target="image_flag" />
+		</field>
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

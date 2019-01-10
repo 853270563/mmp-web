@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="common/isMaster" desc="是否是主管">
+	<rcv>
+		<field name="isPermitted" desc="是否是主管" comment="1是 0否"/>
+	</rcv>
+</trans>

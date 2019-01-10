@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="TodoInfo" desc="金融日历客户意向查询" ibatisStatement="INVEST_INFO.pageQuery">
+	<!-- 请求报文 -->
+	<snd>
+		<field name="INTE_DATE_BEGIN" length="10" type="C" desc="意向时间的开始时间" />
+		<field name="INTE_DATE_END" length="10" type="C" desc="意向时间的结束时间" />
+		<field name="USER_ID" length="20" type="C" desc="用户表示ID" required="false"/>
+		<field name="INTE_PROD" length="20" type="C" desc="理财产品类型" />
+		<field name="MONEY_TYPE" length="20" type="C" desc="金额类型 ，空：全部，1-0~10W，2- 10~100W，3-100~300W， 4-300W以上" />
+		<field name="NEXT_KEY" length="20" type="C" desc="起始记录号" />
+		<field name="PAGE_SIZE" length="20" type="C" desc="页记录数"  />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />
+		<field-list name="LIST" type="E">
+			<field name="CUST_ID" length="20" type="C" desc="客户号" />
+			<field name="CUST_NAME" length="60" type="C" desc="客户名称" />
+			<field name="CUST_CARD_TYPE" length="2" type="C" desc="客户证件类型" />
+			<field name="CUST_CARD_ID" length="60" type="C" desc="客户证件号码" />
+			<field name="CUST_PHONE" length="20" type="C" desc="联系电话（默认）" />
+			<field name="CUST_OFFI_PHONE" length="20" type="C" desc="客户办公电话" />
+			<field name="SYS_CUST_ID" length="20" type="C" desc="客户系统内ID" />
+			
+			<field name="INVEST_DIRE" length="2" type="C" desc="产品类型" />
+			<field name="INVEST_INTE_ID" length="10" type="C" desc="投资意向ID" />
+			<field name="INTE_PROD" length="60" type="C" desc="意向产品" />
+			<field xpath="INTE_DATE_CAL" name="date" length="20" type="C" desc="意向时间日期部分" />
+			<field name="INTE_DATE" length="" type="D" desc="意向时间" />
+			<field name="INTE_MONEY" type="C" desc="购买金额" />
+			<field name="INTE_STATE" length="1" type="C" desc="意向状态" />
+			<field name="INVEST_REMARK" length="100" type="C" desc="备注" />
+		</field-list>
+	</rcv>
+</trans>

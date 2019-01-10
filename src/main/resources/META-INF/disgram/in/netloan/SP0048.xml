@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0048" excode="Pledge_APP01" desc="抵押物房产修改接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="pledge" type="E" desc="抵押物">
+				<field name="pledge_code" length="1" type="C" desc="抵押物房产编号"/>
+				<field name="house_type" length="4" type="C" desc="房屋类型"/>
+				<field name="house_area" length="10" type="C" desc="房屋面积"/>
+				<field name="reference_assess" length="10" type="C" desc="房屋均价"/>
+				<field name="pledge_pro" length="4" type="C" desc="抵押物地址_省" />
+				<field name="pledge_city" length="4" type="C" desc="抵押物地址_市" />
+				<field name="pledge_county" length="4" type="C" desc="抵押物地址_区" />
+				<field name="house_code" length="10" type="C" desc="地址信息-小区编号"/>
+				<field name="house_name" length="20" type="C" desc="地址信息-小区名称"/>
+				<field name="house_address" length="200" type="C" desc="地址信息-小区地址"/>
+				<field name="building_code" length="10" type="C" desc="地址信息-楼栋编号"/>
+				<field name="building_name" length="20" type="C" desc="地址信息-楼栋名称"/>
+				<field name="current_floor" length="3" type="C" desc="地址信息-所在层数"/>
+				<field name="total_floor" length="3" type="C" desc="地址信息-总层数"/>
+				<field name="room_no" length="10" type="C" desc="地址信息-房号编号"/>
+				<field name="room_name" length="10" type="C" desc="地址信息-房屋名称"/>
+				<field name="pledge_detail" length="100" type="C" desc="抵押物地址"/>
+				<field name="evaluate_way" length="20" type="C" desc="评估方式"/>
+				<field name="online_valuate" length="20" type="C" desc="线上估值"/>
+				<field name="formal_valuate" length="20" type="C" desc="正式估值"/>
+				<field name="owner_cert" length="4" type="C" desc="权属证明"/>
+				<field name="land_number" length="50" type="C" desc="土地证书编号"/>
+				<field name="cert_number" length="50" type="C" desc="证书编号"/>
+				<field name="is_rent" length="2" type="C" desc="是否出租"/>
+				<field name="lease_expiry_date" length="20" type="C" desc="租凭到期日"/>
+				<field name="lessee_is_approve" length="2" type="C" desc="承租人是否同意签署相关承诺"/>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>
+			<field name="reason_fail" length="100" type="C" desc="失败原因" />
+			<field name="manager_code" length="20" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="20" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

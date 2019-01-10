@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BUSINESS_LOAN_INFO">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="and" property="BUSINESSNUM">
+			T.BUSINESSNUM =#BUSINESSNUM#
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.BUSINESS_LOAN_INFO T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.BUSINESSNUM
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT('') CNT 
+			FROM ${schema.interPlat}.BUSINESS_LOAN_INFO T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.BUSINESS_LOAN_INFO
+		( BUSINESSNUM,USERTYPE,USERNAME,SEX,IDCARDTYPE,IDCARDNUMBER,BIRTH,ISMARRID,HASCHILDREN,HOUSERHOLD,HOUSING,LIVEADDRESS,COUPLENAME,COUPLEIDCARDTYPE,COUPLEIDCARDNUMBER,COUPLEFIXEDNUMBER,COUPLECELLNUMBER,COUPLEJOBNAME,COUPLEJOBADDRESS,COMTYPE,COMNAME,COMLICENSE,COMFOCUSTYPE,COMADDRESS,BUSIONELEVEL,BUSITWOLEVEL,BUSITHREELEVEL,BUSIFOURLEVEL,PRODUCTNAME,SALECOVERAREA,EMPLOYCOUNT,BUSIRANGE,GETWAY,ANNUALSALEINCOME,COMTOTALINCOME,COMTOTALLIAB,OPENBANK,DAILYDEPOSIT,RECORDTIME,RECORDID,RECORDNME,RECORDORG,EXPANDFIELD1,EXPANDFIELD2,EXPANDFIELD3,EXPANDFIELD4,EXPANDFIELD5 ) 
+		VALUES ( #BUSINESSNUM#,#USERTYPE#,#USERNAME#,#SEX#,#IDCARDTYPE#,#IDCARDNUMBER#,#BIRTH#,#ISMARRID#,#HASCHILDREN#,#HOUSERHOLD#,#HOUSING#,#LIVEADDRESS#,#COUPLENAME#,#COUPLEIDCARDTYPE#,#COUPLEIDCARDNUMBER#,#COUPLEFIXEDNUMBER#,#COUPLECELLNUMBER#,#COUPLEJOBNAME#,#COUPLEJOBADDRESS#,#COMTYPE#,#COMNAME#,#COMLICENSE#,#COMFOCUSTYPE#,#COMADDRESS#,#BUSIONELEVEL#,#BUSITWOLEVEL#,#BUSITHREELEVEL#,#BUSIFOURLEVEL#,#PRODUCTNAME#,#SALECOVERAREA#,#EMPLOYCOUNT#,#BUSIRANGE#,#GETWAY#,#ANNUALSALEINCOME#,#COMTOTALINCOME#,#COMTOTALLIAB#,#OPENBANK#,#DAILYDEPOSIT#,#RECORDTIME#,#RECORDID#,#RECORDNME#,#RECORDORG#,#EXPANDFIELD1#,#EXPANDFIELD2#,#EXPANDFIELD3#,#EXPANDFIELD4#,#EXPANDFIELD5#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.BUSINESS_LOAN_INFO ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="BUSINESSNUM" prepend=","><![CDATA[ BUSINESSNUM = #BUSINESSNUM# ]]></isNotNull>
+			<isNotNull property="USERTYPE" prepend=","><![CDATA[ USERTYPE = #USERTYPE# ]]></isNotNull>
+			<isNotNull property="USERNAME" prepend=","><![CDATA[ USERNAME = #USERNAME# ]]></isNotNull>
+			<isNotNull property="SEX" prepend=","><![CDATA[ SEX = #SEX# ]]></isNotNull>
+			<isNotNull property="IDCARDTYPE" prepend=","><![CDATA[ IDCARDTYPE = #IDCARDTYPE# ]]></isNotNull>
+			<isNotNull property="IDCARDNUMBER" prepend=","><![CDATA[ IDCARDNUMBER = #IDCARDNUMBER# ]]></isNotNull>
+			<isNotNull property="BIRTH" prepend=","><![CDATA[ BIRTH = #BIRTH# ]]></isNotNull>
+			<isNotNull property="ISMARRID" prepend=","><![CDATA[ ISMARRID = #ISMARRID# ]]></isNotNull>
+			<isNotNull property="HASCHILDREN" prepend=","><![CDATA[ HASCHILDREN = #HASCHILDREN# ]]></isNotNull>
+			<isNotNull property="HOUSERHOLD" prepend=","><![CDATA[ HOUSERHOLD = #HOUSERHOLD# ]]></isNotNull>
+			<isNotNull property="HOUSING" prepend=","><![CDATA[ HOUSING = #HOUSING# ]]></isNotNull>
+			<isNotNull property="LIVEADDRESS" prepend=","><![CDATA[ LIVEADDRESS = #LIVEADDRESS# ]]></isNotNull>
+			<isNotNull property="COUPLENAME" prepend=","><![CDATA[ COUPLENAME = #COUPLENAME# ]]></isNotNull>
+			<isNotNull property="COUPLEIDCARDTYPE" prepend=","><![CDATA[ COUPLEIDCARDTYPE = #COUPLEIDCARDTYPE# ]]></isNotNull>
+			<isNotNull property="COUPLEIDCARDNUMBER" prepend=","><![CDATA[ COUPLEIDCARDNUMBER = #COUPLEIDCARDNUMBER# ]]></isNotNull>
+			<isNotNull property="COUPLEFIXEDNUMBER" prepend=","><![CDATA[ COUPLEFIXEDNUMBER = #COUPLEFIXEDNUMBER# ]]></isNotNull>
+			<isNotNull property="COUPLECELLNUMBER" prepend=","><![CDATA[ COUPLECELLNUMBER = #COUPLECELLNUMBER# ]]></isNotNull>
+			<isNotNull property="COUPLEJOBNAME" prepend=","><![CDATA[ COUPLEJOBNAME = #COUPLEJOBNAME# ]]></isNotNull>
+			<isNotNull property="COUPLEJOBADDRESS" prepend=","><![CDATA[ COUPLEJOBADDRESS = #COUPLEJOBADDRESS# ]]></isNotNull>
+			<isNotNull property="COMTYPE" prepend=","><![CDATA[ COMTYPE = #COMTYPE# ]]></isNotNull>
+			<isNotNull property="COMNAME" prepend=","><![CDATA[ COMNAME = #COMNAME# ]]></isNotNull>
+			<isNotNull property="COMLICENSE" prepend=","><![CDATA[ COMLICENSE = #COMLICENSE# ]]></isNotNull>
+			<isNotNull property="COMFOCUSTYPE" prepend=","><![CDATA[ COMFOCUSTYPE = #COMFOCUSTYPE# ]]></isNotNull>
+			<isNotNull property="COMADDRESS" prepend=","><![CDATA[ COMADDRESS = #COMADDRESS# ]]></isNotNull>
+			<isNotNull property="BUSIONELEVEL" prepend=","><![CDATA[ BUSIONELEVEL = #BUSIONELEVEL# ]]></isNotNull>
+			<isNotNull property="BUSITWOLEVEL" prepend=","><![CDATA[ BUSITWOLEVEL = #BUSITWOLEVEL# ]]></isNotNull>
+			<isNotNull property="BUSITHREELEVEL" prepend=","><![CDATA[ BUSITHREELEVEL = #BUSITHREELEVEL# ]]></isNotNull>
+			<isNotNull property="BUSIFOURLEVEL" prepend=","><![CDATA[ BUSIFOURLEVEL = #BUSIFOURLEVEL# ]]></isNotNull>
+			<isNotNull property="PRODUCTNAME" prepend=","><![CDATA[ PRODUCTNAME = #PRODUCTNAME# ]]></isNotNull>
+			<isNotNull property="SALECOVERAREA" prepend=","><![CDATA[ SALECOVERAREA = #SALECOVERAREA# ]]></isNotNull>
+			<isNotNull property="EMPLOYCOUNT" prepend=","><![CDATA[ EMPLOYCOUNT = #EMPLOYCOUNT# ]]></isNotNull>
+			<isNotNull property="BUSIRANGE" prepend=","><![CDATA[ BUSIRANGE = #BUSIRANGE# ]]></isNotNull>
+			<isNotNull property="GETWAY" prepend=","><![CDATA[ GETWAY = #GETWAY# ]]></isNotNull>
+			<isNotNull property="ANNUALSALEINCOME" prepend=","><![CDATA[ ANNUALSALEINCOME = #ANNUALSALEINCOME# ]]></isNotNull>
+			<isNotNull property="COMTOTALINCOME" prepend=","><![CDATA[ COMTOTALINCOME = #COMTOTALINCOME# ]]></isNotNull>
+			<isNotNull property="COMTOTALLIAB" prepend=","><![CDATA[ COMTOTALLIAB = #COMTOTALLIAB# ]]></isNotNull>
+			<isNotNull property="OPENBANK" prepend=","><![CDATA[ OPENBANK = #OPENBANK# ]]></isNotNull>
+			<isNotNull property="DAILYDEPOSIT" prepend=","><![CDATA[ DAILYDEPOSIT = #DAILYDEPOSIT# ]]></isNotNull>
+			<isNotNull property="RECORDTIME" prepend=","><![CDATA[ RECORDTIME = #RECORDTIME# ]]></isNotNull>
+			<isNotNull property="RECORDID" prepend=","><![CDATA[ RECORDID = #RECORDID# ]]></isNotNull>
+			<isNotNull property="RECORDNME" prepend=","><![CDATA[ RECORDNME = #RECORDNME# ]]></isNotNull>
+			<isNotNull property="RECORDORG" prepend=","><![CDATA[ RECORDORG = #RECORDORG# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD1" prepend=","><![CDATA[ EXPANDFIELD1 = #EXPANDFIELD1# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD2" prepend=","><![CDATA[ EXPANDFIELD2 = #EXPANDFIELD2# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD3" prepend=","><![CDATA[ EXPANDFIELD3 = #EXPANDFIELD3# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD4" prepend=","><![CDATA[ EXPANDFIELD4 = #EXPANDFIELD4# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD5" prepend=","><![CDATA[ EXPANDFIELD5 = #EXPANDFIELD5# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.BUSINESS_LOAN_INFO where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

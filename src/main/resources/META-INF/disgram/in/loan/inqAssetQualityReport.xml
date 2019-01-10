@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqAssetQualityReport" desc="资产质量报表">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no" />
+		<field name="LOAN_START_DATE" desc="检查日期起" target="loan_start_date" />
+		<field name="LOAN_END_DATE" desc="检查日期止" target="loan_end_date" />
+	</snd>
+	<rcv>
+		<field name="REPORTLIST" type="E" desc="" target="reportlist">
+			<field name="USER_NO" desc="客户经理" target="user_no" />
+			<field name="OVERDUE_AMOUNT" desc="逾期金额" target="overdue_amount" />
+			<field name="OVERDUE_RATE" desc="逾期率" target="overdue_rate" />
+			<field name="BAD_AMOUNT" desc="不良金额" target="bad_amount" />
+			<field name="BAD_RATE" desc="不良率" target="bad_rate" />
+		</field>
+	</rcv>
+</trans>

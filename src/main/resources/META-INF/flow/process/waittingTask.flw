@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="waittingTask.flw" desc="待我审批">
+  <nodes>
+    <node id="b9637228-1874-406e-82cc-86a7f5800950" xPos="390" yPos="130" Width="180" Height="40">
+      <desc>分页数据查询</desc>
+      <beanId>dbPageQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rejectTask.waittingTask" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="99804bbc-679f-4e14-8ccd-c5f20811a9fc" xPos="390" yPos="280" Width="50" Height="50">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="b9637228-1874-406e-82cc-86a7f5800950" to="99804bbc-679f-4e14-8ccd-c5f20811a9fc"/>
+  </lines>
+</diagram>

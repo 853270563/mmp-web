@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_SESSION">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+	    <isNotNull prepend="AND" property="SESSION_ID">
+			SESSION_ID = #SESSION_ID#
+		</isNotNull>
+	    <isNotNull prepend="AND" property="USER_ID">
+			USER_ID = #USER_ID#
+		</isNotNull>
+	    <isNotNull prepend="AND" property="DEVICE_ID">
+			DEVICE_ID = #DEVICE_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="AUTH_STATUS">
+            substring(AUTH_STATUS,1,1) = #AUTH_STATUS#
+		</isNotNull>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT * FROM ${schema.configPlat}.ARES_SESSION
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</sql>
+	
+	<update id="update" parameterClass="map">
+		<![CDATA[ update ${schema.configPlat}.ARES_SESSION ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="CREATE_TIME" prepend=","><![CDATA[ CREATE_TIME = #CREATE_TIME# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="VISIT_TIME" prepend=","><![CDATA[ VISIT_TIME = #VISIT_TIME# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="INVALID_TIME" prepend=","><![CDATA[ INVALID_TIME = #INVALID_TIME# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="MSG_ID" prepend=","><![CDATA[ MSG_ID = #MSG_ID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="KEY" prepend=","><![CDATA[ `KEY` = #KEY# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EVENT_ID" prepend=","><![CDATA[ EVENT_ID = #EVENT_ID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="USER_ID" prepend=","><![CDATA[ USER_ID = #USER_ID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="DEVICE_ID" prepend=","><![CDATA[ DEVICE_ID = #DEVICE_ID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="SERVER_IP" prepend=","><![CDATA[ SERVER_IP = #SERVER_IP# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="AUTH_STATUS" prepend=","><![CDATA[ AUTH_STATUS = #AUTH_STATUS# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="DATA" prepend=","><![CDATA[ DATA = #DATA# ]]></isNotNull>
+		</dynamic>
+		
+		<![CDATA[ where SESSION_ID = #SESSION_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.configPlat}.ARES_SESSION where SESSION_ID = #SESSION_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="load" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT
+	    SESSION_ID,
+	    CREATE_TIME,
+	    VISIT_TIME,
+	    INVALID_TIME,
+	    MSG_ID,
+	    `KEY`,
+	    EVENT_ID,
+	    USER_ID,
+	    DEVICE_ID,
+	    SERVER_IP,
+	    AUTH_STATUS,
+	    DATA
+	    FROM ${schema.configPlat}.ARES_SESSION
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	
+	<!-- 查询操作 -->
+	<select id="findList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT
+	    SESSION_ID,
+	    CREATE_TIME,
+	    VISIT_TIME,
+	    INVALID_TIME,
+	    MSG_ID,
+	    `KEY`,
+	    EVENT_ID,
+	    USER_ID,
+	    DEVICE_ID,
+	    SERVER_IP,
+	    AUTH_STATUS,
+	    DATA,
+        version
+	    FROM ${schema.configPlat}.ARES_SESSION
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+
+    <!-- 查询操作 -->
+    <select id="querySessionCnt" parameterClass="map" resultClass="java.util.HashMap">
+        <![CDATA[ select count(1) AS CNT from ${schema.configPlat}.ARES_SESSION where USER_ID=#USER_ID# AND DEVICE_ID <> #DEVICE_ID# AND invalid_time >to_timestamp(#SYSTIME#, 'yyyy-mm-dd hh24:mi:ss')]]>
+
+    </select>
+
+    <!-- 查询当前在线会话数 -->
+    <select id="queryOnlineSessionCnt" parameterClass="map" resultClass="java.util.HashMap">
+         select count(1) AS CNT from ${schema.configPlat}.ARES_SESSION where  invalid_time >to_timestamp(#SYSTIME#, 'yyyy-mm-dd hh24:mi:ss')
+    </select>
+
+    <!-- 根据用户查询当前在线会话数 -->
+    <select id="queryOnlineSessionCntByUser" parameterClass="map" resultClass="java.util.HashMap">
+        select count(1) AS CNT from ${schema.configPlat}.ARES_SESSION where  invalid_time >to_timestamp(#SYSTIME#, 'yyyy-mm-dd hh24:mi:ss') and  USER_ID = #USER_ID#
+    </select>
+
+    <!--配置为单一设备时，新会话创建时自动注销历史会话-->
+    <update id="updateByDeviceId" parameterClass="map">
+        <![CDATA[ update ${schema.configPlat}.ARES_SESSION ]]>
+        <dynamic prepend="set">
+            INVALID_TIME = VISIT_TIME
+        </dynamic>
+       where DEVICE_ID = #DEVICE_ID#   AND USER_ID =#USER_ID#
+    </update>
+
+    <!--注销当前用户会话-->
+    <update id="updateByUserId" parameterClass="map">
+        <![CDATA[ update ${schema.configPlat}.ARES_SESSION ]]>
+        <dynamic prepend="set">
+            INVALID_TIME = VISIT_TIME
+        </dynamic>
+        where  USER_ID =#USER_ID#
+    </update>
+	
+</sqlMap>
+

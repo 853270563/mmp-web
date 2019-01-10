@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="QueryCustSignInfo" ibatisStatement="" desc="签约客户信息挡板">
+	<!-- 请求报文 -->
+	<snd> 
+		<field name="CUST_ID" length="20" type="C" desc="客户ID" /> 
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="PHONE_BANK" type="E"> 
+			<field name="SIGN" length="6" type="C" desc="标识" />	
+			<field name="CARD_NUM" length="20" type="C" desc="卡号" />	
+			<field name="PHONE" length="11" type="C" desc="电话" />	
+		</field-list> 
+		<field-list name="ONLINE_BANK" type="E"> 
+			<field name="SIGN" length="6" type="C" desc="标识" />	
+		</field-list> 
+		<field-list name="FMS" type="E"> 
+			<field name="SIGN" length="6" type="C" desc="标识" />	
+		</field-list> 
+	</rcv>
+</trans>

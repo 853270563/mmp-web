@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="JjkTranCardList" desc="实时开卡业务列表查询"   ibatisStatement="JJK_TRAN_CARD.pageQuery">
+	<snd>
+		<field name="startDate" type="C" desc="经办开始时间" required="true" />
+		<field name="endDate" type="C" desc="经办结束时间"  required="true"/>
+		
+		<field name="signType" type="C" length="1" desc="业务类型" />
+		
+		<field name="signState" type="C" length="1" desc="业务状态" />
+		<field name="LOGIN_ID" type="C" length="20"  desc="经办客户经理（号）" />
+		
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<field name="PAGE_SIZE" length="6" type="C" desc="页记录数" />	
+		
+	</snd>
+<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<field-list name="LIST" type="E"> 
+			<field name="transId" length="20" type="C" desc="ID" />
+			<field name="signType" length="1" type="C" desc="综合签约标识" />
+<!-- 			<field name="cardType" length="2" type="C" desc="卡类型编号" />
+			<field name="cardTypeLabel" type="C" desc="卡类型编号-显示名称" /> -->
+			<field name="cardNo" length="24" type="C" desc="卡号" />
+<!-- 			<field name="inpuType" length="2" type="C" desc="输入方式[预留]" />
+			<field name="certType" length="2" type="C" desc="证件类型" />
+			<field name="certTypeLabel" type="C" desc="证件类型-显示名称" /> -->
+<!-- 			<field name="certNo" length="20" type="C" desc="证件号码" />
+			<field name="certImg" length="4000" type="C" desc="身份证图片" />
+			<field name="certOrgan" length="100" type="C" desc="发证机关" />
+			<field name="certStarDate" length="8" type="C" desc="证件有效期起" />
+			<field name="certEndDate" length="8" type="C" desc="证件有效期止" /> -->
+			<field name="custName" length="100" type="C" desc="个人中文名称" />
+	<!-- 		<field name="custPinx" length="100" type="C" desc="个人英文或拼音姓" />
+			<field name="custPinm" length="100" type="C" desc="个人英名或拼音名" />
+			<field name="custSex" length="1" type="C" desc="性别" />
+			<field name="custBorn" length="8" type="C" desc="出生日期" />
+			<field name="decaRes2" length="30" type="C" desc="名族" />
+			<field name="custAddrHome" length="200" type="C" desc="住宅地址" />
+			<field name="custAddrWork" length="200" type="C" desc="办公地址[预留]" />
+			<field name="custMobiPhone" length="11" type="C" desc="手机号码（开手机/短信银行）" />
+			<field name="custTelePhone" length="20" type="C" desc="电话号码[预留]" />
+			<field name="custNati" length="3" type="C" desc="国别代码" />
+			<field name="custJob" length="20" type="C" desc="职业代码[预留]" />
+			<field name="bankKzhy" length="1" type="C" desc="卡折合一标志[预留]" />
+			<field name="bankYbth" length="1" type="C" desc="活期一本通号[预留]" />
+			<field name="flagStat" length="1" type="C" desc="是否产生对账单[预留]" />
+			<field name="flagPwdEnve" length="1" type="C" desc="密码信封标志" />
+			<field name="custPost" length="6" type="C" desc="邮政编码[预留]" />
+			<field name="custEmail" length="100" type="C" desc="邮箱[预留]" />
+			<field name="flagOver" length="1" type="C" desc="透支标志[预留]" />
+			<field name="ensuType" length="1" type="C" desc="担保方式[预留]" />
+			<field name="ensuNo" length="20" type="C" desc="客户担保编号[预留]" />
+			<field name="overAmt" length="" type="N" desc="联机透支额度[预留]" />
+			<field name="modiPwdType" length="1" type="C" desc="修改密码标志[预留]" />
+			<field name="cardCont" length="30" type="C" desc="发卡联系人[预留]" />
+			<field name="cardTrac2" length="30" type="C" desc="磁道2信息[预留]" />
+			<field name="cardTrac3" length="30" type="C" desc="磁道3信息[预留]" />
+			<field name="voucNo" length="30" type="C" desc="凭证号[预留]" />
+			<field name="voucType" length="1" type="C" desc="凭证种类[预留]" />
+			<field name="voucBano" length="30" type="C" desc="凭证批号[预留]" />
+			<field name="voucSeno" length="30" type="C" desc="凭证序号[预留]" />
+			<field name="flagSignEbank" length="1" type="C" desc="是否开网银" />
+			<field name="flagSignMbank" length="1" type="C" desc="是否开手机银行" />
+			<field name="flagSignSbank" length="1" type="C" desc="是否开短信通知" />
+			<field name="flagSignDepo" length="1" type="C" desc="是否开储蓄理财" />
+			<field name="flagSignRes1" length="1" type="C" desc="是否开预留1" />
+			<field name="flagSignRes2" length="1" type="C" desc="是否开预留2" />
+			<field name="tokenType" length="1" type="C" desc="安全工具类型" />
+			<field name="tokenNo" length="30" type="C" desc="安全工具序列号" /> -->
+			<field name="signOrgan" length="20" type="C" desc="经办机构（号）" />
+			<field name="signUser" length="20" type="C" desc="经办客户经理（号）" />
+<!-- 			<field name="signDeviType" length="2" type="C" desc="经办终端类型" />
+			<field name="signDeviNo" length="100" type="C" desc="经办设备（号）" />-->
+			<field name="signTime" length="" type="N" desc="经办时间" />
+<!-- 			<field name="signGps" length="20" type="C" desc="经办GPS位置" />  -->
+			<field name="signState" length="1" type="C" desc="当前业务状态"  descName="signStateLabel" mapKey="SIGN_STATE"  />
+<!-- 			<field name="signApprMark" length="450" type="C" desc="批复备注" />
+			<field name="decaRes1" length="1" type="C" desc="预留1" />
+			<field name="decaRes3" length="30" type="C" desc="预留3" />
+            <field name="apprRetnInfo" type="C" desc="审核未通过原因" />	 -->
+            
+<!--             <field-list name="attrList" type="E"> 
+            	<field name="attaId" length="20" type="C" desc="影像ID" />
+				<field name="tranCode" length="2" type="C" desc="审批交易类型代码" />
+				<field name="transId" length="20" type="C" desc="审批目标交易ID" />
+				<field name="attaType" length="1" type="C" desc="影像格式类型。即所拍摄的影像、证件类型，见码表0：照片 1：视频" />
+				<field name="attaName" length="100" type="C" desc="影像文件名称" />
+				<field name="attaUrl" length="100" type="C" desc="影像文件位置" />
+				<field name="attaDirUrl" length="100" type="C" desc="影像文件位置2预留" />
+				<field name="attaSize"  length="100" type="N" desc="影像大小KB" />
+				<field name="attaUpdaTime" length="6" type="C" desc="上传日期时间" />
+				<field name="attaUser" length="20" type="C" desc="经办人" />
+				<field name="attaRes1" length="20" type="C" desc="预留1" />
+				<field name="attaRes2" length="100" type="C" desc="预留2" />
+            </field-list>  -->
+            
+		</field-list> 
+	</rcv>
+</trans>

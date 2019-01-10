@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="changeTotalAmountStatus.flw" desc="总量授信合同的状态变更">
+  <nodes>
+    <node id="263a0d42-0041-4d6e-a538-4e6829c98147" xPos="390" yPos="210" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/changeTotalAmountStatus" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

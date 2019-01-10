@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PROD_FAVO">
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="addFavoInfo" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.PROD_FAVO
+		( PROD_FAVO_ID,PROD_ID,PROD_TYPE,PROD_NAME,USER_ID,PROD_FAVO_TIME,PROD_FAVO_FLAG) 
+		VALUES (#PROD_FAVO_ID#,#PROD_ID#,#PROD_TYPE#,#PROD_NAME#,#USER_ID#,#PROD_FAVO_TIME#,#PROD_FAVO_FLAG# )
+	</insert>
+	
+	
+		<select id="seqProdFavo"   resultClass="java.util.HashMap">
+			select ${schema.interPlat}.nextval('SEQ_PROD_FAVO') as PROD_FAVO_ID from dual
+	    </select>
+	
+	
+	<!-- 删除操作 -->
+	<delete id="deleteFavoInfo" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.PROD_FAVO where PROD_FAVO_ID = #PROD_FAVO_ID# ]]>
+	</delete>
+
+</sqlMap>
+

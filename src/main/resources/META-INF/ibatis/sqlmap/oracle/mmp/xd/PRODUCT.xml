@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PRODUCT">
+
+    <sql id="queryDynSql">
+        <isNotEmpty prepend="AND" property="PRODUCT_ID">
+            T.PRODUCT_ID = #PRODUCT_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="PRODUCT_NAME">
+            T.PRODUCT_NAME = #PRODUCT_NAME#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="CURRENCY">
+            T.CURRENCY = #CURRENCY#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="AMOUNT">
+            T.AMOUNT = #AMOUNT#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="CREATE_TIME">
+            T.CREATE_TIME = #CREATE_TIME#
+        </isNotEmpty>
+    </sql>
+
+    <sql id="coreSql">
+        SELECT T.* FROM ${schema.xd}.PRODUCT T
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+        <![CDATA[ ORDER BY T.PRODUCT_ID]]>
+    </sql>
+
+    <select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="public.pageBegin"/>
+        <include refid="coreSql"/>
+        <include refid="public.pageEnd"/>
+    </select>
+
+    <select id="pageCount" parameterClass="map" resultClass="int">
+        <![CDATA[
+			SELECT COUNT('') CNT
+			FROM ${schema.xd}.PRODUCT T
+		]]>
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+    </select>
+
+    <insert id="insert" parameterClass="map">
+        INSERT INTO ${schema.xd}.CASE
+        (
+        PRODUCT_ID
+        <isNotEmpty prepend="," property="PRODUCT_NAME">PRODUCT_NAME</isNotEmpty>
+        <isNotEmpty prepend="," property="CURRENCY">CURRENCY</isNotEmpty>
+        <isNotEmpty prepend="," property="AMOUNT">AMOUNT</isNotEmpty>
+        <isNotEmpty prepend="," property="CREATE_TIME">CREATE_TIME</isNotEmpty>
+        ) VALUES (
+        #PRODUCT_ID#
+        <isNotEmpty prepend="," property="PRODUCT_NAME">#PRODUCT_NAME#</isNotEmpty>
+        <isNotEmpty prepend="," property="CURRENCY">#CURRENCY#</isNotEmpty>
+        <isNotEmpty prepend="," property="AMOUNT">#AMOUNT#</isNotEmpty>
+        <isNotEmpty prepend="," property="CREATE_TIME">#CREATE_TIME#</isNotEmpty>
+        )
+    </insert>
+
+    <update id="updateById" parameterClass="map">
+        <![CDATA[ update ${schema.xd}.PRODUCT ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="PRODUCT_NAME">PRODUCT_NAME = #PRODUCT_NAME#</isNotNull>
+            <isNotNull prepend="," property="CURRENCY">CURRENCY = #CURRENCY#</isNotNull>
+            <isNotNull prepend="," property="AMOUNT">AMOUNT = #AMOUNT#</isNotNull>
+            <isNotNull prepend="," property="CREATE_TIME">CREATE_TIME = #CREATE_TIME#</isNotNull>
+        </dynamic>
+        <![CDATA[ where PRODUCT_ID = #PRODUCT_ID# ]]>
+    </update>
+
+    <delete id="delete" parameterClass="map">
+        <![CDATA[
+         delete from ${schema.xd}.PRODUCT where PRODUCT_ID = #PRODUCT_ID#
+        ]]>
+    </delete>
+
+    <select id="query" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="coreSql"/>
+    </select>
+
+    <select id="seq" resultClass="String">
+        select ${schema.xd}.SEQ_PRODUCT.nextval from dual
+    </select>
+
+</sqlMap>
+

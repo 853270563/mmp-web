@@ -14,6 +14,10 @@ public interface IClientFactory {
 
 	/**
 	 * 交易执行
+	 * 
+	 * @param rst
+	 * @return
+	 * @throws Exception
 	 */
 	public boolean execute(IBusinessContext businessContext, String transCode);
 

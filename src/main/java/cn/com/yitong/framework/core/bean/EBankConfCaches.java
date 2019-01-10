@@ -21,18 +21,27 @@ public class EBankConfCaches implements IEBankConfCaches {
 	}
 
 	
+	@Override
 	public synchronized void addTransConf(String transCode,
 			MBTransConfBean trans) {
 		ebankConfList.put(transCode, trans);
 	}
 
 	
+	@Override
 	public MBTransConfBean getTransConfById(String transCode) {
 		return ebankConfList.get(transCode);
 	}
 
 	
+	@Override
 	public boolean hasTransConfById(String transCode) {
 		return ebankConfList.containsKey(transCode);
+	}
+
+	@Override
+	public void removeCache(String key) {
+		ebankConfList.remove(key);
+
 	}
 }

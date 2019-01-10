@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="delReceiptDetailImage.flw" desc="删除借据授信影像资料">
+  <nodes>
+    <node id="e55e9002-7230-4fa2-becf-c3d3097e4830" xPos="250" yPos="220" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="getAreaName">
+	<select id="getareaname" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+		T.AREA_NAME
+		from
+		${schema.configPlat}.ARES_AREA_CODE T
+		WHERE AREA_ID
+		=  #{AREA_ID}
+	</select>
+</mapper>

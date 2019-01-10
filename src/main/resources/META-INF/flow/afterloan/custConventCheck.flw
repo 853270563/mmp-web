@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="custConventCheck.flw" desc="风险客户常规检查列表">
+  <nodes>
+    <node id="924ba21b-30ba-4c07-a470-6876dd570c8a" xPos="310" yPos="110" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqLoanCheck" desc="嵌套流程路径,不含文件后缀"/>
+      </data-map>
+    </node>
+    <node id="7c2951e6-27dd-4943-993e-3b62caeea4f6" xPos="310" yPos="210" Width="180" Height="40">
+      <desc>风险客户常规检查列表</desc>
+      <beanId>custConventCheckOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="924ba21b-30ba-4c07-a470-6876dd570c8a" to="7c2951e6-27dd-4943-993e-3b62caeea4f6"/>
+  </lines>
+</diagram>

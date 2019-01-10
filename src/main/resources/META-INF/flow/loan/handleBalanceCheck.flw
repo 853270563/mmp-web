@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="handleBalanceCheck.flw" desc="余额不足异常处理">
+  <nodes>
+    <node id="0a605916-bfa2-434d-b5a7-85e48f0a4ff1" xPos="470" yPos="210" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/handleBalanceCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

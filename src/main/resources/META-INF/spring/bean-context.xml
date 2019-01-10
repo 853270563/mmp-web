@@ -3,20 +3,35 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="bizLogManager" class="cn.com.yitong.modules.ares.login.util.BizLogManager" />
-	
-	<bean id="springContextUtils" class="cn.com.yitong.common.utils.SpringContextUtils" />
+	<bean id="bizLogManager" class="cn.com.yitong.ares.login.util.BizLogManager" lazy-init ="false" />
     
     <bean class="cn.com.yitong.core.session.dao.DbSessionDao" depends-on="mhhSessionDao"/>
        
-    <bean id="servCtlDao" class="cn.com.yitong.modules.ares.servCtl.dao.impl.ServCtlDatabaseDaoImpl" />
+    <bean id="servCtlDao" class="cn.com.yitong.ares.servCtl.dao.impl.ServCtlDatabaseDaoImpl" />
    
-    <bean id="servCtlConfigDao" class="cn.com.yitong.modules.ares.servCtl.dao.impl.ServCtlConfigDBDao" />
+    <bean id="servCtlConfigDao" class="cn.com.yitong.ares.servCtl.dao.impl.ServCtlConfigDBDao" />
+    
+    <bean id="UserSynchroSupport" class="cn.com.yitong.modules.hbbProvider.support.UserSynchroSupport"/>
    
-    <bean id="servCtlService" class="cn.com.yitong.modules.ares.servCtl.service.ServCtlService">
+    <bean id="servCtlService" class="cn.com.yitong.ares.servCtl.service.ServCtlService">
         <property name="servCtlConfigDao" ref="servCtlConfigDao" />
         <property name="servCtlDao" ref="servCtlDao" />
     </bean>
-
+	<bean id="ProviderListener" class="cn.com.yitong.modules.hbbProvider.ProviderListener" lazy-init="false" destroy-method="destory">
+        <!-- 服务启用标志  启用：true  禁用：false -->
+        <property name="state" value="true"></property>
+    </bean>
     <bean id="logSessionTimeOut" class="cn.com.yitong.core.session.timeout.LogSessionTimeOut" init-method="init" />
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 无KEY对应时，返回KEY，不抛异常 -->
+		<property name="useCodeAsDefaultMessage" value="true" />
+		<!-- 刷新的频率10秒 -->
+		<property name="cacheSeconds" value="10"></property>
+		<property name="basenames">
+			<list>
+				<value>classpath:META-INF/messages/messages</value>
+			</list>
+		</property>
+	</bean>
 </beans>

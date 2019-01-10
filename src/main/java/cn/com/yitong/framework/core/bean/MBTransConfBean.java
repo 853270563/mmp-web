@@ -16,6 +16,7 @@ import cn.com.yitong.framework.core.vo.MBTransItem;
 public class MBTransConfBean {
 
 	private String name;
+	private String excode;
 
 	/**
 	 * 属性字段
@@ -87,6 +88,14 @@ public class MBTransConfBean {
 		this.name = name;
 	}
 
+	public String getExcode() {
+		return excode;
+	}
+
+	public void setExcode(String excode) {
+		this.excode = excode;
+	}
+
 	public List<MBTransItem> getSedHeader() {
 		return sedHeader;
 	}
@@ -114,7 +123,7 @@ public class MBTransConfBean {
 	public String getProperty(String key) {
 		return properties.get(key);
 	}
-	
+
 	public String toString() {
 		StringBuffer bf = new StringBuffer();
 		bf.append("name:").append(this.name).append(",properties=");

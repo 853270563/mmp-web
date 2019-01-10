@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PROD">
+
+    <!-- 查询所有产品 -->
+    <select id="prodList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        select
+        M.ID,M.PROD_INTR,M.PROD_ATTR,M.TARGET_CUST,M.CUST_QC,
+        M.SUBMIT_DATA,M.BUSI_PROC,M.USE,
+        M.RATE,M.LIMIT,M.DEADLINE,M.PICTURE
+        from
+            (select
+            a.*,
+            ROWNUM as rno
+            from
+                (Select
+                t.*
+                From
+                ${schema.configPlat}.PROD t
+                WHERE 1 = 1
+                <isNotEmpty prepend="AND" property="PROD_ATTR">
+                    <![CDATA[PROD_ATTR = #PROD_ATTR#]]>
+                </isNotEmpty>
+                <isNotEmpty prepend="AND" property="RATE">
+                    <![CDATA[RATE = #RATE#]]>
+                </isNotEmpty>
+                <isNotEmpty prepend="AND" property="LIMIT">
+                    <![CDATA[LIMIT = #LIMIT#]]>
+                </isNotEmpty>
+                <isNotEmpty prepend="AND" property="DEADLINE">
+                    <![CDATA[DEADLINE = #DEADLINE#]]>
+                </isNotEmpty>
+                Order by t.ID ASC
+                ) a
+            where <![CDATA[ROWNUM <= #lastIndex#]]>
+            ) M
+        where <![CDATA[M.rno > #firstIndex#]]>
+    </select>
+
+    <!-- 查询详情 -->
+    <select id="queryProd" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT ID,PROD_INTR,PROD_ATTR,TARGET_CUST,CUST_QC,
+				SUBMIT_DATA,BUSI_PROC,USE
+                RATE,LIMIT,DEADLINE,PICTURE
+        FROM ${schema.configPlat}.PROD
+		WHERE ID = #ID#
+    </select>
+</sqlMap>
+

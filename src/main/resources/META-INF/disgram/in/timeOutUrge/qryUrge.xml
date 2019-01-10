@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/timeOutUrge/qryUrge" desc="催办查询">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" />
+	</snd>
+	<rcv>
+		<field name="WORK_NUMBER" desc="客户经理" />
+		<field name="TASK_NUMBER" desc="任务条数" />
+	</rcv>
+</trans>

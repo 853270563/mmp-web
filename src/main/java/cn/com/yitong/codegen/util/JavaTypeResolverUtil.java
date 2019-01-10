@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Sql类型解析工具类
+ * @author 李超（lc3@yitong.com.cn）
  */
 public class JavaTypeResolverUtil {
 

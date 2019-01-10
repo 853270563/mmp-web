@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqAssetQualityReportZ.flw" desc="资产质量报表查询">
+  <nodes>
+    <node id="c513101f-f1fa-4c34-b245-9bea3d75be6a" xPos="480" yPos="60" Width="180" Height="40">
+      <desc>权限检查</desc>
+      <type>condition</type>
+      <beanId>permissionCheckOp</beanId>
+      <data-map>
+        <data key="*permission" expr="approval" desc="检查的权限"/>
+      </data-map>
+    </node>
+    <node id="4c4319ce-6ff4-4fa3-9996-8b0dd9ea4c4e" xPos="340" yPos="200" Width="50" Height="50">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqAssetQualityReport" desc="嵌套流程路径,不含文件后缀"/>
+        <data key="transCode" expr="loan/inqAssetQualityReport" desc="用途说明"/>
+      </data-map>
+    </node>
+    <node id="6c228a4d-a1f1-4760-b332-825e1054b426" xPos="590" yPos="190" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="direct.queryuserbydirect" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="495341a5-8313-4317-91eb-d84b6259aa1b" xPos="590" yPos="290" Width="180" Height="40">
+      <desc>循环查询客户经理</desc>
+      <beanId>batchQryCustMangeOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+        <data key="*flowPath" expr="loan/inqAssetQualityReport" desc="用途说明"/>
+        <data key="transCode" expr="loan/inqAssetQualityReport" desc="用途说明"/>
+        <data key="*REPORTLIST" expr="REPORTLIST" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="不是主管" condition="${isPermitted == 0}" from="c513101f-f1fa-4c34-b245-9bea3d75be6a" to="4c4319ce-6ff4-4fa3-9996-8b0dd9ea4c4e"/>
+    <line desc="是主管" condition="${isPermitted == 1}" from="c513101f-f1fa-4c34-b245-9bea3d75be6a" to="6c228a4d-a1f1-4760-b332-825e1054b426"/>
+    <line desc="" condition="" from="6c228a4d-a1f1-4760-b332-825e1054b426" to="495341a5-8313-4317-91eb-d84b6259aa1b"/>
+  </lines>
+</diagram>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/handleOverduePlan" desc="还款计划逾期的处理结果">
+	<snd>
+		<field name="ID" desc="检查ID" required="true" target="id"/>
+		<field name="NOTE" desc="处理详情" required="true" target="note"/>
+		<field name="LIST" type="E" desc="影像列表"  target="imagelist">
+			<field name="FILE_CN_NAME" desc="文件名称"   target="image_ext"/>
+			<field name="BUSI_FILE_TYPE" desc="文件类型" required="true"  target="image_type"/>
+			<field name="BATCH_ID" desc="影像批次号" required="true"  target="image_path"/>
+			<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"  target="image_flag"/>
+		</field>
+	</snd>
+	
+</trans>

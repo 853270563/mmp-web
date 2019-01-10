@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqLoanCheck" desc="查询贷款检查的异常结果">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+		<field name="START_DATE" desc="检查日期起" target="start_date"/>
+		<field name="END_DATE" desc="检查日期止" target="end_date"/>
+	</snd>
+	<rcv>
+		<field name="CHECKLIST" type="E" desc="" target="checklist">
+			<field name="ID" desc="检查ID" target="id"/>
+			<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="总量授信合同编号"
+				required="true" target="total_amount_contract_no"/>
+			<field name="CREDIT_AMOUNT_CONTRACT_NO" desc="借款合同编号" required="true" target="credit_amount_contract_no"/>
+			<field name="RECEIPT_NO" desc="借据号" required="true" target="receipt_no"/>
+			<field name="USER_NO" desc="客户经理" required="true" target="user_no" />
+			<field name="CHECK_REASON" desc="检查原因" required="true" target="check_reason" comment="1：经营类半年 2：消费类三个月(1,2常规) 3：逾期2期"/>
+			<field name="CHECK_DATE" desc="检查日期" required="true" target="check_date"/>
+			<field name="ABNORMAL_TYPE" desc="异常类型" required="true" target="abnormal_type" comment="1：人行征信 2：百融(法院) 3：百融(自然人) 4：同盾(负面) 5：同盾(法院)"/>
+			<field name="CUSTOM_NAME" desc="客户姓名" required="true" target="name"/>
+			<field name="MOBILE" desc="手机号码" required="true" target="mobile"/>
+			<field name="ID_NO" desc="身份证号" required="true" target="id_no"/>
+			<field name="IS_MOBILE" desc="是否电话通知" comment="0否 1是" target="is_mobile" />
+			<field name="BAR_CODE" desc="影像号" target="bar_code" />
+			<field name="BAR_DATE" desc="影像时间" target="bar_date" />
+		</field>
+	</rcv>
+</trans>

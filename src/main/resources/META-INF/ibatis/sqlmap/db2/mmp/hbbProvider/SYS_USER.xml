@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_USER">
+
+	<!-- 用户同步入库 -->
+    <insert id="insertUserInfo" parameterClass="java.util.Map">
+       	insert into ${schema.configPlat}.SYS_USER
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="ID" >
+	       		ID
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="OFFICE_ID" >	
+       			OFFICE_ID
+       		</isNotNull>
+       		<isNotNull prepend="," property="LOGIN_NAME" >
+       			LOGIN_NAME
+       		</isNotNull>
+       		<isNotNull prepend="," property="PASSWORD" >
+       			PASSWORD
+       		</isNotNull>
+       		<isNotNull prepend="," property="NO" >
+       			NO
+       		</isNotNull>
+       		<isNotNull prepend="," property="NAME" >
+       			NAME
+       		</isNotNull>
+       		<isNotNull prepend="," property="EMAIL" >
+       			EMAIL
+       		</isNotNull>
+       		<isNotNull prepend="," property="MOBILE" >
+       			MOBILE
+       		</isNotNull>
+       		<isNotNull prepend="," property="USER_TYPE" >
+       			USER_TYPE
+       		</isNotNull>
+       		<isNotNull prepend="," property="CREATE_DATE" >
+       			CREATE_DATE
+       		</isNotNull>
+       		<isNotNull prepend="," property="DEL_FLAG" >
+       			DEL_FLAG
+       		</isNotNull>
+       		) 
+       	</dynamic>	
+       	VALUES
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="ID" >
+	       		#ID#
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="OFFICE_ID" >	
+       			#OFFICE_ID#
+       		</isNotNull>
+       		<isNotNull prepend="," property="LOGIN_NAME" >
+       			#LOGIN_NAME#
+       		</isNotNull>
+       		<isNotNull prepend="," property="PASSWORD" >
+       			#PASSWORD#
+       		</isNotNull>
+       		<isNotNull prepend="," property="NO" >
+       			#NO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="NAME" >
+       			#NAME#
+       		</isNotNull>
+       		<isNotNull prepend="," property="EMAIL" >
+       			#EMAIL#
+       		</isNotNull>
+       		<isNotNull prepend="," property="MOBILE" >
+       			#MOBILE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="USER_TYPE" >
+       			#USER_TYPE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="CREATE_DATE" >
+       			#CREATE_DATE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="DEL_FLAG" >
+       			#DEL_FLAG#
+       		</isNotNull>
+       		) 
+       	</dynamic>
+    </insert>
+</sqlMap>
+

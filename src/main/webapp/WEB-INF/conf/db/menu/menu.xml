@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="menu" ibatisStatement="MZJ_RES_DATA.pageQuery"
+	desc="移动金融菜单接口">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		
+		
+		<field-list name="LIST" type="E" desc="菜单列表">
+				<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+				<field name="MENU_URL" length="100" type="C" desc="菜单url" />
+				<field name="MENU_NO" length="100" type="C" desc="菜单NO" />
+				<field name="MENU_SORT" length="100" type="C" desc="菜单顺序" />
+			</field-list>
+			
+	</rcv>
+</trans>

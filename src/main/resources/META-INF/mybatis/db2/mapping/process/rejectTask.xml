@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rejectTask">
+<sql id="BaseColumnList">
+        APPLY_ID,APPLY_TIME,CUSTOMER_MANAGER_NAME,
+        PAUSE_START_TIME,PAUSE_END_TIME,WORK_NUMBER,APPLY_CAUSE,OTHER_REASONS ,UPDATE_DATE  ,CREATE_DATE ,TASK_ID,CUST_NAME,CUST_PHONE           
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{APPLY_ID},#{APPLY_TIME},#{CUSTOMER_MANAGER_NAME},
+        #{PAUSE_START_TIME},#{PAUSE_END_TIME},#{WORK_NUMBER},#{APPLY_CAUSE},#{OTHER_REASONS},#{UPDATE_DATE},#{CREATE_DATE},#{TASK_ID},#{CUST_NAME},#{CUST_PHONE}
+    </sql>
+     <sql id="TableClause"> ${schema.busiPlat}.APPLY_CUSTOMER_MANAGER </sql>
+     <insert id="insert" parameterType="map">
+		        insert into
+		        <include refid="TableClause"/>
+		        (
+		        <include refid="BaseColumnList"/>
+		        ) values (
+		        <include refid="BaseColumnValueList"/>
+		        )
+		    </insert>
+	 <select id="myApply" resultType="map">
+		    select 
+		    a.APPLY_ID,to_char(a.APPLY_TIME,'yyyy-mm-dd hh24:mi:ss') APPLY_TIME,a.CUSTOMER_MANAGER_NAME,
+        a.PAUSE_START_TIME,a.PAUSE_END_TIME,a.WORK_NUMBER,a.APPLY_CAUSE,a.OTHER_REASONS ,a.UPDATE_DATE  ,a.CREATE_DATE ,a.TASK_ID  ,a.CUST_NAME,a.CUST_PHONE,
+		    
+		    b.PROCESS_TYPE,b.APPROVAL_STATE,b.PROCESS_INST_ID from 
+		      ${schema.busiPlat}.APPLY_CUSTOMER_MANAGER a inner join ${schema.busiPlat}.PUSH_PROCESS_INST b on a.APPLY_ID=b.BUSINESS_KEY
+		      <where>
+		       a.WORK_NUMBER=#{WORK_NUMBER}
+		      </where>
+		       order by a.UPDATE_DATE desc
+	 </select>
+	 <!-- 已办审批、代办审批 -->
+	 <select id="waittingTask" resultType="map">
+		    select  a.APPLY_ID,to_char(a.APPLY_TIME,'yyyy-mm-dd hh24:mi:ss') APPLY_TIME,a.CUSTOMER_MANAGER_NAME,
+        a.PAUSE_START_TIME,a.PAUSE_END_TIME,a.WORK_NUMBER,a.APPLY_CAUSE,a.OTHER_REASONS ,a.UPDATE_DATE  ,a.CREATE_DATE ,a.TASK_ID  ,a.CUST_NAME,a.CUST_PHONE,
+		    
+		    b.PROCESS_TYPE,b.APPROVAL_STATE,b.PROCESS_INST_ID from 
+		      ${schema.busiPlat}.APPLY_CUSTOMER_MANAGER a inner join ${schema.busiPlat}.PUSH_PROCESS_INST b on a.APPLY_ID=b.BUSINESS_KEY
+		      <where>
+		      <if test="CUSTOMER_MANAGER_NAME!=null and CUSTOMER_MANAGER_NAME!=''">
+		      a.CUSTOMER_MANAGER_NAME like '%'||#{CUSTOMER_MANAGER_NAME}||'%' and
+		      </if>
+		      <if test="PROCESS_TYPE!=null and PROCESS_TYPE!=''">
+		      b.PROCESS_TYPE=#{PROCESS_TYPE} and
+		      </if>
+		       b.APPROVAL_STATE=#{APPROVAL_STATE}
+		      </where>
+		      order by a.UPDATE_DATE desc
+	 </select>
+</mapper>

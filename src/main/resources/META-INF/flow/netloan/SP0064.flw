@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0064.flw" desc="征信列表返显查询">
+  <nodes>
+    <node id="dc22403e-b09b-4d51-9e5d-4e417ff48e84" xPos="420" yPos="240" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0064" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

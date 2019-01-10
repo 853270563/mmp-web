@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="qry.flw" desc="房产影像查询">
+  <nodes>
+    <node id="f2ec7fee-67fe-4fc0-8a41-8119f1ec1d28" xPos="470" yPos="100" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="58eba6a9-206d-47b9-aa47-0789c3185d75" xPos="470" yPos="210" Width="180" Height="40">
+      <desc>影像查询</desc>
+      <beanId>netToolsXYqryOp</beanId>
+      <data-map>
+        <data key="*required" expr="BATCH_ID,BUSI_FILE_TYPE" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.insert" desc="xypicture.insert"/>
+      </data-map>
+    </node>
+    <node id="b1f882b7-3ee6-4dde-84cc-a1e9e127f20d" xPos="470" yPos="320" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="f2ec7fee-67fe-4fc0-8a41-8119f1ec1d28" to="58eba6a9-206d-47b9-aa47-0789c3185d75"/>
+    <line desc="" condition="" from="58eba6a9-206d-47b9-aa47-0789c3185d75" to="b1f882b7-3ee6-4dde-84cc-a1e9e127f20d"/>
+  </lines>
+</diagram>

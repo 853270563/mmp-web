@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DEVICE_MARK">
+
+    <sql id="queryDynSql">
+        <isNotEmpty prepend="AND" property="MARK_ID">
+            T.MARK_ID = #MARK_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DEVICE_ID">
+            T.DEVICE_ID = #DEVICE_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="APP_ID">
+            T.APP_ID = #APP_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="APP_NAME">
+            T.APP_NAME = #APP_NAME#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="APP_VERSION">
+            T.APP_VERSION = #APP_VERSION#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="APP_SHA1">
+            T.APP_SHA1 = #APP_SHA1#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="MARK_TYPE">
+            T.MARK_TYPE = #MARK_TYPE#
+        </isNotEmpty>
+    </sql>
+
+    <!-- 查询SQL -->
+    <sql id="coreSql">
+        SELECT T.* FROM ${schema.interPlat}.DEVICE_MARK T
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+        <![CDATA[ ORDER BY T.MARK_ID]]>
+    </sql>
+    <!-- 分页查询 -->
+    <select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="public.pageBegin"/>
+        <include refid="coreSql"/>
+        <include refid="public.pageEnd"/>
+    </select>
+    <!-- 分页计数 -->
+    <select id="pageCount" parameterClass="map" resultClass="int">
+        <![CDATA[
+			SELECT COUNT('') CNT
+			FROM ${schema.interPlat}.DEVICE_MARK T
+		]]>
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+    </select>
+
+    <!-- 增加、修改时将信息存放到op表中 -->
+    <insert id="insert" parameterClass="map">
+        INSERT INTO ${schema.interPlat}.DEVICE_MARK
+        (
+        MARK_ID
+        <isNotEmpty prepend="," property="DEVICE_ID">DEVICE_ID</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_ID">APP_ID</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_NAME">APP_NAME</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_VERSION">APP_VERSION</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_SHA1">APP_SHA1</isNotEmpty>
+        <isNotEmpty prepend="," property="MARK_TYPE">MARK_TYPE</isNotEmpty>
+        ) VALUES (
+        #MARK_ID#
+        <isNotEmpty prepend="," property="DEVICE_ID">#DEVICE_ID#</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_ID">#APP_ID#</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_NAME">#APP_NAME#</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_VERSION">#APP_VERSION#</isNotEmpty>
+        <isNotEmpty prepend="," property="APP_SHA1">#APP_SHA1#</isNotEmpty>
+        <isNotEmpty prepend="," property="MARK_TYPE">#MARK_TYPE#</isNotEmpty>
+        )
+    </insert>
+
+    <update id="updateById" parameterClass="map">
+        <![CDATA[ update ${schema.interPlat}.DEVICE_MARK ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="DEVICE_ID">DEVICE_ID = #DEVICE_ID#</isNotNull>
+            <isNotNull prepend="," property="APP_ID">APP_ID = #APP_ID#</isNotNull>
+            <isNotNull prepend="," property="APP_NAME">APP_NAME = #APP_NAME#</isNotNull>
+            <isNotNull prepend="," property="APP_VERSION">APP_VERSION = #APP_VERSION#</isNotNull>
+            <isNotNull prepend="," property="APP_SHA1">APP_SHA1 = #APP_SHA1#</isNotNull>
+            <isNotNull prepend="," property="MARK_TYPE">MARK_TYPE = #MARK_TYPE#</isNotNull>
+        </dynamic>
+        <![CDATA[ where MARK_ID = #MARK_ID# ]]>
+    </update>
+
+    <delete id="delete" parameterClass="map">
+        <![CDATA[
+         delete from ${schema.interPlat}.DEVICE_MARK where DEVICE_ID = #DEVICE_ID#
+        ]]>
+    </delete>
+
+    <select id="query" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="coreSql"/>
+    </select>
+
+    <select id="seq" resultClass="String">
+        select ${schema.interPlat}.SEQ_DEVICE_MARK.nextval from dual
+    </select>
+
+</sqlMap>
+

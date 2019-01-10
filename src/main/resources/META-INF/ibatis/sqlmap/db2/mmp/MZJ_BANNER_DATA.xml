@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MZJ_BANNER_DATA">
+
+	<sql id="queryDynSql"> 
+		T.FILE_ID = F.FILE_ID
+		<isNotEmpty prepend="AND" property="ORGAN_LIMIT">
+		 T.ORGAN_LIMIT=#ORGAN_LIMIT#
+		</isNotEmpty> 
+	</sql>
+	 
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MZJ_BANNER_DATA  T
+	</select> 
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*,F.* FROM ${schema.interPlat}.MZJ_BANNER_DATA  T, ${schema.interPlat}.MZJ_FILES_DATA  F
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.BANNER_ID
+	</sql>
+	
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+
+	
+</sqlMap>

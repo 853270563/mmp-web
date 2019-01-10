@@ -23,13 +23,22 @@ public class ConfigName {
     public static final String SESSION_REUSABLE_MAX_LENGTH =
             "session.reusable_max_length";   // 可重复读写的网络请求前多少位
     public static final int SESSION_REUSABLE_MAX_LENGTH_DEFVAL = 128;   // 128位
-
-    public static final String AES_KEY_LENGTH = "aes_key_length";   //AES 加解密长度
-    public static final int AES_KEY_LENGTH_DEFAULT = 256;           //AES 加解密默认长度
-
-
+	public static final String AES_KEY_LENGTH = "aes_key_length"; //AES 加解密长度
+	public static final int AES_KEY_LENGTH_DEFAULT = 256; //AES 加解密默认长度
 
     // 行为日志相关配置
     public static final String BIZ_LOG_BATCH_SERVICE_URL = "log.server_url_batch";  // 行为日志批量提交接口地址
     public static final String BIZ_LOG_SERVICE_URL = "log.server_url";    // 行为日志提交接口地址
- }
+
+    /**
+     * @return 数据文件目录
+     */
+    public static String dataFilesRoot() {
+        final String path = ConfigUtils.getValue("upload_files_path");
+        if(null != path) {
+            return path;
+        }
+        return System.getProperty("user.home") + "/ares_data_files/";
+    }
+
+}

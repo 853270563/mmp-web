@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="P_SYS_NOTE">
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="AND" property="NOTE_TYP">
+		 	 T.NOTE_TYP=#NOTE_TYP#
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="NOTE_TITLE">
+		 	 T.NOTE_TITLE like '%'||#NOTE_TITLE#||'%'
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="INVALID_DATE">
+		 	<![CDATA[ T.INVALID_DATE <= #INVALID_DATE# ]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="INVALID_DATE">
+		 	<![CDATA[ T.VALID_DATE <= #INVALID_DATE#   ]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="ORG_LIMIT">
+	 		T.ORG_LIMIT IN (SELECT P.ID FROM  ${schema.configPlat}.SYS_ORGAN  P  START WITH P.ID =#ORG_LIMIT# CONNECT BY PRIOR P.PARENT_ID=P.ID)
+		</isNotEmpty> 
+		
+		<!-- 默认过滤条件 -->
+		<isNotEmpty prepend="AND">
+		 	T.INFO_STAT = '1'
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND">
+		 	<![CDATA[ TO_CHAR(TRUNC(current timestamp),'YYYY-MM-DD')>=T.VALID_DATE ]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND">
+		 	<![CDATA[ TO_CHAR(TRUNC(current timestamp),'YYYY-MM-DD')<=T.INVALID_DATE]]>
+		</isNotEmpty> 
+		
+	</sql>
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+	   <![CDATA[
+	        SELECT t.*,o.NAME FROM ${schema.interPlat}.MGG_SYS_NOTE T
+	        LEFT JOIN ${schema.configPlat}.SYS_ORGAN  o ON T.ORG_LIMIT =o.ID
+     	]]>
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.VALID_DATE DESC ,T.IMP_FLG DESC ,T.NOTE_ID DESC
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.NOTE_ID) CNT 
+			FROM ${schema.interPlat}.MGG_SYS_NOTE T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MGG_SYS_NOTE
+		( NOTE_ID,APP_ID,NOTE_TYP,NOTE_TITLE,NOTE_CONTENT,INFO_STAT,VALID_DATE,INVALID_DATE,ORG_LIMIT,IMP_FLG ) 
+		VALUES ( #NOTE_ID#,#APP_ID#,#NOTE_TYP#,#NOTE_TITLE#,#NOTE_CONTENT#,#INFO_STAT#,#VALID_DATE#,#INVALID_DATE#,#ORG_LIMIT#,#IMP_FLG#  )
+	</insert> 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.MGG_SYS_NOTE ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="NOTE_ID" prepend=","><![CDATA[ NOTE_ID = #NOTE_ID# ]]></isNotNull>
+			<isNotNull property="APP_ID" prepend=","><![CDATA[ APP_ID = #APP_ID# ]]></isNotNull>
+			<isNotNull property="NOTE_TYP" prepend=","><![CDATA[ NOTE_TYP = #NOTE_TYP# ]]></isNotNull>
+			<isNotNull property="NOTE_TITLE" prepend=","><![CDATA[ NOTE_TITLE = #NOTE_TITLE# ]]></isNotNull>
+			<isNotNull property="NOTE_CONTENT" prepend=","><![CDATA[ NOTE_CONTENT = #NOTE_CONTENT# ]]></isNotNull>
+			<isNotNull property="INFO_STAT" prepend=","><![CDATA[ INFO_STAT = #INFO_STAT# ]]></isNotNull>
+			<isNotNull property="VALID_DATE" prepend=","><![CDATA[ VALID_DATE = #VALID_DATE# ]]></isNotNull>
+			<isNotNull property="INVALID_DATE" prepend=","><![CDATA[ INVALID_DATE = #INVALID_DATE# ]]></isNotNull>
+			<isNotNull property="ORG_LIMIT" prepend=","><![CDATA[ ORG_LIMIT = #ORG_LIMIT# ]]></isNotNull>
+			<isNotNull property="IMP_FLG" prepend=","><![CDATA[ IMP_FLG = #IMP_FLG# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where NOTE_ID = #NOTE_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.MGG_SYS_NOTE where RID = #RID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+
+	<!-- 个人公告查询  -->
+	<select id="selfNoteList" parameterClass="map" resultClass="java.util.HashMap">
+            <![CDATA[
+            SELECT T.*,o.NAME  FROM
+	        (SELECT * FROM ${schema.interPlat}.MGG_SYS_NOTE WHERE INFO_STAT = '1' and TO_CHAR(TRUNC(current timestamp),'YYYY-MM-DD')>=VALID_DATE  AND TO_CHAR(TRUNC(current timestamp),'YYYY-MM-DD')<=INVALID_DATE  AND  ORG_LIMIT IN (SELECT P.ID FROM  ${schema.configPlat}.SYS_ORGAN  P  START WITH P.ID =#ORG_LIMIT#  CONNECT BY PRIOR P.PARENT_ID=P.ID)   ORDER BY VALID_DATE DESC,IMP_FLG DESC) T
+	        LEFT JOIN ${schema.configPlat}.SYS_ORGAN  o ON T.ORG_LIMIT =o.ID
+     	     ]]>
+			<dynamic prepend="WHERE">
+				<isNotEmpty prepend="AND" property="ROWNUM">
+		 			<![CDATA[ ROWNUM <= #ROWNUM#  ]]>
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="NOTE_TYP">
+				 	 T.NOTE_TYP=#NOTE_TYP#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="NOTE_TITLE">
+				 	 T.NOTE_TITLE like '%'||#NOTE_TITLE#||'%'
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="INVALID_DATE">
+				 	<![CDATA[ T.INVALID_DATE <= #INVALID_DATE# ]]>
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="INVALID_DATE">
+				 	<![CDATA[ T.VALID_DATE <= #INVALID_DATE#   ]]>
+				</isNotEmpty> 
+	
+		</dynamic>
+		ORDER BY T.VALID_DATE,T.IMP_FLG DESC 
+	</select> 
+	
+</sqlMap>
+

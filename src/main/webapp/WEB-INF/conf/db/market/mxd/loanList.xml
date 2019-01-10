@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="loanList" desc="客户贷款查询">
+    <snd>
+        <field name="CUSTOMER_CERTIFICATE_TYPE" type="C" length="20" desc="证件类型" required="true"/>
+        <field name="CUSTOMER_CERTIFICATE_NO" type="C" length="20" desc="证件号码" required="true"/>
+        <field name="CUSTOMER_NAME" type="C" length="50" desc="客户名称"/>
+    </snd>
+
+    <rcv>
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+
+        <field name="EXIST" length="5" type="C" desc="是否存在"/>
+        <!-- 基本信息 -->
+        <field name="CUSTOMER_ID" length="100" type="C" desc="客户编号"/>
+        <field name="CUSTOMER_TYPE" length="100" type="C" desc="客户类型"/>
+        <field name="CUSTOMER_NAME" length="100" type="C" desc="客户名称"/>
+        <!-- 贷款记录 -->
+        <field-list name="LIST" type="E">
+            <field name="LOAN_ID" length="20" type="C" desc="贷款编号" />
+            <field name="PRODUCT_ID" length="20" type="C" desc="产品编号" />
+            <field name="PRODUCT_NAME" length="20" type="C" desc="产品名称" />
+            <field name="LOAN_AMOUNT" length="20" type="C" desc="贷款金额" />
+            <field name="RESIDUE_AMOUNT" length="20" type="C" desc="剩余金额" />
+            <field name="LOAN_STATUS" length="2" type="C" desc="贷款状态" />
+            <field name="VALUE_DATE" length="2" type="C" desc="起息日" />
+        </field-list>
+    </rcv>
+</trans>

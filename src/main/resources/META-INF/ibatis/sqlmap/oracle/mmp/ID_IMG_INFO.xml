@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MGG_CUST_INFO">
+	<!-- 增加、修改时将信息存放到op表中 -->
+<!-- 	<insert id="addIDimgInfo" parameterClass="map">
+ 	   <selectKey type="pre" keyProperty="IMG_ID" resultClass="java.lang.String">
+			SELECT ${schema.configPlat}.SEQ_MGG_CUST_INFO.NEXTVAL FROM DUAL
+		</selectKey> 
+		INSERT INTO ${schema.configPlat}.MGG_CUST_INFO
+		(M_NAME,SEX,NATION,BIRTH,ADDRESS,IDCARD,ISSUE,VALIDITY,VOUCHER_NO,SERIAL_NO,PICTURE,ISSU_ORGAN) 
+		VALUES (#M_NAME#,#SEX#,#NATION#,#BIRTH#,#ADDRESS#,#IDCARD#,#ISSUE#,#VALIDITY#,#VOUCHER_NO#,#SERIAL_NO#,#PICTURE#,#ISSU_ORGAN#) 
+	</insert> -->
+	
+	
+
+	<insert id="addIDimgInfo" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MGG_CUST_INFO
+		(M_NAME,SEX,NATION,BIRTH,ADDRESS,IDCARD,ISSUE,VALIDITY,VOUCHER_NO,SERIAL_NO,PICTURE,CARDTYPE) 
+		VALUES (#M_NAME#,#SEX#,#NATION#,#BIRTH#,#ADDRESS#,#IDCARD#,#ISSUE#,#VALIDITY#,#VOUCHER_NO#,#SERIAL_NO#,#PICTURE#,#CARDTYPE#) 
+	</insert>
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ DELETE FROM ${schema.interPlat}.MGG_CUST_INFO WHERE VOUCHER_NO = #VOUCHER_NO# ]]>
+	</delete>
+</sqlMap>
+

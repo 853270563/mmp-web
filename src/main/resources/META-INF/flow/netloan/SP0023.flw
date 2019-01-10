@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0023.flw" desc="退单">
+  <nodes>
+    <node id="d1f0c27c-4181-4980-a6b7-cbcb7a3322ad" xPos="490" yPos="260" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0023" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

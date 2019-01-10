@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	<select id="querypropalist" resultType="java.util.Map">
+		select
+		T.PROPA_ID,T.FILE_ID,T.PROPA_NAME,T.PROPA_TYPE,T.PROPA_PIC,
+		T.PROPA_LVL,T.PROPA_ORDE,T.VAILD_DATE,T.ORGAN_LIMIT,T.EDITOR,
+		T.EDITOR_TIME,T.STATUS,T.PRO_BUSI_TYPE,T.SUMMARY
+		,O.FILE_TYPE AS
+		PROPA_PIC_TYPE,P.FILE_TYPE
+		,O.FILE_ADDR AS PROPA_PIC_ADDR ,P.FILE_ADDR
+		from ${schema.configPlat}.MZJ_PROPA_DATA T
+		LEFT JOIN
+		${schema.configPlat}.MZJ_FILES_DATA O ON
+		T.PROPA_PIC=O.FILE_ID
+		LEFT JOIN
+		${schema.configPlat}.MZJ_FILES_DATA P ON T.FILE_ID=P.FILE_ID
+		WHERE PRO_BUSI_TYPE ='DOC_TYP'
+	</select>
+</mapper>

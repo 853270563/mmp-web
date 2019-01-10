@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0042" excode="Survey_APP01" desc="调查意见修改接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="problem_i" length="2" type="C" desc="家庭无稳定收入来源（问题1）"/>
+			<field name="problem_ii" length="2" type="C" desc="经营实体不真实（问题2）" />
+			<field name="problem_iii" length="2" type="C" desc="房产或土地性质不符合我行要求（问题3）" default="0"/>
+			<field name="problem_iv" length="2" type="C" desc="有赌博、吸毒等恶习（问题4）" />
+			<field name="problem_v" length="2" type="C" desc="涉嫌非法民间融资（问题5）" />
+			<field name="problem_vi" length="2" type="C" desc="近三年内是否存在环保处罚记录（问题6）" />
+			<field name="problem_vii" length="2" type="C" desc="存在伪造证书、证明、印鉴或假冒签字等欺诈行为（问题7）" />
+			<field name="problem_viii" length="2" type="C" desc="房屋存在拆迁风险（问题8）" default="0"/>
+			<field name="credit_evaluate" length="225" type="C" desc="经营实体信用评价"/>
+			<field name="customer_source" length="4" type="C" desc="客户来源"/>
+			<field name="channel_name" length="4" type="C" desc="渠道名称"/>
+			<field name="credit_count" length="20" type="C" desc="授信总量"/>
+			<field name="credit_count_timelimit" length="20" type="C" desc="授信总量期限"/>
+			<field name="loop_state" length="2" type="C" desc="自助循坏-状态"/>
+			<field name="loop_lines" length="20" type="C" desc="自助循坏-额度"/>
+			<field name="loop_loan_timelimit" length="20" type="C" desc="自助循环-额度期限"/>
+			<field name="loop_loan_type" length="4" type="C" desc="自助循坏-额度类型"/>
+			<field name="loop_is_agriculture" length="2" type="C" desc="自助循坏-是否涉农"/>
+			<field name="loop_agriculture_use" length="4" type="C" desc="自助循坏-涉农贷款用途" />
+			<field name="loop_rate_model" length="10" type="C" desc="自助循坏-利率模式"/>
+			<field name="loop_buoyancy_ratio" length="10" type="C" desc="自助循坏-上浮比例"/>
+			<field name="loop_annual_rate" length="10" type="C" desc="自助循坏-年利率"/>
+			<field name="loop_reimburs_means" length="4" type="C" desc="自助循坏-还款方式"/>
+			<field name="single_state" length="2" type="C" desc="单笔-状态"/>
+			<field name="single_lines" length="20" type="C" desc="单笔-贷款金额"/>
+			<field name="single_loan_timelimit" length="20" type="C" desc="单笔-贷款期限"/>
+			<field name="single_loan_type" length="4" type="C" desc="单笔-贷款类型"/>
+			<field name="single_is_agriculture" length="2" type="C" desc="单笔-是否涉农"/>
+			<field name="single_agriculture_use" length="4" type="C" desc="单笔-涉农贷款用途"/>
+			<field name="single_rate_model" length="10" type="C" desc="单笔-利率模式"/>
+			<field name="single_buoyancy_ratio" length="10" type="C" desc="单笔-上浮比例"/>
+			<field name="single_annual_rate" length="10" type="C" desc="单笔-年利率" />
+			<field name="single_reimburs_means" length="4" type="C" desc="单笔-还款方式"/>
+			<!-- <field name="loan_type" length="4" type="C" desc="贷款用途"/> -->
+			<field name="other" length="50" type="C" desc="其他" />
+			<field name="lending_way" length="4" type="C" desc="放款方式"/>
+			<field name="product_type" length="4" type="C" desc="产品类型"/>
+			<field name="letter_mortgage_rate" length="4" type="C" desc="用信抵押率"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>
+			<field name="reason_fail" length="100" type="C" desc="失败原因" />
+			<field name="manager_code" length="20" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="20" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryPolicyItemAppStart" desc="应用启动时查询策略" ibatisStatement="">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <!-- 设备标识 -->
+        <field name="DEVICE_UUID" length="32" required="true" type="C" desc="设备UUID" />
+        <!-- 设备操作系统 -->
+        <field name="OS_SYSTEM" length="2" required="true" type="C" desc="设备操作系统1：IOS，2：Android" />
+    </snd>
+    
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+
+        <!-- 设备策略 -->
+        <field name="isInstaApp" type="C" length="2" desc="是否允许安装应用程序" />
+        <field name="isCatchScr" type="C" length="2" desc="是否开启截屏功能" />
+        <field name="isOpenWifi" type="C" length="2" desc="是否开启wifi" />
+        <field name="isOpenWlan" type="C" length="2" desc="是否开启便携式WLAN热点" />
+        <field name="isUsbDebug" type="C" length="2" desc="是否允许开启USB调试功能" />
+        <field name="isOpCamera" type="C" length="2" desc="是否允许开启摄像头" />
+        <field name="isBlutooth" type="C" length="2" desc="是否允许开启蓝牙" />
+
+        <!-- 系统策略 -->
+        <field name="isLockScre" type="C" length="2" desc="是否开启锁屏密码" />
+        <field name="isSimValue" type="C" length="2" desc="锁屏密码难度是否验证" />
+        <field name="isStriNumb" type="C" length="2" desc="是否要求字母与数字混合密码" />
+        <field name="minPwdLeng" type="C" length="5" desc="最小密码长度" />
+        <field name="minSpChNum" type="C" length="5" desc="除数字字母外的特殊字符最少数量" />
+        <field name="pwdKeepDay" type="C" length="5" desc="密码最长有效期（天）" />
+        <field name="auLckScTim" type="C" length="5" desc="自动锁屏时间（分钟）" />
+        <field name="histroyPwd" type="C" length="2" desc="0-50历史密码记录，0代表可以与新密码相同" />
+        <field name="pwdFailNum" type="C" length="2" desc="4-16，若超限，则启动擦除，0代表不进行擦除操作" />
+        <field name="isContRoot" type="C" length="2" desc="是否限制root" />
+        <field name="isOpConSim" type="C" length="2" desc="是否启用sim控制" />
+        <field name="isForceGps" type="C" length="2" desc="强制开启后，若客户端未开启，禁止接入" />
+        <field name="isCltCheck" type="C" length="2" desc="是否开启终端加密检查" />
+        <field name="rootItemPo" type="C" length="100" desc="root权限违规策略（启用限制root时需要该字段）" />
+        <field name="simItemChg" type="C" length="100" desc="sim卡变更策略（启用sim控制时需要该字段）" />
+    </rcv>
+</trans>

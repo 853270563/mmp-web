@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiQueuingInfo" desc="业务队列信息" ibatisStatement="">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!-- 业务队列 -->
+		<field-list name="BUSI_LIST" type="E">
+			<field name="BUSI_TYPE" length="2" type="C" desc="业务类型00：个人业务01：理财业务" />
+			<field name="BUSI_NAME" length="20" type="C" desc="业务名称" />
+			<!-- 客户列表 -->
+			<field-list name="CUST_LIST" type="E">
+				<field name="CUST_NO" length="20" type="C" desc="客户号" />
+				<field name="OLD_CUST_NO" length="20" type="C" desc="原客户号" />
+				<field name="TICKET_TYPE" length="2" type="C" desc="取号方式00：身份证01：卡02：存折" />
+				<field name="TICKET_TIME" length="20" type="C" desc="取号时间yyyy-MM-dd HH:mm:ss" />
+				<field name="WAIT_TIME" length="20" type="C" desc="等等时间" />
+			</field-list>
+		</field-list>
+	</rcv>
+</trans>

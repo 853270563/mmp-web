@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqOverduePlan.flw" desc="逾期催收查询">
+  <nodes>
+    <node id="46208308-0952-4c6d-97e6-1cd7dae8f51c" xPos="310" yPos="110" Width="180" Height="40">
+      <desc>完善查询时间</desc>
+      <beanId>finishQryDataOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="cb5dbc16-7b1e-4301-93bd-dfd78d5701d3" xPos="310" yPos="220" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqOverduePlan" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="8af420c8-38b0-4631-be3f-0d3c929c4d93" xPos="310" yPos="350" Width="180" Height="40">
+      <desc>逾期催收过滤</desc>
+      <beanId>isMobileOp</beanId>
+      <data-map>
+        <data key="*chickListName" expr="OVERDUELIST" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="46208308-0952-4c6d-97e6-1cd7dae8f51c" to="cb5dbc16-7b1e-4301-93bd-dfd78d5701d3"/>
+    <line desc="" condition="" from="cb5dbc16-7b1e-4301-93bd-dfd78d5701d3" to="8af420c8-38b0-4631-be3f-0d3c929c4d93"/>
+  </lines>
+</diagram>

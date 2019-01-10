@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/timeOut/task" desc="超时任务查询">
+	<snd>
+		<field name="WORK_NUMBER" desc="当前用户" required="true" />
+		<field name="CUSTMOER_NAME" desc="客户姓名"  />
+		<field name="TIMEOUT_TIME" desc="超时天数" comment="单位天"/>
+		<field name="NEXT_KEY" desc="起始标记" default="1" comment="" />
+    	<field name="PAGE_SIZE" desc="页记录数" default="5" comment="" />
+	</snd>
+	<rcv>
+		<field name="TOTAL_NUM" desc="记录数"/>
+		<field name="NEXT_KEY" desc="下一页页码"  />
+		<field name="IS_MASTER" desc="是否是主管"  comment="1-是 0-否"/>
+		<field name="LIST" type="E" desc="超时任务列表">
+			<field name="CUSTMOER_NAME" desc="客户姓名" required="true" />
+			<field name="HOURSE_ADDR" desc="房产地址" required="true" />
+			<field name="RUSH_TIME" desc="抢单时间" required="true" />
+			<field name="BUSI_START_DATE" desc="申请时间" required="true" />
+			<field name="FIRST_APPLY_ID" desc="影像BAR_CODE（存量客户用）" required="true" />
+			<field name="FIRST_APPLY_TIME" desc="影像APPLY_TIME" required="true" />
+			<field name="TASK_ID" desc="任务ID" required="true" />
+			<field name="TIMEOUT_TIME" desc="超时天数" required="true" comment="单位天"/>
+			<field name="PHONE" desc="手机号码" />
+			<field name="CUSTMOER_TYPE" desc="客户类型" comment="01:新客户，02：存量客户，03：新增加抵押物"/>
+			<field name="WORK_NUMBER" desc="客户经理工号" required="true" />
+		</field>
+	</rcv>
+</trans>

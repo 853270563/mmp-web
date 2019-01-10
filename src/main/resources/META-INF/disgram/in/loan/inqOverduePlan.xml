@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqOverduePlan" desc="还款计划逾期的查询">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+		<field name="START_DATE" desc="检查日期起" target="start_date"/>
+		<field name="END_DATE" desc="检查日期止" target="end_date"/>
+	</snd>
+	<rcv>
+		<field name="OVERDUELIST" type="E" desc="" target="overduelist">
+			<field name="ID" desc="检查ID" required="true" target="id"/>
+			<field name="CUSTOMER_NAME" desc="姓名" required="true" target="customer_name"/>
+			<field name="MOBILE" desc="电话" required="true" target="mobile"/>
+			<field name="ID_NO" desc="证件号码" required="true" target="id_no"/>
+			<field name="WORK_NUMBER" desc="客户经理" required="true" target=""/>
+			<field name="PAY_DATE" desc="应还日期" required="true" target="pay_date"/>
+			<field name="AMOUNT" desc="未还总额" required="true" target="amount"/>
+			<field name="OVERDUE_DAY" desc="逾期天数" required="true" target="overdue_day"/>
+			<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="总量授信合同编号" required="true" target="total_amount_contract_no"/>
+			<field name="CREDIT_AMOUNT_CONTRACT_NO" desc="借款合同编号" required="true" target="credit_amount_contract_no"/>
+			<field name="RECEIPT_NO" desc="借据号" required="true" target="receipt_no"/>
+			<field name="IS_MOBILE" desc="是否电话通知" comment="0否 1是" target="is_mobile" />
+		</field>
+	</rcv>
+</trans>

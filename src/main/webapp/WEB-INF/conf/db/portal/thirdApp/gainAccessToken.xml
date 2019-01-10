@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="gainAuthCode" desc="获取访问令牌接口">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+        <field name="authCode" length="20" type="C" desc="授权码[在请求头里带]" />
+        <field name="appId" length="20" type="C" desc="应用标识" required="true" />
+        <field name="appSecret" length="20" type="C" desc="应用密钥" required="true" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+        <field name="accessToken" length="16" type="C" desc="访问令牌" />
+        <field name="freshToken" length="16" type="C" desc="刷新令牌" />
+	</rcv>
+</trans>

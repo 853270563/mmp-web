@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiPageAdd" desc="常用工具或业务功能添加"   ibatisStatement="MYW_BUSI_PACKAGE.insertBusiSel">
+	<snd>
+		<field-list name="BusiSels" type="E" mapName="BusiSel" desc="业务集合[业务编号:BUSI_ID,类型:BUSI_TYPE,排序号:BUSI_ORDER,业务拥有者:BUSI_OWNER]" required="true" >
+			<field name="BUSI_ID" type="C" length="20" desc="业务编号" required="true" />
+			<field name="BUSI_TYPE" type="C" length="2" desc="类型" required="true" />
+			<field name="BUSI_ORDER" type="C" length="2" desc="排序号" required="false" />
+			<field name="BUSI_OWNER" type="C" length="20" desc="业务拥有者" required="false" />
+		</field-list>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

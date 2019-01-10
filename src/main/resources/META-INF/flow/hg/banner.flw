@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="banner.flw" desc="公告管理">
+  <nodes>
+    <node id="1facbdfc-d166-4d36-a55a-48b898d43ba9" xPos="120" yPos="60" Width="180" Height="40">
+      <desc>完善查询时间</desc>
+      <beanId>finishQryDataOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="5a36fbf8-b450-4e4d-a323-2dfc3b25f612" xPos="350" yPos="60" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="579377c4-fce5-43f0-bbfc-e62e7bfb713a" xPos="350" yPos="140" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="banner.queryBannerList" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="bfc8e2f7-f7b7-4991-afeb-e1da3519de1e" xPos="350" yPos="220" Width="180" Height="40">
+      <desc>更改公告url</desc>
+      <beanId>changeBannerFileUrlOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="cc2f8433-bf8e-4c9f-9880-989d847be042" xPos="350" yPos="290" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="dfcf0364-2ca7-4ffb-ba8a-c991c48fb239" xPos="350" yPos="390" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="1facbdfc-d166-4d36-a55a-48b898d43ba9" to="5a36fbf8-b450-4e4d-a323-2dfc3b25f612"/>
+    <line desc="" condition="" from="5a36fbf8-b450-4e4d-a323-2dfc3b25f612" to="579377c4-fce5-43f0-bbfc-e62e7bfb713a"/>
+    <line desc="" condition="" from="579377c4-fce5-43f0-bbfc-e62e7bfb713a" to="bfc8e2f7-f7b7-4991-afeb-e1da3519de1e"/>
+    <line desc="" condition="" from="bfc8e2f7-f7b7-4991-afeb-e1da3519de1e" to="cc2f8433-bf8e-4c9f-9880-989d847be042"/>
+    <line desc="" condition="" from="cc2f8433-bf8e-4c9f-9880-989d847be042" to="dfcf0364-2ca7-4ffb-ba8a-c991c48fb239"/>
+  </lines>
+</diagram>

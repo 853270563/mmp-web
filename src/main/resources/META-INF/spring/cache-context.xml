@@ -8,8 +8,16 @@
       http://www.springframework.org/schema/cache 
       http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">
 
-	<bean id="cacheManager" class="cn.com.yitong.core.cache.CacheManagerFactoryBean"></bean>
-	
+	<bean id="cacheManagerSimple" class="cn.com.yitong.core.cache.CacheManagerFactoryBean"></bean>
+	<!-- 缓存配置 -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:${ehcache.configFile}" />
+	</bean>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManager" ref="cacheManager"/>
+	</bean>
 	<!--
 	redis配置实例-单节点(REDIS配置选择一)：
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">

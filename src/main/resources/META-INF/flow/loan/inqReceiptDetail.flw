@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqReceiptDetail.flw" desc="借据授信查询">
+  <nodes>
+    <node id="dd2b8387-3702-4fa6-8a31-c645d7bb9250" xPos="560" yPos="200" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqReceiptDetail" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="5c58141c-e1d6-4a44-80da-6c4f96c7f1ab" xPos="560" yPos="300" Width="180" Height="40">
+      <desc>过滤已确认数据</desc>
+      <beanId>isConfimOp</beanId>
+      <data-map>
+        <data key="*chickListName" expr="RECEIPTDETALIST" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="dd2b8387-3702-4fa6-8a31-c645d7bb9250" to="5c58141c-e1d6-4a44-80da-6c4f96c7f1ab"/>
+  </lines>
+</diagram>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="validateCode"   desc="验证码">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+	</snd>
+	<rcv>
+		<field name="MSG" type="C" desc="返回消息"  />
+		<field name="STATUS" type="C" desc="返回状态" />
+		<field name="IMG_CODE" type="C" desc="base64编码的验证码"  required="true"/>
+	</rcv>
+</trans>

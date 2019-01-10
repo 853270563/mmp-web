@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MHJ_FUNDCOMPANY">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.CORPCODE,T.CORPNAME FROM ${schema.interPlat}.MHJ_FUNDCOMPANY T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.CORPCODE
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.CORPCODE) CNT 
+			FROM ${schema.interPlat}.MHJ_FUNDCOMPANY T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.CORPCODE) FROM ${schema.interPlat}.MHJ_FUNDCOMPANY p 
+			 WHERE P.CORPCODE=#CORPCODE#
+		]]>
+	</select>
+	
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="Register" desc="用户注册" ibatisStatement="P_REGISTER_USER.insert">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<!--过滤响应信息，并对数据字典进行解析-->
+		<field name="USER_ID" length="32" type="C" desc="用户名"  required="true"/>
+		<field name="UUID" length="32" type="C" desc="设备唯一标识"  required="true"/>
+		<field name="MODEL" length="12" type="C" desc="设备型号"  required="false"/>
+		<field name="OS_TYPE" length="1" type="N" desc="设备类型1：ios 2：安卓"  required="true"/>
+		<field name="OS_VERSION" length="12" type="C" desc="系统版本"  required="false"/>
+		<field name="APP_ID" length="20" type="C" desc="应用标识"  required="true"/>
+		<field name="APP_KEY" length="20" type="C" desc="appkey"  required="false"/>
+		
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

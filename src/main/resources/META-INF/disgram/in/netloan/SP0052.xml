@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0052" excode="Pledge_APP04" desc="房产调查信息提交接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="pledge_code" length="2" type="C" desc="抵押物房产编号" required="true"/> 
+			<field name="problem_i" length="10" type="C" desc="地理位置" required="true"/>
+			<field name="problem_ii" length="10" type="C" desc="区域成熟度" required="true"/>
+			<field name="problem_iii" length="10" type="C" desc="房屋装修情况" required="true"/>
+			<field name="problem_iv" length="10" type="C" desc="房屋维护状况" required="true"/>
+			<field name="problem_v" length="10" type="C" desc="房屋年限是否超过20年" required="true"/>
+			<field name="problem_vi" length="10" type="C" desc="房屋构造是否存在结构性改动" required="true"/>
+			<field name="problem_vii" length="10" type="C" desc="证件载明用于住宅，实际用途为商业或办公" required="true"/>
+			<field name="problem_viii" length="10" type="C" desc="物业管理方统一经营、承诺给付投资收益的房产" required="true"/>
+			<field name="problem_ix" length="10" type="C" desc="产权是否清晰" required="true"/>
+			<field name="problem_x" length="10" type="C" desc="地方政府规定不能上市交易或办理抵押登记的房产" required="true"/>
+			<field name="problem_xi" length="10" type="C" desc="房屋存在拆迁风险" required="true"/>
+			<field name="problem_xii" length="10" type="C" desc="房产或土地性质不符合我行要求" required="true"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+			<field name="pledge_code" length="2" type="C" desc="抵押物房产编号"/>
+		</body>
+	</rcv>
+</trans>

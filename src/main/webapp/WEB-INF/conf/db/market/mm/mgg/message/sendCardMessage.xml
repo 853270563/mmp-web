@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiPageAdd" desc="业务包添加"   ibatisStatement="BUSI_PACKAGE.insertPageBusiConf">
+	<snd>
+		<field name="MOBILE" length="30" type="C" desc="手机号码" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

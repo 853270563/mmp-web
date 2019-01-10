@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mobileMenu">
+ <!-- 根据用户角色权限查询权限 -->
+    <select id="findByUserId" resultType="string" >
+        SELECT DISTINCT
+	      P.PERMISSION 
+	      FROM  ${schema.configPlat}.SYS_MOBILE_MENU P 
+	      INNER JOIN ${schema.configPlat}.SYS_MOBILE_ROLE_MENU T  ON  P.MENU_NO=T.MENU_NO
+	      <where>
+	       P.DEL_FLAG ='0' and
+	      
+	   	<![CDATA[ T.ROLE_ID in (SELECT R.ROLE_ID FROM ${schema.configPlat}.SYS_USER_ROLE  R, 
+	   	${schema.configPlat}.SYS_USER H WHERE H.DEL_FLAG='0' AND R.USER_ID = H.ID AND H.LOGIN_NAME=#{userId})]]>
+	   	and    P.PERMISSION  is not null
+	      
+	      </where>
+               
+    </select>
+</mapper>

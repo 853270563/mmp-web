@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="checkCode" desc="验证码验证">
+	<snd>
+		<field name="CODE" length="20" type="C" desc="备用"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

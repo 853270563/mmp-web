@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0024" excode="Track_APP06" desc="废单处理">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="refusal_reason" length="2000" type="C" desc="拒绝原因" required="true"/>             
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="bar_code" length="32" type="C" desc="条码号"/>  
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/> 
+		</body>
+	</rcv>
+</trans>

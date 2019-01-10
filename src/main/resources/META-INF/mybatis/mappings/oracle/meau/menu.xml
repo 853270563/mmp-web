@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="menu">
+	<select id="queryCurrentMenu" parameterType="string" resultType="map">
+       SELECT M.* FROM ${schema.configPlat}.SYS_USER_ROLE T inner join ${schema.configPlat}.SYS_MOBILE_ROLE_MENU R  
+        on T.ROLE_ID=R.ROLE_ID right join ${schema.configPlat}.SYS_MOBILE_MENU M on R.MENU_NO=M.MENU_NO
+        <where>
+        T.USER_ID=#{userId} and M.MENU_TYPE='2' and M.MENU_ABTYPE='A' and M.DEL_FLAG='0' order by M.MENU_SORT 
+        </where>
+       </select>
+       <!-- 根据移动金融账号查询OA -->
+	<select id="queryOAUser" parameterType="string" resultType="map">
+       SELECT * FROM ${schema.configPlat}.OA_USER 
+        <where>
+        SYS_USERID=#{userId} 
+        </where>
+       </select>
+       <!-- 根据移动金融账号查询CRM -->
+	<select id="queryCRMUser" parameterType="string" resultType="map">
+       SELECT * FROM ${schema.configPlat}.CRM_USER 
+        <where>
+        LOGIN_NAME=#{userId} 
+        </where>
+       </select>
+       <!-- 根据移动金融账号查询移动驾驶舱 -->
+	<select id="queryCOCKPITUser" parameterType="string" resultType="map">
+       SELECT * FROM ${schema.configPlat}.COCKPIT_USER
+        <where>
+        LOGIN_NAME=#{userId} 
+        </where>
+       </select>
+       
+</mapper>

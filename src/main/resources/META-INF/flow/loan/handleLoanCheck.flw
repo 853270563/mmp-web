@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="handleLoanCheck.flw" desc="贷后检查异常的处理结果">
+  <nodes>
+    <node id="d36edeca-1f04-4ba1-924c-97ebedacdcf0" xPos="290" yPos="240" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/handleLoanCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

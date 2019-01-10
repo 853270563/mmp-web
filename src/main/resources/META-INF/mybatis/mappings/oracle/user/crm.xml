@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="crm">
+	<sql id="BaseColumnList">
+       LOGIN_NAME
+    </sql>
+
+    <sql id="BaseColumnValueList">
+       #{loginName}
+    </sql>
+     <sql id="TableClause"> ${schema.configPlat}.CRM_USER </sql>
+    <insert id="insert">
+    insert into <include refid="TableClause" /> (
+        <include refid="BaseColumnList" />
+        ) values (
+        <include refid="BaseColumnValueList" />
+        )
+    
+    </insert>
+    <!-- 不存在插入 -->
+   <insert id="notExistinsert">
+		   declare num number;   
+			begin
+		    select count(1) into num from <include refid="TableClause" /> where LOGIN_NAME=<include refid="BaseColumnValueList" />;   
+		    if num = 0 then   
+		     INSERT INTO <include refid="TableClause" /> (<include refid="BaseColumnList" />) values( <include refid="BaseColumnValueList" />);
+		     end if;
+		   
+			end; 
+    
+    </insert>
+    <insert id="inserts">
+     
+            insert  all 
+             <foreach collection ="array" item="userId" index= "index" separator =" ">
+            into <include refid="TableClause" />
+             (<include refid="BaseColumnList" />)
+             values
+            
+                 (
+                #{userId}
+                 )
+             </foreach >
+    	select 1 from dual
+    </insert>
+    
+</mapper>

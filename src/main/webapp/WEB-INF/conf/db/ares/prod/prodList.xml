@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="prodList"   desc="产品列表">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="PROD_ATTR" length="64" type="C" desc="产品属性"/>
+		<field name="RATE" length="64" type="C" desc="利率" />
+		<field name="LIMIT" length="64" type="C" desc="额度"/>
+		<field name="DEADLINE" length="64" type="C" desc="期限" />
+
+		<field  name="PAGE_NO" length="30" type="C" desc="第几页" required="true" />
+		<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小" required="true"  />
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 --> 
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+
+
+		<field-list type="E" name="list">
+			<field name="ID" length="64" type="C" desc="产品ID" required="true"/>
+			<field name="PROD_INTR" length="64" type="C" desc="产品简介" required="true"/>
+			<field name="PROD_ATTR" length="64" type="C" desc="产品属性" required="true"/>
+			<field name="TARGET_CUST" length="64" type="C" desc="目标客户" required="true"/>
+			<field name="CUST_QC" length="64" type="C" desc="客户资质" required="true"/>
+			<field name="SUBMIT_DATA" length="64" type="C" desc="需提交材料" required="true"/>
+			<field name="BUSI_PROC" length="64" type="C" desc="业务流程" required="true"/>
+			<field name="USE" length="64" type="C" desc="用途" required="true"/>
+			<field name="RATE" length="64" type="C" desc="利率" required="true"/>
+			<field name="LIMIT" length="64" type="C" desc="额度" required="true"/>
+			<field name="DEADLINE" length="64" type="C" desc="期限" required="true"/>
+			<field name="PICTURE" length="64" type="C" desc="图片" required="true"/>
+		</field-list>
+	</rcv>
+</trans>

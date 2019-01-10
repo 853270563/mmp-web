@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MP_CUST_MSG">
+
+	<select id="genCustMsg" resultClass="java.util.HashMap">
+		SELECT
+			M.*
+		FROM
+			(SELECT
+				A.TASK_CUST_ID,
+				A.TASK_ID,
+				A.TASK_BATCH_ID,
+				A.CUST_ID,
+				A.TMPL_ID 		AS TMPL_ID_CUST,
+				A.TMPL_TAG_VAL  AS TMPL_TAG_VAL_CUST,
+				A.STATUS 		AS STATUS_CUST,
+				A.MSG_BODY 		AS MSG_BODY_CUST,
+				A.CREATE_TIME 	AS CREATE_TIME_CUST,
+				A.UPDATE_TIME 	AS UPDATE_TIME_CUST,
+				A.CLIENT_TYPE,
+				B.CHAN_TYPE,
+				B.SEND_TYPE,
+				B.PUSH_TYPE,
+				B.MSG_TYPE,
+				B.APP_ID,
+				B.CLIENT_APP_ID,
+				B.REC_CUST_FROM,
+				B.IS_TMPL,
+				B.TMPL_ID 		AS TMPL_ID_TASK,
+				B.TMPL_TAG_VAL  AS TMPL_TAG_VAL_TASK,
+				B.MSG_TITLE,
+				B.MSG_BODY		AS MSG_BODY_TASK,
+				B.EXT_BODY,
+				B.CLICK_ACT_TYPE,
+				B.CLICK_ACT_BODY,
+				B.PUSH_CLIENT_TYPE,
+				B.DIST_VAL,
+				B.PRIO_VAL,
+				B.SEND_BEGIN_TIME,
+				B.SEND_END_TIME,
+				B.IS_DEAL,
+				B.SERIAL_NO,
+				B.OPER_ID,
+				B.STATUS AS STATUS_TASK,
+				B.AUDITOR_ID,
+				B.AUDIT_INFO,
+				B.DEL_FLAG,
+				B.CREATE_TIME 	AS CREATE_TIME_TASK,
+				B.UPDATE_TIME 	AS UPDATE_TIME_TASK,
+				C.DEVICE_ID,
+				C.IS_CLOSE,
+				C.CLIENT_ID
+			FROM
+				${schema.configPlat}.ARES_MP_MSG_TASK_CUST A
+				LEFT JOIN ${schema.configPlat}.ARES_MP_MSG_TASK B
+					ON A.TASK_ID = B.TASK_ID
+				LEFT JOIN ${schema.configPlat}.ARES_MP_CUST_CLIENT C
+					ON A.CUST_ID = C.CUST_ID
+					AND A.CLIENT_TYPE = C.CLIENT_TYPE
+			WHERE
+				A.STATUS = '0' <!-- 状态：0-未处理 -->
+				) M
+		WHERE
+			M.STATUS_TASK = '3' <!-- 审核状态：3-审核通过 -->
+			AND M.DEL_FLAG = '0' <!-- 删除标记:0-未删除 -->
+	</select>
+	
+	
+	<select id="selectMpMsgClickActList" resultClass="java.util.HashMap">
+		SELECT
+			T.*
+		FROM
+			${schema.configPlat}.ARES_MP_MSG_CLICK_ACT T
+		WHERE
+			<!-- 未删除 -->
+			T.DEL_FLAG = '0'
+	</select>
+	
+	<update id="updateStatus" parameterClass="map">
+		UPDATE
+			${schema.configPlat}.ARES_MP_MSG_TASK_CUST
+		SET
+			STATUS = '1',
+			UPDATE_TIME = #UPDATE_TIME#
+		WHERE
+			TASK_CUST_ID = #TASK_CUST_ID#
+	</update>
+	
+    <insert id="insert" parameterClass="map">
+        insert into ${schema.configPlat}.ARES_MP_CUST_MSG (
+	        MSG_ID,TASK_ID,CHAN_TYPE,PUSH_TYPE,CLIENT_APP_ID,
+	        CLIENT_TYPE,DEVICE_ID,CLIENT_ID,CUST_ID,MSG_TITLE,
+	        MSG_BODY,EXT_BODY,DIST_VAL,PRIO_VAL,CLICK_ACT_TYPE,
+	        CLICK_ACT_BODY,SEND_BEGIN_TIME,SEND_END_TIME,SEND_TIME,SEND_TIMES,
+	        TAKE_TIME,STATUS,DEL_FLAG,CREATE_TIME,UPDATE_TIME,
+	        ERR_MSG
+        ) values (
+        	#MSG_ID#,#TASK_ID#,#CHAN_TYPE#,#PUSH_TYPE#,#CLIENT_APP_ID#,
+	        #CLIENT_TYPE#,#DEVICE_ID#,#CLIENT_ID#,#CUST_ID#,#MSG_TITLE#,
+	        #MSG_BODY#,#EXT_BODY#,#DIST_VAL#,#PRIO_VAL#,#CLICK_ACT_TYPE#,
+	        #CLICK_ACT_BODY#,#SEND_BEGIN_TIME#,#SEND_END_TIME#,#SEND_TIME#,#SEND_TIMES#,
+	        #TAKE_TIME#,#STATUS#,#DEL_FLAG#,#CREATE_TIME#,#UPDATE_TIME#,#ERR_MSG#
+        )
+    </insert>
+    
+   	<update id="updateIsDeal" parameterClass="java.util.HashMap">
+		UPDATE
+			${schema.configPlat}.ARES_MP_MSG_TASK
+		SET
+			IS_DEAL = '1',
+			UPDATE_TIME = #UPDATE_TIME#
+		WHERE
+			TASK_ID = #TASK_ID#
+	</update>
+	
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		select ${schema.interPlat}.nextval('SEQ_MP_CUST_MSG') as MSG_ID from dual
+	</select>
+	
+	<select id="loadCustMsgList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT m.*
+		FROM
+		  (SELECT a.*, (@rownum:= @rownum + 1) AS rno
+		  FROM
+		    (SELECT b.*, (SELECT @rownum:=0) r
+		    FROM
+		      (SELECT t1.*,
+		        t2.MSG_TYPE,
+		        t3.TYPE_NAME
+		      FROM ${schema.configPlat}.ARES_MP_CUST_MSG t1
+		      LEFT JOIN ${schema.configPlat}.ARES_MP_MSG_TASK t2
+		      ON t1.TASK_ID    = t2.TASK_ID
+		      LEFT JOIN ${schema.configPlat}.ARES_MP_MSG_TYPE t3
+		      ON t2.MSG_TYPE    = t3.TYPE_ID
+		      WHERE t1.CUST_ID = #SUB_ID#
+		      AND t1.STATUS    = '2'
+		      ORDER BY t1.SEND_TIME DESC
+		      ) b
+		    WHERE b.MSG_TYPE = #MSG_TYPE#
+		    ) a limit #lastIndex#
+		  ) m
+		WHERE <![CDATA[m.rno > #firstIndex#]]>
+	</select>
+</sqlMap>

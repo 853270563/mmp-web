@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/add" excode="vqserver/previews/add" desc="新增委托预评">
+	<snd>
+		<head>
+			<!-- <field name="orgId" type="C" desc="机构id" required="true" default="90080"/>
+			<field name="userId" type="C" desc="发起用户" required="true" default="app"/> -->
+			<field name="account" type="C" desc="发起账号" required="true" default="123456"/>
+		</head>
+		<body>
+			<field name="loginSessionId" type="C" desc="登录的唯一凭证"/>
+			<field name="businessData" type="M" desc="业务数据">
+				<field name="projectName" type="C" required="true" desc="业务项目名称"/>
+				<field name="reportType" type="C" required="true" desc="报告类型" default="10010001"/>
+				<field name="bizType" type="C" required="true" desc="委托类型" default="20010402"/>
+				<field name="clientName" type="C" required="false" desc="委托人名称"/>
+				<field name="clientPhone" type="C" required="false" desc="委托人电话"/>
+				<field name="remarks" type="C" required="false" desc="业务备注"/>
+				<field name="busiEFiles" targetName="listFiles" type="E" desc="文件列表">
+					<field name="name" type="C" required="false" desc="文件名称"/>
+					<field name="path" type="C" required="false" desc="文件地址"/>
+					<field name="fileSubTypeCode" type="C" required="false" desc="业务信息文件子类型"/>
+					<field name="fileSize" type="C" required="false" desc="文件大小"/>
+				</field>
+			</field>
+			<field name="propertyData" type="E" desc="物业数据">
+				<field name="provinceId" type="C" required="true" desc="省Id(国标码)"/>
+				<field name="provinceName" type="C" required="true" desc="省名称"/>
+				<field name="cityId" type="C" required="true" desc="城市Id(国标码)"/>
+				<field name="cityName" type="C" required="true" desc="城市名称"/>
+				<field name="ruleId" type="C" required="true" desc="委托规则Id"/>
+				<field name="subRuleType" type="C" required="true" desc="委托规则中标子类型"/>
+				<field name="outCompany" type="E" desc="评估机构列表">
+					<field name="outCompanyId" type="C" required="true" desc="评估机构Id"/>
+					<field name="outCompanyName" type="C" required="true" desc="评估机构名称"/>
+				</field>
+				<field name="datObject" type="E" desc="物业列表">
+					<field name="projectId" type="C" required="false" desc="楼盘Id"/>
+					<field name="projectName" type="C" required="true" desc="楼盘名称"/>
+					<field name="buildingId" type="C" required="false" desc="楼栋Id"/>
+					<field name="buildingName" type="C" required="false" desc="楼栋名称"/>
+					<field name="totalFloor" type="C" required="true" desc="总楼层"/>
+					<field name="floorNumber" type="C" required="false" desc="所在楼层"/>
+					<field name="houseId" type="C" required="false" desc="房号Id"/>
+					<field name="houseName" type="C" required="false" desc="房号名称"/>
+					<field name="listFiles" type="E" required="false" desc="文件列表">
+						<field name="name" type="C" required="false" desc="文件名称"/>
+						<field name="path" type="C" required="false" desc="文件地址"/>
+						<field name="fileSubTypeCode" type="C" required="false" desc="物业信息文件子类型"/>
+						<field name="fileSize" type="C" required="false" desc="文件大小"/>
+					</field>
+					<field name="streetName" type="C" required="false" desc="临街名称"/>
+					<field name="decoration" type="C" required="false" desc="装修情况"/>
+					<field name="villaType" type="C" required="false" desc="别墅类型"/>
+					<field name="face" type="C" required="false" desc="朝向" />
+					<field name="address" type="C" required="true" desc="物业地址"/>
+					<field name="buildingArea" type="C" required="true" desc="面积"/>
+					<field name="remark" type="C" required="false" desc="备注"/>
+					<field name="areaId" type="C" required="true" desc="行政区Id(国标码)"/>
+					<field name="areaName" type="C" required="true" desc="行政区名称"/>
+					<!-- <field name="typeCode" type="C" required="false" desc="物业主类型"/> -->
+					<field name="subTypeCode" type="C" required="true" desc="物业子类型"/>
+					<field name="isNeedSurvey" type="C" required="false" desc="是否查勘"/>
+					<field name="propertyPattern" type="C" required="true" desc="物业模式(1：仅查勘，2：查勘+预评)"/>
+				</field>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+			<field name="signature" type="C" desc="服务端签名"/>
+			<field name="timestamp" type="C" desc="时间戳"/>
+		</head>
+		<body>
+			<field name="entrustId" type="C" desc="业务id"/>
+			<field name="objectList" type="E" desc="委估对象列表">
+				<field name="objectId" type="C" desc="委估对象id"/>
+				<field name="fullName" type="C" desc="物业全名"/>
+			</field>
+		</body>
+	</rcv>
+</trans>

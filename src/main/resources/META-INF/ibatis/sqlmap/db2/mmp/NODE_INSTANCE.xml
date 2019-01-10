@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="NODE_INSTANCE">
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+	</sql>
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT
+    		ROW_NUMBER() over(ORDER BY t.node_instance_id) AS XH,
+    		t.NODE_INSTANCE_LOG
+		FROM
+    		${schema.interPlat}.NODE_INSTANCE t
+		WHERE
+    	t.FLOW_INSTANCE_ID = #FLOW_INSTANCE_ID#
+		ORDER BY t.NODE_INSTANCE_ID
+	</sql>
+	
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+
+  	
+    <select id="getSeqNodeInstanceId" resultClass="java.util.HashMap" >
+  		select to_char(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.seq_node_instance.nextval as NODE_INSTANCE_ID from dual 
+  	</select>
+	
+	<insert id="insertNodeInstance" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.NODE_INSTANCE
+		(NODE_INSTANCE_ID,FLOW_INSTANCE_ID,IS_NEED_ROLLBACK,RES_ID,NODE_STATUS,NODE_INSTANCE_LOG,CREATE_TIME,UPDATE_TIME,ATOM_SERVICE,ATOM_SERVICE_METHOD) 
+		VALUES (#NODE_INSTANCE_ID#,#FLOW_INSTANCE_ID#,#IS_NEED_ROLLBACK#,#RES_ID#,#NODE_STATUS#,#NODE_INSTANCE_LOG#,#CREATE_TIME#,#UPDATE_TIME#,#ATOM_SERVICE#,#ATOM_SERVICE_METHOD#) 
+	</insert> 
+
+
+</sqlMap>
+

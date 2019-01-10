@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SEQ">
+	<!-- 获得某一序列号的next值 -->
+	<select id="nextVal" parameterClass="String" remapResults="true" resultClass="int">
+		select $seqName$.NEXTVAL from dual
+	</select> 
+
+	<select id="P_TRANS_LOGS_SEQ" resultClass="int">
+		select ${schema.configPlat}.P_TRANS_LOGS_SEQ.NEXTVAL from dual
+	</select>
+
+	<!-- 日誌主鍵 -->
+	<select id="SEQ_OP" resultClass="int">
+		select ${schema.configPlat}.SEQ_OP.NEXTVAL from dual
+	</select>
+	<!--ESB 序列号前缀  -->
+	<select id="ESB_PREFIX" resultClass="int">
+		select ESB_PREFIX.NEXTVAL from dual
+	</select> 
+	<select id="ESB_PREFIX2" resultClass="int">
+		select ESB_PREFIX2.NEXTVAL from dual
+	</select> 
+</sqlMap>
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="upload.flw" desc="房产影像上传">
+  <nodes>
+    <node id="f5a68d13-8524-4f64-9a8a-ad40ad46d076" xPos="370" yPos="70" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="6f52119e-8474-4275-a168-e603b2961bbc" xPos="370" yPos="170" Width="180" Height="40">
+      <desc>上传到本地</desc>
+      <beanId>yxLocaluploadOp2</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="c5d97a7b-4481-41dc-819b-ddb051b9a2f2" xPos="370" yPos="260" Width="180" Height="40">
+      <desc>贷后影像上传</desc>
+      <beanId>netToolsXYBusiuploadOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.insert" desc="Mybatis SQL Statement"/>
+      </data-map>
+    </node>
+    <node id="df787ec3-286c-41ca-ba82-fe2b6a896be6" xPos="370" yPos="360" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/addReceiptDetailImage" desc="嵌套流程路径,不含文件后缀"/>
+        <data key="*key_1" expr="VALUE_1" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="f5a68d13-8524-4f64-9a8a-ad40ad46d076" to="6f52119e-8474-4275-a168-e603b2961bbc"/>
+    <line desc="" condition="" from="6f52119e-8474-4275-a168-e603b2961bbc" to="c5d97a7b-4481-41dc-819b-ddb051b9a2f2"/>
+    <line desc="" condition="" from="c5d97a7b-4481-41dc-819b-ddb051b9a2f2" to="df787ec3-286c-41ca-ba82-fe2b6a896be6"/>
+  </lines>
+</diagram>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="deleteTask.flw" desc="删除超时任务">
+  <nodes>
+    <node id="e804c915-b061-4d6e-ad4b-2cfdc728da18" xPos="420" yPos="120" Width="180" Height="40">
+      <desc>删除超时任务数据</desc>
+      <beanId>dbDelOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rushTask.delete" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+        <data key="*throw" expr="false" desc="用途说明"/>
+      </data-map>
+    </node>
+    <node id="b08ce51a-6024-4d96-8209-fc4b0af7733b" xPos="420" yPos="250" Width="180" Height="40">
+      <desc>删除超时催办数据</desc>
+      <beanId>dbDelOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="TimeoutTaskUrge.deleteById" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="e804c915-b061-4d6e-ad4b-2cfdc728da18" to="b08ce51a-6024-4d96-8209-fc4b0af7733b"/>
+  </lines>
+</diagram>

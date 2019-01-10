@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="custMsgList"   desc="加载消息列表">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="SUB_ID" length="64" type="C" desc="订阅客户号"  required="true"/>
+		<field name="MSG_TYPE" length="64" type="C" desc="消息类型"/>
+		<field name="PAGE_NO" type="N" desc="页码"  required="true"/>
+		<field name="PAGE_SIZE" type="N" desc="每页显示数量"  required="true"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<field-list type="E" name="LIST">
+			<field name="MSG_TITLE" length="128" type="C" desc="消息标题" /> 
+			<field name="MSG_BODY" length="4000" type="C" desc="消息内容" /> 
+			<field name="TYPE_NAME" length="32" type="C" desc="消息类型" />
+			<field name="CLICK_ACT_TYPE" length="1" type="C" desc="点击通知动作类型，0-打开应用，1-打开网址，2-自定义，3-资讯公告" /> 
+			<field name="CLICK_ACT_BODY" length="512" type="C" desc="点击通知动作内容" /> 
+		</field-list>
+		<field name="MSG" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

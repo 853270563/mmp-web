@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/getDetails" desc="查询派单详情">
+	<snd>
+		<body>
+			<field name="TASKID" type="C" desc="任务id"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<body>
+			<filed name="dList" type="E" desc="派单业务详情列表">
+				<field name="TASKID" type="C" desc="任务id"/>
+				<field name="BUSIID" type="C" desc="业务id"/>
+				<field name="CLIENT_NAME" type="C" desc="客户姓名"/>
+				<field name="CLIENT_PHONE" type="C" desc="客户电话号码"/>
+				<field name="OBJECTID" type="C" desc="房产id"/>
+				<field name="OBJECT_NAME" type="C" desc="房产名称"/>
+				<field name="TOTAL_PRICE" type="C" desc="房产预估总价"/>
+			</filed>
+		</body>
+	</rcv>
+</trans>

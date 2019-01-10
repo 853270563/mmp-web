@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TASK_BUSI_RELATION">
+
+	<!-- 查询所有未查询的业务id -->
+    <select id="queryBusidList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+       	select *
+     	from ${schema.busiPlat}.TASK_BUSI_RELATION 
+     	where flag='0'
+    </select>
+    
+    <!-- 更新关联表的查询状态 -->
+    <update id="updateBusidState" parameterClass="java.util.Map">
+       	update ${schema.busiPlat}.TASK_BUSI_RELATION
+       	<dynamic prepend="set" >
+	      <isNotNull prepend="," property="FLAG" >
+	        FLAG = #FLAG#
+	      </isNotNull>
+    	</dynamic>
+    	where BUSIID=#BUSIID#
+    </update>
+    
+    <!-- 数据入库 -->
+    <insert id="insertBusiInfo" parameterClass="java.util.Map">
+       	insert into ${schema.busiPlat}.TASK_BUSI_RELATION(TASKID,BUSIID,CREATE_TIME,FLAG) values(#TASKID#,#BUSIID#,#CREATE_TIME#,#FLAG#)
+    </insert>
+</sqlMap>
+

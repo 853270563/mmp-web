@@ -1,18 +1,35 @@
 package cn.com.yitong.framework.util.security;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import javax.crypto.Cipher;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.math.BigInteger;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
+
+import javax.crypto.Cipher;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.log4j.Logger;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * 用户服务器端对客户端提交的加密数据使用私钥进行解密 公钥加密--客户端 私钥解密--服务端
@@ -62,7 +79,7 @@ public class RSACerPlus {
 	 * @throws Exception
 	 */
 	private void initCer() throws Exception {
-		String filePath = rootpath + "config/" + keystoreFilePath;
+		String filePath = rootpath + "conf/" + keystoreFilePath;
 		//String filePath = "c:/" + keystoreFilePath;
 		FileInputStream fis2 = new FileInputStream(filePath);
 		KeyStore ks = KeyStore.getInstance("JKS"); // 加载证书库
@@ -89,7 +106,7 @@ public class RSACerPlus {
 	public String doEncrypt(String str) throws Exception {
 		CertificateFactory cff = CertificateFactory.getInstance("X.509");
 
-		String filePath = rootpath + "config/" + publickeyFilePath;
+		String filePath = rootpath + "conf/" + publickeyFilePath;
 		InputStream in = new FileInputStream(filePath);// 证书文件
 		Certificate cf = cff.generateCertificate(in);
 		PublicKey pk1 = cf.getPublicKey(); // 得到证书文件携带的公钥

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/timeOutUrge/urge" desc="超时催办">
+	<snd>
+		<field name="TASK_ID" desc="任务ID" required="true" />
+		<field name="WORK_NUMBER" desc="客户经理" required="true" />
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

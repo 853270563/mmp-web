@@ -50,6 +50,9 @@ public class YTLog extends Logger {
 
 	/**
 	 * 提供统一的过滤规则
+	 * 
+	 * @param message
+	 * @return
 	 */
 	private String forbidOutput(Object message) {
 		if (message != null) {
@@ -57,4 +60,5 @@ public class YTLog extends Logger {
 		}
 		return "";
 	}
+
 }

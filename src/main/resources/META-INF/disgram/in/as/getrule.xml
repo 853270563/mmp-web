@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/getrule" excode="vqserver/rule/getrule" desc="获取委托规则">
+	<snd>
+		<head>
+			<!-- <field name="orgId" type="C" desc="机构id" required="true" xpath="@session" default="90080"/>
+			<field name="userId" type="C" desc="发起用户" required="true" xpath="@session" default="app"/> -->
+			<field name="account" type="C" desc="发起账号" required="true" default="app"/>
+		</head>
+		<body>
+			<field name="loginSessionId" type="C" desc="登录唯一标识"/>
+			<field name="objectTypeCode" type="C" desc="押品类型" default="9007008"/>
+			<field name="companyTypeCode" type="C" desc="公司类型" required="false"/>
+			<field name="userId" type="C" desc="用户id" required="false"/>
+			<field name="cityId" type="C" desc="押品城市所在id" required="true"/>
+			<field name="fxtCompanyId" type="C" desc="客户公司id" required="false"/>
+			<field name="subCompanyId" type="C" desc="分行、分公司id" required="false"/>
+			<field name="custCityId" type="C" desc="客户公司所在城市id" required="false"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+			<field name="signature" type="C" desc="服务端签名"/>
+			<field name="timestamp" type="C" desc="时间戳"/>
+		</head>
+		<body>
+			<field name="ruleId" type="C" desc="委托规则"/>
+			<field name="ruleType" type="C" desc="规则应用类型"/>
+			<field name="subRuleType" type="C" desc="中标规则类型"/>
+			<field name="ruleContent" type="C" desc="规则内容"/>
+			<field name="createIsHide" type="C" desc="是否隐藏评估机构"/>
+			<field name="companyList" type="E" desc="评估机构列表">
+				<field name="cityId" type="C" desc="城市id"/>
+				<field name="shortName" type="C" desc="评估机构简称"/>
+				<field name="custFxtCompanyId" type="C" desc="评估机构id"/>
+				<field name="companyLogo" type="C" desc="评估机构logo"/>
+			</field>
+		</body>
+	</rcv>
+</trans>

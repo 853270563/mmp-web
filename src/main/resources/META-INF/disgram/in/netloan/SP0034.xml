@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0034" excode="EmergContact_APP01" desc="紧急联系人信息修改接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="emerg_contact" type="E" desc="紧急联系人">
+				<field name="emerg_contact_name" length="50" type="C" desc="姓名" />
+				<field name="emerg_contact_code" length="32" type="C" desc="紧急联系人编号" />
+				<field name="emerg_contact_relate" length="32" type="C" desc="与借款人关系"/>
+				<field name="emerg_contact_phone" length="15" type="C" desc="手机号码"/>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果" />
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

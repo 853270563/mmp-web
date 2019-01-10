@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/changeTotalAmountStatus" desc="总量授信合同的状态变更">
+	<snd>
+		<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="授信总量合同编号" required="true" target="total_amount_contract_no"/>
+		<field name="CHANGE_MODE" desc="变更方式" required="true" target="change_mode" comment="1：冻结 2：恢复 3：终止 4：注销"/>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+		<field name="CHECK_USER_NO" desc="复核人员" target="check_user_no"/>
+		<field name="REASON" desc="原因" target="reason"/>
+		<field name="LIST" type="E" desc="影像列表"  target="imagelist">
+				<field name="FILE_CN_NAME" desc="文件名称"   target="image_ext"/>
+				<field name="BUSI_FILE_TYPE" desc="文件类型" target="image_type"/>
+				<field name="BATCH_ID" desc="影像批次号" target="image_path"/>
+				<field name="BUSI_START_DATE" desc="开始日期" comment="yyyyMMdd"  target="image_flag"/>
+			</field>
+	</snd>
+	<rcv>
+		<field name="CONTRACT_STATUS" desc="合同状态" target="status" comment="0：正常 1：冻结 2：终止  3：到期 4注销"/>
+	</rcv>
+</trans>

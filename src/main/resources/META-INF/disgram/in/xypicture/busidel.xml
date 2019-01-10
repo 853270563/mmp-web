@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/busidel" desc="业务影像删除">
+	<snd>
+		<field name="TASK_ID" desc="TASK_ID" required="true" />
+		<field name="BUSI_FILE_SCANUSER" desc="文件扫描人" />
+		<field name="BUSI_FILE_PAGENUM" desc="文件页码"/>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" />
+		<field name="FILE_CN_NAME" desc="文件名称" />
+		<field name="BATCH_ID" desc="影像批次号" required="true" />
+		<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"/>
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

@@ -13,6 +13,8 @@ public class CharsetUtil {
 
 	/**
 	 * 判断是否GBK编码
+	 * 
+	 * @return
 	 */
 	public static boolean isCnZHString(String str) {
 		if (str == null || str.trim().length() == 0) {
@@ -29,6 +31,8 @@ public class CharsetUtil {
 
 	/**
 	 * 判断是否全部能被BIG5 编码的字符串
+	 * 
+	 * @return
 	 */
 	public static boolean isCnHKString(String str) {
 		if (str == null || str.trim().length() == 0) {

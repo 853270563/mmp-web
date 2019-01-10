@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="JJK_TRAN_CARD_EXT">
+
+	<!-- 动�?查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.JJK_TRAN_CARD T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.TRANS_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.TRANS_ID) CNT 
+			FROM ${schema.interPlat}.JJK_TRAN_CARD T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="TRANS_ID" type="pre" resultClass="string">
+			select to_char(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_JJK_TRAN_CARD.nextval from dual
+		</selectKey>
+		INSERT INTO ${schema.interPlat}.JJK_TRAN_CARD
+		( TRANS_ID,SIGN_TYPE,CARD_TYPE,CARD_NO,INPU_TYPE,CERT_TYPE,CERT_NO,CERT_ORGAN,CERT_STAR_DATE,CERT_END_DATE,CUST_NAME,CUST_PINX,CUST_PINM,CUST_SEX,CUST_BORN,CUST_ADDR_HOME,CUST_ADDR_WORK,CUST_MOBI_PHONE,CUST_TELE_PHONE,CUST_NATI,CUST_JOB,BANK_KZHY,BANK_YBTH,FLAG_STAT,FLAG_PWD_ENVE,CUST_POST,CUST_EMAIL,FLAG_OVER,ENSU_TYPE,ENSU_NO,OVER_AMT,MODI_PWD_TYPE,CARD_CONT,CARD_TRAC2,CARD_TRAC3,VOUC_NO,VOUC_TYPE,VOUC_BANO,VOUC_SENO,FLAG_SIGN_EBANK,FLAG_SIGN_MBANK,FLAG_SIGN_SBANK,FLAG_SIGN_DEPO,FLAG_SIGN_RES1,FLAG_SIGN_RES2,TOKEN_TYPE,TOKEN_NO,SIGN_ORGAN,SIGN_USER,SIGN_DEVI_TYPE,SIGN_DEVI_NO,SIGN_TIME,SIGN_GPS,SIGN_STATE,SIGN_APPR_MARK,DECA_RES1,DECA_RES2,DECA_RES3,CHK_ID,CHK_TIME ) 
+		VALUES ( #TRANS_ID#,#SIGN_TYPE#,#CARD_TYPE#,#CARD_NO#,#INPU_TYPE#,#CERT_TYPE#,#CERT_NO#,#CERT_ORGAN#,#CERT_STAR_DATE#,#CERT_END_DATE#,#CUST_NAME#,#CUST_PINX#,#CUST_PINM#,#CUST_SEX#,#CUST_BORN#,#CUST_ADDR_HOME#,#CUST_ADDR_WORK#,#CUST_MOBI_PHONE#,#CUST_TELE_PHONE#,#CUST_NATI#,#CUST_JOB#,#BANK_KZHY#,#BANK_YBTH#,#FLAG_STAT#,#FLAG_PWD_ENVE#,#CUST_POST#,#CUST_EMAIL#,#FLAG_OVER#,#ENSU_TYPE#,#ENSU_NO#,#OVER_AMT#,#MODI_PWD_TYPE#,#CARD_CONT#,#CARD_TRAC2#,#CARD_TRAC3#,#VOUC_NO#,#VOUC_TYPE#,#VOUC_BANO#,#VOUC_SENO#,#FLAG_SIGN_EBANK#,#FLAG_SIGN_MBANK#,#FLAG_SIGN_SBANK#,#FLAG_SIGN_DEPO#,#FLAG_SIGN_RES1#,#FLAG_SIGN_RES2#,#TOKEN_TYPE#,#TOKEN_NO#,#SIGN_ORGAN#,#SIGN_USER#,#SIGN_DEVI_TYPE#,#SIGN_DEVI_NO#,current timestamp,#SIGN_GPS#,#SIGN_STATE#,#SIGN_APPR_MARK#,#DECA_RES1#,#DECA_RES2#,#DECA_RES3#,#CHK_ID#,#CHK_TIME#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.JJK_TRAN_CARD ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="TRANS_ID" prepend=","><![CDATA[ TRANS_ID = #TRANS_ID# ]]></isNotNull>
+			<isNotNull property="SIGN_TYPE" prepend=","><![CDATA[ SIGN_TYPE = #SIGN_TYPE# ]]></isNotNull>
+			<isNotNull property="CARD_TYPE" prepend=","><![CDATA[ CARD_TYPE = #CARD_TYPE# ]]></isNotNull>
+			<isNotNull property="CARD_NO" prepend=","><![CDATA[ CARD_NO = #CARD_NO# ]]></isNotNull>
+			<isNotNull property="INPU_TYPE" prepend=","><![CDATA[ INPU_TYPE = #INPU_TYPE# ]]></isNotNull>
+			<isNotNull property="CERT_TYPE" prepend=","><![CDATA[ CERT_TYPE = #CERT_TYPE# ]]></isNotNull>
+			<isNotNull property="CERT_NO" prepend=","><![CDATA[ CERT_NO = #CERT_NO# ]]></isNotNull>
+			<isNotNull property="CERT_ORGAN" prepend=","><![CDATA[ CERT_ORGAN = #CERT_ORGAN# ]]></isNotNull>
+			<isNotNull property="CERT_STAR_DATE" prepend=","><![CDATA[ CERT_STAR_DATE = #CERT_STAR_DATE# ]]></isNotNull>
+			<isNotNull property="CERT_END_DATE" prepend=","><![CDATA[ CERT_END_DATE = #CERT_END_DATE# ]]></isNotNull>
+			<isNotNull property="CUST_NAME" prepend=","><![CDATA[ CUST_NAME = #CUST_NAME# ]]></isNotNull>
+			<isNotNull property="CUST_PINX" prepend=","><![CDATA[ CUST_PINX = #CUST_PINX# ]]></isNotNull>
+			<isNotNull property="CUST_PINM" prepend=","><![CDATA[ CUST_PINM = #CUST_PINM# ]]></isNotNull>
+			<isNotNull property="CUST_SEX" prepend=","><![CDATA[ CUST_SEX = #CUST_SEX# ]]></isNotNull>
+			<isNotNull property="CUST_BORN" prepend=","><![CDATA[ CUST_BORN = #CUST_BORN# ]]></isNotNull>
+			<isNotNull property="CUST_ADDR_HOME" prepend=","><![CDATA[ CUST_ADDR_HOME = #CUST_ADDR_HOME# ]]></isNotNull>
+			<isNotNull property="CUST_ADDR_WORK" prepend=","><![CDATA[ CUST_ADDR_WORK = #CUST_ADDR_WORK# ]]></isNotNull>
+			<isNotNull property="CUST_MOBI_PHONE" prepend=","><![CDATA[ CUST_MOBI_PHONE = #CUST_MOBI_PHONE# ]]></isNotNull>
+			<isNotNull property="CUST_TELE_PHONE" prepend=","><![CDATA[ CUST_TELE_PHONE = #CUST_TELE_PHONE# ]]></isNotNull>
+			<isNotNull property="CUST_NATI" prepend=","><![CDATA[ CUST_NATI = #CUST_NATI# ]]></isNotNull>
+			<isNotNull property="CUST_JOB" prepend=","><![CDATA[ CUST_JOB = #CUST_JOB# ]]></isNotNull>
+			<isNotNull property="BANK_KZHY" prepend=","><![CDATA[ BANK_KZHY = #BANK_KZHY# ]]></isNotNull>
+			<isNotNull property="BANK_YBTH" prepend=","><![CDATA[ BANK_YBTH = #BANK_YBTH# ]]></isNotNull>
+			<isNotNull property="FLAG_STAT" prepend=","><![CDATA[ FLAG_STAT = #FLAG_STAT# ]]></isNotNull>
+			<isNotNull property="FLAG_PWD_ENVE" prepend=","><![CDATA[ FLAG_PWD_ENVE = #FLAG_PWD_ENVE# ]]></isNotNull>
+			<isNotNull property="CUST_POST" prepend=","><![CDATA[ CUST_POST = #CUST_POST# ]]></isNotNull>
+			<isNotNull property="CUST_EMAIL" prepend=","><![CDATA[ CUST_EMAIL = #CUST_EMAIL# ]]></isNotNull>
+			<isNotNull property="FLAG_OVER" prepend=","><![CDATA[ FLAG_OVER = #FLAG_OVER# ]]></isNotNull>
+			<isNotNull property="ENSU_TYPE" prepend=","><![CDATA[ ENSU_TYPE = #ENSU_TYPE# ]]></isNotNull>
+			<isNotNull property="ENSU_NO" prepend=","><![CDATA[ ENSU_NO = #ENSU_NO# ]]></isNotNull>
+			<isNotNull property="OVER_AMT" prepend=","><![CDATA[ OVER_AMT = #OVER_AMT# ]]></isNotNull>
+			<isNotNull property="MODI_PWD_TYPE" prepend=","><![CDATA[ MODI_PWD_TYPE = #MODI_PWD_TYPE# ]]></isNotNull>
+			<isNotNull property="CARD_CONT" prepend=","><![CDATA[ CARD_CONT = #CARD_CONT# ]]></isNotNull>
+			<isNotNull property="CARD_TRAC2" prepend=","><![CDATA[ CARD_TRAC2 = #CARD_TRAC2# ]]></isNotNull>
+			<isNotNull property="CARD_TRAC3" prepend=","><![CDATA[ CARD_TRAC3 = #CARD_TRAC3# ]]></isNotNull>
+			<isNotNull property="VOUC_NO" prepend=","><![CDATA[ VOUC_NO = #VOUC_NO# ]]></isNotNull>
+			<isNotNull property="VOUC_TYPE" prepend=","><![CDATA[ VOUC_TYPE = #VOUC_TYPE# ]]></isNotNull>
+			<isNotNull property="VOUC_BANO" prepend=","><![CDATA[ VOUC_BANO = #VOUC_BANO# ]]></isNotNull>
+			<isNotNull property="VOUC_SENO" prepend=","><![CDATA[ VOUC_SENO = #VOUC_SENO# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_EBANK" prepend=","><![CDATA[ FLAG_SIGN_EBANK = #FLAG_SIGN_EBANK# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_MBANK" prepend=","><![CDATA[ FLAG_SIGN_MBANK = #FLAG_SIGN_MBANK# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_SBANK" prepend=","><![CDATA[ FLAG_SIGN_SBANK = #FLAG_SIGN_SBANK# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_DEPO" prepend=","><![CDATA[ FLAG_SIGN_DEPO = #FLAG_SIGN_DEPO# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_RES1" prepend=","><![CDATA[ FLAG_SIGN_RES1 = #FLAG_SIGN_RES1# ]]></isNotNull>
+			<isNotNull property="FLAG_SIGN_RES2" prepend=","><![CDATA[ FLAG_SIGN_RES2 = #FLAG_SIGN_RES2# ]]></isNotNull>
+			<isNotNull property="TOKEN_TYPE" prepend=","><![CDATA[ TOKEN_TYPE = #TOKEN_TYPE# ]]></isNotNull>
+			<isNotNull property="TOKEN_NO" prepend=","><![CDATA[ TOKEN_NO = #TOKEN_NO# ]]></isNotNull>
+			<isNotNull property="SIGN_ORGAN" prepend=","><![CDATA[ SIGN_ORGAN = #SIGN_ORGAN# ]]></isNotNull>
+			<isNotNull property="SIGN_USER" prepend=","><![CDATA[ SIGN_USER = #SIGN_USER# ]]></isNotNull>
+			<isNotNull property="SIGN_DEVI_TYPE" prepend=","><![CDATA[ SIGN_DEVI_TYPE = #SIGN_DEVI_TYPE# ]]></isNotNull>
+			<isNotNull property="SIGN_DEVI_NO" prepend=","><![CDATA[ SIGN_DEVI_NO = #SIGN_DEVI_NO# ]]></isNotNull>
+			<isNotNull property="SIGN_TIME" prepend=","><![CDATA[ SIGN_TIME = #SIGN_TIME# ]]></isNotNull>
+			<isNotNull property="SIGN_GPS" prepend=","><![CDATA[ SIGN_GPS = #SIGN_GPS# ]]></isNotNull>
+			<isNotNull property="SIGN_STATE" prepend=","><![CDATA[ SIGN_STATE = #SIGN_STATE# ]]></isNotNull>
+			<isNotNull property="SIGN_APPR_MARK" prepend=","><![CDATA[ SIGN_APPR_MARK = #SIGN_APPR_MARK# ]]></isNotNull>
+			<isNotNull property="DECA_RES1" prepend=","><![CDATA[ DECA_RES1 = #DECA_RES1# ]]></isNotNull>
+			<isNotNull property="DECA_RES2" prepend=","><![CDATA[ DECA_RES2 = #DECA_RES2# ]]></isNotNull>
+			<isNotNull property="DECA_RES3" prepend=","><![CDATA[ DECA_RES3 = #DECA_RES3# ]]></isNotNull>
+			<isNotNull property="CHK_ID" prepend=","><![CDATA[ CHK_ID = #CHK_ID# ]]></isNotNull>
+			<isNotNull property="CHK_TIME" prepend=","><![CDATA[ CHK_TIME = #CHK_TIME# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where TRANS_ID = #TRANS_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.JJK_TRAN_CARD where TRANS_ID = #TRANS_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

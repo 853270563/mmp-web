@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0022" excode="Track_APP04" desc="代办任务列表">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="house_name" length="80" type="C" desc="房产名称" required="false"/>             
+			<field name="borrower_name" length="80" type="C" desc="客户姓名" required="false"/>              
+			<field name="borrower_phone" length="15" type="C" desc="手机号码" required="false"/>             
+			<field name="apply_time_start" length="20" type="C" desc="申请时间起" required="false"/>             
+			<field name="apply_time_end" length="20" type="C" desc="申请时间止" required="false"/> 
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="list" type="E" desc="列表">             
+				<field name="borrower_name" length="50" type="C" desc="客户姓名"/>              
+				<field name="borrower_phone" length="15" type="C" desc="手机号"/>              
+				<field name="in_time" length="20" type="C" desc="进入时间"/>             
+				<field name="apply_time" length="20" type="C" desc="申请时间"/>             
+				<field name="bar_code" length="32" type="C" desc="条码号"/>
+				<field name="task_type" length="100" type="C" desc="任务类型"/>             
+				<field name="is_refund" length="2" type="C" desc="是否可退单"/>              
+				<field name="lastrefund_manager_code" length="32" type="C" desc="最后一次退单客户经理号"/>
+				<field name="state" length="2" type="C" desc="任务状态-00：待完善；01：待核验；02：待复核；03：重新核验；04：已完成"/>
+				<field name="borrower_type" length="10" type="C" desc="客户类型-01:新客户，02：存量客户，03：新增加抵押物"/>
+				<field name="frist_apply_id" length="100" type="C" desc="影像BAR_CODE（存量客户用）"/>
+				<field name="frist_apply_time" length="100" type="C" desc="影像APPLY_TIME（存量客户用）"/>
+				<field name="house_list" type="E" desc="房屋列表">
+				    <field name="house_address_pro" length="10" type="C" desc="房产地址-省"/>               
+					<field name="house_address_city" length="10" type="C" desc="房产地址-市"/>               
+					<field name="house_address_county" length="10" type="C" desc="房产地址-区"/>               
+					<field name="address_detail" length="2000" type="C" desc="房产地址"/>
+					<field name="community_x" length="18" type="C" desc="小区经度"/>              
+					<field name="community_y" length="18" type="C" desc="小区纬度"/>
+				</field> 
+			</field>  
+		</body>
+	</rcv>
+</trans>

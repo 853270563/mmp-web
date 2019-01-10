@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MGG_TRIGGER_RELATION">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="AND" property="OPERATE_IDS">
+		T.OPERATE_ID in 
+		<iterate property="OPERATE_IDS" conjunction="," close=")" open="(" >
+			#OPERATE_IDS[]#
+		</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="OPERATE_DATE">
+		 	<![CDATA[to_date(T.OPERATE_DATE,'yyyy-MM-dd HH24:mi:ss')>to_date(#OPERATE_DATE#,'yyyy-MM-dd HH24:mi:ss')]]>
+		</isNotEmpty>
+	</sql>
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MGG_TRIGGER_RELATION T 
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.OPERATE_ID
+	</select> 
+	
+</sqlMap>

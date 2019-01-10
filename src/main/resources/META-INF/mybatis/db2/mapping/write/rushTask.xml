@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rushTask">
+
+<sql id="BaseColumnList">
+        TASK_ID,TIMEOUT_TIME,CUSTMOER_NAME,
+        HOURSE_ADDR,to_char(RUSH_TIME,'yyyy-mm-dd hh24:mi:ss') RUSH_TIME,WORK_NUMBER,IS_TIMEOUT,PHONE,CUSTMOER_TYPE,BUSI_START_DATE,
+        FIRST_APPLY_ID,FIRST_APPLY_TIME
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{TASK_ID},#{TIMEOUT_TIME},#{CUSTMOER_NAME},
+        #{HOURSE_ADDR},#{RUSH_TIME},#{WORK_NUMBER},#{IS_TIMEOUT},#{PHONE},#{CUSTMOER_TYPE},#{BUSI_START_DATE}
+        ,#{FIRST_APPLY_ID},#{FIRST_APPLY_TIME}
+    </sql>
+    <sql id="WhereClause4Id">
+        <where>
+            TASK_ID = #{TASK_ID}
+        </where>
+    </sql>
+     <sql id="TableClause"> ${schema.busiPlat}.TIMEOUT_TASK </sql>
+     <insert id="insert" parameterType="map">
+		        insert into
+		        <include refid="TableClause"/>
+		        (
+		         TASK_ID,TIMEOUT_TIME,CUSTMOER_NAME,
+        HOURSE_ADDR, RUSH_TIME,WORK_NUMBER,IS_TIMEOUT,PHONE,CUSTMOER_TYPE,BUSI_START_DATE,
+        FIRST_APPLY_ID,FIRST_APPLY_TIME
+		        ) values (
+		        <include refid="BaseColumnValueList"/>
+		        )
+		    </insert>
+	   <select id="qry" resultType="map">
+		    select 
+		     <include refid="BaseColumnList" />
+		     from 
+		      <include refid="TableClause" />
+		       <where>
+		       IS_TIMEOUT='1'
+		       and  DEL_FLAG='0'
+		        	   <if test="WORK_NUMBER!=null and WORK_NUMBER!=''">
+		        	   and
+		        	   WORK_NUMBER=#{WORK_NUMBER}</if>
+		        	   <if test="CUSTMOER_NAME!=null and CUSTMOER_NAME!=''">
+		        	   and
+		        	   CUSTMOER_NAME like '%'||#{CUSTMOER_NAME}||'%'</if>
+		        	   <if test="TIMEOUT_TIME!=null and TIMEOUT_TIME!=''">
+		        	   and
+		        	   TIMEOUT_TIME =#{TIMEOUT_TIME}</if>
+		        </where>
+		        order by to_number(TIMEOUT_TIME) desc
+        </select>
+        <!-- 遍历任务 -->
+      <select id="qryTimeOut" resultType="map">
+			    select RUSH_TIME,TASK_ID from 
+			      <include refid="TableClause" />
+			       <where>
+			        		IS_TIMEOUT=#{IS_TIMEOUT}
+			        </where>
+    </select>
+    <!-- 标记为超时 -->
+     <update id="updateById" parameterType="map">
+        update <include refid="TableClause" />
+        <set>
+       IS_TIMEOUT='1',
+       TIMEOUT_TIME=#{TIMEOUT_TIME}
+        </set> <include refid="WhereClause4Id" />
+    </update>
+
+    <delete id="delete">
+     update <include refid="TableClause" />
+        <set>
+       DEL_FLAG='1'
+        </set> <include refid="WhereClause4Id" />
+    </delete>
+   <select id="count" resultType="int">
+  	 select count(TASK_ID) from <include refid="TableClause" /> <include refid="WhereClause4Id" />
+   </select>
+   
+   <select id="qryByDirect" resultType="map">
+		    select 
+		     <include refid="BaseColumnList" />
+		     from 
+		      <include refid="TableClause" />
+		       <where>
+		       IS_TIMEOUT='1'
+		       and  DEL_FLAG='0'
+		        	   <if test="CUSTMOER_NAME!=null and CUSTMOER_NAME!=''">
+		        	   and
+		        	   CUSTMOER_NAME like '%'||#{CUSTMOER_NAME}||'%'</if>
+		        	   <if test="TIMEOUT_TIME!=null and TIMEOUT_TIME!=''">
+		        	   and
+		        	   TIMEOUT_TIME =#{TIMEOUT_TIME}</if>
+		        	    <if test="WORK_NUMBER!=null and WORK_NUMBER!=''">
+		        	   and
+		        	   WORK_NUMBER in 
+		        	   (select m.NO from ${schema.configPlat}.SYS_USER m inner join ${schema.configPlat}.DIRECT_MANAGE_RELACTION dm on dm.MANAGE_ID= m.id and DIRECT_ID = (select u.id from ${schema.configPlat}.SYS_USER u where u.no=#{WORK_NUMBER}))</if>
+		        </where>
+		        order by to_number(TIMEOUT_TIME) desc
+        </select>
+</mapper>

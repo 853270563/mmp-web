@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MGG_CUST_INFO">
+
+	<!-- 查找身份信息 -->
+	<select id="selectId" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+	    <![CDATA[
+	        SELECT M_NAME,SEX,NATION,BIRTH,ADDRESS,IDCARD,ISSUE,VALIDITY,VOUCHER_NO,SERIAL_NO,PICTURE 
+	         FROM ${schema.configPlat}.MGG_CUST_INFO WHERE VOUCHER_NO = #VOUCHER_NO#  and IDCARD=#IDCARD#
+	    ]]>
+	    
+	    <isNotEmpty prepend="and" property="SERIAL_NO">
+			SERIAL_NO = #SERIAL_NO#
+		</isNotEmpty>
+	</select>
+		
+	 	<!-- 查询身份证信息 -->
+     <select id="findIdCardMessage" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			select * from ${schema.configPlat}.MGG_CUST_INFO m where  m.IDCARD = #IDCARD# and m.VOUCHER_NO = #VOUCHER_NO#
+		]]>
+	</select>
+	
+	 	<!-- 将预警信息插入数据库-->
+     <insert id="insertMessage" parameterClass="map">
+   		<selectKey  resultClass="String" keyProperty="CAUTION_ID">
+			SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') || ${schema.interPlat}.SEQ_CAUTION.nextval from DUAL
+		</selectKey>
+	    <![CDATA[
+		INSERT INTO ${schema.interPlat}.CAUTION
+			(CAUTION_ID,OPER_SUB_BRANCH_ID,QUERY_MSG,QUEUE_NO,INFO_TYPE,REMARK,REMARK2,REMARK3,REMARK4,IPAD_TYPE) 
+		VALUES (#CAUTION_ID#,#OPER_SUB_BRANCH_ID#,#QUERY_MSG#,#QUEUE_NO#,#INFO_TYPE#,#REMARK#,#REMARK2#,#REMARK3#,#REMARK4#,#IPAD_TYPE#) 
+		]]>
+	</insert>
+	
+	 	<!-- 查询预警信息数据 -->
+     <select id="findCautionMessage" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			select * from ${schema.interPlat}.CAUTION m where
+					 m.IPAD_TYPE = #IPAD_TYPE# and m.OPER_SUB_BRANCH_ID = #OPER_SUB_BRANCH_ID# 
+		]]>
+	</select>
+	
+		 <!-- 查询预警信息数据 -->
+     <select id="findMessageForPD" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			select * from ${schema.interPlat}.CAUTION m where m.IPAD_TYPE = #IPAD_TYPE# and
+				m.OPER_SUB_BRANCH_ID = #OPER_SUB_BRANCH_ID#
+		]]>
+	</select>
+	
+	<!-- 修改预警信息数据 -->
+	<update id="updateCautionMessage" parameterClass="map" >
+		 update ${schema.interPlat}.CAUTION m set m.IPAD_TYPE = #type# where m.IPAD_TYPE = #IPAD_TYPE#
+		 	and m.OPER_SUB_BRANCH_ID = #OPER_SUB_BRANCH_ID#
+	</update>
+	
+	<!-- 查询成功的业务 -->
+	<select id="selectOpenCard" parameterClass="map">
+		  select trans_id,
+		         case sign_type
+		           when '1' then
+		            '开卡'
+		           when '2' then
+		            '开卡签约'
+		           when '3' then
+		            '签约'
+		           when '4' then
+		            '密码重置'
+		         end as sign_type,
+		         cust_name,
+		         '身份证' as cert_type,
+		         cert_no,
+		         card_no,
+		         cust_mobi_phone,
+		         sign_appr_mark,
+		         to_char(sign_time, 'yyyy-mm-dd hh24:mi:ss') as TRANS_DATE,
+		         sign_organ,
+		         sign_user
+		    from ${schema.interPlat}.JJK_TRAN_CARD sign_type
+		   where sign_state = '6'
+		     and sign_user = #sign_user#
+		     and sign_time = to_date(#sign_time#, 'yyyymmdd')
+		  union all
+		  select remove_id as trans_id,
+		         '卡作废' as sign_type， '' as cust_name,
+		         '' as cert_type,
+		         '' as cert_no,
+		         start_num || '-' || end_num as card_no,
+		         '' as cust_mobi_phone,
+		         msg_info as sign_appr_mark,
+		         TRANS_DATE,
+		         sign_organ,
+		         cust_name as sign_user
+		    from ${schema.configPlat}.manualremove
+		   where return_status = '6'
+		     and cust_name = #sign_user#
+		     and substr(trans_date, 1, 10) = #sign_time#
+	</select>
+	
+</sqlMap>

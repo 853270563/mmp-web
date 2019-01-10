@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="houseQuery.flw" desc="房号列表检索">
+  <nodes>
+    <node id="01263a38-1dc8-4b86-91dc-57c9c7064941" xPos="430" yPos="280" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/houseQuery" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

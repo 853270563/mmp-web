@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<title>服务调试工具</title>
+<link rel="stylesheet" href="css/all.css">
+<script src="js/jquery-1.8.2.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/plus.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/module.js"></script>
+<script src="js/juicer-min.js"></script>
+<script src="js/test-case.js"></script>
+<style type="text/css">
+body {
+	background: #eee;
+}
+input{
+	padding-left:4px;
+	line-height: 25px;
+}
+H1{
+	font-size:16px;
+} 
+.hiden{
+	display:none;
+}
+#TRAN_AREA button{
+	width: 100%;
+	text-align:left;
+	padding: 4px 4px;
+	overflow-x: hidden;
+	text-overflow :ellipsis ;
+	border: 1px solid #cacccd;
+	font-weight: 100;
+}
+.container{
+	display:-moz-box; display:-webkit-box; display:box;
+}
+.left-menus{
+	width:200px;
+	margin-left:5px;
+	margin-right:10px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	
+}
+.main-area{
+	-moz-box-flex:1; -webkit-box-flex:1; box-flex:1;
+}
+button.selected{
+	border: 1px solid #09a991;
+	background: #0790DF;
+	color: #fff !important;
+} 
+.form *{
+     line-height: 25px;
+     text-valign: middle;
+}
+.label{
+	min-width:150px;
+	display:inline-block;
+}
+.label2{
+	min-width:200px;
+	display:inline-block;
+}
+#imgCode{
+	width:100;
+	height:40px;
+}
+.list,.list2{
+	padding-left:20px;
+	background-color: #f8f8f8;
+}
+.list {
+	padding:10px;
+	border-bottom: 1px solid #ccc;
+}
+.btn-s{
+	color:#fff;
+	background-color: #060;
+	padding:2px 5px;
+	display:inline-block;
+}
+
+.red{
+	color: red;
+
+}
+</style>
+</head>
+<body>
+	<div id="TEST_PANEL" align="center">
+		<div id="group" align="left" style="padding: 10px 0px 0px 10px;"> 
+			<div class="group-menus">
+				<ul class="group trans_model" data-name="MODO_TYPE"
+					data-group="MODO_TYPE" data-label="模塊">
+					<li data-value="PP" class="selected">全部服务</li>
+					<li data-value="PP00">00 基础服务</li>
+				
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div class="container" align="left" style="min-width: 1024px;">
+			<div id="TRAN_AREA" class="left-menus" align="center"></div>
+			<div class="main-area">
+				<div align="left">
+					<b>交易路径:</b><input id="TRAN_URL" type="text" size="40" value=""
+						placeholder="请选择交易">&nbsp;&nbsp;
+					<button onclick="test()">測試</button>
+					<button onclick="query()" title="查找交易">查找</button>
+					<button onclick="clean()" title="清理响应">清理</button>
+					<img id="imgCode" src="../common/ImageCode.do?token=0" onclick="refreshCode()">
+				</div>
+				<hr>
+				<div align="left">
+					<b>测试场景:</b> 
+					<select id="fileName" style="width:255px" title="输入保存的名称">
+						<option value="">请选择测试场景及顺序号</option>
+						<option value="YYM/001">[YYM/001]场景描述。。。</option>
+					</select>&nbsp;
+					<button onclick="save()">保存</button>
+					<b>历史数据:</b> 
+					<select id="testData" onchange="showData(this)"></select>
+				</div>
+				<hr>
+				<div align="left">
+					<h1>交易请求</h1>
+					<div id="REQ_FORM" class="bg01"></div>
+					<table>
+						<tr>
+							<th align="left"><b>请求报文</b></th>
+							<th align="left"><b>响应报文</b></th>
+						</tr>
+						<tr>
+							<td><textarea id="REQ_DATA" rows="10" cols="60">{"ORG_PAR_ID":""}</textarea></td>
+							<td><textarea id="RSP_DATA" rows="10" cols="60"></textarea></td>
+						</tr>
+					</table>
+					<h1>交易响应</h1>
+					<div id="RSP_FORM" class="bg01"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	/**
+	 * 請在此處設置會話創建時需要的客戶號及登錄號
+	 */
+	var ctx = "";
+
+	function showTimeOut() {
+		alert("session time out");
+	}
+	function userShotOff() {
+		alert("当前用户已在其他设备上登录");
+	}
+
+	// 更新图片
+	function refreshCode() {
+		var imgCode = document.getElementById("imgCode");
+		var data={"r":new Date().getTime()};
+		imgCode.src = juicer("../common/ImageCode.do?r=${r}",data);
+	}
+
+	var showRspDefines = document.getElementById("showRspDefines");
+	var lastBtn = null;
+
+	function loadForm(obj) {
+		if (lastBtn) {
+			$(lastBtn).removeClass("selected");
+		}
+		lastBtn = obj;
+		var trans = $(obj).addClass("selected");
+		$("#TRAN_URL").val(trans.attr("data-url"));
+		var transConfPath = trans.attr("data-path");
+		$("#RSP_DATA").val("");
+		$("#RSP_FORM").html("");
+		$("#REQ_FORM").html("");
+		$("#REQ_DATA").val("{}");
+		if (transConfPath == "") {
+			$("#REQ_FORM").html("*************无报文定义***************");
+			return;
+		}
+		var url = "../test/transConf.do";
+		var data = {
+			"fullTransId" : transConfPath
+		};
+		var ajax = new TransAjax();
+		ajax.sendPostData(url, JsonToStr(data), function(rpdata) {
+			var data = {
+				conf : rpdata
+			};
+			var formTpl = $("#formTpl").html();
+			var html = juicer(formTpl, data);
+			html = html.replace(/null/g, "");
+			$("#REQ_FORM").html(html);
+
+			var rspTpl = $("#rspTpl").html();
+			html = juicer(rspTpl, data);
+			$("#RSP_FORM").html(html);
+			try {
+				afterLoadTransConf();
+			} catch (e) {
+				alert(e);
+			}
+		});
+		loadTestData();
+	}
+
+	function afterLoadTransConf() {
+		var form = $("#form");
+		var reqData = $("#REQ_DATA");
+		$(".formInput").bind("keyup", function() {
+			initFormJson(form, reqData);
+		});
+		initFormJson(form, reqData);
+	}
+
+	function initFormJson(form, reqData) {
+		var str = JsonToStr(getFormJson(form, {
+			
+		}), "\n ");
+		reqData.val(str);
+	}
+
+	function clean() {
+		$("#RSP_DATA").val("");
+	}
+
+	//var SESSION_TOKEN = "" + (new Date().getTime());
+	// 是否为登录交易
+	function needChangeLoginToken(url) {
+		return "../login/mobileLogin.do" == url;
+	}
+
+	function test() {
+		$("#RSP_DATA").val("");
+		var url = "../" + $("#TRAN_URL").val();
+		if (url.indexOf(".do") == -1) {
+			url += ".do";
+		}
+		var data = $("#REQ_DATA").val();
+		/* 	if (SESSION_TOKEN && SESSION_TOKEN.length > 1) {
+				data = data.replace(/\"SESSION_TOKEN\":\"\w+\"/g, '\"SESSION_TOKEN\":\"' + SESSION_TOKEN + '\"');
+			} */
+		var ajax = new TransAjax();
+		ajax.sendPostData(url, data, function(rpdata) {
+			//alert("-------test callback-----\n" + JsonToStr(rpdata));
+			/* // 更新会话标记
+			if (needChangeLoginToken(url) && rpdata.SESSION_TOKEN) {
+				SESSION_TOKEN = rpdata.SESSION_TOKEN;
+				console.log(" ，SESSION_TOKEN：" + SESSION_TOKEN);
+			} */
+			var rst = JsonToStr(rpdata, "\n ");//.replace(/\}/g, "}\n").replace(/\[/g, "[\n");
+			$("#RSP_DATA").val(rst);
+		});
+	}
+
+	//显示历史数据
+	function showData(o) {
+		var index = o.value;
+		var value = tempData[index];
+		var json = eval("(" + value + ")");
+		$("#REQ_DATA").val(JsonToStr(json, "\n "));
+		// 表单赋值
+		$(".formInput").each(function() {
+			var name = this.name;
+			var item = $(this);
+			var groupName = item.data("group");
+			if (groupName && groupName.length > 0) {
+				var list = json[groupName];
+				if (list && list.length > 0) {
+					$(this).val(list[0][name] || "");
+				}
+			} else {
+				$(this).val(json[name] || "");
+			}
+		});
+	}
+
+	function save() {
+		var data = $("#REQ_DATA").val();
+		var transCode = $("#TRAN_URL").val();
+		if (data == '' || transCode == '') {
+			alert("没有需要保存的信息");
+		}
+		var url = "../test/qdzhSave.do?transCode=" + transCode + "&fileName=" + $("#fileName").val();
+		var ajax = new TransAjax();
+		ajax.sendPostData(url, data, function(rpdata) {
+			if (rpdata.STATUS == "1") {
+				alert("保存成功！");
+				loadTestData();
+			} else {
+				alert(rpdata.MSG || "保存失败！");
+			}
+		});
+	}
+
+	function initFileName() {
+		var tpl = "{@each datas as item}<option value='${item.code}'>[${item.code}] ${item.desc}</option>{@/each}";
+		var html = juicer(tpl, {
+			datas : cases
+		});
+		$("#fileName").html(html);
+	}
+
+	//加载测试shuj
+	var tempData = [];
+	function loadTestData() {
+		tempData = [];
+		var transCode = $("#TRAN_URL").val();
+		var url = "../test/qdzhFind.do?transCode=" + transCode;
+		var ajax = new TransAjax();
+		ajax.sendPostData(url, "{}", function(rpdata) {
+			var list = rpdata.LIST;
+			var sb = [];
+			sb[sb.length] = "<option></option>";
+			for (var i = 0; i < list.length; i++) {
+				var map = list[i];
+				tempData[i] = map.CONTENT;
+				sb[sb.length] = '<option value='+i+' url='+map.URL+'>' + map.NAME + '</option>';
+			}
+			$("#testData").html(sb.join());
+		});
+
+	}
+
+	function stringLength(str) {
+		return str.replace(/[^\x00-\xff]/g, "**").length;
+	}
+
+	function addFormRow(obj) {
+		var container = $(obj).parent();
+		var divLists = container.find(".list");
+		if (divLists && divLists.length > 0) {
+			divLists.eq(0).clone(true).append(
+					"<label onclick='removeFormRow(this)' class='btn-s' title='删除行'>X</label>").appendTo(container);
+		}
+		var form = $("#form");
+		var reqData = $("#REQ_DATA");
+		initFormJson(form, reqData);
+	}
+
+	function removeFormRow(obj) {
+		$(obj).parent().remove();
+		var form = $("#form");
+		var reqData = $("#REQ_DATA");
+		initFormJson(form, reqData);
+	}
+
+	function query() {
+		var filter = $("#TRAN_URL").val();
+		var len2 = stringLength(filter);
+		if (filter.length == len2) {
+			loadMenus(null, filter, null);
+		} else {
+			loadMenus(null, null, filter);
+		}
+	}
+
+	$(function() {
+		initFileName();
+		var panel = $("#TEST_PANEL");
+		//加载模块
+		var area = panel.find("ul.trans_model");
+		generyModules(area);
+		//加载菜单
+		var group = panel.find("ul.trans_model>li");
+		group.each(function(index) {
+			$(this).bind("click", function() {
+				$(this).parent().find("li").removeClass("selected");
+				$(this).addClass("selected");
+				var model = $(this).attr("data-value");
+				loadMenus(model);
+			});
+		});
+		if (menus.length < 20) {
+			group.eq(0).click();
+		} else {
+			group.eq(1).click();
+		}
+
+		window.onresize = function() {
+			resetMenus();
+		}
+		function resetMenus() {
+			var wh = $(window).height();
+			var gh = $("#group").height();
+			$('#TRAN_AREA').height(wh - gh);
+		}
+		resetMenus();
+	});
+</script>
+
+<script type="text/juicer" id="formTpl">
+	<div id="form" class="form">
+	<div><b>接口名称：${conf.name } <br>接口描述：${conf.desc } </b></div>
+		{@each conf.req as item}
+		<div>
+	
+			<label class="label">${item.desc}</label> 
+			<label class="label">[${item.name}]:</label>
+			{@if item.type=="E"}
+				<label><b>列表结构</b></label>
+				<label onclick="addFormRow(this)" class="btn-s"><b>增加行</b></label>
+				<div data-group="${item.name}" class="list">
+						{@include "#subformTpl", item}
+				</div>
+			{@else if item.type=="M"}
+		 		<label><b>实体结构</b></label>
+				<div data-group="${item.name}" class="list">
+					{@include "#subformTpl", item}
+				</div>
+			{@else}
+
+				<label><input name="${item.name}" data-type="text" class="formInput" value="${item.defaultValue }"> </label>
+				<label >必需项[<font {@if item["required"] == true} color="red" {@/if}>${item["required"]}</font>]; 最大长度[${item.length }]; 备注[${item["comment"]}];</label>
+			{@/if}
+		</div>
+		{@/each}
+	</div>
+</script>
+<script type="text/juicer" id="subformTpl">
+	{@each children as item}
+		<div>
+			
+			<label class="label">${item.desc}</label> 
+			<label class="label">[${item.name}]:</label>
+			{@if item.type=="E"}
+				<label><b>列表结构</b></label>
+				<label onclick="addFormRow(this)" class="btn-s"><b>增加行</b></label>
+				<div data-group="${item.name}" class="list">
+						{@include "#subformTpl", item}
+				</div>
+			{@else if item.type=="M"}
+		 		<label><b>实体结构</b></label>
+				<div data-group="${item.name}" class="list">
+					{@include "#subformTpl", item}
+				</div>
+			{@else}
+
+				<label><input name="${item.name}" {@if type== "E" ||type== "M" } data-group="${name}" {@/if}  {@if type== "M" } data-map=true {@/if}
+				data-type="text" class="formInput" value="${item.defaultValue }"> </label>
+				<label >必需项[<font {@if item["required"] == true} color="red" {@/if}>${item["required"] }</font>]; 最大长度[${item.length }]; 备注[${item["comment"]}];</label>
+			{@/if}
+		</div>
+		{@/each}
+
+
+</script>
+<script type="text/juicer" id="subTpl">
+	{@each children as child}
+		{@if child.type=="E"}
+		  <div>
+			<label class="label">${child.desc}</label> 
+			<label class="label2">|--[${child.name}]:</label>
+			<label><b>++列表结构</b></label>
+		  </div>
+	 	<div class="list2">	{@include "#subTpl", child} </div>
+	    {@else if child.type=="M"}
+		  <div>
+			<label class="label">${child.desc}</label> 
+			<label class="label2">|--[${child.name}]:</label>
+			<label><b>++实体结构</b></label>
+		  </div>
+		<div class="list2">	{@include "#subTpl", child} </div>
+		{@else}
+		<div>
+			<label class="label">${child.desc} </label> 
+			<label class="label2">|--[${child.name}]:</label>
+			<label>最大长度[${child.length }]; 备注[${child["comment"]}];  </label>
+		</div>
+		{@/if}
+	{@/each}
+</script>
+<script type="text/juicer" id="rspTpl">
+	{@each conf.rsp as item}
+		{@if item.type=="E"}
+		  <div>
+			<label class="label">${item.desc}</label> 
+			<label class="label2">[${item.name}]:</label>
+			<label><b>列表结构</b></label>
+		  </div>
+          <div class="list2">{@include "#subTpl", item}</div>
+		{@else if item.type=="M"}
+		  <div>
+			<label class="label">${item.desc}</label> 
+			<label class="label2">[${item.name}]:</label>
+			<label><b>实体结构</b></label> 
+		  </div>
+          <div class="list2">{@include "#subTpl", item}</div>
+		{@else}
+		  <div>
+			<label class="label">${item.desc}</label> 
+			<label class="label2">[${item.name}]:</label>
+			<label>最大长度[${item.length }]; 备注[${item["comment"]}];  </label>
+		  </div>
+		{@/if}
+	{@/each}
+</script>
+</body>
+</html>

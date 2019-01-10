@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0052.flw" desc="房产调查信息提交接口">
+  <nodes>
+    <node id="c153bcb9-de75-4cb8-8a53-43aa3663f203" xPos="350" yPos="280" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0052" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="6d562bc5-dad4-4c26-b2df-57dff83b7aa0" xPos="350" yPos="410" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="timeOut/deleteTask" desc="嵌套流程路径,不含文件后缀"/>
+        <data key="TASK_ID" expr="${bar_code}" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="c153bcb9-de75-4cb8-8a53-43aa3663f203" to="6d562bc5-dad4-4c26-b2df-57dff83b7aa0"/>
+  </lines>
+</diagram>

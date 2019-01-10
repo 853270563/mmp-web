@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/image" excode="downloadImg/image" desc="获取图片">
+	<snd>
+		<body>
+			<field name="imgUrl" type="C" desc="图片路径" required="true"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+		</head>
+		<body>
+			<field name="base64" type="C" desc="图片base64"/>
+		</body>
+	</rcv>
+</trans>

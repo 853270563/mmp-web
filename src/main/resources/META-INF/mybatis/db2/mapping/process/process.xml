@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="process">
+<sql id="BaseColumnList">
+        PROCESS_INST_ID,PROCESS_TYPE,CURRENT_ACT,
+        START_USER_ID,BUSINESS_KEY,START_TIME,END_TIME,START_ORG_ID ,UPDATE_DATE  ,CREATE_DATE ,APPROVAL_STATE           
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{PROCESS_INST_ID},#{PROCESS_TYPE},#{CURRENT_ACT},
+        #{START_USER_ID},#{BUSINESS_KEY},#{START_TIME},#{END_TIME},#{START_ORG_ID},#{UPDATE_DATE},#{CREATE_DATE},#{APPROVAL_STATE}
+    </sql>
+     <sql id="TableClause"> ${schema.busiPlat}.PUSH_PROCESS_INST </sql>
+     <insert id="insert" parameterType="map">
+		        insert into
+		        <include refid="TableClause"/>
+		        (
+		        <include refid="BaseColumnList"/>
+		        ) values (
+		        <include refid="BaseColumnValueList"/>
+		        )
+		    </insert>
+		    <update id="update">
+			    update 
+			      <include refid="TableClause"/>
+			      <set>
+			      APPROVAL_STATE=#{APPROVAL_STATE}
+			      </set>
+			    <where>
+			    PROCESS_INST_ID= #{PROCESS_INST_ID}
+			    </where>
+		    </update>
+</mapper>

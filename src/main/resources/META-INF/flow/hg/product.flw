@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="product.flw" desc="我的产品">
+  <nodes>
+    <node id="5a608f61-9d5f-403b-8f78-9f018c84675a" xPos="290" yPos="90" Width="50" Height="50">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="7d746bd8-6ffe-43c9-9337-9b2bf839a4b0" xPos="290" yPos="180" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="product.querypropalist" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="7798f7a8-f590-4116-906f-125dbacb4b8c" xPos="290" yPos="260" Width="180" Height="40">
+      <desc>更改资源url</desc>
+      <beanId>changePropaFileUrlOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="84d10883-53c8-4f7e-88b5-678401cd2655" xPos="290" yPos="350" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="962be7f9-ad79-4529-9003-d429b6539e5b" xPos="290" yPos="450" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="5a608f61-9d5f-403b-8f78-9f018c84675a" to="7d746bd8-6ffe-43c9-9337-9b2bf839a4b0"/>
+    <line desc="" condition="" from="7d746bd8-6ffe-43c9-9337-9b2bf839a4b0" to="7798f7a8-f590-4116-906f-125dbacb4b8c"/>
+    <line desc="" condition="" from="7798f7a8-f590-4116-906f-125dbacb4b8c" to="84d10883-53c8-4f7e-88b5-678401cd2655"/>
+    <line desc="" condition="" from="84d10883-53c8-4f7e-88b5-678401cd2655" to="962be7f9-ad79-4529-9003-d429b6539e5b"/>
+  </lines>
+</diagram>

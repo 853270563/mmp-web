@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/process/PaidanSubmit" desc="派单提交">
+	<snd>
+	           	<field name="WORK_NUMBER" desc="客户经理" required="true" />
+				<field name="BORROWER_NAME" length="50" type="C" desc="客户姓名"/>              
+				<field name="BORROWER_PHONE" length="15" type="C" desc="手机号"/>              
+				<field name="IN_TIME" length="20" type="C" desc="进入时间"/>             
+				<field name="BAR_CODE" length="32" type="C" desc="条码号"/>
+				<field name="TASK_TYPE" length="100" type="C" desc="任务类型"/>             
+				<field name="STATE" length="2" type="C" desc="任务状态-00：待完善；01：待核验；02：待复核；03：重新核验；04：已完成"/>
+				<field name="HOURSE_ADDR" desc="房产地址" required="true" />
+				<field name="LONGITUDE" desc="经度" />
+				<field name="LATITUDE" desc="纬度" />
+				<field name="RULEID" length="100" type="C" desc="委托规则Id"/>
+				<field name="SUB_RULE_TYPE" length="100" type="C" desc="委托规则中标子类型"/>
+				<field name="OUT_COMPANY_ID" length="100" type="C" desc="评估机构Id"/>
+				<field name="PROPERTY_PATTERN" length="100" type="C" desc="是否需要报告"/>
+				<field name="APPLY_TIME" length="100" type="C" desc="申请时间"/>
+				<field name="OUT_COMPANY_NAME" length="100" type="C" desc="评估机构名称"/>
+				<field name="CUST_TYPE" length="2" type="C" desc="客户类型"/>
+				<field name="FRIST_APPLY_ID" length="20" type="C" desc="影像BAR_CODE（存量客户用）"/>
+				<field name="FRIST_APPLY_TIME" length="25" type="C" desc="影像APPLY_TIME（存量客户用）"/>
+	</snd>
+</trans>

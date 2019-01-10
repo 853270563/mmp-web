@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/paramManager/inqProdInfo" desc="产品信息查询">
+	<snd>
+	</snd>
+	<rcv>
+		<field name="PRODLIST" type="E" desc="" target="prodlist">
+			<field name="PRD_CODE" desc="产品编号" target="prd_code" />
+			<field name="PRD_NAME" desc="产品名称" target="prd_name" />
+			<field name="PRO_SIMPLE_NAME" desc="产品简称" target="prd_simple_name" />
+			<field name="BUSS_TYPE" desc="业务类型" target="buss_type" />
+			<field name="SINGLE_AMOUNT" desc="单笔最大额度" target="single_amount" />
+			<field name="LOWEST_MONEY" desc="起分金额" target="lowest_money" />
+			<field name="LOANS_TYPE" desc="贷款品种" target="loans_type" />
+			<field name="MAX_RECEIPT_PERIOD" desc="最大借据时长(月)" target="max_receipt_period" />
+			<field name="MAX_CREDIT_PERIOD" desc="最大合同时长(月)" target="max_credit_period" />
+			<field name="MAX_FLOAT" desc="浮动上限" target="max_float" />
+			<field name="MIN_FLOAT" desc="浮动下限" target="min_float" />
+			<field name="MAX_FIXED" desc="固定利率上限" target="max_fixed" />
+			<field name="MIN_FIXED" desc="固定利率下限" target="min_fixed" />
+			<field name="REPAYWAYLIST" type="E" desc="" target="repaywaylist">
+				<field name="MIN_PERIOD" desc="期限起(月)" target="min_period" />
+				<field name="MAX_PERIOD" desc="期限止(月)" target="max_period" />
+				<field name="REPAY_WAY_CODE" desc="还款方式列表" target="repay_way_code" />
+			</field>
+			<field name="FIXRATELIST" type="E" desc="" target="fixratelist">
+				<field name="MIN_TERM" desc="期数起" target="min_term" />
+				<field name="MAX_TERM" desc="期数止" target="max_term" />
+				<field name="RATE_VALUE" desc="年利率值" target="rate_value" />
+			</field>
+		</field>
+	</rcv>
+</trans>

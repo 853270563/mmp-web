@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="JJK_TRAN_LOG">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+        <isNotEmpty prepend="AND" property="OPERLOG_ID"><![CDATA[ OPERLOG_ID = #OPERLOG_ID# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="TRAN_ID"><![CDATA[ TRAN_ID = #TRAN_ID# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="TRAN_TYPE"><![CDATA[ TRAN_TYPE = #TRAN_TYPE# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="TRAN_SUB_TYPE"><![CDATA[ TRAN_SUB_TYPE = #TRAN_SUB_TYPE# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="OPER_TIME"><![CDATA[ OPER_TIME = #OPER_TIME# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="OPER_RET_STATUS"><![CDATA[ OPER_RET_STATUS = #OPER_RET_STATUS# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="OPER_RET_DESC"><![CDATA[ OPER_RET_DESC = #OPER_RET_DESC# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="SIGN_DEVI_TYPE"><![CDATA[ SIGN_DEVI_TYPE = #SIGN_DEVI_TYPE# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="SIGN_ORGAN"><![CDATA[ SIGN_ORGAN = #SIGN_ORGAN# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="SIGN_USER"><![CDATA[ SIGN_USER = #SIGN_USER# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="SIGN_DEVI_NO"><![CDATA[ SIGN_DEVI_NO = #SIGN_DEVI_NO# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="CERT_NO"><![CDATA[ CERT_NO = #CERT_NO# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="CARD_TYPE"><![CDATA[ CARD_TYPE = #CARD_TYPE# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="CARD_NO"><![CDATA[ CARD_NO = #CARD_NO# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="EXTEND1"><![CDATA[ EXTEND1 = #EXTEND1# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="EXTEND2"><![CDATA[ EXTEND2 = #EXTEND2# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="EXTEND3"><![CDATA[ EXTEND3 = #EXTEND3# ]]></isNotEmpty>
+        <isNotEmpty prepend="AND" property="CUST_NAME"><![CDATA[ CUST_NAME = #CUST_NAME# ]]></isNotEmpty>
+    </sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*,A.NAME AS SIGN_ORGANS FROM ${schema.interPlat}.JJK_TRAN_LOG T
+        LEFT JOIN ${schema.configPlat}.SYS_ORGAN A ON T.SIGN_ORGAN=A.ID
+        <dynamic prepend="WHERE ">
+            <include refid="queryDynSql" />
+        </dynamic>
+        ORDER BY T.OPERLOG_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.OPERLOG_ID) CNT 
+			FROM ${schema.interPlat}.JJK_TRAN_LOG T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+        <selectKey resultClass="string" type="pre" keyProperty="OPERLOG_ID">
+            SELECT to_char(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_JJK_TRAN_LOG.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO ${schema.interPlat}.JJK_TRAN_LOG
+		( OPERLOG_ID,TRAN_ID,TRAN_TYPE,TRAN_SUB_TYPE,OPER_TIME,OPER_RET_STATUS,OPER_RET_DESC,SIGN_DEVI_TYPE,SIGN_ORGAN,SIGN_USER,SIGN_DEVI_NO,CERT_NO,CARD_TYPE,CARD_NO,EXTEND1,EXTEND2,EXTEND3,CUST_NAME ) 
+		VALUES ( #OPERLOG_ID#,#TRAN_ID#,#TRAN_TYPE#,#TRAN_SUB_TYPE#,#OPER_TIME#,#OPER_RET_STATUS#,#OPER_RET_DESC#,#SIGN_DEVI_TYPE#,#SIGN_ORGAN#,#SIGN_USER#,#SIGN_DEVI_NO#,#CERT_NO#,#CARD_TYPE#,#CARD_NO#,#EXTEND1#,#EXTEND2#,#EXTEND3#,#CUST_NAME#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.JJK_TRAN_LOG ]]>
+		<dynamic prepend="set">
+            <isNotEmpty prepend="," property="TRAN_ID"><![CDATA[ TRAN_ID = #TRAN_ID# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="TRAN_TYPE"><![CDATA[ TRAN_TYPE = #TRAN_TYPE# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="TRAN_SUB_TYPE"><![CDATA[ TRAN_SUB_TYPE = #TRAN_SUB_TYPE# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="OPER_TIME"><![CDATA[ OPER_TIME = #OPER_TIME# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="OPER_RET_STATUS"><![CDATA[ OPER_RET_STATUS = #OPER_RET_STATUS# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="OPER_RET_DESC"><![CDATA[ OPER_RET_DESC = #OPER_RET_DESC# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="SIGN_DEVI_TYPE"><![CDATA[ SIGN_DEVI_TYPE = #SIGN_DEVI_TYPE# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="SIGN_ORGAN"><![CDATA[ SIGN_ORGAN = #SIGN_ORGAN# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="SIGN_USER"><![CDATA[ SIGN_USER = #SIGN_USER# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="SIGN_DEVI_NO"><![CDATA[ SIGN_DEVI_NO = #SIGN_DEVI_NO# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="CERT_NO"><![CDATA[ CERT_NO = #CERT_NO# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="CARD_TYPE"><![CDATA[ CARD_TYPE = #CARD_TYPE# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="CARD_NO"><![CDATA[ CARD_NO = #CARD_NO# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="EXTEND1"><![CDATA[ EXTEND1 = #EXTEND1# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="EXTEND2"><![CDATA[ EXTEND2 = #EXTEND2# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="EXTEND3"><![CDATA[ EXTEND3 = #EXTEND3# ]]></isNotEmpty>
+            <isNotEmpty prepend="," property="CUST_NAME"><![CDATA[ CUST_NAME = #CUST_NAME# ]]></isNotEmpty>
+
+        </dynamic>
+		<![CDATA[ where OPERLOG_ID = #OPERLOG_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.JJK_TRAN_LOG where OPERLOG_ID = #OPERLOG_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

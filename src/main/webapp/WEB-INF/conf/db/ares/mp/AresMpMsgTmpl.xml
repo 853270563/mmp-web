@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="AresMpMsgTmpl" desc="模板消息推送">
+	<!-- 请求报文 -->
+    <snd>
+    	<field name="TMPLID" length="64" type="C" desc="消息模板ID" required="true"/>
+    	<field name="TMPLTAGVAL" type="C" desc="模板标签值"/>
+        <field name="RECCUSTFROM" length="1" type="C" desc="接受客户号来源" />
+        <field name="RECCUST" type="C" desc="接受客户号" />
+        <field name="MSGTITLE" length="128" type="C" desc="消息标题" required="true"/>
+        <field name="SENDBEGINTIME" length="20" type="C" desc="发送开始时间yyyy-MM-dd HH:mm:ss" required="true"/>
+        <field name="SENDENDTIME" length="20" type="C" desc="发送结束时间yyyy-MM-dd HH:mm:ss" />
+        <field name="OPERID" length="20" type="C" desc="操作人"/>
+    </snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

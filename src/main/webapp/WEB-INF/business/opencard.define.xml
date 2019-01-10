@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config id="opencard" title="开卡流程">
+	<!-- 服务编排 -->
+	<actions>
+		<action index="1" ref="getMinCertNumService" title="获取最小凭证号"></action>
+		<action index="2" ref="occupyCertNumService" title="占用凭证号"></action>
+		<action index="4" ref="saveIDCardInfoService" title="保存身份证信息"></action>
+		<action index="5" ref="saveOpenCardInfoService" title="保存开卡信息"></action>
+		<action index="6" ref="upLoadFileService" title="上传图片"></action>
+	</actions>
+</config>

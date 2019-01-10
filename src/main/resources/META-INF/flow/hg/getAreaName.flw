@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="getAreaName.flw" desc="根据编码获得地区名称">
+  <nodes>
+    <node id="75786def-d796-4aa7-a988-3051081c75ce" xPos="290" yPos="70" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="4ddaa932-8ad6-4d6b-a9e9-f8dad4b3c36f" xPos="290" yPos="160" Width="180" Height="40">
+      <desc>查询单条数据</desc>
+      <beanId>dbMapQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="getAreaName.getareaname" desc="Mybatis SQL Statement"/>
+        <data key="*mapName" expr="" desc="输出结果字段名，非必须"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="36bfa09d-7e98-4c82-9e5a-d89709b970f7" xPos="290" yPos="260" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="hg/getAreaName" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="b0456412-5fde-426e-a684-3d20b6cf71e0" xPos="290" yPos="360" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="75786def-d796-4aa7-a988-3051081c75ce" to="4ddaa932-8ad6-4d6b-a9e9-f8dad4b3c36f"/>
+    <line desc="" condition="" from="4ddaa932-8ad6-4d6b-a9e9-f8dad4b3c36f" to="36bfa09d-7e98-4c82-9e5a-d89709b970f7"/>
+    <line desc="" condition="" from="36bfa09d-7e98-4c82-9e5a-d89709b970f7" to="b0456412-5fde-426e-a684-3d20b6cf71e0"/>
+  </lines>
+</diagram>

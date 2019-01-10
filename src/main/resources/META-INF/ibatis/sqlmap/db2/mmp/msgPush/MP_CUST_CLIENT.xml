@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MP_CUST_CLIENT">
+
+	<select id="checkAppId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT 
+			CLIENT_APP_ID
+		FROM
+			${schema.configPlat}.ARES_MP_CLIENT_APP
+		WHERE 
+			CLIENT_APP_ID = #CLIENT_APP_ID#
+			and DEL_FLAG = '0'
+	</select>
+	<select id="genCustClientId" resultClass="java.util.HashMap">
+		SELECT 
+			TO_CHAR(current timestamp, 'yyyyMMdd')||${schema.configPlat}.SEQ_MP_CUST_CLIENT.NEXTVAL as CUST_CLIENT_ID 
+		FROM DUAL
+	</select>
+	
+	<insert id="addSub" parameterClass="map">
+		INSERT 
+		INTO ${schema.configPlat}.ARES_MP_CUST_CLIENT(
+			CUST_CLIENT_ID,
+			CLIENT_TYPE,
+			DEVICE_ID,
+			CLIENT_APP_ID,
+			CLIENT_ID
+			<isNotEmpty property="CUST_ID">,CUST_ID</isNotEmpty>
+			<isNotEmpty property="DEVICE_NAME">,DEVICE_NAME</isNotEmpty>
+			<isNotEmpty property="DEVICE_MODEL">,DEVICE_MODEL</isNotEmpty>
+			<isNotEmpty property="DEVICE_VERSION">,DEVICE_VERSION</isNotEmpty>
+			<isNotEmpty property="IS_CLOSE">,IS_CLOSE</isNotEmpty>
+			,OPER_ID
+			,DEL_FLAG
+			,CREATE_TIME
+			,UPDATE_TIME
+			,CHAN_TYPE
+		)
+		VALUES(
+			#CUST_CLIENT_ID#,
+			#CLIENT_TYPE#,
+			#DEVICE_ID#,
+			#CLIENT_APP_ID#,
+			#CLIENT_ID#
+			<isNotEmpty property="CUST_ID">,#CUST_ID#</isNotEmpty>
+			<isNotEmpty property="DEVICE_NAME">,#DEVICE_NAME#</isNotEmpty>
+			<isNotEmpty property="DEVICE_MODEL">,#DEVICE_MODEL#</isNotEmpty>
+			<isNotEmpty property="DEVICE_VERSION">,#DEVICE_VERSION#</isNotEmpty>
+			<isNotEmpty property="IS_CLOSE">,#IS_CLOSE#</isNotEmpty>
+			,#OPER_ID#
+			,#DEL_FLAG#
+			,#CREATE_TIME#
+			,#UPDATE_TIME#
+			,#CHAN_TYPE#
+		)
+		
+	</insert>
+	
+	<update id="modifySub" parameterClass="map">
+		UPDATE ${schema.configPlat}.ARES_MP_CUST_CLIENT SET
+		OPER_ID = #OPER_ID#,
+		UPDATE_TIME = #UPDATE_TIME#
+		<isNotEmpty property="IS_CLOSE">
+			,IS_CLOSE = #IS_CLOSE#
+		</isNotEmpty>
+		<isNotEmpty property="DEL_FALG">
+			,DEL_FLAG = #DEL_FLAG#
+		</isNotEmpty>
+		WHERE CUST_CLIENT_ID = #CUST_CLIENT_ID#
+	</update>
+	
+	<delete id="deleteCust" parameterClass="map">
+		delete from 
+			${schema.configPlat}.ARES_MP_CUST_CLIENT
+		where
+			CUST_ID = #CUST_ID#
+			and
+			DEVICE_ID=#DEVICE_ID#
+	</delete>
+</sqlMap>
+

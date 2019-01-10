@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ScheduleInfoUpdate" desc="金融日历个人日程修改" ibatisStatement="PERS_SCHED.updateInfo">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="SCHEDULEID" length="10" type="C" desc="日程编号ID" required="true" />
+		<field name="SCHED_SUBJECT" length="50" type="C" desc="日程标题"/>
+		<field name="SCHED_STIME" length="20" type="C" desc="日程起始时间" />
+		<field name="SCHED_ETIME" length="20" type="C" desc="日程结束时间" />
+		<field name="SCHED_TIMESPAN" length="20" type="C" desc="日程提醒时间" />
+		<field name="SCHED_CONTENT" length="200" type="C" required="true" desc="日程内容" />
+		<field name="SCHED_REMIND" length="1" type="C" desc="是否提醒"  />
+		<field name="SCHED_FULLEVENT" length="1" type="C" desc="是否全天事件" />
+		<field name="USER_ID" length="20" type="C" desc="用户表示ID" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

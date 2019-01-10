@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0058" excode="Track_APP08" desc="贷中贷办查询接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="list" type="E" desc="代办列表">
+				<field name="bar_code" length="32" type="C" desc="条码号"/>
+				<field name="borrower_name" length="80" type="C" desc="借款人姓名"/>
+				<field name="borrower_phone" length="15" type="C" desc="电话号码"/>
+				<field name="borrower_type" length="10" type="C" desc="客户类型"/>
+				<field name="to_do_type" length="2" type="C" desc="待办类型"/>
+				<field name="refuse_reason" length="100" type="C" desc="拒绝原因"/>
+				<field name="apply_time" length="20" type="C" desc="申请日期"/>
+				<field name="community_name" length="100" type="C" desc="小区名称"/>
+				<field name="community_pro" length="10" type="C" desc="小区地址-省" />
+				<field name="community_city" length="10" type="C" desc="小区地址-市" />
+				<field name="community_county" length="10" type="C" desc="小区地址-县" />
+				<field name="community_detail" length="2000	" type="C" desc="小区地址"/>
+				<field name="frist_apply_id" length="100" type="C" desc="影像BAR_CODE（存量客户用）"/>
+				<field name="frist_apply_time" length="100" type="C" desc="影像APPLY_TIME（存量客户用）"/>
+			</field>
+		</body>
+	</rcv>
+</trans>

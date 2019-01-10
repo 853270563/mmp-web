@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/qry" desc="影像查询">
+	<snd>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见家园E贷-影像平台需求反馈（最终版）"/>
+		<field name="BATCH_ID" desc="影像批次号" required="true" />
+		<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"/>
+		<field name="FILE_CN_NAME" desc="文件名称" required="true" />
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="图片列表">
+			<field name="IMG_URL" desc="图片url地址" />
+			<field name="FILE_NO" desc="图片编号" />
+		</field>
+	</rcv>
+</trans>

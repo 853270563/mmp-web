@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="submit.flw" desc="提交审批">
+  <nodes>
+    <node id="02159bf7-795f-4425-ae75-12b32deb6f93" xPos="130" yPos="20" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="d76895b0-7a90-43f9-8725-63f0329b2af9" xPos="330" yPos="60" Width="180" Height="40">
+      <desc>填充数据</desc>
+      <beanId>insert2Op</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="866cf295-3f67-4e55-a5a7-023ae291d1fb" xPos="340" yPos="130" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="ce399cf5-41d0-4434-98af-7a9bbdfeb663" xPos="340" yPos="190" Width="180" Height="40">
+      <desc>插入审批数据</desc>
+      <beanId>dbInsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="PushProcessAct.insert" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="5055e5e0-f2b4-4406-b5d0-0ec16e0c7430" xPos="340" yPos="260" Width="180" Height="40">
+      <desc>修改数据</desc>
+      <beanId>dbUpdOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="process.update" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+        <data key="APPROVAL_STATE" expr="1" desc="用途说明"/>
+      </data-map>
+    </node>
+    <node id="c8402b60-ff15-478d-97e9-54c3960c4b5d" xPos="330" yPos="330" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="febb8061-562a-4529-b791-119d43a4387b" xPos="330" yPos="410" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="d76895b0-7a90-43f9-8725-63f0329b2af9" to="866cf295-3f67-4e55-a5a7-023ae291d1fb"/>
+    <line desc="" condition="" from="866cf295-3f67-4e55-a5a7-023ae291d1fb" to="ce399cf5-41d0-4434-98af-7a9bbdfeb663"/>
+    <line desc="" condition="" from="ce399cf5-41d0-4434-98af-7a9bbdfeb663" to="5055e5e0-f2b4-4406-b5d0-0ec16e0c7430"/>
+    <line desc="" condition="" from="5055e5e0-f2b4-4406-b5d0-0ec16e0c7430" to="c8402b60-ff15-478d-97e9-54c3960c4b5d"/>
+    <line desc="" condition="" from="c8402b60-ff15-478d-97e9-54c3960c4b5d" to="febb8061-562a-4529-b791-119d43a4387b"/>
+    <line desc="" condition="" from="02159bf7-795f-4425-ae75-12b32deb6f93" to="d76895b0-7a90-43f9-8725-63f0329b2af9"/>
+  </lines>
+</diagram>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ChargeProductTypeList"  ibatisStatement="CHARGE.queryProductTypeAll" desc="资费产品">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	 <snd> 
+		
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+					<field name="PRODUCT_TYPE_ID" length="100" type="C" desc="资费产品类型编号"/>
+					<field name="PRODUCT_TYPE_NAME" length="100" type="C" desc="资费产品类型名称"  />
+					<field name="EXTEND1" length="100" type="C" desc="扩展字段1"  client="extend1"/>
+					<field name="EXTEND2" length="100" type="C" desc="扩展字段2"  client="extend2"/>
+					<field name="PRODUCT_TYPE_DESC" length="100" type="C" desc="产品类型描述" />
+		</field-list>
+	</rcv>
+</trans>

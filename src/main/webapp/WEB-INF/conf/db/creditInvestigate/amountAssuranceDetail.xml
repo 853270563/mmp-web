@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="amountAssuranceDetail" desc="担保信息详情">
+	<!--请求报文 -->
+	<snd>
+				<field name="guarantycontract_no" client="serialNo" type="C"  required="true"  default=""    desc="担保合同编号" />  
+				<field name="apply_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" />  
+				<field name="contract_type" client="contractType" type="C"  required="true"  default=""    desc="合同类型" />  
+				<field name="guaranty_type" client="guarantyType" type="C"  required="true"  default=""    desc="担保方式" /> 
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+   			<field-list name="item"  type="E"  desc="解析响应报文体">
+   					<field name="serialNo" client="serialNo" type="C" required="true"  default="100"    desc="担保合同编号" />
+   					<field name="contractType" client="contractType" type="C" required="true"  default="100"    desc="合同类型" />  
+   					<field name="GuaranteeForm" client="GuaranteeForm" type="C" required="true"  default="100"    desc="保证担保形式" />  
+   					<field name="YYSerialNo" client="YYSerialNo" type="C" required="true"  default="100"    desc="文本合同号" />  
+   					<field name="GuarantyTypeName" client="GuarantyTypeName" type="C" required="true"  default="100"    desc="担保方式" />  
+   					<field name="CheckGuarantyMan2" client="CheckGuarantyMan2" type="C" required="true"  default="100"    desc="保证金类型" />  
+   					<field name="ConfirmCurrency" client="ConfirmCurrency" type="C" required="true"  default="100"    desc="保证金币种2" />  
+   					<field name="BailRatio" client="BailRatio" type="C" required="true"  default="100"    desc="保证金比例" />
+   					<field name="GuarantorName" client="GuarantorName" type="C" required="true"  default="100"    desc="质押人名称" />
+   					<field name="CertType" client="CertType" type="C" required="true"  default="100"    desc="质押人证件类型" />  
+   					<field name="CertID" client="CertID" type="C" required="true"  default="100"    desc="质押人证件号码" />  
+   					<field name="LoanCardNo" client="LoanCardNo" type="C" required="true"  default="100"    desc="质押人贷款卡编号" />  
+   					<field name="SignDate" client="SignDate" type="C" required="true"  default="100"    desc="担保合同签订日" />  
+   					<field name="BeginDate" client="BeginDate" type="C" required="true"  default="100"    desc="担保合同起始日" />  
+   					<field name="EndDate" client="EndDate" type="C" required="true"  default="100"    desc="担保合同到期日" />  
+   					<field name="GuarantyCurrency" client="GuarantyCurrency" type="C" required="true"  default="100"    desc="质押担保币种" />   
+   					<field name="GuarantyValue" client="GuarantyValue" type="C" required="true"  default="100"    desc="担保合同编号" />
+   					<field name="RelativeSum" client="RelativeSum" type="C" required="true"  default="100"    desc="本笔贷款占用担保金额" />  
+   					<field name="InputUserName" client="InputUserName" type="C" required="true"  default="100"    desc="登记人" />  
+   					<field name="InputOrgName" client="InputOrgName" type="C" required="true"  default="100"    desc="登记机构" />  
+   					<field name="InputDate" client="InputDate" type="C" required="true"  default="100"    desc="登记时间" />  
+   					<field name="UpdateDate" client="UpdateDate" type="C" required="true"  default="100"    desc="更新时间" />  
+   			</field-list>
+   			<field-list name="Action"    type="E"  desc="解析响应报文体">
+   					<field name="GuarantyID" client="GuarantyID" type="C" required="true"  default="100"    desc="抵押物编号、质物编号" />
+   					<field name="GuarantyType" client="GuarantyType" type="C" required="true"  default="100"    desc="抵押物类型、质押类型" />  
+   					<field name="GuarantyTypeName" client="GuarantyTypeName" type="C" required="true"  default="100"    desc="抵押物类型、质押类型编码" />  
+   					<field name="OwnerID" client="OwnerID" type="C" required="true"  default="100"    desc="权利人编号、出质人编号" />  
+   					<field name="OwnerName" client="OwnerName" type="C" required="true"  default="100"    desc="权利人名称、出质人名称" />  
+   					<field name="CertID" client="CertID" type="C" required="true"  default="100"    desc="" />  
+   					<field name="CertType" client="CertType" type="C" required="true"  default="100"    desc="" />  
+   					<field name="GuarantySum" client="GuarantySum" type="C" required="true"  default="100"    desc="抵押担保金额、质押担保金额" />  
+   					<field name="GuarantyCurrenc" client="GuarantyCurrenc" type="C" required="true"  default="100"    desc="" />
+   					<field name="GuarantyRate" client="GuarantyRate" type="C" required="true"  default="100"    desc="抵押率%" />
+   			</field-list>
+		</rcv>
+</trans>   			

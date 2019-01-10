@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0039.flw" desc="影像信息查询接口">
+  <nodes>
+    <node id="8d6354a7-59eb-4d02-a2e5-1fa8d5061c9d" xPos="350" yPos="230" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0039" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

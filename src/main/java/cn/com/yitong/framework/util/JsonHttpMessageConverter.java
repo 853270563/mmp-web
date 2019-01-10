@@ -1,15 +1,21 @@
 package cn.com.yitong.framework.util;
 
-import cn.com.yitong.core.web.convert.CodecJsonHttpMessageConverter;
+import java.io.IOException;
+
+import javax.annotation.Resource;
+
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-import java.io.IOException;
+import cn.com.yitong.core.web.convert.CodecJsonHttpMessageConverter;
+import cn.com.yitong.modules.session.service.ExtDemoDataService;
 
 /**
  * @author lc3@yitong.com.cn
  */
 public class JsonHttpMessageConverter extends CodecJsonHttpMessageConverter {
+    @Resource
+    private ExtDemoDataService extDemoDataService;
     /**
      * 是否自动记录挡板数据
      */
@@ -17,6 +23,9 @@ public class JsonHttpMessageConverter extends CodecJsonHttpMessageConverter {
 
     @Override
     protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+        if(autoSaveRespData) {
+            extDemoDataService.saveDemoData(object);
+        }
         super.writeInternal(object, outputMessage);
     }
 

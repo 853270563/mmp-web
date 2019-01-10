@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0025" excode="Credit_APP01" desc="征信授权接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>             
+			<field name="list" type="E" desc="列表">
+				<field name="name" length="80" type="C" desc="姓名" required="false"/>
+				<field name="idcard" length="32" type="C" desc="证件号" required="false"/>
+				<field name="person_type" length="4" type="C" desc="人员类型" required="false"/>
+			</field>           
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="bar_code" length="32" type="C" desc="条码号"/>  
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/> 
+		</body>
+	</rcv>
+</trans>

@@ -16,4 +16,6 @@ public interface IEBankConfCaches {
 
 	public abstract boolean hasTransConfById(String transCode);
 
+	public abstract void removeCache(String key);
+
 }

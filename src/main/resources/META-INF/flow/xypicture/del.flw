@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="del.flw" desc="房产影像删除">
+  <nodes>
+    <node id="6bf2c19b-b6a5-4744-81fc-53d33dcebbdb" xPos="350" yPos="230" Width="50" Height="50">
+      <desc>房产影像删除</desc>
+      <beanId>netToolsXYdelOp</beanId>
+      <data-map>
+        <data key="*required" expr="BATCH_ID,BUSI_SERIAL_NO,BUSI_FILE_TYPE,BUSI_START_DATE" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.insert" desc="xypicture.insert"/>
+      </data-map>
+    </node>
+    <node id="c8f2735f-148d-473c-a081-f369611d6426" xPos="350" yPos="340" Width="180" Height="40">
+      <desc>删除数据</desc>
+      <beanId>dbDelOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.delete" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="91ed4688-bd4c-438f-b1bc-5f4597ea214c" xPos="350" yPos="440" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="6bf2c19b-b6a5-4744-81fc-53d33dcebbdb" to="c8f2735f-148d-473c-a081-f369611d6426"/>
+    <line desc="" condition="" from="c8f2735f-148d-473c-a081-f369611d6426" to="91ed4688-bd4c-438f-b1bc-5f4597ea214c"/>
+  </lines>
+</diagram>

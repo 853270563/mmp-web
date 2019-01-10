@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="task.flw" desc="超时任务查询">
+  <nodes>
+    <node id="2e2c9d29-0a77-48ef-ae6f-68c618be0570" xPos="550" yPos="80" Width="180" Height="40">
+      <desc>权限检查</desc>
+      <type>condition</type>
+      <beanId>permissionCheckOp</beanId>
+      <data-map>
+        <data key="*permission" expr="approval" desc="检查的权限"/>
+        <data key="*queryForList" expr="mobileMenu.findByUserId" desc="查询语句"/>
+      </data-map>
+    </node>
+    <node id="4d0dd7f3-ad56-4e4f-9fdf-973a761baae4" xPos="370" yPos="200" Width="180" Height="40">
+      <desc>分页数据查询</desc>
+      <type/>
+      <beanId>dbPageQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rushTask.qry" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="f99c8632-29f9-48ca-a170-00a59ad952c0" xPos="740" yPos="210" Width="180" Height="40">
+      <desc>分页数据查询</desc>
+      <beanId>dbPageQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rushTask.qryByDirect" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="55a9c75a-f880-4ace-9e59-6f31872797e6" xPos="560" yPos="360" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="timeOut/task" desc="交易报文路径"/>
+        <data key="IS_MASTER" expr="${isPermitted}" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="不是主管" condition="${isPermitted == 0}" from="2e2c9d29-0a77-48ef-ae6f-68c618be0570" to="4d0dd7f3-ad56-4e4f-9fdf-973a761baae4"/>
+    <line desc="是主管" condition="${isPermitted == 1}" from="2e2c9d29-0a77-48ef-ae6f-68c618be0570" to="f99c8632-29f9-48ca-a170-00a59ad952c0"/>
+    <line desc="" condition="" from="4d0dd7f3-ad56-4e4f-9fdf-973a761baae4" to="55a9c75a-f880-4ace-9e59-6f31872797e6"/>
+    <line desc="" condition="" from="f99c8632-29f9-48ca-a170-00a59ad952c0" to="55a9c75a-f880-4ace-9e59-6f31872797e6"/>
+  </lines>
+</diagram>

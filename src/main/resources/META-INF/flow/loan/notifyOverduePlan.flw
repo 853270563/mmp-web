@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="notifyOverduePlan.flw" desc="逾期催收通知">
+  <nodes>
+    <node id="e5254ba6-8425-4cdf-a1cc-b7868d30d92b" xPos="480" yPos="270" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/notifyOverduePlan" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

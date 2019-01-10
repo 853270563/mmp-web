@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MHJ_PROD_INFO">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="ORGAN_LIMIT">
+			P.ORGAN_LIMIT=#ORGAN_LIMIT#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="TA_CODE">
+			P.TA_CODE=#TA_CODE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PRD_CODE">
+			P.PRD_CODE=#PRD_CODE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="STATUS">
+			P.STATUS=#STATUS#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="RISK_LEVEL">
+			P.RISK_LEVEL=#RISK_LEVEL#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PRD_MANAGER">
+			P.PRD_MANAGER=#PRD_MANAGER#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PRD_ATTR">
+			P.PRD_ATTR=#PRD_ATTR#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="CURR_TYPE">
+			P.CURR_TYPE=#CURR_TYPE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PRD_ATTR_LABEL">
+			P.PRD_ATTR_LABEL LIKE '%'||#PRD_ATTR_LABEL#||'%'
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="NAME_SEARCH_Q">
+			P.PRD_NAME LIKE '%'||#NAME_SEARCH_Q#||'%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="NUM">
+			<![CDATA[
+				P.P_FIRST_AMT < #NUM#
+			]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="NUMS">
+			<![CDATA[
+				P.P_FIRST_AMT >= #NUMS#
+			]]>
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="and" property="DATE">
+			<![CDATA[
+				TO_DATE(END_DATE,'YYYY-MM-DD')-TO_DATE(INCOME_DATE,'YYYY-MM-DD') < #DATE#
+			]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="DATES">
+			<![CDATA[
+				TO_DATE(END_DATE,'YYYY-MM-DD')-TO_DATE(INCOME_DATE,'YYYY-MM-DD') >= #DATES#
+			]]>
+		</isNotEmpty>
+	</sql>
+	 
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT P.*,TO_DATE(END_DATE,'YYYY-MM-DD')-TO_DATE(INCOME_DATE,'YYYY-MM-DD') AS NOMINAL_DATE
+		FROM  ${schema.interPlat}.MHJ_PROD_INFO P
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+		order by 1
+		<isNotNull property="GUEST_RATE_ORDER" prepend=",">
+			<isEqual property="GUEST_RATE_ORDER" compareValue="0">
+				GUEST_RATE asc
+			</isEqual>
+			<isEqual property="GUEST_RATE_ORDER" compareValue="1">
+				GUEST_RATE desc
+			</isEqual>
+		</isNotNull>
+		<isNotNull property="NOMINAL_DATE_ORDER" prepend=",">
+			<isEqual property="NOMINAL_DATE_ORDER" compareValue="0">
+				NOMINAL_DATE asc
+			</isEqual>
+			<isEqual property="NOMINAL_DATE_ORDER" compareValue="1">
+				NOMINAL_DATE desc
+			</isEqual>
+		</isNotNull>
+		<isNotNull property="END_DATE_ORDER" prepend=",">
+			<isEqual property="END_DATE_ORDER" compareValue="0">
+				END_DATE asc
+			</isEqual>
+			<isEqual property="END_DATE_ORDER" compareValue="1">
+				END_DATE desc
+			</isEqual>
+		</isNotNull>
+	</sql>
+	
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+		<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(P.PRD_CODE) CNT 
+			FROM ${schema.interPlat}.MHJ_PROD_INFO P
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	
+	<!-- 分页计数 -->
+	<select id="totalCount" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(P.PRD_CODE) CNT 
+			FROM ${schema.interPlat}.MHJ_PROD_INFO P
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	
+	<select id="getFuJian" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.*,O.FILE_ADDR FROM  ${schema.interPlat}.MHJ_PROD_ATTA T
+			LEFT JOIN  ${schema.interPlat}.MZJ_FILES_DATA O ON T.FILE_ID = O.FILE_ID 
+			WHERE T.PRD_CODE=#PRD_CODE#
+	</select>
+	
+</sqlMap>
+

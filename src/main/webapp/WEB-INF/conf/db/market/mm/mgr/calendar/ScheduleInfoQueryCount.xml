@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ScheduleInfoQueryCount" desc="金融日历个人日程当月记录数查询" ibatisStatement="PERS_SCHED.queryDayCountForMonth">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="USER_ID" length="20" type="C" desc="用户表示ID" required="true"/>
+		<field name="SCHED_STIME_BEGIN" length="10" type="C" desc="开始时间的开始时间" required="true"/>
+		<field name="SCHED_STIME_END" length="10" type="C" desc="开始时间的结束时间" required="true"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+			<field name="NUM"   length="20" type="C" desc="记录数" />
+			<field name="date"  xpath="SCHED_STIME_TEMP" length="50" type="C" desc="日程开始时间" />
+		</field-list>
+	</rcv>
+</trans>

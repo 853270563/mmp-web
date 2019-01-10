@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="JJK_SIGN_INFO">
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="addSignInfo" parameterClass="map">
+		<selectKey keyProperty="SIGN_ID" type="pre" resultClass="string">
+	        	SELECT TO_CHAR(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_SIGN_INFO.NEXTVAL  AS SIGN_ID  FROM DUAL
+	    </selectKey>
+		INSERT INTO ${schema.interPlat}.JJK_SIGN_INFO
+		( SIGN_ID,TRANS_ID,CARD_NO,SIGN_TYPE,IS_DOWN,CUST_MOBI_PHONE,EXTEND1,EXTEND2,EXTEND3,CREATE_TIME,USER_ID) 
+		VALUES (#SIGN_ID#,#TRANS_ID#,#CARD_NO#,#SIGN_TYPE#,#IS_DOWN#,#CUST_MOBI_PHONE#,#EXTEND1#,#EXTEND2#,#EXTEND3#,to_char(current timestamp,'yyyy-MM-dd HH24:mi:ss'),#USER_ID#)
+	</insert>
+	
+</sqlMap>
+

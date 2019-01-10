@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="nextInfo" desc="下一步审批人列表">
+	<!--请求报文 -->
+	<snd>
+		<body>
+				<field name="serial_no" client="serialNo" type="C"  required="true"  default=""    desc="任务流水号" />  
+				<field name="phase_opinion1" client="phaseOpinion1" type="C"  required="true"  default=""    desc="选择意见" />
+				<field  name="PAGE_NO" length="30" type="C" desc="第几页"  />
+				<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小"  />
+		</body>
+	</snd>
+		<rcv>
+				<field name="total"     default="01" desc="总数"/>
+   			<field-list name="item"    type="E"  desc="解析响应报文体">
+   					<field name="phaseAction" client="phaseAction" type="C" required="true"  default="100"    desc="审批人列表"/>  
+   			</field-list>
+   			<field name="serialNo"    type="C"  desc=""/>
+   			<field name="nextPhaseNo"  type="C"  desc=""/>
+   			<field name="nextPhaseName"    type="C"  desc=""/>
+   			<field name="phaseActionDisplay"    type="C"  desc=""/>
+   			<field name="nextPhaseInfoDisplay"    type="C"  desc=""/>
+   			<field name="isMultiSelect"   type="C"  desc=""/>
+   			<field name="roleIDs"   type="C"  desc=""/>
+		</rcv>
+</trans>   			
+   			
+   			
+   			

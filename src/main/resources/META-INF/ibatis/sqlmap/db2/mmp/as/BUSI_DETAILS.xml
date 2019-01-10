@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BUSI_DETAILS">
+
+	<!-- 业务详情信息入库 -->
+    <insert id="insertBusiDetails" parameterClass="java.util.Map">
+       	insert into ${schema.busiPlat}.BUSI_DETAILS
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="BUSIID" >
+	       		BUSIID
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="PRO_NAME" >	
+       			PRO_NAME
+       		</isNotNull>
+       		<isNotNull prepend="," property="CLIENT_NAME" >
+       			CLIENT_NAME
+       		</isNotNull>
+       		<isNotNull prepend="," property="CLIENT_PHONE" >
+       			CLIENT_PHONE
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECTID" >
+       			OBJECTID
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECT_NAME" >
+       			OBJECT_NAME
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECT_AREA" >
+       			OBJECT_AREA
+       		</isNotNull>
+       		<isNotNull prepend="," property="UNIT_PRICE" >
+       			UNIT_PRICE
+       		</isNotNull>
+       		<isNotNull prepend="," property="TOTAL_PRICE" >
+       			TOTAL_PRICE
+       		</isNotNull>
+       		) 
+       	</dynamic>	
+       	VALUES
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="BUSIID" >
+	       		#BUSIID#
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="PRO_NAME" >	
+       			#PRO_NAME#
+       		</isNotNull>
+       		<isNotNull prepend="," property="CLIENT_NAME" >
+       			#CLIENT_NAME#
+       		</isNotNull>
+       		<isNotNull prepend="," property="CLIENT_PHONE" >
+       			#CLIENT_PHONE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECTID" >
+       			#OBJECTID#
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECT_NAME" >
+       			#OBJECT_NAME#
+       		</isNotNull>
+       		<isNotNull prepend="," property="OBJECT_AREA" >
+       			#OBJECT_AREA#
+       		</isNotNull>
+       		<isNotNull prepend="," property="UNIT_PRICE" >
+       			#UNIT_PRICE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="TOTAL_PRICE" >
+       			#TOTAL_PRICE#
+       		</isNotNull>
+       		) 
+       	</dynamic>
+    </insert>
+    <select id="queryDetails" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+    	select 
+    		a.BUSIID,
+    		a.CLIENT_NAME,
+    		a.CLIENT_PHONE,
+    		a.OBJECTID,
+    		a.OBJECT_NAME,
+    		a.UNIT_PRICE,
+    		a.TOTAL_PRICE 
+    	from ${schema.busiPlat}.BUSI_DETAILS a inner join ${schema.busiPlat}.TASK_BUSI_RELATION b on a.BUSIID = b.BUSIID 
+    	where b.TASKID=#TASKID#
+    </select>
+</sqlMap>
+

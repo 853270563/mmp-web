@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="propaDataList" ibatisStatement="MZJ_PROPA_DATA.propaDataQuery" desc="产品展架列表">
+	<!-- 请求报文 -->
+	<snd>  
+		<field name="ORGAN_LIMIT"   length="20"  type="C" desc="所属机构"/>
+		<field name="PROPA_NAME"   length="20"  type="C" desc="展架标题"/>
+		<field name="FILE_CATA"   length="20"  type="C" desc="资源类别（0-公众，1-广告，2-宣传展架，3-学习园地，4-理财相关）不传查询所有"/>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E"> 
+			<field name="RID" length="6" type="C" desc="产品编号" xpath="RES_ID" />
+			<field name="RES_TYPE" length="6" type="C" desc="资源类型" />	
+			<field name="PROD_NAME" length="6" type="C" desc="产品名称" xpath="PRD_NAME"/>	
+			<field name="PROD_TYPE" length="6" type="C" desc="产品分类" xpath="PRD_TYPE"/>
+				
+			<field name="FILE_ID" length="100" type="C" desc="资源编号" />
+			<field name="FILE_TYPE" length="6" type="C" desc="文件类型"/>
+			<field name="FILE_URL" length="100" type="C" desc="资源路径"/>
+			
+			<field name="IMG_ID" length="100" type="C" desc="封面编号" />
+			<field name="IMG_URL" length="100" type="C" desc="封面图片" />
+			
+			<field name="UPDATE_TIME" length="100" type="C" desc="修改时间" />
+		</field-list> 
+		
+		<field-list name="MENU_LIST" type="E"> 
+			<field name="LABEL" length="6" type="C" desc="菜单名称" />
+			<field name="VALUE" length="6" type="C" desc="菜单编码（对应 PROD_TYPE）" />	
+		</field-list> 
+	</rcv>
+</trans>

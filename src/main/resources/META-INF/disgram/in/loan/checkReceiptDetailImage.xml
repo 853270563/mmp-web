@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/checkReceiptDetailImage" desc="确认借据授信影像资料">
+	<snd>
+		<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no"/>
+		<field name="RECEIPT_NO" desc="借据编号" target="receipt_no"/>
+		<field name="ID" desc="借据授信ID" required="true"  target="id"/>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

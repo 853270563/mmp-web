@@ -56,7 +56,6 @@
 		<plugin interceptor="cn.com.yitong.common.persistence.interceptor.PaginationInterceptor">
             <property name="jdbc.type" value="${jdbc.type}" />
         </plugin>
-        <plugin interceptor="cn.com.yitong.framework.interceptor.MybatisTimeLogInterceptor"></plugin>
     </plugins>
 
 	<mappers>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqReceiptDetail" desc="借据授信查询">
+	<snd>
+		<field name="USER_NO" desc="客户经理" target="" />
+		<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no" />
+		<field name="RECEIPT_NO" desc="借据编号" target="receipt_no" />
+	</snd>
+	<rcv>
+
+		<field name="RECEIPTDETALIST" type="E" desc="消费列表" target="receiptdetaillist">
+			<field name="CUSTOM_NAME" desc="客户名" target="customer_name" />
+			<field name="MOBILE" desc="电话" target="mobile" />
+			<field name="ID" desc="借据授信ID" target="id" />
+			<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no" />
+			<field name="RECEIPT_NO" desc="借据编号" target="receipt_no" />
+			<field name="USED_TIME" desc="使用时间" target="used_time" />
+			<field name="USED_AMOUNT" desc="使用金额" target="used_amount" />
+			<field name="USED_SERIALNO" desc="使用流水号" target="used_serialno" />
+			<field name="USED_WAY" desc="使用途径" comment="0：未知 1：POS 2：ATM 3：柜面 4：手机银行"
+				target="used_way" />
+			<field name="CONFIM_FLAG" desc="确认标志" comment="0否 1是" target="confirm_flag" />
+			<field name="CONFIM_DATE" desc="确认日期" comment="YYYY-MM-DD"
+				target="confirm_date" />
+			<field name="WORK_NUMBER" desc="确认客户经理" target="user_no" />
+			<field name="IMAGE_NO" desc="使用凭证影像编号" target="image_no" />
+			<field name="LIST" type="E" desc="影像列表" target="imagelist">
+				<field name="ID" desc="影像ID" target="id" />
+				<field name="IMAGE_TYPE" desc="影像类型" comment="影像字典文件" target="image_type" />
+				<field name="IMAGE_PATH" desc="图片地址" required="true" target="image_path" comment="影像批次号"/>
+				<field name="FILE_EXT" desc="图片后缀" required="true" target="file_ext" />
+				<field name="IMAGE_FLAG" desc="图片分表标识" required="true" target="image_flag" comment="开始日期"/>
+				<field name="UPLOAD_TIME" desc="上传时间" required="true" target="upload_time" />
+			</field>
+			<field name="IS_MOBILE" desc="是否电话通知" comment="0否 1是" target="is_mobile" />
+		</field>
+	</rcv>
+</trans>

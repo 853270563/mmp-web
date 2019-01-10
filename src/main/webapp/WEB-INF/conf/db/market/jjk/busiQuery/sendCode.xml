@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="sendCode" desc="发送验证码">
+	<snd>
+		<field name="idNBR" length="18" type="C" required="true" desc="证件号码"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

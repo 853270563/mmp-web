@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="LOG">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotNull prepend="AND" property="LOG_ID"><![CDATA[ LOG_ID = #LOG_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="MSG_ID"><![CDATA[ MSG_ID = #MSG_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="EVENT_ID"><![CDATA[ EVENT_ID = #EVENT_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="USER_ID"><![CDATA[ USER_ID = #USER_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="DEVICE_ID"><![CDATA[ DEVICE_ID = #DEVICE_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="SERVER_ID"><![CDATA[ SERVER_ID = #SERVER_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="URL"><![CDATA[ URL = #URL# ]]></isNotNull>
+		<isNotNull prepend="AND" property="APP_TAG"><![CDATA[ APP_TAG = #APP_TAG# ]]></isNotNull>
+		<isNotNull prepend="AND" property="LOG_LEVEL"><![CDATA[ LOG_LEVEL = #LOG_LEVEL# ]]></isNotNull>
+		<isNotNull prepend="AND" property="LOG_TIME"><![CDATA[ LOG_TIME = #LOG_TIME# ]]></isNotNull>
+		<isNotNull prepend="AND" property="LOG_DATA"><![CDATA[ LOG_DATA = #LOG_DATA# ]]></isNotNull>
+		<isNotNull prepend="AND" property="SESSION_ID"><![CDATA[ SESSION_ID = #SESSION_ID# ]]></isNotNull>
+
+		<isNotNull prepend="AND" property="CHANNEL_ID"><![CDATA[ CHANNEL_ID = #CHANNEL_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="APP_ID"><![CDATA[ APP_ID = #APP_ID# ]]></isNotNull>
+		<isNotNull prepend="AND" property="APP_VERS"><![CDATA[ APP_VERS = #APP_VERS# ]]></isNotNull>
+		<isNotNull prepend="AND" property="IP_ADDR"><![CDATA[ IP_ADDR = #IP_ADDR# ]]></isNotNull>
+		<isNotNull prepend="AND" property="GPS"><![CDATA[ GPS = #GPS# ]]></isNotNull>
+		<isNotNull prepend="AND" property="PLACE"><![CDATA[ PLACE = #PLACE# ]]></isNotNull>
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.configPlat}.ARES_LOG_INFO T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.LOG_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(0) CNT 
+			FROM ${schema.configPlat}.ARES_LOG_INFO T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.configPlat}.ARES_LOG_INFO
+		( LOG_ID,MSG_ID,EVENT_ID,USER_ID,DEVICE_ID,SERVER_ID,URL,APP_TAG,LOG_LEVEL,LOG_TIME,LOG_DATA, SESSION_ID,
+			CHANNEL_ID, APP_ID, APP_VERS, IP_ADDR, GPS, PLACE)
+		VALUES ( #LOG_ID#,#MSG_ID#,#EVENT_ID#,#USER_ID#,#DEVICE_ID#,#SERVER_ID#,#URL#,#APP_TAG#,#LOG_LEVEL#,#LOG_TIME#,#LOG_DATA#, #SESSION_ID#,
+			#CHANNEL_ID#, #APP_ID#, #APP_VERS#, #IP_ADDR#, #GPS#, #PLACE#)
+	</insert>
+
+	<!-- 查詢P_WARM_TIPS是否有待審核的數據 -->
+	<select id="findOp" parameterClass="map" resultClass="java.util.HashMap">
+		select *
+		from ${schema.configPlat}.ARES_LOG_INFO t1
+		INNER JOIN ${schema.configPlat}.AUDI_DETAIL t2 ON t1.AUDI_ID = t2.AUDI_ID
+		where t1.LOG_ID = #LOG_ID# and t2.AUDI_STAT ='3'
+	</select>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.LOG_ID) FROM ${schema.configPlat}.ARES_LOG_INFO p 
+			 WHERE P.LOG_ID=#LOG_ID#
+		]]>
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.configPlat}.ARES_LOG_INFO ]]>
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="LOG_ID"><![CDATA[ LOG_ID = #LOG_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="MSG_ID"><![CDATA[ MSG_ID = #MSG_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="EVENT_ID"><![CDATA[ EVENT_ID = #EVENT_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="USER_ID"><![CDATA[ USER_ID = #USER_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="DEVICE_ID"><![CDATA[ DEVICE_ID = #DEVICE_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="SERVER_ID"><![CDATA[ SERVER_ID = #SERVER_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="URL"><![CDATA[ URL = #URL# ]]></isNotNull>
+			<isNotNull prepend="," property="APP_TAG"><![CDATA[ APP_TAG = #APP_TAG# ]]></isNotNull>
+			<isNotNull prepend="," property="LOG_LEVEL"><![CDATA[ LOG_LEVEL = #LOG_LEVEL# ]]></isNotNull>
+			<isNotNull prepend="," property="LOG_TIME"><![CDATA[ LOG_TIME = #LOG_TIME# ]]></isNotNull>
+			<isNotNull prepend="," property="LOG_DATA"><![CDATA[ LOG_DATA = #LOG_DATA# ]]></isNotNull>
+			<isNotNull prepend="," property="SESSION_ID"><![CDATA[ SESSION_ID = #SESSION_ID# ]]></isNotNull>
+
+			<isNotNull prepend="," property="CHANNEL_ID"><![CDATA[ CHANNEL_ID = #CHANNEL_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="APP_ID"><![CDATA[ APP_ID = #APP_ID# ]]></isNotNull>
+			<isNotNull prepend="," property="APP_VERS"><![CDATA[ APP_VERS = #APP_VERS# ]]></isNotNull>
+			<isNotNull prepend="," property="IP_ADDR"><![CDATA[ IP_ADDR = #IP_ADDR# ]]></isNotNull>
+			<isNotNull prepend="," property="GPS"><![CDATA[ GPS = #GPS# ]]></isNotNull>
+			<isNotNull prepend="," property="PLACE"><![CDATA[ PLACE = #PLACE# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where LOG_ID = #LOG_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.configPlat}.ARES_LOG_INFO where LOG_ID = #LOG_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+</sqlMap>
+

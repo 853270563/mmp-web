@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CRDT_SELECT_INFO">
+	<!-- 进件查询行所号、分行号 -->
+	<select id="queryCardImgInfo"  parameterClass="map" resultClass="java.util.HashMap" >
+	    SELECT a.BANK_PLACE_NO,b.CARD_DATUM FROM ${schema.configPlat}.CRDT_BANK_FILL a LEFT JOIN  CARD_FUN_INFO b ON a.CRDT_IN_ID=b.CRDT_IN_ID WHERE a.CRDT_IN_ID=#CRDT_IN_ID#
+	</select>
+	<!--确认函上送图片所需的批次，条形码，分行号和行所号 -->
+	<select id="queryConfirmImgInfo"  parameterClass="map" resultClass="java.util.HashMap" >
+	 	SELECT	BATCHID,BAR_CODE,TABLECODE,	APPLY_CITY,BRANCH_ORGAN FROM GET_CARD_CONFIRMATION_DATA WHERE CRDT_IN_ID=#CRDT_IN_ID#
+	</select>
+	<!-- 查询所有的图片的信息-->
+	<select id="selectImageInfoList"  parameterClass="map" resultClass="java.util.HashMap" >
+	    SELECT IMAGE_ID,
+	CRDT_IN_ID,
+	IMAGE_NAME,
+	IMAGE_TYPE,
+	IMAGE_PATH,
+	IMAGE_SIZE,
+	UPLOAD_DATE FROM ${schema.configPlat}.IMAGE_INFO WHERE  CRDT_IN_ID=#CRDT_IN_ID#
+	</select>
+	<!-- 绑定进件号对应的批次号和条形码-->
+	<update id="update"  parameterClass="map"  >
+	   	UPDATE ${schema.configPlat}.CRDT_IN_INFO SET BAR_CODE=#BAR_CODE#, BATCH_NBR=#BATCH_NBR# WHERE CRDT_IN_ID = #CRDT_IN_ID#
+	</update>
+	<!-- 查询批次号和条形码-->
+	<select id="select"  parameterClass="map" resultClass="java.util.HashMap" >
+	    SELECT BAR_CODE,BATCH_NBR  FROM ${schema.configPlat}.CRDT_IN_INFO WHERE  CRDT_IN_ID=#CRDT_IN_ID#
+	</select>
+	
+		<!-- 绑定进件号对应的批次号和条形码-->
+	<update id="updateConfirm"  parameterClass="map"  >
+	   	UPDATE ${schema.configPlat}.GET_CARD_CONFIRMATION_DATA SET BAR_CODE=#BAR_CODE#, BATCHID=#BATCHID# WHERE CRDT_IN_ID = #CRDT_IN_ID#
+	</update>
+	
+	
+		<!-- 通过进件Id查询紧急程度-->
+	<select id="selectCrdtInfo"  parameterClass="map" resultClass="java.util.HashMap" >
+	    SELECT TIMELY_TYPE FROM ${schema.configPlat}.CRDT_IN_INFO WHERE  CRDT_IN_ID=#CRDT_IN_ID#
+	</select>
+		<!-- 判断团办编号是否存在-->
+	<select id="selectTeamNo"  parameterClass="map" resultClass="int" >
+	  SELECT 	count(TEAM_ID) CNT FROM ${schema.configPlat}.TEAM_CRDT_IN_INFO WHERE TEAM_ID=#TEAM_ID#
+	</select>
+	<!-- 查询进件个数 -->
+	<select id="selectSameTeamNo"  parameterClass="map" resultClass="int" >
+	 	 SELECT COUNT(CRDT_IN_ID) FROM TEAM_REF WHERE TEAM_ID=#TEAM_ID#
+	</select>
+
+	
+</sqlMap>
+

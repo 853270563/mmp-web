@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	   default-lazy-init="true">
+
+	<description>Shiro Configuration</description>
+
+	<!--<bean id="logoutFilter" class="com.thinkgem.jeesite.modules.sys.security.LogoutFilter" />-->
+
+	
+	<!-- 定义 Shiro 主要业务对象 -->
+	<!-- <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
+		<property name="realm" ref="systemAuthorizingRealm" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+		<property name="sessionManager" ref="sessionManager" />
+		
+	</bean>
+	会话管理器
+	    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+	        session的失效时长，单位毫秒
+	        <property name="globalSessionTimeout" value="600000"/>
+	        删除失效的session
+	        <property name="deleteInvalidSessions" value="true"/>
+	    </bean>
+	<bean id="systemAuthorizingRealm" class="cn.com.yitong.framework.util.security.SystemAuthorizingRealm"></bean> -->
+</beans>

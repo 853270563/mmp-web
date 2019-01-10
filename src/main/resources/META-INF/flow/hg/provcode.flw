@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="provcode.flw" desc="获取省份编码">
+  <nodes>
+    <node id="8158fdc3-6117-42e7-ab52-022027b8ae8d" xPos="230" yPos="80" Width="50" Height="50">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="dfac6c56-3018-4aa4-bca9-5b1892e5a495" xPos="230" yPos="160" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="provcode.queryprovcodelist" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="1728af7c-48da-4281-be43-e7e43f3015f8" xPos="230" yPos="240" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="hg/provcode" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="63fdf720-d53a-4c85-8683-3a8e3a203a79" xPos="230" yPos="330" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="8158fdc3-6117-42e7-ab52-022027b8ae8d" to="dfac6c56-3018-4aa4-bca9-5b1892e5a495"/>
+    <line desc="" condition="" from="dfac6c56-3018-4aa4-bca9-5b1892e5a495" to="1728af7c-48da-4281-be43-e7e43f3015f8"/>
+    <line desc="" condition="" from="1728af7c-48da-4281-be43-e7e43f3015f8" to="63fdf720-d53a-4c85-8683-3a8e3a203a79"/>
+  </lines>
+</diagram>

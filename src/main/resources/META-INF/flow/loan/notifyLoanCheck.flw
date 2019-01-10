@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="notifyLoanCheck.flw" desc="贷后检查异常通知">
+  <nodes>
+    <node id="31701fac-e54e-43a9-b6c9-8ace01e83711" xPos="420" yPos="210" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/notifyLoanCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

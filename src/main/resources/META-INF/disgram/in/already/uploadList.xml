@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/already/uploadList" desc="已上传贷款用途影像影像消费凭证列表">
+	<snd>
+		<field name="CONTRACT_NO" desc="借款合同编号" />
+		<field name="RECEIPT_NO" desc="借据编号" />
+	</snd>
+	<rcv>
+		
+		<field name="LIST" type="E" desc="消费列表">
+			<field name="ID" desc="借据授信ID" />
+			<field name="USED_TIME" desc="使用时间" />
+			<field name="USED_AMOUNT" desc="使用金额" />
+			<field name="USED_SERIALNO " desc="使用流水号" />
+			<field name="USED_WAY" desc="使用途径" comment="0：未知 1：POS 2：ATM 3：柜面 4：手机银行"/>
+			<field name="CONFIM_FLAG " desc="确认标志" comment="0否 1是"/>
+			<field name="CONFIM_DATE " desc="确认日期" comment="YYYY-MM-DD"/>
+			<field name="WORK_NUMBER " desc="确认客户经理" />
+			<field name="IMAGE_NO " desc="使用凭证影像编号" />
+			<field name="LIST" type="E" desc="影像列表" >
+				<field name="FILE_CN_NAME" desc="文件名称" />
+				<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" />
+				<field name="BATCH_ID" desc="影像批次号" required="true" />
+				<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"/>
+			</field>
+		</field>
+	</rcv>
+</trans>

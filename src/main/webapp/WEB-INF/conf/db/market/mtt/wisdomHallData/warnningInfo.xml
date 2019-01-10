@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="warningInfo" desc="预警信息" ibatisStatement="">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!-- 预警信息列表 -->
+		<field-list name="MSG_LIST" type="E">
+			<field name="MSG" length="2000" type="C" desc="消息内容" />
+			<field name="MSG_TIME" length="20" type="C" desc="消息时间yyyy-MM-dd HH:mm:ss" />
+		</field-list>
+	</rcv>
+</trans>

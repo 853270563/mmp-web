@@ -3,13 +3,8 @@ package cn.com.yitong.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author zhanglong
- * @date 17/9/7
- */
 public class TransSeqNoUtils {
-
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
     public static String getSeqNoUtilsByDate(int randomLength) {
         return sdf.format(new Date()) + getRandom(randomLength);

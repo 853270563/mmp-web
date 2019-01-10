@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MY_DISPACH">
+
+    <!-- 更新派单状态 -->
+    <update id="updateState" parameterClass="java.util.Map">
+       	update ${schema.busiPlat}.MY_DISPACH
+       	<dynamic prepend="set" >
+	      <isNotNull prepend="," property="STATE" >
+	        STATE = #STATE#
+	      </isNotNull>
+    	</dynamic>
+    	where BAR_CODE=#BAR_CODE#
+    </update>
+</sqlMap>
+

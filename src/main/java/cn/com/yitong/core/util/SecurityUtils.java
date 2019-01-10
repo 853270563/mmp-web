@@ -1,20 +1,20 @@
 package cn.com.yitong.core.util;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.com.yitong.common.utils.ConfigUtils;
 import cn.com.yitong.common.utils.StringUtils;
 import cn.com.yitong.core.session.Session;
 import cn.com.yitong.core.session.util.SessionManagerUtils;
 import cn.com.yitong.core.web.util.LoginCodecUtils;
 import cn.com.yitong.core.web.util.NetCodecUtils;
-import cn.com.yitong.framework.util.security.SecurityUtil;
 import cn.com.yitong.tools.crypto.ICodec;
 import cn.com.yitong.tools.crypto.RSAFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Token 生成工具类
@@ -90,7 +90,7 @@ public class SecurityUtils {
      * @return
      */
     private static boolean isSysCodecType(int codecType) {
-        return 0 == codecType || 1 == codecType || 2 == codecType;
+        return 0 == codecType || 1 == codecType;
     }
 
     /**
@@ -152,7 +152,7 @@ public class SecurityUtils {
      * @return
      */
     public static String getToken() {
-        return (String) getSessionRequired().getId();
+        return getSessionRequired().getId();
     }
 
     /**
@@ -170,7 +170,7 @@ public class SecurityUtils {
     public static String getSecurityKeyRequired() {
         String skey = getSecurityKey();
         if(null == skey) {
-            throw new IllegalArgumentException("当前会话没有正常登录");
+            throw new IllegalArgumentException("当前会话没有正常登陆");
         }
         return skey;
     }
@@ -249,14 +249,14 @@ public class SecurityUtils {
         return ThreadContext.getRequestMessageId();
     }
 
-    /**
-     * 根据秘钥长度配置获取key的长度
-     * @return
-     */
-    public static int getAesKeyLength() {
-        int keyLength = ConfigUtils.getValue(ConfigName.AES_KEY_LENGTH, Integer.class, ConfigName.AES_KEY_LENGTH_DEFAULT);
-        return keyLength/8;
-    }
+	/**
+	 * 根据秘钥长度配置获取key的长度
+	 * @return
+	 */
+	public static int getAesKeyLength() {
+		int keyLength = ConfigUtils.getValue(ConfigName.AES_KEY_LENGTH, Integer.class, ConfigName.AES_KEY_LENGTH_DEFAULT);
+		return keyLength / 8;
+	}
 
     /**
      * 加密通讯数据
@@ -267,26 +267,22 @@ public class SecurityUtils {
         if(!canCodec() || null == ThreadContext.get(HAS_CODED_KEY)) {
             return data;
         }
-        if(logger.isInfoEnabled()) {
-            logger.info("加密前的返回报文为：" + data);
+        if(logger.isDebugEnabled()) {
+            logger.debug("加密前的返回报文为：" + data);
         }
         int codecType = getCurrentCodecType();
         if(1 == codecType) {
-            //ARES 平台加密
             if (isLogining()) {
                 data = LoginCodecUtils.loginEncode(data);
             } else {
                 data = NetCodecUtils.encode(data);
             }
-        }else if(2 == codecType) {
-            // 手机银行 三段式加密
-//            data = SecurityUtil.encrypt(data);
-
-            // 移动营销 三段式加密
-            data = SecurityUtil.encryptAres(data);
         } else {
             data = getCodecByType(codecType).encrypt(data);
         }
+//        if(logger.isTraceEnabled()) {
+//            logger.trace("加密后的返回报文为：" + data);
+//        }
         if(logger.isDebugEnabled()) {
             logger.debug("加密后的返回报文为：" + data);
         }
@@ -302,29 +298,25 @@ public class SecurityUtils {
         if(!canCodec()) {
             return data;
         }
+//        if(logger.isTraceEnabled()) {
+//            logger.trace("解密前的请求报文为：" + data);
+//        }
         if(logger.isDebugEnabled()) {
             logger.debug("解密前的请求报文为：" + data);
         }
         ThreadContext.put(HAS_CODED_KEY, true);
         int codecType = getCurrentCodecType();
         if(1 == codecType) {
-            //Ares 平台解密
             if (isLogining()) {
                 data = LoginCodecUtils.loginDecode(data);
             } else {
                 data = NetCodecUtils.decode(data);
             }
-        }else if(2 == codecType) {
-            //手机银行 三段式解密
-//            data = SecurityUtil.deEncrypt(data);
-
-            //移动营销 三段式解密
-            data = SecurityUtil.deEncryptAres(data);
         } else {
             data = getCodecByType(codecType).decrypt(data);
         }
-        if(logger.isInfoEnabled()) {
-            logger.info("解密后的请求报文为：" + data);
+        if(logger.isDebugEnabled()) {
+			logger.debug("解密后的请求报文为：\n" + data);
         }
         return data;
     }

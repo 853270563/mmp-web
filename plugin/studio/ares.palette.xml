@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project>
+	<!-- 通讯相关 -->
+	<group id="netTools" desc="通讯相关">
+		<component beanId="netToolsAsOp" desc="安硕Http通讯">
+			<items>
+				<item key="*transCode" desc="交易报文路径" expr=""></item>
+				<item key="*remove" desc="请求字段清理，*为全部字段" expr="KEY_1,KEY_2"></item>
+			</items>
+		</component>
+		<component beanId="netToolsNetLoanOp" desc="网贷平台Http通讯">
+			<items>
+				<item key="*transCode" desc="交易报文路径" expr=""></item>
+				<item key="*remove" desc="请求字段清理，*为全部字段" expr="KEY_1,KEY_2"></item>
+			</items>
+		</component>
+		<component beanId="netToolsNetCoreOp" desc="网贷核心Http通讯">
+			<items>
+				<item key="*transCode" desc="交易报文路径" expr="${transCode}"></item>
+			</items>
+		</component>
+		<component beanId="netToolsXYuploadOp" desc="影像上传">
+			<items>
+				<item key="*required" desc="必输项检查" expr="FILE_PATHS,BUSI_FILE_TYPE,TASK_ID"></item>
+				<item key="*sqlId" desc="Mybatis SQL Statement" expr="xypicture.insert"></item>
+			</items>
+		</component>
+		<component beanId="netToolsXYqryOp" desc="影像查询">
+			<items>
+				<item key="*required" desc="必输项检查" expr="BATCH_ID,BUSI_SERIAL_NO,BUSI_FILE_TYPE,BUSI_START_DATE"></item>
+				<item key="*sqlId" desc="xypicture.insert" expr="xypicture.insert"></item>
+			</items>
+		</component>
+		<component beanId="netToolsXYdelOp" desc="影像删除">
+			<items>
+				<item key="*required" desc="必输项检查" expr="BATCH_ID,BUSI_SERIAL_NO,BUSI_FILE_TYPE,BUSI_START_DATE"></item>
+				<item key="*sqlId" desc="xypicture.delete" expr="xypicture.insert"></item>
+			</items>
+		</component>
+	</group>
+	
+	<!-- 更多控件 -->
+	<group id="more" desc="更多控件">
+		<component beanId="requestCheckOp" desc="请求参数检查">
+			<items>
+				<item key="*transCode" desc="交易报文路径" expr="${transCode}"></item>
+			</items>
+		</component> 
+		<component beanId="permissionCheckOp" desc="权限检查">
+			<items>
+				<item key="*permission" desc="检查的权限" expr=""></item>
+			</items>
+		</component> 
+		<component beanId="responsFilterOp" desc="响应报文过滤">
+			<items>
+				<item key="*transCode" desc="交易报文路径" expr="${transCode}"></item>
+			</items>
+		</component> 
+		<component beanId="onceSessionCheckOp" desc="单次会话检查">
+			<items>
+				<item key="*sessKey" desc="会话字段名" expr="SESS_KEY_1"></item>
+				<item key="*paramKey" desc="请求字段名" expr="PARAM_KEY_1"></item>
+			</items>
+		</component> 
+		<component beanId="sessionSubmitOp" desc="会话创建">
+			<items>
+				<item key="*SESS_USER_ID" desc="会话字段名" expr="${USER_ID}"></item>
+				<item key="*SESS_LOGIN_FLAG" desc="会话字段名" expr="1"></item>
+			</items>
+		</component>
+		<component beanId="flowListEmbedOp" desc="列表遍历流程">
+			<items>
+				<item key="*flowPath" desc="列表子流程相对路径" expr="embed/demo"></item>
+				<item key="*listKey" desc="列表数据变量名" expr="LIST"></item>
+				<item key="*itemKey" desc="子项数据变量名" expr="item"></item>
+				<item key="*itemIndex" desc="列表索引变量名" expr="index"></item>
+			</items>
+		</component>
+		<component beanId="seqCreateOp" desc="创建序列">
+			<items>
+				<item key="*SEQ_KEY" desc="主键KEY,多个用,分割" expr=""></item>
+			</items>
+		</component>
+	</group>
+
+</project>
+
+

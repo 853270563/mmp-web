@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="groupCustInfo" desc="集团客户信息">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<body>
+  				<!--请求体 -->
+				<field name="customer_id" client="customerId" type="C"  required="true"  desc="客户编号" /> 
+		</body>
+	</snd>
+	
+		<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+   			<field-list name="item"   type="E"  desc="解析响应报文体">
+					<field name="GroupID" client="GroupID" type="C" required="true"  default="20"    desc="集团ID" />  
+					<field name="GroupName" client="GroupName" type="C" required="true"  default="20"    desc="集团名称" />  
+					<field name="GroupAbbName" client="GroupAbbName" type="C" required="true"  default="20"    desc="集团简称" />  
+					<field name="GroupCreditType" client="GroupCreditType" type="C" required="true"  default="20"    desc="集团类型" />  
+					<field name="KeyMemberCustomerName" client="KeyMemberCustomerName" type="C"  default="20"    desc="集团核心企业" />  
+					<field name="FinanceFocus" client="FinanceFocus" type="C"   default="20"    desc="财务是否集中" />  
+					<field name="GroupType2" client="GroupType2" type="C" required="true"  default="20"    desc="是否在总行集中管理名单" />  
+					<field name="MgtUserName" client="MgtUserName" type="C" required="true"  default="20"    desc="业务主办客户经理" />  
+					<field name="MgtOrgName" client="MgtOrgName" type="C" required="true"  default="20"    desc="  业务主办机构" />  
+					<field name="InputOrgName" client="InputOrgName" type="C" required="true"  default="20"    desc="维护机构" />  
+					<field name="FamilyMapStatus" client="FamilyMapStatus" type="C" required="true"  default="20"    desc="家谱版本状态" />
+			</field-list>
+		</rcv>
+</trans>

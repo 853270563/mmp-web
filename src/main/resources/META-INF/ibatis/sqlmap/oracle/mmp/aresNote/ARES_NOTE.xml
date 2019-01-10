@@ -48,29 +48,13 @@
 				ROWNUM as rno
 			from
 				(Select
-					t.NOTE_ID,
-					t.APP_ID,
-					t.NOTE_TYP,
-					t.NOTE_TITLE,
-					t.NOTE_CONTENT,
-					t.SEND_BEGIN_TIME,
-					t.SEND_END_TIME,
-					t.IMP_FLG,
-					TO_CHAR(t.CREATE_TIME, 'yyyy-MM-dd HH24:mm:ss"') as CREATE_TIME,
-					t.UPDATE_TIME,
-					t.AUDITOR_ID,
-					t.AUDIT_INFO,
-					t.AUDIT_TIME,
-					t.AUDIT_STATUS,
-					t.OPER_ID,
-					t.NOTE_STATUS
+					t.*
 				From
 					${schema.configPlat}.ARES_NOTE t
 				Where
-					t.AUDIT_STATUS = '1'
-					<![CDATA[
-						and t.SEND_BEGIN_TIME <= sysdate and ( t.SEND_END_TIME is null or t.SEND_END_TIME >= sysdate )
-					]]>
+					t.APP_ID = #APP_ID#
+					AND t.NOTE_STATUS = '1'
+					AND t.AUDIT_STATUS = '1'
 				Order by t.UPDATE_TIME desc
 				) a 
 			 where <![CDATA[ROWNUM <= #lastIndex#]]>
@@ -80,22 +64,7 @@
 	
 	<select id="loadAresNote" parameterClass="map" resultClass="java.util.HashMap">
 		Select
-			t.NOTE_ID,
-			t.APP_ID,
-			t.NOTE_TYP,
-			t.NOTE_TITLE,
-			t.NOTE_CONTENT,
-			t.SEND_BEGIN_TIME,
-			t.SEND_END_TIME,
-			t.IMP_FLG,
-			TO_CHAR(t.CREATE_TIME, 'yyyy-MM-dd HH24:mm:ss"') as CREATE_TIME,
-			t.UPDATE_TIME,
-			t.AUDITOR_ID,
-			t.AUDIT_INFO,
-			t.AUDIT_TIME,
-			t.AUDIT_STATUS,
-			t.OPER_ID,
-			t.NOTE_STATUS
+			t.*
 		From
 			${schema.configPlat}.ARES_NOTE t
 		Where

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/intefaceInfo" desc="接口調用信息記錄、查詢">
+	<snd>
+		<body>
+			<field name="BAR_CODE" type="C" desc="任务id" required="true"/>
+			<field name="OPTION_TYPE" type="C" desc="操作类型（1-查询，2-新增）" required="true"/>
+		    <field name="CUST_APPLY" type="C" desc="客户申请信息"/>
+		    <field name="CUST_BASE" type="C" desc="客户基本信息"/>
+		    <field name="EMER_CONTACT" type="C" desc="紧急联系人"/>
+		    <field name="COM_BOOROWER" type="C" desc="共同借款人"/>
+		    <field name="OTHER_RAPID" type="C" desc="其他还款人"/>
+		    <field name="GUARANTOR" type="C" desc="保证人"/>
+		    <field name="PHOTOES" type="C" desc="影像信息"/>
+		    <field name="SURVEY_OPINION" type="C" desc="调查意见"/>
+		    <field name="NOTAR_INFO" type="C" desc="公证信息"/>
+		    <field name="HOUSE_INFO_ONE" type="C" desc="房产信息1"/>
+		    <field name="HOUSE_INFO_TWO" type="C" desc="房产信息2"/>
+		    <field name="HOUSE_INFO_THREE" type="C" desc="房产信息3"/>
+		    <field name="HOUSE_INFO_FOUR" type="C" desc="房产信息4"/>
+		    <field name="HOUSE_INFO_FIVE" type="C" desc="房产信息5"/>
+		    <field name="HOUSE_INFO_SIX" type="C" desc="房产信息6"/>
+		    <field name="COM_PERSON_ONE" type="C" desc="共有人1"/>
+		    <field name="COM_PERSON_TWO" type="C" desc="共有人2"/>
+		    <field name="COM_PERSON_THREE" type="C" desc="共有人3"/>
+		    <field name="COM_PERSON_FOUR" type="C" desc="共有人4"/>
+		    <field name="COM_PERSON_FIVE" type="C" desc="共有人5"/>
+		    <field name="COM_PERSON_SIX" type="C" desc="共有人6"/>
+		    <field name="HOUSE_SURVEY_ONE" type="C" desc="房产调查意见1"/>
+		    <field name="HOUSE_SURVEY_TWO" type="C" desc="房产调查意见2"/>
+		    <field name="HOUSE_SURVEY_THREE" type="C" desc="房产调查意见3"/> 
+		    <field name="HOUSE_SURVEY_FOUR" type="C" desc="房产调查意见4"/>
+		    <field name="HOUSE_SURVEY_FIVE" type="C" desc="房产调查意见5"/>
+		    <field name="HOUSE_SURVEY_SIX" type="C" desc="房产调查意见6"/>
+		    <field name="HOUSE_PHOTO_ONE" type="C" desc="房产影像信息1"/>
+		    <field name="HOUSE_PHOTO_TWO" type="C" desc="房产影像信息2"/>
+		    <field name="HOUSE_PHOTO_THREE" type="C" desc="房产影像信息3"/>
+		    <field name="HOUSE_PHOTO_FOUR" type="C" desc="房产影像信息4"/>
+		    <field name="HOUSE_PHOTO_FIVE" type="C" desc="房产影像信息5"/>
+		    <field name="HOUSE_PHOTO_SIX" type="C" desc="房产影像信息6"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<body>
+			<field name="BAR_CODE" type="C" desc="任务id"/>
+		    <field name="CUST_APPLY" type="C" desc="客户申请信息"/>
+		    <field name="CUST_BASE" type="C" desc="客户基本信息"/>
+		    <field name="EMER_CONTACT" type="C" desc="紧急联系人"/>
+		    <field name="COM_BOOROWER" type="C" desc="共同借款人"/>
+		    <field name="OTHER_RAPID" type="C" desc="其他还款人"/>
+		    <field name="GUARANTOR" type="C" desc="保证人"/>
+		    <field name="PHOTOES" type="C" desc="影像信息"/>
+		    <field name="SURVEY_OPINION" type="C" desc="调查意见"/>
+		    <field name="NOTAR_INFO" type="C" desc="公证信息"/>
+		    <field name="HOUSE_INFO_ONE" type="C" desc="房产信息1"/>
+		    <field name="HOUSE_INFO_TWO" type="C" desc="房产信息2"/>
+		    <field name="HOUSE_INFO_THREE" type="C" desc="房产信息3"/>
+		    <field name="HOUSE_INFO_FOUR" type="C" desc="房产信息4"/>
+		    <field name="HOUSE_INFO_FIVE" type="C" desc="房产信息5"/>
+		    <field name="HOUSE_INFO_SIX" type="C" desc="房产信息6"/>
+		    <field name="COM_PERSON_ONE" type="C" desc="共有人1"/>
+		    <field name="COM_PERSON_TWO" type="C" desc="共有人2"/>
+		    <field name="COM_PERSON_THREE" type="C" desc="共有人3"/>
+		    <field name="COM_PERSON_FOUR" type="C" desc="共有人4"/>
+		    <field name="COM_PERSON_FIVE" type="C" desc="共有人5"/>
+		    <field name="COM_PERSON_SIX" type="C" desc="共有人6"/>
+		    <field name="HOUSE_SURVEY_ONE" type="C" desc="房产调查意见1"/>
+		    <field name="HOUSE_SURVEY_TWO" type="C" desc="房产调查意见2"/>
+		    <field name="HOUSE_SURVEY_THREE" type="C" desc="房产调查意见3"/> 
+		    <field name="HOUSE_SURVEY_FOUR" type="C" desc="房产调查意见4"/>
+		    <field name="HOUSE_SURVEY_FIVE" type="C" desc="房产调查意见5"/>
+		    <field name="HOUSE_SURVEY_SIX" type="C" desc="房产调查意见6"/>
+		    <field name="HOUSE_PHOTO_ONE" type="C" desc="房产影像信息1"/>
+		    <field name="HOUSE_PHOTO_TWO" type="C" desc="房产影像信息2"/>
+		    <field name="HOUSE_PHOTO_THREE" type="C" desc="房产影像信息3"/>
+		    <field name="HOUSE_PHOTO_FOUR" type="C" desc="房产影像信息4"/>
+		    <field name="HOUSE_PHOTO_FIVE" type="C" desc="房产影像信息5"/>
+		    <field name="HOUSE_PHOTO_SIX" type="C" desc="房产影像信息6"/>
+		</body>
+	</rcv>
+</trans>

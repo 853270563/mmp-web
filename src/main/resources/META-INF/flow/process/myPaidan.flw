@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="myPaidan.flw" desc="我的派单">
+  <nodes>
+    <node id="d876066f-ad19-4869-9c59-3eba4f7c1bf0" xPos="410" yPos="60" Width="180" Height="40">
+      <desc>分页数据查询</desc>
+      <beanId>dbPageQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="MyDispach.queryByMap" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="6a239760-adc4-445b-934a-35070d963c61" xPos="410" yPos="290" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="d876066f-ad19-4869-9c59-3eba4f7c1bf0" to="6a239760-adc4-445b-934a-35070d963c61"/>
+  </lines>
+</diagram>

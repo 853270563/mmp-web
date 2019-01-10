@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CREDIT_APPLY">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="BUSINESSNUM">
+			T.BUSINESSNUM =#BUSINESSNUM#
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.CREDIT_APPLY T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.BUSINESSNUM
+	</sql>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(*) CNT 
+			FROM ${schema.interPlat}.CREDIT_APPLY APP,${schema.interPlat}.MGG_CUST_INFO IDI
+		 	]]>
+		 <dynamic prepend="WHERE">
+		 	APP.BUSINESSNUM = IDI.SERIAL_NO AND
+			<isNotNull prepend="AND" property="FLAG">
+				<![CDATA['1' = #FLAG#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="RECORDID">
+				<![CDATA[APP.RECORDID = #RECORDID#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="BEGINDATE">
+				<![CDATA[substr(APP.RECORDTIME, 0, 10) >= #BEGINDATE#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="ENDDATE">
+				<![CDATA[substr(APP.RECORDTIME, 0, 10) <= #ENDDATE#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="DEALFLAG">
+				<![CDATA[APP.DEALFLAG = #DEALFLAG#]]>
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.CREDIT_APPLY
+		( BUSINESSNUM,USERNAME,SEX,IDCARDTYPE,IDCARDNUMBER,BIRTH,CREDITTYPE,APPLYAMOUNT,APPLYDEADLINE,LOANUSE,INTERESTRATE,SPREADS,INTERESTRATEMODE,INTERESTRATESTYLE,TRUSTEEFLAG,FLOATINGRATE,REPAYMENT,REPAYMENTDATE,REPAYMENTINTERVALS,PROJECTINFORMATION,BUFFETFLAG,MOBILEBANKING,ONLINEBANKING,BUFFETTERMINAL,RECORDTIME,DEALFLAG,RECORDID,RECORDNME,RECORDORG,EXPANDFIELD1,EXPANDFIELD2,EXPANDFIELD3,EXPANDFIELD4,EXPANDFIELD5 ) 
+		VALUES ( #BUSINESSNUM#,#USERNAME#,#SEX#,#IDCARDTYPE#,#IDCARDNUMBER#,#BIRTH#,#CREDITTYPE#,#APPLYAMOUNT#,#APPLYDEADLINE#,#LOANUSE#,#INTERESTRATE#,#SPREADS#,#INTERESTRATEMODE#,#INTERESTRATESTYLE#,#TRUSTEEFLAG#,#FLOATINGRATE#,#REPAYMENT#,#REPAYMENTDATE#,#REPAYMENTINTERVALS#,#PROJECTINFORMATION#,#BUFFETFLAG#,#MOBILEBANKING#,#ONLINEBANKING#,#BUFFETTERMINAL#,#RECORDTIME#,#DEALFLAG#,#RECORDID#,#RECORDNME#,#RECORDORG#,#EXPANDFIELD1#,#EXPANDFIELD2#,#EXPANDFIELD3#,#EXPANDFIELD4#,#EXPANDFIELD5#  )
+	</insert> 
+ 
+   <select id="getBusinessNum" resultClass="java.util.HashMap" >
+  		select to_char(sysdate, 'YYYYMMDD') || ${schema.interPlat}.SEQ_CREDIT_APPLY.nextval as BUSINESSNUM from dual 
+   </select>
+   
+   <sql id="loadByRecordId">
+		SELECT
+			APP.*,
+			IDI.NATION,
+			IDI.ADDRESS,
+			IDI.VALIDITY,
+			IDI.ISSUE
+		FROM ${schema.interPlat}.CREDIT_APPLY APP,${schema.interPlat}.MGG_CUST_INFO IDI
+		 <dynamic prepend="WHERE">
+		 	APP.BUSINESSNUM = IDI.SERIAL_NO AND
+			<isNotNull prepend="AND" property="FLAG">
+				<![CDATA['1' = #FLAG#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="RECORDID">
+				<![CDATA[APP.RECORDID = #RECORDID#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="BEGINDATE">
+				<![CDATA[substr(APP.RECORDTIME, 0, 10) >= #BEGINDATE#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="ENDDATE">
+				<![CDATA[substr(APP.RECORDTIME, 0, 10) <= #ENDDATE#]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="DEALFLAG">
+				<![CDATA[APP.DEALFLAG = #DEALFLAG#]]>
+			</isNotNull>
+		</dynamic>
+		ORDER BY APP.RECORDTIME DESC
+   </sql>
+	
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="loadByRecordId" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.CREDIT_APPLY ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="USERNAME" prepend=","><![CDATA[ USERNAME = #USERNAME# ]]></isNotNull>
+			<isNotNull property="SEX" prepend=","><![CDATA[ SEX = #SEX# ]]></isNotNull>
+			<isNotNull property="IDCARDTYPE" prepend=","><![CDATA[ IDCARDTYPE = #IDCARDTYPE# ]]></isNotNull>
+			<isNotNull property="IDCARDNUMBER" prepend=","><![CDATA[ IDCARDNUMBER = #IDCARDNUMBER# ]]></isNotNull>
+			<isNotNull property="BIRTH" prepend=","><![CDATA[ BIRTH = #BIRTH# ]]></isNotNull>
+			<isNotNull property="CREDITTYPE" prepend=","><![CDATA[ CREDITTYPE = #CREDITTYPE# ]]></isNotNull>
+			<isNotNull property="APPLYAMOUNT" prepend=","><![CDATA[ APPLYAMOUNT = #APPLYAMOUNT# ]]></isNotNull>
+			<isNotNull property="APPLYDEADLINE" prepend=","><![CDATA[ APPLYDEADLINE = #APPLYDEADLINE# ]]></isNotNull>
+			<isNotNull property="LOANUSE" prepend=","><![CDATA[ LOANUSE = #LOANUSE# ]]></isNotNull>
+			<isNotNull property="INTERESTRATE" prepend=","><![CDATA[ INTERESTRATE = #INTERESTRATE# ]]></isNotNull>
+			<isNotNull property="SPREADS" prepend=","><![CDATA[ SPREADS = #SPREADS# ]]></isNotNull>
+			<isNotNull property="INTERESTRATEMODE" prepend=","><![CDATA[ INTERESTRATEMODE = #INTERESTRATEMODE# ]]></isNotNull>
+			<isNotNull property="INTERESTRATESTYLE" prepend=","><![CDATA[ INTERESTRATESTYLE = #INTERESTRATESTYLE# ]]></isNotNull>
+			<isNotNull property="TRUSTEEFLAG" prepend=","><![CDATA[ TRUSTEEFLAG = #TRUSTEEFLAG# ]]></isNotNull>
+			<isNotNull property="FLOATINGRATE" prepend=","><![CDATA[ FLOATINGRATE = #FLOATINGRATE# ]]></isNotNull>
+			<isNotNull property="REPAYMENT" prepend=","><![CDATA[ REPAYMENT = #REPAYMENT# ]]></isNotNull>
+			<isNotNull property="REPAYMENTDATE" prepend=","><![CDATA[ REPAYMENTDATE = #REPAYMENTDATE# ]]></isNotNull>
+			<isNotNull property="REPAYMENTINTERVALS" prepend=","><![CDATA[ REPAYMENTINTERVALS = #REPAYMENTINTERVALS# ]]></isNotNull>
+			<isNotNull property="PROJECTINFORMATION" prepend=","><![CDATA[ PROJECTINFORMATION = #PROJECTINFORMATION# ]]></isNotNull>
+			<isNotNull property="BUFFETFLAG" prepend=","><![CDATA[ BUFFETFLAG = #BUFFETFLAG# ]]></isNotNull>
+			<isNotNull property="MOBILEBANKING" prepend=","><![CDATA[ MOBILEBANKING = #MOBILEBANKING# ]]></isNotNull>
+			<isNotNull property="ONLINEBANKING" prepend=","><![CDATA[ ONLINEBANKING = #ONLINEBANKING# ]]></isNotNull>
+			<isNotNull property="BUFFETTERMINAL" prepend=","><![CDATA[ BUFFETTERMINAL = #BUFFETTERMINAL# ]]></isNotNull>
+			<isNotNull property="RECORDTIME" prepend=","><![CDATA[ RECORDTIME = #RECORDTIME# ]]></isNotNull>
+			<isNotNull property="DEALFLAG" prepend=","><![CDATA[ DEALFLAG = #DEALFLAG# ]]></isNotNull>
+			<isNotNull property="RECORDID" prepend=","><![CDATA[ RECORDID = #RECORDID# ]]></isNotNull>
+			<isNotNull property="RECORDNME" prepend=","><![CDATA[ RECORDNME = #RECORDNME# ]]></isNotNull>
+			<isNotNull property="RECORDORG" prepend=","><![CDATA[ RECORDORG = #RECORDORG# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD1" prepend=","><![CDATA[ EXPANDFIELD1 = #EXPANDFIELD1# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD2" prepend=","><![CDATA[ EXPANDFIELD2 = #EXPANDFIELD2# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD3" prepend=","><![CDATA[ EXPANDFIELD3 = #EXPANDFIELD3# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD4" prepend=","><![CDATA[ EXPANDFIELD4 = #EXPANDFIELD4# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD5" prepend=","><![CDATA[ EXPANDFIELD5 = #EXPANDFIELD5# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.CREDIT_APPLY where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	<!-- 信贷详情操作 -->
+	<select id="getCreditDetail" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			SELECT * FROM ${schema.interPlat}.EXAM_CREDIT T
+		       	LEFT JOIN ${schema.interPlat}.CREDIT_APPLY O ON T.BUSINESSNUM = O.BUSINESSNUM
+		       	LEFT JOIN ${schema.interPlat}.MGG_CUST_INFO  P ON P.SERIAL_NO=T.BUSINESSNUM
+     	       	LEFT JOIN ${schema.interPlat}.MGG_TRAN_CHECK Q ON T.ID = Q.TRANS_ID
+	       		WHERE O.BUSINESSNUM=#BUSINESSNUM# AND ROWNUM<2
+	    ]]>
+	</select>
+	<!-- 查询信贷类型 0 企业贷 1消费贷 -->
+	<select id="loadCreditType" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[SELECT T.* FROM ${schema.interPlat}.CREDIT_APPLY T  WHERE T.BUSINESSNUM=#BUSINESSNUM#]]>
+  	</select>
+  	<!--  根据资产类型查询资产信息    资产类型:家庭资产 1或2   企业资产  3或4 -->
+	<select id="loadAssestInfo" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[SELECT * FROM (SELECT * FROM ${schema.interPlat}.CREDIT_ASSETS) T]]>
+		<dynamic prepend="WHERE ">
+				<isNotEmpty prepend="and" property="ASSESTTYPE">
+		    		T.ASSESTTYPE  in 
+					<iterate property="ASSESTTYPE" conjunction="," close=")" open="(" >
+						<![CDATA[#ASSESTTYPE[]#]]>
+					</iterate>
+				</isNotEmpty>
+				<isNotEmpty prepend="and"  property="BUSINESSNUM">
+					<![CDATA[ T.BUSINESSNUM=#BUSINESSNUM# ]]>
+				</isNotEmpty>
+				<isNotEmpty prepend="and" >
+					<![CDATA[ ROWNUM<2 ]]>
+				</isNotEmpty>
+		</dynamic>
+  	</select>
+  	
+  	<!--  企业信贷信息 -->
+	<select id="loadBusinessInfo" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ SELECT t.* FROM ${schema.interPlat}.BUSINESS_LOAN_INFO T WHERE T.BUSINESSNUM=#BUSINESSNUM# ]]>
+	</select>
+	<!--  消费信贷信息 -->
+	<select id="loadConsumerInfo" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ SELECT t.* FROM ${schema.interPlat}.CONSUMER_LOAN_INFO T WHERE T.BUSINESSNUM=#BUSINESSNUM# ]]>
+	</select>
+</sqlMap>
+

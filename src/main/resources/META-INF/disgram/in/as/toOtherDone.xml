@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/toOtherDone" desc="派单">
+	<snd>
+		<body>
+			<field name="manager_code" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" type="C" desc="条码号" required="true"/>
+			<field name="clientName" type="C" required="true" desc="委托人名称"/>
+			<field name="clientPhone" type="C" required="true" desc="委托人电话"/>
+			<field name="ruleId" type="C" required="true" desc="委托规则Id"/>
+			<field name="subRuleType" type="C" required="true" desc="委托规则中标子类型"/>
+			<field name="outCompanyId" type="C" required="true" desc="评估机构Id"/>
+			<field name="outCompanyName" type="C" required="true" desc="评估机构名称"/>
+			<field name="propertyPattern" type="C" required="true" desc="是否需要报告(1：不需要，2：需要)"/>
+			<field name="apply_time" type="C" required="true" desc="申请时间"/>
+			<field name="reFlag" type="2" required="true" desc="是否重新核验（1-是，0-否）"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+			<field name="signature" type="C" desc="服务端签名"/>
+			<field name="timestamp" type="C" desc="时间戳"/>
+		</head>
+		<body>
+			<field name="entrustId" type="C" desc="业务id"/>
+			<field name="objectList" type="E" desc="委估对象列表">
+				<field name="objectId" type="C" desc="委估对象id"/>
+				<field name="fullName" type="C" desc="物业全名"/>
+			</field>
+		</body>
+	</rcv>
+</trans>

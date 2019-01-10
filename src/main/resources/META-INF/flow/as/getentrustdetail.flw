@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="getentrustdetail.flw" desc="查询业务详情">
+  <nodes>
+    <node id="133ec6c2-e047-4da8-99f6-8e780610eeba" xPos="440" yPos="290" Width="50" Height="50">
+      <desc>安硕Http通讯</desc>
+      <beanId>netToolsAsOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/getentrustdetail" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

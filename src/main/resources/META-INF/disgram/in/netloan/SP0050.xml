@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0050" excode="CoOwner_APP02" desc="共有人查询接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="pledge_code" length="2" type="C" desc="抵押物房产编号" required="true"/>             
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+			<field name="co_owner" type="E" desc="共有人">
+				<field name="co_owner_name" length="80" type="C" desc="姓名"/>
+				<field name="co_owner_idcard" length="32" type="C" desc="证件号"/>
+				<field name="co_owner_phone" length="15" type="C" desc="手机号"/>
+				<field name="address_pro" length="10" type="C" desc="居住地址-省"/>
+				<field name="address_city" length="10" type="C" desc="居住地址-市"/>
+				<field name="address_county" length="10" type="C" desc="居住地址-县"/>
+				<field name="address_detail" length="80" type="C" desc="居住地址"/>
+				<field name="pledge_code" length="2" type="C" desc="抵押物房产编号"/> 
+				<field name="co_owner_code" length="10" type="C" desc="共有人编号"/>
+				<field name="mari_status" length="2" type="C" desc="婚姻状况"/>
+				<field name="spouse_name" length="50" type="C" desc="配偶-姓名"/>
+				<field name="spouse_idcard" length="18" type="C" desc="配偶-证件号码"/>
+			</field>  
+		</body>
+	</rcv>
+</trans>

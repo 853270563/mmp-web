@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/notifyOverduePlan" desc="逾期催收通知">
+	<snd>
+		<field name="ID" desc="检查ID" required="true" target="id" />
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

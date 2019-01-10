@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="myApply.flw" desc="我的申请">
+  <nodes>
+    <node id="d8063bf5-8b53-4533-9d47-0f64ce482e78" xPos="430" yPos="130" Width="180" Height="40">
+      <desc>分页数据查询</desc>
+      <beanId>dbPageQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rejectTask.myApply" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="a4ff0cc8-31f6-4a3e-9616-60b0a06faf78" xPos="430" yPos="290" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="d8063bf5-8b53-4533-9d47-0f64ce482e78" to="a4ff0cc8-31f6-4a3e-9616-60b0a06faf78"/>
+  </lines>
+</diagram>

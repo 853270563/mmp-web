@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="FinaServCont" desc="金融产品分类" ibatisStatement="FINA_SERV_CONT.pageQuery">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<!--过滤响应信息，并对数据字典进行解析-->
+		<field name="PARA_VALUE" length="20" type="C" desc="一级类型"/>
+		<field name="TYPE_SECO_ID" length="20" type="C" desc="二级类型"/>
+		<field name="TYPE_THIR_ID" length="20" type="C" desc="三级类型"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+ 					<field name="INFO_DESC_ID" length="20" type="C" desc="内容描述ID" />
+					<field name="INFO_TITLE" length="60" type="C" desc="标题" />
+					<field name="INFO_CONT" length="" type="C" desc="内容" />
+					<field name="INFO_TYPE" length="60" type="C" desc="类型" />
+					<field name="PARA_VALUE" length="20" type="C" desc="一级类型" />
+					<field name="PARA_NAME_CN" length="60" type="C" desc="一级类型名称" />
+					<field name="TYPE_SECO_ID" length="20" type="C" desc="二级类型" />
+					<field name="TYPE_SECO_NAME" length="60" type="C" desc="二级类型名称" />
+					<field name="TYPE_THIR_ID" length="20" type="C" desc="三级类型" />
+					<field name="TYPE_THIR_NAME" length="60" type="C" desc="三级类型名称" />
+		</field-list>
+	</rcv>
+</trans>

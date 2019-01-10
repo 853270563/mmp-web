@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="direct">
+	<select id="queryuserbydirect" parameterType="java.util.Map" resultType="string">
+		<!-- select m.no from ${schema.configPlat}.SYS_USER m inner join ${schema.configPlat}.DIRECT_MANAGE_RELACTION dm on dm.MANAGE_ID= m.id left join ${schema.configPlat}.SYS_USER d on dm.DIRECT_ID = d.id and d.no=#{WORK_NUMBER} -->
+		select m.NO from ${schema.configPlat}.SYS_USER m inner join
+	 		${schema.configPlat}.DIRECT_MANAGE_RELACTION dm on dm.MANAGE_ID= m.id and DIRECT_ID =
+			(select u.id from ${schema.configPlat}.SYS_USER u where u.no=#{WORK_NUMBER})
+	</select>
+</mapper>

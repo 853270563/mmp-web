@@ -1,14 +1,15 @@
 package cn.com.yitong.codegen.vo;
 
 
-import cn.com.yitong.common.utils.ConfigUtils;
-import cn.com.yitong.util.StringUtil;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang3.ObjectUtils;
+
+import cn.com.yitong.common.utils.ConfigUtils;
+import cn.com.yitong.util.StringUtil;
 
 /**
  * 表对应的代码生成辅助类.

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/client/uploadHeadImg" desc="客户端上传头像">
+	<snd>
+		<field name="USER_ID" desc="用户ID" required="true" />
+		<field name="IMG_BASE64" desc="base64图片" required="true" />
+	</snd>
+	<rcv>
+		
+	</rcv>
+</trans>

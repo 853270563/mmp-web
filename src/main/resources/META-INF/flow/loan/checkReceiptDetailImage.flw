@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="checkReceiptDetailImage.flw" desc="确认借据授信影像资料">
+  <nodes>
+    <node id="c84889ac-4ed9-4fae-a421-5198ffea4bd0" xPos="290" yPos="230" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

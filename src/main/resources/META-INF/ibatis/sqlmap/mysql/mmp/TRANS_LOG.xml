@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TRANS_LOG">
+
+	<insert id="savePubTransLog">
+		INSERT INTO ${schema.interPlat}.MGG_TRANS_LOG
+		( TRAN_SEQ, SESS_SEQ, TRAN_DATE, TRAN_TIME, LGN_ID, CIF_NO, JSESS_ID,
+		FUNC_NO, TRAN_TYP, TRAN_STAT, TRAN_MSG, OTH_COMM )
+		VALUES
+		(
+		#TRANS_LOG_SEQ#, #SESS_SEQ#, #TRAN_DATE#, #TRAN_TIME#, #LGN_ID#, #CIF_NO#, #JSESS_ID#, #TRANS_CODE#,
+		#TRAN_TYP#, #STATUS#, #MSG#, #OTH_COMM#
+		)
+	</insert>
+	
+</sqlMap>
+

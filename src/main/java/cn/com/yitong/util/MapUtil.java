@@ -3,7 +3,6 @@ package cn.com.yitong.util;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,6 @@ import java.util.Set;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import cn.com.yitong.common.persistence.BaseEntity;
 
 /**
  * Map 相关的工具类 提供简单的xpath功能遍历json map;
@@ -33,6 +31,10 @@ public class MapUtil {
 	/**
 	 * 节点遍历<br>
 	 * 相当于dom4j.selectSingleNode(xpath)<br>
+	 * 
+	 * @param map
+	 * @param xpath
+	 * @return
 	 */
 	public static Map singleNode(Map map, String xpath) {
 		String[] paths = splitPath(xpath);
@@ -41,6 +43,12 @@ public class MapUtil {
 
 	/**
 	 * 深度遍历节点
+	 * 
+	 * @param map
+	 * @param paths
+	 * @param index
+	 * @param endIndex
+	 * @return
 	 */
 	private static Map singleNode(Map map, String[] paths, int index,
 			int endIndex) {
@@ -82,21 +90,24 @@ public class MapUtil {
 	/**
 	 * 获取单节点文本 <br>
 	 * 相当于 dom4j.selectSingleNode(xpath).getText()<br>
+	 * 
+	 * @param map
+	 * @param xpath
+	 * @return
 	 */
 	public static String singleNodeText(Map map, String xpath) {
 		String[] paths = splitPath(xpath);
 		if (paths.length > 1) {
 			String last = paths[paths.length - 1];
 			Map node = singleNode(map, paths, 0, paths.length - 2);
-			if (null != node) {
+			if (null != node)
 				return getMapString(node, last, "");
-			}
 			return "";
 		}
 		return getMapString(map, xpath, "");
 	}
 
-	public static String getMapString(Map node, String key, String def) {
+	private static String getMapString(Map node, String key, String def) {
 		if (node.containsKey(key)) {
 			return node.get(key).toString();
 		}
@@ -105,6 +116,10 @@ public class MapUtil {
 
 	/**
 	 * 获取列表 相当于 dom4j.selectNodes(xpath) <br>
+	 * 
+	 * @param map
+	 * @param xpath
+	 * @return
 	 */
 	public static List selectNodes(Map map, String xpath) {
 		String[] paths = splitPath(xpath);
@@ -242,7 +257,7 @@ public class MapUtil {
 	public static <T> T getMapValue(Map map, String key, Object def) {
 		if (null != map && null != key && map.containsKey(key)) {
 			try {
-				return (T) map.get(key);
+				return (T) (map.get(key).equals("") ? def : map.get(key));
 			} catch (Exception e) {
 			}
 		}
@@ -285,10 +300,12 @@ public class MapUtil {
       
      
     public static List<Map<String, Object>> getListByUrl(String url){  
+    	InputStream in = null;
+    	BufferedReader reader = null;
         try {  
             //通过HTTP获取JSON数据  
-            InputStream in = new URL(url).openStream();  
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));  
+            in = new URL(url).openStream();  
+            reader = new BufferedReader(new InputStreamReader(in));  
             StringBuilder sb = new StringBuilder();  
             String line;  
             while((line=reader.readLine())!=null){  
@@ -297,16 +314,34 @@ public class MapUtil {
             return parseJSON2List(sb.toString());  
         } catch (Exception e) {  
             e.printStackTrace();  
-        }  
+        } finally{
+			if(in!=null){
+				try {
+					in.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			if(reader!=null){
+				try {
+					reader.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} 
         return null;  
     }  
       
      
     public static Map<String, Object> getMapByUrl(String url){  
+    	InputStream in = null;
+    	BufferedReader reader = null;
         try {  
             //通过HTTP获取JSON数据  
-            InputStream in = new URL(url).openStream();  
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));  
+            in = new URL(url).openStream();  
+            reader = new BufferedReader(new InputStreamReader(in));  
             StringBuilder sb = new StringBuilder();  
             String line;  
             while((line=reader.readLine())!=null){  
@@ -315,77 +350,23 @@ public class MapUtil {
             return parseJSON2Map(sb.toString());  
         } catch (Exception e) {  
             e.printStackTrace();  
-        }  
+        }  finally{
+			if(in!=null){
+				try {
+					in.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			if(reader!=null){
+				try {
+					reader.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} 
         return null;  
-    }
-
-	/**
-	 * map to entity
-	 * @param map
-	 * @param entityClass
-	 * @return
-	 * @throws Exception
-	 */
-	public static <T extends BaseEntity> T map2EntityHandler(Map<String, Object> map, Class<T> entityClass) throws Exception{
-		if (entityClass == null) {
-			return null;
-		}
-		T instance = entityClass.newInstance();
-		if (map == null || map.isEmpty()) {
-			return instance;
-		}
-
-		Class<?>[] classes = entityClass.getDeclaredClasses();
-		Class<?> tfClass = classes[0];
-		Field[] fields = tfClass.getDeclaredFields();
-		if (fields.length == 0) {
-			return instance;
-		}
-		for(Field field : fields) {
-			String columnName = (String)field.get(null);
-			if (map.containsKey(columnName)) {
-				String fieldName = field.getName();
-				Field entityField = entityClass.getDeclaredField(fieldName);
-				entityField.setAccessible(true);
-				Class<?> type = entityField.getType();
-				entityField.set(instance, map.get(columnName));
-			}
-		}
-
-		return instance;
-	}
-	
-
-	/**
-	 * entity to map
-	 * @param map
-	 * @param entityClass
-	 * @return
-	 * @throws Exception
-	 */
-	public static Map<String, Object> entity2MapHandler(BaseEntity entity) throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (entity == null) {
-			return map;
-		}
-
-		Class<?>[] classes = entity.getClass().getDeclaredClasses();
-		Class<?> tfClass = classes[0];
-		Field[] tfFields = tfClass.getDeclaredFields();
-		if (tfFields.length == 0) {
-			return map;
-		}
-		for(Field tfField : tfFields) {
-			String columnName = (String)tfField.get(null);
-			String tfFieldName = tfField.getName();
-			try {
-				Field entityFiled = entity.getClass().getDeclaredField(tfFieldName);
-				entityFiled.setAccessible(true);
-				Object object = entityFiled.get(entity);
-				map.put(columnName, object == null ? "" : object);
-			} catch (Exception e) {
-			}
-		}
-		return map;
-	}
+    }  
 }

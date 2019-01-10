@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqAssetQualityReport.flw" desc="业务发展报表">
+  <nodes>
+    <node id="1562d891-b550-4f46-9e15-8088835e42d9" xPos="510" yPos="140" Width="180" Height="40">
+      <desc>完善查询时间</desc>
+      <beanId>finishQryDataOp2</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="82567400-85ad-4e7c-8432-ab2ebe0bd315" xPos="510" yPos="270" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="1562d891-b550-4f46-9e15-8088835e42d9" to="82567400-85ad-4e7c-8432-ab2ebe0bd315"/>
+  </lines>
+</diagram>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="uploadHeadImg.flw" desc="客户端上传头像">
+  <nodes>
+    <node id="86373851-f1b8-4e9d-a297-39d5cb673ca8" xPos="510" yPos="100" Width="50" Height="50">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="4c64c392-5701-4f93-bb16-b68f95f11fea" xPos="470" yPos="220" Width="50" Height="50">
+      <desc>客户端上传头像</desc>
+      <beanId>uploadHeadImgOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="71196acd-1d86-418a-a170-2f08b2561fa4" xPos="500" yPos="320" Width="50" Height="50">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="4c64c392-5701-4f93-bb16-b68f95f11fea" to="71196acd-1d86-418a-a170-2f08b2561fa4"/>
+    <line desc="" condition="" from="86373851-f1b8-4e9d-a297-39d5cb673ca8" to="4c64c392-5701-4f93-bb16-b68f95f11fea"/>
+  </lines>
+</diagram>

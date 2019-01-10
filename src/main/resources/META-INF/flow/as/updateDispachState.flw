@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="intefaceInfo.flw" desc="接口调用信息记录、查询">
+  <nodes>
+    <node id="1155527f-4017-4cb1-9ae1-d40f4e07ec9d" xPos="350" yPos="300" Width="180" Height="40">
+      <desc>更新派单状态</desc>
+      <beanId>updateDispachStateOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/updateDispachState" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

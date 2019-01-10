@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqProdInfo.flw" desc="产品信息查询">
+  <nodes>
+    <node id="c992bd0b-db3b-4b3e-8c4a-2adf792cc2fc" xPos="300" yPos="180" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

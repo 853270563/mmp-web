@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="getFilesStatus" desc="文件状态检查">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<field name="files" length="1000" required="true" type="C" desc="待上传文件名(要保证唯一性)"/>
+		<field name="willUploadFile" length="100" required="false" type="C" desc="0-只查询，不上传文件，1-上传文件"/>
+		<field name="BUSI_ID" length="100" required="false" type="C" desc="业务ID"/>
+		<field name="BUSI_TYPE" length="100" required="false" type="C" desc="业务类型"/>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+
+
+	</rcv>
+</trans>

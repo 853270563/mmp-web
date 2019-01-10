@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0022.flw" desc="代办任务列表">
+  <nodes>
+    <node id="b6326f3d-5f38-4d33-937c-a20fbded088e" xPos="360" yPos="110" Width="180" Height="40">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0022" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="72186c8f-0d3e-435b-b82b-b32066818da5" xPos="360" yPos="240" Width="180" Height="40">
+      <desc>加入超时</desc>
+      <beanId>timeOutOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+        <data key="transCode" expr="write/rushTask" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="b6326f3d-5f38-4d33-937c-a20fbded088e" to="72186c8f-0d3e-435b-b82b-b32066818da5"/>
+  </lines>
+</diagram>

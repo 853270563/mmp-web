@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_INFO_GT">
+
+	<!-- 查询所有机构列表 -->
+    <select id="loadInfoGT" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        	T.*
+        FROM 
+        	${schema.configPlat}.ARES_INFO_GT T
+        WHERE
+        	T.ID = #ID#
+    </select>
+    
+	<!-- 查询所有机构列表 -->
+    <select id="selectInfoGTList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+			T.ID,
+			T.NAME,
+			T.SUMMARY,
+			T.ACTION,
+			T.ACTION_TYPE,
+			T.TYPE,
+			T.SOURCE,
+			T.CREATE_DATE
+        FROM
+        	${schema.configPlat}.ARES_INFO_GT T
+        WHERE
+        	<![CDATA[
+        	T.CREATE_DATE >= #synchroTime#
+        	AND T.CREATE_DATE < #updateTime#]]>
+        	AND T.TYPE = #TYPE#
+    </select>
+    
+    <insert id="insertInfoGT" parameterClass="java.util.Map">
+    	INSERT INTO ${schema.configPlat}.ARES_INFO_GT (
+    		ID,NAME,SUMMARY,CONTENT,ACTION,ACTION_TYPE,TYPE,SOURCE,CREATE_DATE,REMARK
+    	) VALUES (
+    		#ID#,#NAME#,#SUMMARY#,#CONTENT#,#ACTION#,#ACTION_TYPE#,#TYPE#,#SOURCE#,#CREATE_DATE#,#REMARK#
+    	)
+    </insert>
+</sqlMap>
+

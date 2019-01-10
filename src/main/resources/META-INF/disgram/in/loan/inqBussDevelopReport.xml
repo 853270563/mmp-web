@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqBussDevelopReport" desc="业务发展报表查询">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" target="user_no" required="true" />
+		<field name="LOAN_START_DATE" desc="检查日期起" target="loan_start_date" />
+		<field name="LOAN_END_DATE" desc="检查日期止" target="loan_end_date" />
+	</snd>
+	<rcv>
+		<field name="REPORTLIST" type="E" desc="" target="reportlist">
+			<field name="USER_NO" desc="客户经理" target="user_no" />
+			<field name="LOAN_AMOUNT" desc="放款金额" target="loan_amount" />
+			<field name="REST_CORPUS" desc="贷款余额" target="rest_corpus" />
+		</field>
+	</rcv>
+</trans>

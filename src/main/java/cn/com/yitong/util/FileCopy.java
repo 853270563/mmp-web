@@ -30,9 +30,8 @@ public class FileCopy {
 			}
 			if ((inC.size() - inC.position()) < length) {
 				length = (int) (inC.size() - inC.position());
-			} else {
+			} else
 				length = DEF_SIZE;
-			}
 			b = ByteBuffer.allocateDirect(length);
 			inC.read(b);
 			b.flip();
@@ -40,4 +39,25 @@ public class FileCopy {
 			outC.force(false);
 		}
 	}
+
+	public static void main(String[] args) {
+		long beginTime = new Date().getTime();
+		String input = "D:/1.4.3.png";
+		String output = "D:/temps/imgs/1.4.3#.png";
+		File inf = new File(input);
+		try {
+			for (int i = 0; i < 10; i++) {
+				File outf = new File(
+						output.replaceFirst("#", String.valueOf(i)));
+				if (outf.exists())
+					outf.delete();
+				forChannel(inf, outf);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		long endTime = new Date().getTime();
+		log.info("共耗时(ms)：" + (endTime - beginTime));
+	}
+
 }

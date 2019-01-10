@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="VALUEDATA_MSG">
+
+	 <!--短信发送成功插入数据库 -->
+	 <insert id="insertmessage" parameterClass="map">
+	 	<selectKey  resultClass="String" keyProperty="MSG_ID">
+			select ${schema.configPlat}.SEQ_VALUEDATA_MSG.nextval from DUAL
+		</selectKey>
+	 	<![CDATA[ 
+			INSERT INTO ${schema.configPlat}.VALUEDATA_MSG
+				(MSG_ID,RANDOMNUM,PHONE,BIAOSHI,SEND_TIME)
+				VALUES 
+				(#MSG_ID#,#RANDOMNUM#,#PHONE#,#BIAOSHI#,#SEND_TIME#) 
+			]]>
+	 </insert>
+	 
+	 	 <!-- 验证短信 -->
+	<select id="checkMessage" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			select * from ${schema.configPlat}.VALUEDATA_MSG g where  g.PHONE = #PHONE# and
+			 g.BIAOSHI = #BIAOSHI# and g.RANDOMNUM = #RANDOMNUM#
+		]]>
+	</select>
+	 
+</sqlMap>

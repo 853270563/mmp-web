@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0055" excode="Pledge_APP06" desc="房产影像信息查询接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="pledge_code" length="2" type="C" desc="抵押物房产编号" required="true"/> 
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+			<field name="pledge_code" length="2" type="C" desc="抵押物房产编号"/>
+			<field name="surr_road" length="100" type="C" desc="小区周边道路"/>
+			<field name="community_name" length="100" type="C" desc="小区名"/>
+			<field name="unit_no" length="100" type="C" desc="单元号"/>
+			<field name="build_appear" length="100" type="C" desc="楼外观"/>
+			<field name="house_num" length="100" type="C" desc="门牌号"/>
+			<field name="house_interior" length="100" type="C" desc="房屋内景"/>
+			<field name="house_cert" length="100" type="C" desc="房产证件"/>
+			<field name="co_owner_idcard" length="100" type="C" desc="共有人身份证"/>
+			<field name="account_info" length="100" type="C" desc="户口信息"/>
+			<field name="marri_cert" length="100" type="C" desc="婚姻证明"/>
+			<field name="spouse_idcard" length="100" type="C" desc="配偶身份证"/>
+			<field name="other" length="100" type="C" desc="其他"/>
+		</body>
+	</rcv>
+</trans>

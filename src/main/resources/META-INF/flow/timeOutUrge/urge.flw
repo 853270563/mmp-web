@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="" desc="服务说明">
+  <nodes>
+    <node id="effe8e61-45ac-465b-8770-262fdc1cb71f" xPos="330" yPos="40" Width="180" Height="40">
+      <desc>查询单条数据</desc>
+      <beanId>dbMapQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="TimeoutTaskUrge.queryById" desc="Mybatis SQL Statement"/>
+        <data key="*mapName" expr="" desc="输出结果字段名，非必须"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="fb5d7772-3289-48ae-81d7-2adfb400fe88" xPos="330" yPos="100" Width="180" Height="40">
+      <desc>更改催办次数</desc>
+      <type>condition</type>
+      <beanId>changeUrgeCountOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="c02680da-4f4a-46bd-9c30-d835fd09029c" xPos="460" yPos="180" Width="50" Height="50">
+      <desc>修改数据</desc>
+      <type/>
+      <beanId>dbUpdOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="TimeoutTaskUrge.updateById" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="528a4284-4ecc-4165-9a6c-59deb09a7e35" xPos="220" yPos="180" Width="50" Height="50">
+      <desc>插入数据</desc>
+      <type/>
+      <beanId>dbInsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="TimeoutTaskUrge.insert" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="effe8e61-45ac-465b-8770-262fdc1cb71f" to="fb5d7772-3289-48ae-81d7-2adfb400fe88"/>
+    <line desc="多次催办" condition="${URGE_COUNT &gt; 1}" from="fb5d7772-3289-48ae-81d7-2adfb400fe88" to="c02680da-4f4a-46bd-9c30-d835fd09029c"/>
+    <line desc="第一次催办" condition="${URGE_COUNT == 1}" from="fb5d7772-3289-48ae-81d7-2adfb400fe88" to="528a4284-4ecc-4165-9a6c-59deb09a7e35"/>
+  </lines>
+</diagram>

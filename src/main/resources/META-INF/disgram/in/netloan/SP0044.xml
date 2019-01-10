@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0044" excode="Guarantor_APP01" desc="担保人信息修改接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<!-- <field name="guarantor_code" length="2" type="C" desc="担保人编号" required="false"/> -->
+			<field name="guarantor" type="E" desc="担保人">
+				<field name="guarantor_name" length="50" type="C" desc="姓名"/>
+				<field name="guarantor_code" length="2" type="C" desc="担保人编号"/>
+				<field name="guarantor_idcard" length="18" type="C" desc="证件号码"/>
+				<field name="guarantor_phone" length="15" type="C" desc="手机号码"/>
+				<field name="address_pro" length="10" type="C" desc="居住地址_省"/>
+				<field name="address_city" length="10" type="C" desc="居住地址_市"/>
+				<field name="address_county" length="10" type="C" desc="居住地址_区"/>
+				<field name="address_detail" length="100" type="C" desc="详细地址"/>
+				<field name="company_name" length="100" type="C" desc="单位名称"/>
+				<field name="personal_annual_income" length="16" type="C" desc="个人年收入"/>
+				<field name="guarantor_net_asset" length="16" type="C" desc="保证人净资产"/>
+				<field name="mari_status" length="2" type="C" desc="婚姻状况"/>
+				<field name="spouse_name" length="50" type="C" desc="配偶-姓名"/>
+				<field name="spouse_idcard" length="18" type="C" desc="配偶-证件号码"/>
+				<field name="spouse_phone" length="15" type="C" desc="配偶-手机号码"/>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>
+			<field name="reason_fail" length="100" type="C" desc="失败原因" />
+			<field name="manager_code" length="20" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="20" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

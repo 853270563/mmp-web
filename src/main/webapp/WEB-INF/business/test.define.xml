@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config id="testFlow" title="测试业务流程">
+    <actions>
+        <action index="-1" ref="start" title="开始节点">
+            <mapping>
+                <forward key="1">1</forward>
+            </mapping>
+        </action>
+        <action index="1" ref="test1" title="初始化报文">
+            <mapping>
+                <forward key="2">2</forward>
+                <forward key="3">3</forward>
+            </mapping>
+        </action>
+        <action index="2" ref="test2" title="图形验证码">
+            <mapping>
+                <forward key="4">4</forward>
+            </mapping>
+        </action>
+        <action index="4" ref="test4" title="创建用户会话">
+            <mapping>
+                <forward key="0">0</forward>
+            </mapping>
+        </action>
+        <action index="3" ref="test3" title="加载客户信息">
+            <mapping>
+                <forward key="4">4</forward>
+            </mapping>
+        </action>
+    </actions>
+</config>

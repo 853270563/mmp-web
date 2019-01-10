@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqReceipt" desc="借据信息查询">
+	<snd>
+		<field name="ID_TYPE" desc="证件类型" target="id_type" comment="110001	居民身份证
+																		021   	第一代居民身份证
+																		110003	临时居民身份证
+																		110005	户口簿
+																		110007	中国人民解放军军人身份证件
+																		110009	中国人民武装察身份证件
+																		110011	离休干部荣誉证
+																		110013	军官退休证
+																		110015	文职干部退休证
+																		110017	军事院校学员证
+																		110019	港澳居民往来内地通行证
+																		110021	台湾居民来往大陆通行证
+																		110023	中华人民共和国因私护照
+																		110025	中华人民共和国因公护照
+																		110027	外国护照
+																		110029	外国人永久居留证
+																		119998	系统使用的个人证件识别标识，在现实中不存在
+																		119999	其他个人证件识别标识
+																		Z00000	移植的不规范个人身份证件
+																				" />
+		<field name="ID_NO" desc="证件号码" target="id_no"/>
+		<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="总量授信合同编号"  target="total_amount_contract_no"/>
+		<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no"/>
+		<field name="RECEIPT_NO" desc="借据编号"  target="receipt_no"/>
+		<field name="BUSS_TYPE" desc="业务类型" target="buss_type" comment="	0	单笔
+															 		1	循环" />													
+		<field name="ALREADY_STATE" desc="结清状态" target="already_state" comment="0：未还清 1：已还清 2：已提前还清 3：已代偿 4：已核销"/>
+		<field name="SATRT_NUMBER" desc="当前起始条数" target="start_number"/>
+		<field name="PAGE_NUMBER" desc="每页展示条数" target="page_number"/>
+	</snd>
+	<rcv>
+		<field name="TOTAL_NUMBER" desc="符合条件的未结清借据总数" target="total_number"/>
+		<field name="RECEIPTLIST" type="E" desc="" target="receiptlist">
+			<field name="RECEIPT_NO" desc="借据编号" target="receipt_no"/>
+			<field name="AMOUNT_NO" desc="额度编号" target="amount_no"/>
+			<field name="PRD_CODE" desc="产品编号" target="prd_code"/>
+			<field name="CUSTOMER_NO" desc="客户编号" target="customer_no"/>
+			<field name="CUSTOM_NAME" desc="客户名" target="custom_name"/>
+			<field name="ID_TYPE" desc="证件类型" target="id_type" required="true" comment="110001	居民身份证
+																			021   	第一代居民身份证
+																			110003	临时居民身份证
+																			110005	户口簿
+																			110007	中国人民解放军军人身份证件
+																			110009	中国人民武装察身份证件
+																			110011	离休干部荣誉证
+																			110013	军官退休证
+																			110015	文职干部退休证
+																			110017	军事院校学员证
+																			110019	港澳居民往来内地通行证
+																			110021	台湾居民来往大陆通行证
+																			110023	中华人民共和国因私护照
+																			110025	中华人民共和国因公护照
+																			110027	外国护照
+																			110029	外国人永久居留证
+																			119998	系统使用的个人证件识别标识，在现实中不存在
+																			119999	其他个人证件识别标识
+																			Z00000	移植的不规范个人身份证件
+																					" />
+			<field name="ID_NO" desc="证件号码" target="id_no"/>
+			<field name="MOBILE" desc="电话" target="mobile"/>
+			<field name="BANK_ACCOUNT_NO" desc="本人账号" target="bank_account_no"/>
+			<field name="ACCOUNT_TYPE" desc="账户类型" target="account_type" comment="00	未知
+															  01	个人结算账户
+															  02	对公结算账户" />
+			<field name="LOAN_ACCOUNT_NO" desc="本人放款账号" target="loan_account_no"/>
+			<field name="IS_TRUSTEE" desc="是否受托放款" target="is_trustee" comment="0	否
+															  1	是" />
+			<field name="CURRENCY" desc="币种" target="currency" comment="	CNY	人民币
+															 	USD	美元" />
+				<field name="APPLY_AMOUNT" desc="申请金额" target="apply_amount"/>
+				<field name="LOAN_AMOUNT" desc="发放金额" target="loan_amount"/>
+				<field name="LOAN_DATE" desc="放款日期" target="loan_date"/>
+				<field name="END_DATE" desc="到期日期" target="end_date"/>
+				<field name="INTEREST_DATE" desc="起息日" target="interest_date"/>
+				<field name="ALREADY_STATE" desc="结清状态" target="already_state"/>
+				<field name="ALREADY_DATE" desc="结情日期" target="already_date"/>
+				<field name="CONTACT_NO" desc="借款合同编号" target="contact_no"/>
+				<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="总量授信合同编号" target="total_amount_contract_no"/>
+				<field name="PERIOD" target="period" desc="期限" />
+				<field name="PAY_DAY_MODE" desc="还款日期方式" target="pay_day_mode" comment="	0	放款日
+															 				1	指定还款日" />
+				<field name="REPAY_DAY" desc="还款日期" target="repay_day" />
+				<field name="REPAY_WAY" desc="还款方式" target="repay_way" comment="	1	等额本息
+															 		2	等额本金
+															 		3	先息后本
+															 		4	一次性利随本清
+															 		" />
+				<field name="RATE_MODE" desc="利率模式" target="rate_mode" comment="	0	固定利率
+															 		1	浮动利率" />
+				<field name="RATE_TYPE" desc="利率类型" target="rate_type" comment="	0	其他
+															 		1	基准利率" />
+				<field name="RATE_FLOAT_MODE" target="rate_float_mode" desc="利率浮动方式" comment="	0	无
+															 				1	比例
+															 				2	定值
+															 				" />
+				<field name="RATE_FLOAT_VALUE" desc="利率浮动值"  target="rate_float_value"/>
+				<field name="RATE_VALUE" desc="利率值" target="rate_value"/>
+				<field name="PENALTY_MODE" desc="罚息率方式" target="penalty_mode" comment="	0	浮动
+															 			1	定值" />
+				<field name="PENALTY_MODE_VALUE" desc="罚息率方式值" target="penalty_mode_value"/>
+				<field name="PENALTY_VALUE" desc="罚息利率值" target="penalty_value"/>
+				<field name="BUSS_TYPE" desc="业务类型" target="buss_type" comment="	0	单笔
+															 		1	循环" />
+				<field name="BANK_NO" desc="记账机构" target="bank_no"/>
+				<field name="USER_NO" desc="客户经理" target="user_no"/>
+				<field name="DEPT_NO" desc="部门编号" target="dept_no"/>
+				<field name="LINE_NO" desc="条线编号" target="line_no"/>
+				<field name="CHANNEl_NO" desc="渠道编号" target="channel_no"/>
+				<field name="MARKET_USER_NO" desc="营销人员" target="market_user_no"/>
+				<field name="MERCHANT_CODE" desc="合作商户编号" target="merchant_code"/>
+				<field name="REST_CORPUS" desc="剩余本金" target="rest_corpus"/>
+				<field name="LAST_ALREADY_DATE" desc="上次还款日期" target="last_already_date"/>
+				<field name="ALREADY_CORPUS" desc="已还本金" target="already_corpus"/>
+				<field name="ALREADY_ACCRUAL" desc="已还利息" target="already_accrual"/>
+				<field name="OVERDUE_DATE" desc="逾期日期" target="overdue_date"/>
+				<field name="OVER_CORPUS" desc="逾期本金" target="over_corpus"/>
+				<field name="OVER_ACCRUAL" desc="逾期利息" target="over_accrual"/>
+				<field name="TOTAL_OVERDUE_PERIOD" desc="累计逾期期数" target="total_overdue_period"/>
+				<field name="CURRENT_OVERDUE_PERIOD" desc="当前逾期期数" target="current_overdue_period"/>
+				<field name="TRUSTEELIST" type="E" desc="" target="trusteelist">
+					<field name="IS_TRUSTEE_SELF" target="is_trustee_self" desc="是否本行受托" comment="	0	否
+																 				1	是" />
+					<field name="TRUSTEE_ACCOUNT_NO" desc="受托放款账号" target="trustee_account_no"/>
+					<field name="TRUSTEE_ACCOUNT_NAME" desc="受托放款账号户名" target="trustee_account_name"/>
+					<field name="TRUSTEE_ACCOUNT_BANK" desc="受托放款账号开户行行号" target="trustee_account_bank"/>
+					<field name="TRUSTEE_ACCOUNT_BANK_NAME" desc="受托放款账号开户行名称" target="trustee_account_bank_name"/>
+					<field name="ACCOUNT_TYPE" desc="账户类型" target="account_type" comment="00	未知
+															  01	个人结算账户
+															  02	对公结算账户" />
+					<field name="TRUSTEE_ACCOUNT_AMOUNT" desc="受托放款金额" target="trustee_amount"/>
+				</field>
+				<field name="FIVE_LEVEL_SERIES" desc="五级分类" target="five_level_series" comment="	10	正常
+															 		20	关注
+															 		30	次级 
+															 		40	可疑 
+															 		50	损失
+															 		" />
+				<field name="TEN_LEVEL_SERIES" desc="十级分类"	target="ten_level_series" comment="	0	正常1
+																			1	正常2
+																			2	正常3
+															 				3	关注1
+															 				4	关注2
+															 				5	关注3
+															 				6	次级1
+															 				7	次级2
+															 				8	可疑
+															 				9	损失
+															 		" />
+				<field name="FOUR_LEVEL_SERIES" desc="四级分类" target="four_level_series" comment="	01	正常
+															 		02	逾期
+															 		03	呆滞
+															 		04	呆账
+															 		" />
+		</field>
+	</rcv>	
+</trans>

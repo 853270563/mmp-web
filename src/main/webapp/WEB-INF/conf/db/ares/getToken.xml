@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="getToken" desc="获取token">
+	<!-- 请求报文 -->
+	<snd>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+
+		<field name="TOKEN" length="32" type="C" desc="用户token" />
+	</rcv>
+</trans>

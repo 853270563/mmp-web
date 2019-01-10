@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/getentrustdetail" excode="vqserver/entrust/getentrustdetail" desc="查询业务详情">
+	<snd>
+		<head>
+			<!-- <field name="orgId" type="C" desc="机构id" required="true" default="90080"/>
+			<field name="userId" type="C" desc="发起用户" required="true" default="app"/> -->
+			<field name="account" type="C" desc="发起账号" required="true" default="123456"/>
+		</head>
+		<body>
+			<field name="loginSessionId" type="C" desc="登录唯一标识"/>
+			<field name="entrustId" type="C" desc="业务id" required="true"/>
+			<field name="selType" type="C" desc="业务类型" required="false"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+			<!-- <field name="signature" type="C" desc="服务端签名"/>
+			<field name="timestamp" type="C" desc="时间戳"/> -->
+		</head>
+		<body>
+			<field name="entrustId" type="C" desc="业务ID"/>
+			<field name="autoEntrustNo" type="C" desc="业务编号"/>
+			<field name="projectName" type="C" desc="项目名称"/>
+			<field name="clientName" type="C" desc="委托人"/>
+			<field name="clientPhone" type="C" desc="委托人电话"/>
+			<field name="fileList" type="E" desc="银行附件列表">
+				<field name="fxtCompanyId" type="C" desc="公司ID"/>
+				<field name="flowTypeCode" type="C" desc="附件业务节点类型"/>
+				<field name="objectId" type="C" desc="业务节点对象ID"/>
+				<field name="fileName" type="C" desc="文件名称"/>
+				<field name="filePath" type="C" desc="文件地址（相对路径）"/>
+				<field name="fileTypeCode" type="C" desc="文件主类型"/>
+				<field name="fileSubTypeCode" type="C" desc="文件子类型"/>
+				<field name="fileSize" type="C" desc="文件大小"/>
+				<field name="createDate" type="C" desc="创建时间"/>
+				<field name="createUserId" type="C" desc="创建用户ID"/>
+			</field>
+			<field name="cityObjList" type="E" desc="以城市分组显示委估对象">
+				<field name="cityId" type="C" desc="城市Id"/>
+				<field name="cityName" type="C" desc="城市名称"/>
+				<field name="objectList" type="E" desc="委估对象列表">
+					<field name="objectId" type="C" desc="委估对象ID"/>
+					<field name="fullName" type="C" desc="委估对象全称"/>
+					<field name="projectName" type="C" desc="楼盘名称"/>
+					<field name="projectId" type="C" desc="楼盘ID"/>
+					<field name="buildingName" type="C" desc="楼栋名称"/>
+					<field name="buildingId" type="C" desc="楼栋ID"/>
+					<field name="floorno" type="C" desc="楼层"/>
+					<field name="houseName" type="C" desc="房号"/>
+					<field name="houseId" type="C" desc="房号ID"/>
+					<field name="buildingArea" type="C" desc="面积"/>
+					<field name="address" type="C" desc="地址"/>
+					<field name="statecode" type="C" desc="业务状态"/>
+					<field name="remark" type="C" desc="备注"/>
+					<field name="fileList" type="E" desc="附件列表"/>
+				</field>
+				<field name="outCompany" type="E" desc="评估机构列表">
+					<field name="outCompanyId" type="C" desc="评估机构I"/>
+					<field name="outCompanyName" type="C" desc="评估机构名称"/>
+					<field name="stateCode" type="C" desc="业务状态"/>
+					<field name="unitPrice" type="C" desc="总单价"/>
+					<field name="totalPrice" type="C" desc="总总价"/>
+					<field name="taxPrice" type="C" desc="总税费"/>
+					<field name="netPrice" type="C" desc="总净值"/>
+					<field name="soaFileList" type="E" desc="评估机构文件列表">
+						<field name="fxtCompanyId" type="C" desc="公司ID"/>
+						<field name="flowTypeCode" type="C" desc="附件业务节点类型"/>
+						<field name="objectId" type="C" desc="业务节点对象ID"/>
+						<field name="fileName" type="C" desc="文件名称"/>
+						<field name="filePath" type="C" desc="文件地址"/>
+						<field name="fileTypeCode" type="C" desc="文件主类型"/>
+						<field name="fileSubTypeCode" type="C" desc="文件子类型"/>
+						<field name="fileSize" type="C" desc="文件大小"/>
+						<field name="createDate" type="C" desc="创建时间"/>
+						<field name="createUserId" type="C" desc="创建用户ID"/>
+					</field>
+					<field name="objectPriceList" type="E" desc="委托估对象价格列表">
+						<field name="objectId" type="C" desc="委估对象ID"/>
+						<field name="buildingArea" type="C" desc="面积"/>
+						<field name="unitPrice" type="C" desc="单价"/>
+						<field name="totalPrice" type="C" desc="总价"/>
+						<field name="taxPrice" type="C" desc="税费"/>
+						<field name="netPrice" type="C" desc="净值"/>
+						<field name="outRemark" type="C" desc="银行备注"/>
+					</field>
+				</field>
+			</field>
+		</body>
+	</rcv>
+</trans>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/getSurveyPhotos" excode="vqserver/entrust/getSurveyPhotos" desc="获取查勘图片信息">
+	<snd>
+		<head>
+			<!-- <field name="orgId" type="C" desc="机构id" required="true" default="90080"/>
+			<field name="userId" type="C" desc="发起用户" required="true" default="app"/> -->
+			<field name="account" type="C" desc="发起账号" required="true" default="123456"/>
+		</head>
+		
+		<body>
+			<field name="loginSessionId" type="C" desc="登录唯一标识"/>
+			<field name="objectid" type="C" desc="委托对象" required="true"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="code" type="C" desc="返回码"/>
+			<field name="errmsg" type="C" desc="错误信息"/>
+			<field name="signature" type="C" desc="服务端签名"/>
+			<field name="timestamp" type="C" desc="时间戳"/>
+		</head>
+		<body>
+			<field name="surveyReturnList" type="E" desc="查勘图片列表">
+				<!-- <field name="objectId" type="C" desc="委托对象"/> -->
+				<field name="name" type="C" desc="名称"/>
+				<field name="path" type="C" desc="路径"/>
+				<field name="smallImgPath" type="C" desc="缩略图路径"/>
+				<field name="imageType" type="C" desc="图片类型"/>
+				<field name="fileSize" type="C" desc="图片大小"/>
+				<field name="imageCode" type="C" desc="图片类型代码"/>
+			</field>
+		</body>
+		
+	</rcv>
+</trans>

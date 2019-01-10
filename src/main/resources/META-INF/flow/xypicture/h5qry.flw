@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="h5qry.flw" desc="h5影像查询">
+  <nodes>
+    <node id="3650dbbd-c55f-488c-94b0-c74b400ff24e" xPos="390" yPos="40" Width="50" Height="50">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="64af9297-2f4c-48c6-b1d3-8f9f64d05d7b" xPos="370" yPos="130" Width="180" Height="40">
+      <desc>不分页影像批次查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.qry" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="caa246fb-6ecb-43d5-a072-9bd9f98fb702" xPos="370" yPos="250" Width="180" Height="40">
+      <desc>查询影像列表</desc>
+      <beanId>h5ImgQryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="4690c845-05fb-4c51-a4f4-7ed8c7e8290e" xPos="360" yPos="360" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="64af9297-2f4c-48c6-b1d3-8f9f64d05d7b" to="caa246fb-6ecb-43d5-a072-9bd9f98fb702"/>
+    <line desc="" condition="" from="caa246fb-6ecb-43d5-a072-9bd9f98fb702" to="4690c845-05fb-4c51-a4f4-7ed8c7e8290e"/>
+    <line desc="" condition="" from="3650dbbd-c55f-488c-94b0-c74b400ff24e" to="64af9297-2f4c-48c6-b1d3-8f9f64d05d7b"/>
+  </lines>
+</diagram>

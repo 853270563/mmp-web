@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/addReceiptDetailImage" desc="登记借据授信影像资料">
+	<snd>
+		<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no" />
+		<field name="RECEIPT_NO" desc="借据编号" target="receipt_no" />
+		<field name="ID" desc="借据授信ID" required="true"  target="id"/>
+		<field name="LIST" type="E" desc="影像列表"  target="imagelist">
+			<field name="FILE_CN_NAME" desc="文件名称"   target="file_ext"/>
+			<field name="BUSI_FILE_TYPE" desc="文件类型" required="true"  target="image_type"/>
+			<field name="BATCH_ID" desc="影像批次号" required="true"  target="image_path"/>
+			<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"  target="image_flag"/>
+		</field>
+	</snd>
+	<rcv>
+		<field name="IMAGE_NO" desc="使用凭证影像编号" target="image_no"/>
+	</rcv>
+</trans>

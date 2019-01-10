@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqLoanCheck.flw" desc="查询贷款检查的异常结果">
+  <nodes>
+    <node id="522cf4c5-6fc7-46cd-8960-581d0183bf51" xPos="330" yPos="70" Width="180" Height="40">
+      <desc>完善查询时间数据</desc>
+      <beanId>finishQryDataOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="03393d7d-e297-4613-83e7-e4143ae617b0" xPos="330" yPos="190" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqLoanCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="b833fa22-db5a-4232-a766-4a0bd2579c55" xPos="330" yPos="280" Width="180" Height="40">
+      <desc>贷款检查是否通知过滤</desc>
+      <beanId>isMobileOp</beanId>
+      <data-map>
+        <data key="*chickListName" expr="CHECKLIST" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="522cf4c5-6fc7-46cd-8960-581d0183bf51" to="03393d7d-e297-4613-83e7-e4143ae617b0"/>
+    <line desc="" condition="" from="03393d7d-e297-4613-83e7-e4143ae617b0" to="b833fa22-db5a-4232-a766-4a0bd2579c55"/>
+  </lines>
+</diagram>

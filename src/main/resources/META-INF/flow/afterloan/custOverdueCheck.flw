@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="custOverdueCheck.flw" desc="风险客户逾期检查列表">
+  <nodes>
+    <node id="2b3a07e1-c6fb-409a-8469-3a84131c9fed" xPos="350" yPos="120" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqLoanCheck" desc="嵌套流程路径,不含文件后缀"/>
+      </data-map>
+    </node>
+    <node id="a3f789c1-83d7-41f3-b2d2-37ee4bb95311" xPos="350" yPos="230" Width="180" Height="40">
+      <desc>风险客户逾期检查列表</desc>
+      <beanId>custOverdueCheckOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="2b3a07e1-c6fb-409a-8469-3a84131c9fed" to="a3f789c1-83d7-41f3-b2d2-37ee4bb95311"/>
+  </lines>
+</diagram>

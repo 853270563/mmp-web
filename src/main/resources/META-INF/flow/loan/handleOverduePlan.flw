@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="handleOverduePlan.flw" desc="逾期催收处理">
+  <nodes>
+    <node id="227327fe-ba2e-4eca-b755-3e85c0b7ce89" xPos="150" yPos="210" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/handleOverduePlan" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

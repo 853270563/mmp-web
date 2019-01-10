@@ -16,6 +16,7 @@ import java.util.*;
 
 /**
  * 代码生成方面的数据库工具类.
+ * @author  lc3@yitong.com.cn
  */
 public class DbUtils {
 
@@ -128,5 +129,10 @@ public class DbUtils {
             list.add(table);
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        System.out.printf(getTables("easyweb", "P_MNG_USER").toString());
+        System.out.printf(getTables("MMC", "P_MNG_USER").toString());
     }
 }

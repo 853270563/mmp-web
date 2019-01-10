@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/batchQry" desc="影像批次查询">
+	<snd>
+		<field name="TASK_ID" desc="TASK_ID" required="true" />
+		<field name="BUSI_SERIAL_NO" desc="房产ID"  comment="查询房产影像时必输"/>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" comment="参见家园E贷-影像平台需求反馈（最终版）"/>
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="影像信息列表">
+			<field name="TASK_ID" desc="TASK_ID" required="true" />
+			<field name="BUSI_FILE_SCANUSER" desc="文件扫描人" />
+			<field name="BUSI_FILE_PAGENUM" desc="文件页码"/>
+			<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见家园E贷-影像平台需求反馈（最终版）"/>
+			<field name="FILE_CN_NAME" desc="文件名称" />
+			<field name="BATCH_ID" desc="影像批次号" required="true" />
+			<field name="BUSI_START_DATE" desc="开始日期" required="true" comment="yyyyMMdd"/>
+			<field name="BUSI_SERIAL_NO" />
+		</field>
+	</rcv>
+</trans>

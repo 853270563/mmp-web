@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="rushTask.flw" desc="记录抢单任务">
+  <nodes>
+    <node id="d12ec287-9fb2-4aa8-bdcc-cede68722a7f" xPos="420" yPos="20" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="8475dd9b-c7a2-43db-99d9-66fee3158fed" xPos="410" yPos="110" Width="180" Height="40">
+      <desc>完善数据</desc>
+      <beanId>finishDataOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="d7035bb3-bb92-422c-9196-1d46afcc1252" xPos="410" yPos="200" Width="180" Height="40">
+      <desc>插入数据</desc>
+      <beanId>dbInsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rushTask.insert" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+        <data key="FIRST_APPLY_ID" expr="${TASK_ID}" desc="用途说明"/>
+        <data key="FIRST_APPLY_TIME" expr="${BUSI_START_DATE}" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="d12ec287-9fb2-4aa8-bdcc-cede68722a7f" to="8475dd9b-c7a2-43db-99d9-66fee3158fed"/>
+    <line desc="" condition="" from="8475dd9b-c7a2-43db-99d9-66fee3158fed" to="d7035bb3-bb92-422c-9196-1d46afcc1252"/>
+  </lines>
+</diagram>

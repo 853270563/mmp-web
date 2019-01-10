@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="resFilesList" ibatisStatement="MZJ_RES_DATA.pageQuery" desc="广告及产品货架列表">
+	<!-- 请求报文 -->
+	<snd>  
+		<field name="ORGAN_LIMIT"   length="20"  type="C" desc="所属机构"/>
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E"> 
+			<field name="RID" length="6" type="C" desc="产品编号" xpath="RES_ID" />
+			<field name="RES_TYPE" length="6" type="C" desc="资源类型" />	
+			<field name="PROD_NAME" length="6" type="C" desc="产品名称" xpath="PRD_NAME"/>	
+			<field name="PROD_TYPE" length="6" type="C" desc="产品分类" xpath="PRD_TYPE"/>	
+			<field name="PROD_MEMO" length="6" type="C" desc="产品说明" xpath="FILE_NAME"/>	
+			<field name="FILE_ID" length="100" type="C" desc="资源编号" />
+			<field name="FILE_TYPE" length="6" type="C" desc="文件类型"/>
+			<field name="FILE_URL" length="100" type="C" desc="资源路径" xpath="FILE_ADDR"/>
+			<field name="IMG_ID" length="100" type="C" desc="封面图片" />
+			<field name="IMG_URL" length="100" type="C" desc="封面图片" xpath="PROPA_IMG"/>
+			<field name="UPDATE_TIME" length="100" type="C" desc="修改时间" />
+			<field name="AUDI_ID" length="6" type="C" desc="版本号" />		
+		</field-list> 
+	</rcv>
+</trans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="QueueInfoMng" desc="队列信息管理">
+
+	<snd-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号"  required="true"/>
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号"  required="true"/>
+		<field name="TRAN_FLAG" length="100" type="C" desc=""  required="true"/>
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期"  required="true"/>
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号"  required="true"/>
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户"  required="true"/>
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间"  required="true"/>
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号"  required="true"/>
+		<!-- <field name="SOURCE_TYPE" length="2" type="C" desc="渠道类型"  required="true"/> -->
+	</snd-sys-header>
+
+	<snd>
+		<field name="OPERATION_TYPE" length="10" type="C" desc="操作类型" required="true"/>
+		<field name="APP_BRANCH_ID" length="20" type="C" desc="办理机构代码" required="true"/>
+		<field name="SUB_BRANCH_ID" length="20" type="C" desc="子操作网点号" required="true"/>
+		<field name="EMBRANCH_ID" length="30" type="C" desc="分行号" />
+		<field name="SUBSIDIARY_BRANCH_ID" length="20" type="C" desc="支行号" />
+		<field name="CREATION_DATE" length="8" type="C" desc="创建日期" />
+		<field name="WINDOW_NO" length="20" type="C" desc="窗口号码" />
+		<field name="QUEUE_NO" length="20" type="C" desc="队列号码" />
+		<field name="BUSS_TYPE" length="50" type="C" desc="业务类型" />
+		<field name="REMARK1" length="300" type="C" desc="备注1"/>
+		<field name="REMARK2" length="300" type="C" desc="备注2"/>
+		<field name="SOURCE_TYPE" length="20" type="C" desc="渠道代码" required="true"/>
+		<field name="USER_ID" length="20" type="C" desc="操作员" required="false"/>
+	</snd>
+
+	<rcv>
+		<field name="APP_BRANCH_ID" desc="办理机构代码" type="C" />
+		<field name="CREATION_DATE" desc="创建日期" type="C"/>
+		<field name="NEW_QUEUE_NO" desc="新队列号码" type="C" />
+		<field name="NEW_BUSS_TYPE" desc="新业务类型" type="C" />
+		<field name="QUEUE_TYPE" desc="队列类型" type="C" />
+		<field name="QUEUE_STATUS" desc="队列状态" type="C" />
+		<field name="BUSS_PRIORITY" desc="业务优先级" type="C"/>
+		<field name="VIP_FLAG" desc="VIP标志" type="C" />
+		<field name="REMARK" desc="备注" type="C" />
+		<field name="REMARK1" desc="备注1" type="C" />
+		<field name="REMARK2" desc="备注2" type="C" />
+	</rcv>
+
+	<rev-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号" />
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号" />
+		<field name="TRAN_FLAG" length="100" type="C" desc="" />
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期" />
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号" />
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户" />
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间" />
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号" />
+	</rev-sys-header>
+</trans>

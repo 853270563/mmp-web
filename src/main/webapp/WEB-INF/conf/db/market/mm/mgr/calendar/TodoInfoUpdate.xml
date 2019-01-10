@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="TodoInfoAdd" desc="金融日历客户意向修改" ibatisStatement="MOBILE_CUST_INFO.updateById,INVEST_INFO.updateById">
+	<!-- 请求报文 -->
+	<snd>
+        <!-- 客户信息表/MOBILE_CUST_INFO -->
+		<field name="CUST_ID" length="20" type="C" desc="客户号" />
+		<field name="CUST_NAME" length="60" type="C" desc="客户名称" />
+		<field name="CUST_CARD_TYPE" length="2" type="C" desc="客户证件类型" />
+		<field name="CUST_CARD_ID" length="60" type="C" desc="客户证件号码" />
+		<field name="CUST_PHONE" length="20" type="C" desc="联系电话（默认）" />
+		<field name="CUST_OFFI_PHONE" length="20" type="C" desc="客户办公电话" />
+		<field name="SYS_CUST_ID" length="20" type="C" desc="客户系统内ID" />
+
+		<!-- 
+		<field name="CUST_TYPE" length="1" type="C" desc="客户类型" />
+		<field name="CUST_FLAG" length="1" type="C" desc="行内行外客户标识" />
+		<field name="CUST_ADDR" length="100" type="C" desc="地址" />
+		 -->
+		
+		<!-- 投资意向/INVEST_INFO -->
+		<!-- 
+		<field name="INVEST_DIRE" length="1" type="C" desc="投资方向" />
+		<field name="INTE_DEGREE" length="1" type="C" desc="意向程度" />
+		<field name="INTE_UPDATE_DATE" type="D" desc="更新时间" />
+		<field name="RESERVE1" length="20" type="C" desc="备用字段1" />
+		<field name="RESERVE2" length="20" type="C" desc="备用字段2" />
+		<field name="RESERVE3" length="20" type="C" desc="备用字段3" />
+		-->
+		
+		<field name="INVEST_INTE_ID" length="10" type="C" desc="投资意向ID" />
+		<field name="INTE_PROD" length="60" type="C" desc="意向产品" />
+		<field name="INTE_DATE" length="" type="D" desc="意向时间" />
+		<field name="INTE_MONEY" type="C" desc="购买金额" />
+		<field name="INTE_STATE" length="1" type="C" desc="意向状态" />
+		<field name="INVEST_REMARK" length="100" type="C" desc="备注" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

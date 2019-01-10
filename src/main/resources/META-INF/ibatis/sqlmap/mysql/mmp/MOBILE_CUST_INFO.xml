@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MOBILE_CUST_INFO">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotNull prepend="AND" property="SYS_CUST_ID">
+			SYS_CUST_ID = #SYS_CUST_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_TYPE">
+			CUST_TYPE = #CUST_TYPE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_ID">
+			CUST_ID = #CUST_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_NAME">
+			CUST_NAME = #CUST_NAME#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_CARD_TYPE">
+			CUST_CARD_TYPE = #CUST_CARD_TYPE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_CARD_ID">
+			CUST_CARD_ID = #CUST_CARD_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_FLAG">
+			CUST_FLAG = #CUST_FLAG#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_PHONE">
+			CUST_PHONE = #CUST_PHONE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_OFFI_PHONE">
+			CUST_OFFI_PHONE = #CUST_OFFI_PHONE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="CUST_ADDR">
+			CUST_ADDR = #CUST_ADDR#
+		</isNotNull>
+
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.MOBILE_CUST_INFO T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.SYS_CUST_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT('') CNT 
+			FROM ${schema.interPlat}.MOBILE_CUST_INFO T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="SYS_CUST_ID" type="pre" resultClass="string">
+			select CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'),${schema.interPlat}.nextval('SEQ_MOBILE_CUST_INFO')) from dual
+		</selectKey>
+		INSERT INTO
+		${schema.interPlat}.MOBILE_CUST_INFO
+		(
+		SYS_CUST_ID,CUST_TYPE,CUST_ID,CUST_NAME,CUST_CARD_TYPE,CUST_CARD_ID,CUST_FLAG,CUST_PHONE,CUST_OFFI_PHONE,CUST_ADDR
+		)
+		VALUES (
+		#SYS_CUST_ID#,#CUST_TYPE#,#CUST_ID#,#CUST_NAME#,#CUST_CARD_TYPE#,#CUST_CARD_ID#,#CUST_FLAG#,#CUST_PHONE#,#CUST_OFFI_PHONE#,#CUST_ADDR#
+		)
+	</insert>
+
+	<!-- 删除时存放删除表的信息 -->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.interPlat}.MOBILE_CUST_INFO
+		select * from ${schema.interPlat}.MOBILE_CUST_INFO where SYS_CUST_ID=
+		#SYS_CUST_ID#
+	</insert>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.SYS_CUST_ID) FROM ${schema.interPlat}.MOBILE_CUST_INFO p 
+			 WHERE P.SYS_CUST_ID=#SYS_CUST_ID#
+		]]>
+	</select>
+
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.MOBILE_CUST_INFO ]]>
+		<dynamic prepend="set">
+		<isNotNull prepend="," property="CUST_TYPE">
+			CUST_TYPE = #CUST_TYPE#</isNotNull>
+			<isNotNull prepend="," property="CUST_ID">
+			CUST_ID = #CUST_ID#</isNotNull>
+			<isNotNull prepend="," property="CUST_NAME">
+			CUST_NAME = #CUST_NAME#</isNotNull>
+			<isNotNull prepend="," property="CUST_CARD_TYPE">
+			CUST_CARD_TYPE = #CUST_CARD_TYPE#</isNotNull>
+			<isNotNull prepend="," property="CUST_CARD_ID">
+			CUST_CARD_ID = #CUST_CARD_ID#</isNotNull>
+			<isNotNull prepend="," property="CUST_FLAG">
+			CUST_FLAG = #CUST_FLAG#</isNotNull>
+			<isNotNull prepend="," property="CUST_PHONE">
+			CUST_PHONE = #CUST_PHONE#</isNotNull>
+			<isNotNull prepend="," property="CUST_OFFI_PHONE">
+			CUST_OFFI_PHONE = #CUST_OFFI_PHONE#</isNotNull>
+			<isNotNull prepend="," property="CUST_ADDR">
+			CUST_ADDR = #CUST_ADDR#</isNotNull>
+			<!-- 现在审核ID -->
+		<isNotNull property="AUDI_ID" prepend=","><![CDATA[ AUDI_ID = #AUDI_ID# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where SYS_CUST_ID = #SYS_CUST_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.MOBILE_CUST_INFO where SYS_CUST_ID = #SYS_CUST_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	<select id="seqMOBILE_CUST_INFO" resultClass="java.util.HashMap">
+	   select ${schema.interPlat}.nextval('SEQ_MOBILE_CUST_INFO') as SYS_CUST_ID from dual
+    </select>
+
+</sqlMap>
+

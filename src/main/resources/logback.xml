@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="/opt/was/logs/mmp-web" />
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%thread] %mdc  %-5level %c:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- 按照每天生成日志文件 -->
+	<appender name="DEBUF_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<Encoding>UTF-8</Encoding>
+		 <file>${LOG_HOME}/TRANS_LOG/mmp-web.log</file><!--如果这个定义的话这个为当天的日志-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<fileNamePattern>${LOG_HOME}/TRANS_LOG/mmp-web-%d{yyyy-MM-dd}.%i.log</fileNamePattern><!--历史日志  -->
+			<!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件 -->
+			<maxHistory>3</maxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件最大的大小-->
+				<MaxFileSize>100MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<Pattern>%d [%thread] %mdc  %-5level %c:%L - %msg%n</Pattern>
+		</layout>
+		<encoder>
+			
+		</encoder>
+	</appender>
+	<!-- 警告及错误日志 -->
+	<appender name="ERROR_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<Encoding>UTF-8</Encoding>
+		 <file>${LOG_HOME}/ERROR_WARN/mmp-web.log</file><!--如果这个定义的话这个为当天的日志-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名-->
+			<fileNamePattern>${LOG_HOME}/ERROR_WARN/mmp-web-%d{yyyy-MM-dd}.%i.log</fileNamePattern><!--历史日志  -->
+			<!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件 -->
+			<maxHistory>3</maxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!--日志文件最大的大小-->
+				<MaxFileSize>100MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<Pattern>%d [%thread] %mdc  %-5level %c:%L - %msg%n</Pattern>
+		</layout>
+		<encoder>
+			
+		</encoder>
+	</appender>
+	<appender name="ASYNC_TRANS_LOG"
+			class="ch.qos.logback.classic.AsyncAppender">
+			<queueSize>512</queueSize>
+			<appender-ref ref="DEBUF_LOG" />
+			<includeCallerData>true</includeCallerData>
+			<discardingThreshold>0</discardingThreshold>
+		</appender>
+		
+		<appender name="ASYNC_ERROR_WARN"
+			class="ch.qos.logback.classic.AsyncAppender">
+			<queueSize>512</queueSize>
+			<appender-ref ref="ERROR_WARN" />
+			<includeCallerData>true</includeCallerData>
+			<discardingThreshold>0</discardingThreshold>
+		</appender>
+	<!-- <logger name="org.springframework.aop.framework.Cglib2AopProxy"
+			level="ERROR" />
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"
+			level="WARN" />
+
+	<logger name="user.access.log" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger> -->
+	<root level="DEBUG">
+		 <appender-ref ref="ASYNC_ERROR_WARN" />
+		<appender-ref ref="ASYNC_TRANS_LOG" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>

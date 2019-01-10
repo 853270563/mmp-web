@@ -1,0 +1,1211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="JJK_TRAN_CARD" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.market.jjk.model.JjkTranCard" >
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="SIGN_TYPE" property="signType" jdbcType="CHAR" />
+    <result column="CARD_TYPE" property="cardType" jdbcType="CHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="INPU_TYPE" property="inpuType" jdbcType="CHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="CHAR" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="CERT_ORGAN" property="certOrgan" jdbcType="VARCHAR" />
+    <result column="CERT_STAR_DATE" property="certStarDate" jdbcType="CHAR" />
+    <result column="CERT_END_DATE" property="certEndDate" jdbcType="CHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="CUST_PINX" property="custPinx" jdbcType="VARCHAR" />
+    <result column="CUST_PINM" property="custPinm" jdbcType="VARCHAR" />
+    <result column="CUST_SEX" property="custSex" jdbcType="CHAR" />
+    <result column="CUST_BORN" property="custBorn" jdbcType="CHAR" />
+    <result column="CUST_ADDR_HOME" property="custAddrHome" jdbcType="VARCHAR" />
+    <result column="CUST_ADDR_WORK" property="custAddrWork" jdbcType="VARCHAR" />
+    <result column="CUST_MOBI_PHONE" property="custMobiPhone" jdbcType="CHAR" />
+    <result column="CUST_TELE_PHONE" property="custTelePhone" jdbcType="VARCHAR" />
+    <result column="CUST_NATI" property="custNati" jdbcType="CHAR" />
+    <result column="CUST_JOB" property="custJob" jdbcType="VARCHAR" />
+    <result column="BANK_KZHY" property="bankKzhy" jdbcType="CHAR" />
+    <result column="BANK_YBTH" property="bankYbth" jdbcType="CHAR" />
+    <result column="FLAG_STAT" property="flagStat" jdbcType="CHAR" />
+    <result column="FLAG_PWD_ENVE" property="flagPwdEnve" jdbcType="CHAR" />
+    <result column="CUST_POST" property="custPost" jdbcType="CHAR" />
+    <result column="CUST_EMAIL" property="custEmail" jdbcType="VARCHAR" />
+    <result column="FLAG_OVER" property="flagOver" jdbcType="CHAR" />
+    <result column="ENSU_TYPE" property="ensuType" jdbcType="CHAR" />
+    <result column="ENSU_NO" property="ensuNo" jdbcType="VARCHAR" />
+    <result column="OVER_AMT" property="overAmt" jdbcType="DECIMAL" />
+    <result column="MODI_PWD_TYPE" property="modiPwdType" jdbcType="CHAR" />
+    <result column="CARD_CONT" property="cardCont" jdbcType="VARCHAR" />
+    <result column="CARD_TRAC2" property="cardTrac2" jdbcType="VARCHAR" />
+    <result column="CARD_TRAC3" property="cardTrac3" jdbcType="VARCHAR" />
+    <result column="VOUC_NO" property="voucNo" jdbcType="VARCHAR" />
+    <result column="VOUC_TYPE" property="voucType" jdbcType="CHAR" />
+    <result column="VOUC_BANO" property="voucBano" jdbcType="VARCHAR" />
+    <result column="VOUC_SENO" property="voucSeno" jdbcType="VARCHAR" />
+    <result column="FLAG_SIGN_EBANK" property="flagSignEbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_MBANK" property="flagSignMbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_SBANK" property="flagSignSbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_DEPO" property="flagSignDepo" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_RES1" property="flagSignRes1" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_RES2" property="flagSignRes2" jdbcType="CHAR" />
+    <result column="TOKEN_TYPE" property="tokenType" jdbcType="CHAR" />
+    <result column="TOKEN_NO" property="tokenNo" jdbcType="VARCHAR" />
+    <result column="SIGN_ORGAN" property="signOrgan" jdbcType="VARCHAR" />
+    <result column="SIGN_USER" property="signUser" jdbcType="VARCHAR" />
+    <result column="SIGN_DEVI_TYPE" property="signDeviType" jdbcType="CHAR" />
+    <result column="SIGN_DEVI_NO" property="signDeviNo" jdbcType="VARCHAR" />
+    <result column="SIGN_TIME" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="SIGN_GPS" property="signGps" jdbcType="VARCHAR" />
+    <result column="SIGN_STATE" property="signState" jdbcType="CHAR" />
+    <result column="SIGN_APPR_MARK" property="signApprMark" jdbcType="VARCHAR" />
+    <result column="DECA_RES1" property="decaRes1" jdbcType="CHAR" />
+    <result column="DECA_RES2" property="decaRes2" jdbcType="VARCHAR" />
+    <result column="DECA_RES3" property="decaRes3" jdbcType="VARCHAR" />
+    <result column="APPR_RETN_INFO" property="apprRetnInfo" jdbcType="VARCHAR" />
+    <result column="CERT_IMG" property="certImg" jdbcType="VARCHAR" />
+  </resultMap>
+   <resultMap id="BaseResultMap2" class="java.util.HashMap" >
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="SIGN_TYPE" property="signType" jdbcType="CHAR" />
+    <result column="CARD_TYPE" property="cardType" jdbcType="CHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="CHAR" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="SIGN_ORGAN" property="signOrgan" jdbcType="VARCHAR" />
+    <result column="SIGN_USER" property="signUser" jdbcType="VARCHAR" />
+    <result column="SIGN_TIME" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="SIGN_STATE" property="signState" jdbcType="CHAR" />
+  </resultMap>
+  
+    <resultMap id="BaseResultMap3" class="java.util.HashMap" >
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="SIGN_TYPE" property="signType" jdbcType="CHAR" />
+    <result column="CARD_TYPE" property="cardType" jdbcType="CHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="INPU_TYPE" property="inpuType" jdbcType="CHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="CHAR" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="CERT_ORGAN" property="certOrgan" jdbcType="VARCHAR" />
+    <result column="CERT_STAR_DATE" property="certStarDate" jdbcType="CHAR" />
+    <result column="CERT_END_DATE" property="certEndDate" jdbcType="CHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="CUST_PINX" property="custPinx" jdbcType="VARCHAR" />
+    <result column="CUST_PINM" property="custPinm" jdbcType="VARCHAR" />
+    <result column="CUST_SEX" property="custSex" jdbcType="CHAR" />
+    <result column="CUST_BORN" property="custBorn" jdbcType="CHAR" />
+    <result column="CUST_ADDR_HOME" property="custAddrHome" jdbcType="VARCHAR" />
+    <result column="CUST_ADDR_WORK" property="custAddrWork" jdbcType="VARCHAR" />
+    <result column="CUST_MOBI_PHONE" property="custMobiPhone" jdbcType="CHAR" />
+    <result column="CUST_TELE_PHONE" property="custTelePhone" jdbcType="VARCHAR" />
+    <result column="CUST_NATI" property="custNati" jdbcType="CHAR" />
+    <result column="CUST_JOB" property="custJob" jdbcType="VARCHAR" />
+    <result column="BANK_KZHY" property="bankKzhy" jdbcType="CHAR" />
+    <result column="BANK_YBTH" property="bankYbth" jdbcType="CHAR" />
+    <result column="FLAG_STAT" property="flagStat" jdbcType="CHAR" />
+    <result column="FLAG_PWD_ENVE" property="flagPwdEnve" jdbcType="CHAR" />
+    <result column="CUST_POST" property="custPost" jdbcType="CHAR" />
+    <result column="CUST_EMAIL" property="custEmail" jdbcType="VARCHAR" />
+    <result column="FLAG_OVER" property="flagOver" jdbcType="CHAR" />
+    <result column="ENSU_TYPE" property="ensuType" jdbcType="CHAR" />
+    <result column="ENSU_NO" property="ensuNo" jdbcType="VARCHAR" />
+    <result column="OVER_AMT" property="overAmt" jdbcType="DECIMAL" />
+    <result column="MODI_PWD_TYPE" property="modiPwdType" jdbcType="CHAR" />
+    <result column="CARD_CONT" property="cardCont" jdbcType="VARCHAR" />
+    <result column="CARD_TRAC2" property="cardTrac2" jdbcType="VARCHAR" />
+    <result column="CARD_TRAC3" property="cardTrac3" jdbcType="VARCHAR" />
+    <result column="VOUC_NO" property="voucNo" jdbcType="VARCHAR" />
+    <result column="VOUC_TYPE" property="voucType" jdbcType="CHAR" />
+    <result column="VOUC_BANO" property="voucBano" jdbcType="VARCHAR" />
+    <result column="VOUC_SENO" property="voucSeno" jdbcType="VARCHAR" />
+    <result column="FLAG_SIGN_EBANK" property="flagSignEbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_MBANK" property="flagSignMbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_SBANK" property="flagSignSbank" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_DEPO" property="flagSignDepo" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_RES1" property="flagSignRes1" jdbcType="CHAR" />
+    <result column="FLAG_SIGN_RES2" property="flagSignRes2" jdbcType="CHAR" />
+    <result column="TOKEN_TYPE" property="tokenType" jdbcType="CHAR" />
+    <result column="TOKEN_NO" property="tokenNo" jdbcType="VARCHAR" />
+    <result column="SIGN_ORGAN" property="signOrgan" jdbcType="VARCHAR" />
+    <result column="SIGN_USER" property="signUser" jdbcType="VARCHAR" />
+    <result column="SIGN_DEVI_TYPE" property="signDeviType" jdbcType="CHAR" />
+    <result column="SIGN_DEVI_NO" property="signDeviNo" jdbcType="VARCHAR" />
+    <result column="SIGN_TIME" property="signTime" jdbcType="VARCHAR" />
+    <result column="SIGN_GPS" property="signGps" jdbcType="VARCHAR" />
+    <result column="SIGN_STATE" property="signState" jdbcType="CHAR" />
+    <result column="SIGN_APPR_MARK" property="signApprMark" jdbcType="VARCHAR" />
+    <result column="DECA_RES1" property="decaRes1" jdbcType="CHAR" />
+    <result column="DECA_RES2" property="decaRes2" jdbcType="VARCHAR" />
+    <result column="DECA_RES3" property="decaRes3" jdbcType="VARCHAR" />
+    <result column="APPR_RETN_INFO" property="apprRetnInfo" jdbcType="VARCHAR" />
+    <result column="CERT_IMG" property="certImg" jdbcType="CLOB" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    TRANS_ID, SIGN_TYPE, CARD_TYPE, CARD_NO, INPU_TYPE, CERT_TYPE, CERT_NO, CERT_ORGAN, 
+    CERT_STAR_DATE, CERT_END_DATE, CUST_NAME, CUST_PINX, CUST_PINM, CUST_SEX, CUST_BORN, 
+    CUST_ADDR_HOME, CUST_ADDR_WORK, CUST_MOBI_PHONE, CUST_TELE_PHONE, CUST_NATI, CUST_JOB, 
+    BANK_KZHY, BANK_YBTH, FLAG_STAT, FLAG_PWD_ENVE, CUST_POST, CUST_EMAIL, FLAG_OVER, 
+    ENSU_TYPE, ENSU_NO, OVER_AMT, MODI_PWD_TYPE, CARD_CONT, CARD_TRAC2, CARD_TRAC3, VOUC_NO, 
+    VOUC_TYPE, VOUC_BANO, VOUC_SENO, FLAG_SIGN_EBANK, FLAG_SIGN_MBANK, FLAG_SIGN_SBANK, 
+    FLAG_SIGN_DEPO, FLAG_SIGN_RES1, FLAG_SIGN_RES2, TOKEN_TYPE, TOKEN_NO, SIGN_ORGAN, 
+    SIGN_USER, SIGN_DEVI_TYPE, SIGN_DEVI_NO, SIGN_TIME, SIGN_GPS, SIGN_STATE, SIGN_APPR_MARK, 
+    DECA_RES1, DECA_RES2, DECA_RES3, (select a.APPR_RETN_INFO from ${schema.interPlat}.MGG_TRAN_CHECK a
+    where a.TRANS_ID = JJK_TRAN_CARD.TRANS_ID limit 1) as APPR_RETN_INFO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="JJK_TRAN_CARD.Base_Column_List" />
+    from ${schema.interPlat}.JJK_TRAN_CARD
+    <isParameterPresent >
+      <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+    <!-- 附带审核结果查询 -->
+    <select id="selectByExampleExt" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+        select
+        <isParameterPresent >
+            <isEqual property="distinct" compareValue="true" >
+                distinct
+            </isEqual>
+        </isParameterPresent>
+        <include refid="JJK_TRAN_CARD.Base_Column_List" />
+        from ${schema.interPlat}.JJK_TRAN_CARD
+        <isParameterPresent >
+            <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+            <isNotNull property="orderByClause" >
+                order by $orderByClause$
+            </isNotNull>
+        </isParameterPresent>
+    </select>
+  <select id="findPageByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+  	<include refid="public.pageBegin" />
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="JJK_TRAN_CARD.Base_Column_List" />
+    from ${schema.interPlat}.JJK_TRAN_CARD
+    <isParameterPresent >
+      <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+    <include refid="public.pageEnd" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="String" >
+    select 
+    <include refid="JJK_TRAN_CARD.Base_Column_List" />
+    from ${schema.interPlat}.JJK_TRAN_CARD
+    where TRANS_ID = #transId:CHAR#
+  </select>
+  
+  <select id="getSeqTranId" resultClass="java.util.HashMap" >
+  		select CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'),${schema.interPlat}.nextval('seq_JJK_TRAN_CARD')) as TRANS_ID from dual
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterClass="String" >
+    delete from ${schema.interPlat}.JJK_TRAN_CARD
+    where TRANS_ID = #transId:CHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from ${schema.interPlat}.JJK_TRAN_CARD
+    <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.market.jjk.model.JjkTranCard" >
+    insert into ${schema.interPlat}.JJK_TRAN_CARD (TRANS_ID, SIGN_TYPE, CARD_TYPE, CARD_NO, INPU_TYPE,
+      CERT_TYPE, CERT_NO, CERT_ORGAN, CERT_STAR_DATE, CERT_END_DATE, 
+      CUST_NAME, CUST_PINX, CUST_PINM, CUST_SEX, CUST_BORN, 
+      CUST_ADDR_HOME, CUST_ADDR_WORK, CUST_MOBI_PHONE, CUST_TELE_PHONE, 
+      CUST_NATI, CUST_JOB, BANK_KZHY, BANK_YBTH, FLAG_STAT, 
+      FLAG_PWD_ENVE, CUST_POST, CUST_EMAIL, FLAG_OVER, ENSU_TYPE, 
+      ENSU_NO, OVER_AMT, MODI_PWD_TYPE, CARD_CONT, CARD_TRAC2, 
+      CARD_TRAC3, VOUC_NO, VOUC_TYPE, VOUC_BANO, VOUC_SENO, 
+      FLAG_SIGN_EBANK, FLAG_SIGN_MBANK, FLAG_SIGN_SBANK, FLAG_SIGN_DEPO, 
+      FLAG_SIGN_RES1, FLAG_SIGN_RES2, TOKEN_TYPE, TOKEN_NO, 
+      SIGN_ORGAN, SIGN_USER, SIGN_DEVI_TYPE, SIGN_DEVI_NO, 
+      SIGN_TIME, SIGN_GPS, SIGN_STATE, SIGN_APPR_MARK, 
+      DECA_RES1, DECA_RES2, DECA_RES3)
+    values (#transId:CHAR#, #signType:CHAR#, #cardType:CHAR#, #cardNo:VARCHAR#, #inpuType:CHAR#, 
+      #certType:CHAR#, #certNo:VARCHAR#, #certOrgan:VARCHAR#, #certStarDate:CHAR#, #certEndDate:CHAR#, 
+      #custName:VARCHAR#, #custPinx:VARCHAR#, #custPinm:VARCHAR#, #custSex:CHAR#, #custBorn:CHAR#, 
+      #custAddrHome:VARCHAR#, #custAddrWork:VARCHAR#, #custMobiPhone:CHAR#, #custTelePhone:VARCHAR#, 
+      #custNati:CHAR#, #custJob:VARCHAR#, #bankKzhy:CHAR#, #bankYbth:CHAR#, #flagStat:CHAR#, 
+      #flagPwdEnve:CHAR#, #custPost:CHAR#, #custEmail:VARCHAR#, #flagOver:CHAR#, #ensuType:CHAR#, 
+      #ensuNo:VARCHAR#, #overAmt:DECIMAL#, #modiPwdType:CHAR#, #cardCont:VARCHAR#, #cardTrac2:VARCHAR#, 
+      #cardTrac3:VARCHAR#, #voucNo:VARCHAR#, #voucType:CHAR#, #voucBano:VARCHAR#, #voucSeno:VARCHAR#, 
+      #flagSignEbank:CHAR#, #flagSignMbank:CHAR#, #flagSignSbank:CHAR#, #flagSignDepo:CHAR#, 
+      #flagSignRes1:CHAR#, #flagSignRes2:CHAR#, #tokenType:CHAR#, #tokenNo:VARCHAR#, 
+      #signOrgan:VARCHAR#, #signUser:VARCHAR#, #signDeviType:CHAR#, #signDeviNo:VARCHAR#, 
+      #signTime:TIMESTAMP#, #signGps:VARCHAR#, #signState:CHAR#, #signApprMark:VARCHAR#, 
+      #decaRes1:CHAR#, #decaRes2:VARCHAR#, #decaRes3:VARCHAR#)
+  </insert>
+  
+
+  <insert id="insertSelective" parameterClass="cn.com.yitong.market.jjk.model.JjkTranCard" >
+  	<selectKey type="pre" keyProperty="transId">
+  		select CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'),${schema.interPlat}.nextval('seq_JJK_TRAN_CARD')) from dual
+  	</selectKey>
+    insert into ${schema.interPlat}.JJK_TRAN_CARD
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="transId" >
+        TRANS_ID
+      </isNotNull>
+      <isNotNull prepend="," property="signType" >
+        SIGN_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="cardType" >
+        CARD_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="cardNo" >
+        CARD_NO
+      </isNotNull>
+      <isNotNull prepend="," property="inpuType" >
+        INPU_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="certType" >
+        CERT_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="certNo" >
+        CERT_NO
+      </isNotNull>
+      <isNotNull prepend="," property="certOrgan" >
+        CERT_ORGAN
+      </isNotNull>
+      <isNotNull prepend="," property="certStarDate" >
+        CERT_STAR_DATE
+      </isNotNull>
+      <isNotNull prepend="," property="certEndDate" >
+        CERT_END_DATE
+      </isNotNull>
+      <isNotNull prepend="," property="custName" >
+        CUST_NAME
+      </isNotNull>
+      <isNotNull prepend="," property="custPinx" >
+        CUST_PINX
+      </isNotNull>
+      <isNotNull prepend="," property="custPinm" >
+        CUST_PINM
+      </isNotNull>
+      <isNotNull prepend="," property="custSex" >
+        CUST_SEX
+      </isNotNull>
+      <isNotNull prepend="," property="custBorn" >
+        CUST_BORN
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrHome" >
+        CUST_ADDR_HOME
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrWork" >
+        CUST_ADDR_WORK
+      </isNotNull>
+      <isNotNull prepend="," property="custMobiPhone" >
+        CUST_MOBI_PHONE
+      </isNotNull>
+      <isNotNull prepend="," property="custTelePhone" >
+        CUST_TELE_PHONE
+      </isNotNull>
+      <isNotNull prepend="," property="custNati" >
+        CUST_NATI
+      </isNotNull>
+      <isNotNull prepend="," property="custJob" >
+        CUST_JOB
+      </isNotNull>
+      <isNotNull prepend="," property="bankKzhy" >
+        BANK_KZHY
+      </isNotNull>
+      <isNotNull prepend="," property="bankYbth" >
+        BANK_YBTH
+      </isNotNull>
+      <isNotNull prepend="," property="flagStat" >
+        FLAG_STAT
+      </isNotNull>
+      <isNotNull prepend="," property="flagPwdEnve" >
+        FLAG_PWD_ENVE
+      </isNotNull>
+      <isNotNull prepend="," property="custPost" >
+        CUST_POST
+      </isNotNull>
+      <isNotNull prepend="," property="custEmail" >
+        CUST_EMAIL
+      </isNotNull>
+      <isNotNull prepend="," property="flagOver" >
+        FLAG_OVER
+      </isNotNull>
+      <isNotNull prepend="," property="ensuType" >
+        ENSU_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="ensuNo" >
+        ENSU_NO
+      </isNotNull>
+      <isNotNull prepend="," property="overAmt" >
+        OVER_AMT
+      </isNotNull>
+      <isNotNull prepend="," property="modiPwdType" >
+        MODI_PWD_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="cardCont" >
+        CARD_CONT
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac2" >
+        CARD_TRAC2
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac3" >
+        CARD_TRAC3
+      </isNotNull>
+      <isNotNull prepend="," property="voucNo" >
+        VOUC_NO
+      </isNotNull>
+      <isNotNull prepend="," property="voucType" >
+        VOUC_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="voucBano" >
+        VOUC_BANO
+      </isNotNull>
+      <isNotNull prepend="," property="voucSeno" >
+        VOUC_SENO
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignEbank" >
+        FLAG_SIGN_EBANK
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignMbank" >
+        FLAG_SIGN_MBANK
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignSbank" >
+        FLAG_SIGN_SBANK
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignDepo" >
+        FLAG_SIGN_DEPO
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes1" >
+        FLAG_SIGN_RES1
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes2" >
+        FLAG_SIGN_RES2
+      </isNotNull>
+      <isNotNull prepend="," property="tokenType" >
+        TOKEN_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="tokenNo" >
+        TOKEN_NO
+      </isNotNull>
+      <isNotNull prepend="," property="signOrgan" >
+        SIGN_ORGAN
+      </isNotNull>
+      <isNotNull prepend="," property="signUser" >
+        SIGN_USER
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviType" >
+        SIGN_DEVI_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviNo" >
+        SIGN_DEVI_NO
+      </isNotNull>
+      <isNotNull prepend="," property="signTime" >
+        SIGN_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="signGps" >
+        SIGN_GPS
+      </isNotNull>
+      <isNotNull prepend="," property="signState" >
+        SIGN_STATE
+      </isNotNull>
+      <isNotNull prepend="," property="signApprMark" >
+        SIGN_APPR_MARK
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes1" >
+        DECA_RES1
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes2" >
+        DECA_RES2
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes3" >
+        DECA_RES3
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="transId" >
+        #transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signType" >
+        #signType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardType" >
+        #cardType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardNo" >
+        #cardNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="inpuType" >
+        #inpuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certType" >
+        #certType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certNo" >
+        #certNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certOrgan" >
+        #certOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certStarDate" >
+        #certStarDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certEndDate" >
+        #certEndDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custName" >
+        #custName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPinx" >
+        #custPinx:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPinm" >
+        #custPinm:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custSex" >
+        #custSex:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custBorn" >
+        #custBorn:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrHome" >
+        #custAddrHome:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrWork" >
+        #custAddrWork:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custMobiPhone" >
+        #custMobiPhone:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custTelePhone" >
+        #custTelePhone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custNati" >
+        #custNati:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custJob" >
+        #custJob:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankKzhy" >
+        #bankKzhy:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankYbth" >
+        #bankYbth:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagStat" >
+        #flagStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagPwdEnve" >
+        #flagPwdEnve:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPost" >
+        #custPost:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custEmail" >
+        #custEmail:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagOver" >
+        #flagOver:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ensuType" >
+        #ensuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ensuNo" >
+        #ensuNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="overAmt" >
+        #overAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="modiPwdType" >
+        #modiPwdType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardCont" >
+        #cardCont:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac2" >
+        #cardTrac2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac3" >
+        #cardTrac3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucNo" >
+        #voucNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucType" >
+        #voucType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucBano" >
+        #voucBano:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucSeno" >
+        #voucSeno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignEbank" >
+        #flagSignEbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignMbank" >
+        #flagSignMbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignSbank" >
+        #flagSignSbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignDepo" >
+        #flagSignDepo:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes1" >
+        #flagSignRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes2" >
+        #flagSignRes2:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tokenType" >
+        #tokenType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tokenNo" >
+        #tokenNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signOrgan" >
+        #signOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signUser" >
+        #signUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviType" >
+        #signDeviType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviNo" >
+        #signDeviNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signTime" >
+        #signTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="signGps" >
+        #signGps:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signState" >
+        #signState:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signApprMark" >
+        #signApprMark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes1" >
+        #decaRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes2" >
+        #decaRes2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes3" >
+        #decaRes3:VARCHAR#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from ${schema.interPlat}.JJK_TRAN_CARD
+    <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update ${schema.interPlat}.JJK_TRAN_CARD
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.transId" >
+        TRANS_ID = #record.transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signType" >
+        SIGN_TYPE = #record.signType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cardType" >
+        CARD_TYPE = #record.cardType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cardNo" >
+        CARD_NO = #record.cardNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.inpuType" >
+        INPU_TYPE = #record.inpuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.certType" >
+        CERT_TYPE = #record.certType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.certNo" >
+        CERT_NO = #record.certNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.certOrgan" >
+        CERT_ORGAN = #record.certOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.certStarDate" >
+        CERT_STAR_DATE = #record.certStarDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.certEndDate" >
+        CERT_END_DATE = #record.certEndDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custName" >
+        CUST_NAME = #record.custName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custPinx" >
+        CUST_PINX = #record.custPinx:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custPinm" >
+        CUST_PINM = #record.custPinm:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custSex" >
+        CUST_SEX = #record.custSex:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custBorn" >
+        CUST_BORN = #record.custBorn:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custAddrHome" >
+        CUST_ADDR_HOME = #record.custAddrHome:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custAddrWork" >
+        CUST_ADDR_WORK = #record.custAddrWork:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custMobiPhone" >
+        CUST_MOBI_PHONE = #record.custMobiPhone:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custTelePhone" >
+        CUST_TELE_PHONE = #record.custTelePhone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custNati" >
+        CUST_NATI = #record.custNati:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custJob" >
+        CUST_JOB = #record.custJob:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankKzhy" >
+        BANK_KZHY = #record.bankKzhy:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankYbth" >
+        BANK_YBTH = #record.bankYbth:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagStat" >
+        FLAG_STAT = #record.flagStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagPwdEnve" >
+        FLAG_PWD_ENVE = #record.flagPwdEnve:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custPost" >
+        CUST_POST = #record.custPost:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.custEmail" >
+        CUST_EMAIL = #record.custEmail:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagOver" >
+        FLAG_OVER = #record.flagOver:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.ensuType" >
+        ENSU_TYPE = #record.ensuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.ensuNo" >
+        ENSU_NO = #record.ensuNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.overAmt" >
+        OVER_AMT = #record.overAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.modiPwdType" >
+        MODI_PWD_TYPE = #record.modiPwdType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cardCont" >
+        CARD_CONT = #record.cardCont:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cardTrac2" >
+        CARD_TRAC2 = #record.cardTrac2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cardTrac3" >
+        CARD_TRAC3 = #record.cardTrac3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.voucNo" >
+        VOUC_NO = #record.voucNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.voucType" >
+        VOUC_TYPE = #record.voucType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.voucBano" >
+        VOUC_BANO = #record.voucBano:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.voucSeno" >
+        VOUC_SENO = #record.voucSeno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignEbank" >
+        FLAG_SIGN_EBANK = #record.flagSignEbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignMbank" >
+        FLAG_SIGN_MBANK = #record.flagSignMbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignSbank" >
+        FLAG_SIGN_SBANK = #record.flagSignSbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignDepo" >
+        FLAG_SIGN_DEPO = #record.flagSignDepo:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignRes1" >
+        FLAG_SIGN_RES1 = #record.flagSignRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.flagSignRes2" >
+        FLAG_SIGN_RES2 = #record.flagSignRes2:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.tokenType" >
+        TOKEN_TYPE = #record.tokenType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.tokenNo" >
+        TOKEN_NO = #record.tokenNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signOrgan" >
+        SIGN_ORGAN = #record.signOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signUser" >
+        SIGN_USER = #record.signUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signDeviType" >
+        SIGN_DEVI_TYPE = #record.signDeviType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signDeviNo" >
+        SIGN_DEVI_NO = #record.signDeviNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signTime" >
+        SIGN_TIME = #record.signTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signGps" >
+        SIGN_GPS = #record.signGps:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signState" >
+        SIGN_STATE = #record.signState:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.signApprMark" >
+        SIGN_APPR_MARK = #record.signApprMark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.decaRes1" >
+        DECA_RES1 = #record.decaRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.decaRes2" >
+        DECA_RES2 = #record.decaRes2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.decaRes3" >
+        DECA_RES3 = #record.decaRes3:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update ${schema.interPlat}.JJK_TRAN_CARD
+    set TRANS_ID = #record.transId:CHAR#,
+      SIGN_TYPE = #record.signType:CHAR#,
+      CARD_TYPE = #record.cardType:CHAR#,
+      CARD_NO = #record.cardNo:VARCHAR#,
+      INPU_TYPE = #record.inpuType:CHAR#,
+      CERT_TYPE = #record.certType:CHAR#,
+      CERT_NO = #record.certNo:VARCHAR#,
+      CERT_ORGAN = #record.certOrgan:VARCHAR#,
+      CERT_STAR_DATE = #record.certStarDate:CHAR#,
+      CERT_END_DATE = #record.certEndDate:CHAR#,
+      CUST_NAME = #record.custName:VARCHAR#,
+      CUST_PINX = #record.custPinx:VARCHAR#,
+      CUST_PINM = #record.custPinm:VARCHAR#,
+      CUST_SEX = #record.custSex:CHAR#,
+      CUST_BORN = #record.custBorn:CHAR#,
+      CUST_ADDR_HOME = #record.custAddrHome:VARCHAR#,
+      CUST_ADDR_WORK = #record.custAddrWork:VARCHAR#,
+      CUST_MOBI_PHONE = #record.custMobiPhone:CHAR#,
+      CUST_TELE_PHONE = #record.custTelePhone:VARCHAR#,
+      CUST_NATI = #record.custNati:CHAR#,
+      CUST_JOB = #record.custJob:VARCHAR#,
+      BANK_KZHY = #record.bankKzhy:CHAR#,
+      BANK_YBTH = #record.bankYbth:CHAR#,
+      FLAG_STAT = #record.flagStat:CHAR#,
+      FLAG_PWD_ENVE = #record.flagPwdEnve:CHAR#,
+      CUST_POST = #record.custPost:CHAR#,
+      CUST_EMAIL = #record.custEmail:VARCHAR#,
+      FLAG_OVER = #record.flagOver:CHAR#,
+      ENSU_TYPE = #record.ensuType:CHAR#,
+      ENSU_NO = #record.ensuNo:VARCHAR#,
+      OVER_AMT = #record.overAmt:DECIMAL#,
+      MODI_PWD_TYPE = #record.modiPwdType:CHAR#,
+      CARD_CONT = #record.cardCont:VARCHAR#,
+      CARD_TRAC2 = #record.cardTrac2:VARCHAR#,
+      CARD_TRAC3 = #record.cardTrac3:VARCHAR#,
+      VOUC_NO = #record.voucNo:VARCHAR#,
+      VOUC_TYPE = #record.voucType:CHAR#,
+      VOUC_BANO = #record.voucBano:VARCHAR#,
+      VOUC_SENO = #record.voucSeno:VARCHAR#,
+      FLAG_SIGN_EBANK = #record.flagSignEbank:CHAR#,
+      FLAG_SIGN_MBANK = #record.flagSignMbank:CHAR#,
+      FLAG_SIGN_SBANK = #record.flagSignSbank:CHAR#,
+      FLAG_SIGN_DEPO = #record.flagSignDepo:CHAR#,
+      FLAG_SIGN_RES1 = #record.flagSignRes1:CHAR#,
+      FLAG_SIGN_RES2 = #record.flagSignRes2:CHAR#,
+      TOKEN_TYPE = #record.tokenType:CHAR#,
+      TOKEN_NO = #record.tokenNo:VARCHAR#,
+      SIGN_ORGAN = #record.signOrgan:VARCHAR#,
+      SIGN_USER = #record.signUser:VARCHAR#,
+      SIGN_DEVI_TYPE = #record.signDeviType:CHAR#,
+      SIGN_DEVI_NO = #record.signDeviNo:VARCHAR#,
+      SIGN_TIME = #record.signTime:TIMESTAMP#,
+      SIGN_GPS = #record.signGps:VARCHAR#,
+      SIGN_STATE = #record.signState:CHAR#,
+      SIGN_APPR_MARK = #record.signApprMark:VARCHAR#,
+      DECA_RES1 = #record.decaRes1:CHAR#,
+      DECA_RES2 = #record.decaRes2:VARCHAR#,
+      DECA_RES3 = #record.decaRes3:VARCHAR#
+    <isParameterPresent >
+      <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateDecaRes1ByExample" >
+    update ${schema.interPlat}.JJK_TRAN_CARD
+    set 
+      DECA_RES1 = #record.decaRes1:CHAR#
+    <isParameterPresent >
+      <include refid="JJK_TRAN_CARD.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.market.jjk.model.JjkTranCard" >
+    update ${schema.interPlat}.JJK_TRAN_CARD
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="signType" >
+        SIGN_TYPE = #signType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardType" >
+        CARD_TYPE = #cardType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardNo" >
+        CARD_NO = #cardNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="inpuType" >
+        INPU_TYPE = #inpuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certType" >
+        CERT_TYPE = #certType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certNo" >
+        CERT_NO = #certNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certOrgan" >
+        CERT_ORGAN = #certOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certStarDate" >
+        CERT_STAR_DATE = #certStarDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="certEndDate" >
+        CERT_END_DATE = #certEndDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custName" >
+        CUST_NAME = #custName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPinx" >
+        CUST_PINX = #custPinx:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPinm" >
+        CUST_PINM = #custPinm:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custSex" >
+        CUST_SEX = #custSex:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custBorn" >
+        CUST_BORN = #custBorn:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrHome" >
+        CUST_ADDR_HOME = #custAddrHome:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custAddrWork" >
+        CUST_ADDR_WORK = #custAddrWork:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custMobiPhone" >
+        CUST_MOBI_PHONE = #custMobiPhone:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custTelePhone" >
+        CUST_TELE_PHONE = #custTelePhone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custNati" >
+        CUST_NATI = #custNati:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custJob" >
+        CUST_JOB = #custJob:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankKzhy" >
+        BANK_KZHY = #bankKzhy:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankYbth" >
+        BANK_YBTH = #bankYbth:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagStat" >
+        FLAG_STAT = #flagStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagPwdEnve" >
+        FLAG_PWD_ENVE = #flagPwdEnve:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custPost" >
+        CUST_POST = #custPost:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="custEmail" >
+        CUST_EMAIL = #custEmail:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagOver" >
+        FLAG_OVER = #flagOver:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ensuType" >
+        ENSU_TYPE = #ensuType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ensuNo" >
+        ENSU_NO = #ensuNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="overAmt" >
+        OVER_AMT = #overAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="modiPwdType" >
+        MODI_PWD_TYPE = #modiPwdType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardCont" >
+        CARD_CONT = #cardCont:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac2" >
+        CARD_TRAC2 = #cardTrac2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cardTrac3" >
+        CARD_TRAC3 = #cardTrac3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucNo" >
+        VOUC_NO = #voucNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucType" >
+        VOUC_TYPE = #voucType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucBano" >
+        VOUC_BANO = #voucBano:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="voucSeno" >
+        VOUC_SENO = #voucSeno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignEbank" >
+        FLAG_SIGN_EBANK = #flagSignEbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignMbank" >
+        FLAG_SIGN_MBANK = #flagSignMbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignSbank" >
+        FLAG_SIGN_SBANK = #flagSignSbank:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignDepo" >
+        FLAG_SIGN_DEPO = #flagSignDepo:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes1" >
+        FLAG_SIGN_RES1 = #flagSignRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="flagSignRes2" >
+        FLAG_SIGN_RES2 = #flagSignRes2:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tokenType" >
+        TOKEN_TYPE = #tokenType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tokenNo" >
+        TOKEN_NO = #tokenNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signOrgan" >
+        SIGN_ORGAN = #signOrgan:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signUser" >
+        SIGN_USER = #signUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviType" >
+        SIGN_DEVI_TYPE = #signDeviType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signDeviNo" >
+        SIGN_DEVI_NO = #signDeviNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signTime" >
+        SIGN_TIME = #signTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="signGps" >
+        SIGN_GPS = #signGps:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signState" >
+        SIGN_STATE = #signState:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="signApprMark" >
+        SIGN_APPR_MARK = #signApprMark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes1" >
+        DECA_RES1 = #decaRes1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes2" >
+        DECA_RES2 = #decaRes2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="decaRes3" >
+        DECA_RES3 = #decaRes3:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where TRANS_ID = #transId:CHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.JjkTranCard" >
+    update ${schema.interPlat}.JJK_TRAN_CARD
+    set SIGN_TYPE = #signType:CHAR#,
+      CARD_TYPE = #cardType:CHAR#,
+      CARD_NO = #cardNo:VARCHAR#,
+      INPU_TYPE = #inpuType:CHAR#,
+      CERT_TYPE = #certType:CHAR#,
+      CERT_NO = #certNo:VARCHAR#,
+      CERT_ORGAN = #certOrgan:VARCHAR#,
+      CERT_STAR_DATE = #certStarDate:CHAR#,
+      CERT_END_DATE = #certEndDate:CHAR#,
+      CUST_NAME = #custName:VARCHAR#,
+      CUST_PINX = #custPinx:VARCHAR#,
+      CUST_PINM = #custPinm:VARCHAR#,
+      CUST_SEX = #custSex:CHAR#,
+      CUST_BORN = #custBorn:CHAR#,
+      CUST_ADDR_HOME = #custAddrHome:VARCHAR#,
+      CUST_ADDR_WORK = #custAddrWork:VARCHAR#,
+      CUST_MOBI_PHONE = #custMobiPhone:CHAR#,
+      CUST_TELE_PHONE = #custTelePhone:VARCHAR#,
+      CUST_NATI = #custNati:CHAR#,
+      CUST_JOB = #custJob:VARCHAR#,
+      BANK_KZHY = #bankKzhy:CHAR#,
+      BANK_YBTH = #bankYbth:CHAR#,
+      FLAG_STAT = #flagStat:CHAR#,
+      FLAG_PWD_ENVE = #flagPwdEnve:CHAR#,
+      CUST_POST = #custPost:CHAR#,
+      CUST_EMAIL = #custEmail:VARCHAR#,
+      FLAG_OVER = #flagOver:CHAR#,
+      ENSU_TYPE = #ensuType:CHAR#,
+      ENSU_NO = #ensuNo:VARCHAR#,
+      OVER_AMT = #overAmt:DECIMAL#,
+      MODI_PWD_TYPE = #modiPwdType:CHAR#,
+      CARD_CONT = #cardCont:VARCHAR#,
+      CARD_TRAC2 = #cardTrac2:VARCHAR#,
+      CARD_TRAC3 = #cardTrac3:VARCHAR#,
+      VOUC_NO = #voucNo:VARCHAR#,
+      VOUC_TYPE = #voucType:CHAR#,
+      VOUC_BANO = #voucBano:VARCHAR#,
+      VOUC_SENO = #voucSeno:VARCHAR#,
+      FLAG_SIGN_EBANK = #flagSignEbank:CHAR#,
+      FLAG_SIGN_MBANK = #flagSignMbank:CHAR#,
+      FLAG_SIGN_SBANK = #flagSignSbank:CHAR#,
+      FLAG_SIGN_DEPO = #flagSignDepo:CHAR#,
+      FLAG_SIGN_RES1 = #flagSignRes1:CHAR#,
+      FLAG_SIGN_RES2 = #flagSignRes2:CHAR#,
+      TOKEN_TYPE = #tokenType:CHAR#,
+      TOKEN_NO = #tokenNo:VARCHAR#,
+      SIGN_ORGAN = #signOrgan:VARCHAR#,
+      SIGN_USER = #signUser:VARCHAR#,
+      SIGN_DEVI_TYPE = #signDeviType:CHAR#,
+      SIGN_DEVI_NO = #signDeviNo:VARCHAR#,
+      SIGN_TIME = #signTime:TIMESTAMP#,
+      SIGN_GPS = #signGps:VARCHAR#,
+      SIGN_STATE = #signState:CHAR#,
+      SIGN_APPR_MARK = #signApprMark:VARCHAR#,
+      DECA_RES1 = #decaRes1:CHAR#,
+      DECA_RES2 = #decaRes2:VARCHAR#,
+      DECA_RES3 = #decaRes3:VARCHAR#
+    where TRANS_ID = #transId:CHAR#
+  </update>
+  
+  
+  	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotNull prepend="AND" property="LOGIN_ID">
+			SIGN_USER = #LOGIN_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="signType">
+			SIGN_TYPE = #signType#
+		</isNotNull>
+		<isNotNull prepend="AND" property="signState">
+			SIGN_STATE = #signState#
+		</isNotNull>
+		
+		 <isNotEmpty prepend="AND" property="startDate">
+		 	<![CDATA[ DATE_FORMAT(SIGN_TIME, '%Y-%m-%d')  >=  DATE_FORMAT(#startDate#,'%Y-%m-%d')  ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="endDate">
+		 	<![CDATA[ DATE_FORMAT(SIGN_TIME, '%Y-%m-%d')  <= DATE_FORMAT(#endDate#,'%Y-%m-%d')]]>
+		</isNotEmpty>
+	</sql>
+  	<!-- 查询SQL -->
+	<sql id="coreSql">
+		 SELECT                                             
+		 	TRANS_ID, SIGN_TYPE, CARD_TYPE, CARD_NO, CERT_TYPE, CERT_NO,CUST_NAME,SIGN_ORGAN,SIGN_USER,SIGN_TIME, SIGN_STATE   
+		 FROM ${schema.interPlat}.JJK_TRAN_CARD                                                              
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY TRANS_ID
+	</sql>
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultMap="BaseResultMap2">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+		<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(t.TRANS_ID) CNT 
+			FROM ${schema.interPlat}.JJK_TRAN_CARD T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	
+	<!-- 详情查询 -->
+	<select id="queryTranDecardById" parameterClass="map" resultMap="BaseResultMap3">
+		select                                             
+		 TRANS_ID, SIGN_TYPE, CARD_TYPE, CARD_NO, INPU_TYPE, CERT_TYPE, CERT_NO, CERT_ORGAN,
+		 CERT_STAR_DATE, CERT_END_DATE, CUST_NAME, CUST_PINX, CUST_PINM, CUST_SEX, CUST_BORN,      
+		 CUST_ADDR_HOME, CUST_ADDR_WORK, CUST_MOBI_PHONE, CUST_TELE_PHONE, CUST_NATI, CUST_JOB,     
+		 BANK_KZHY, BANK_YBTH, FLAG_STAT, FLAG_PWD_ENVE, CUST_POST, CUST_EMAIL, FLAG_OVER,      
+		 ENSU_TYPE, ENSU_NO, OVER_AMT, MODI_PWD_TYPE, CARD_CONT, CARD_TRAC2, CARD_TRAC3, VOUC_NO,      
+		 VOUC_TYPE, VOUC_BANO, VOUC_SENO, FLAG_SIGN_EBANK, FLAG_SIGN_MBANK, FLAG_SIGN_SBANK,      
+		 FLAG_SIGN_DEPO, FLAG_SIGN_RES1, FLAG_SIGN_RES2, TOKEN_TYPE, TOKEN_NO, SIGN_ORGAN,     
+		 SIGN_USER, SIGN_DEVI_TYPE, SIGN_DEVI_NO, DATE_FORMAT(SIGN_TIME,'yyyy-dd-mm hh24:mi:ss') as SIGN_TIME , SIGN_GPS, SIGN_STATE, SIGN_APPR_MARK,     
+		 DECA_RES1, DECA_RES2, DECA_RES3,
+		 (select a.APPR_RETN_INFO from ${schema.interPlat}.MGG_TRAN_CHECK a     where a.TRANS_ID = JJK_TRAN_CARD.TRANS_ID limit 1) as APPR_RETN_INFO,
+    	 (select b.picture from ${schema.interPlat}.mgg_cust_info b  where b.serial_no=JJK_TRAN_CARD.TRANS_ID) as CERT_IMG
+		 from ${schema.interPlat}.JJK_TRAN_CARD                                                              
+		<dynamic prepend="WHERE ">
+			<isNotNull prepend="AND" property="transId">
+			TRANS_ID = #transId#
+		</isNotNull>
+		</dynamic>
+		order by TRANS_ID
+	</select>
+	
+
+	
+</sqlMap>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="CardInfoAdd2" ibatisStatement="JJK_TRAN_CARD_EXT.insert" desc="开卡提交">
+	<!-- 请求报文 -->
+	<snd> 
+<!-- 		<field name="TRANS_ID" length="20" type="C" desc="业务流水ID 8位日期+12位序列。系统的表：公共序列。业务的表：单独序列。" /> -->
+		<field name="SIGN_TYPE" length="1" type="C" desc="综合签约标识 0：默认，开卡、签约（电子渠道等）1：仅开卡2：仅签约" />
+		<field name="CARD_TYPE" length="2" type="C" desc="卡类型编号 01：默认，普通借记卡" /> 
+		<field name="CARD_NO" length="24" type="C" desc="卡号" />
+		<field name="INPU_TYPE" length="2" type="C" desc="输入方式[预留]" />
+		<field name="CERT_TYPE" length="2" type="C" desc="证件类型" /> 
+		<field name="CERT_NO" length="20" type="C" desc="身份证号" />
+		<field name="CERT_ORGAN" length="100" type="C" desc="发证机关" />
+		<field name="CERT_STAR_DATE" length="10" type="C" desc="证件有效期起" /> 
+		<field name="CERT_END_DATE" length="10" type="C" desc="证件有效期止" />
+		<field name="CUST_NAME" length="100" type="C" desc="个人中文名称" />
+		<field name="CUST_PINX" length="100" type="C" desc="个人英文或拼音姓" /> 
+		<field name="CUST_PINM" length="100" type="C" desc="个人英名或拼音名" />
+		<field name="CUST_SEX" length="2" type="C" desc="性别" />
+		<field name="CUST_BORN" length="10" type="C" desc="出生日期" /> 
+		<field name="CUST_ADDR_HOME" length="200" type="C" desc="住宅地址" />
+		<field name="CUST_ADDR_WORK" length="200" type="C" desc="办公地址[预留]" />
+		<field name="CUST_MOBI_PHONE" length="11" type="C" desc="手机号码（开手机/短信银行）" /> 
+		<field name="CUST_TELE_PHONE" length="20" type="C" desc="电话号码[预留]" />
+		<field name="CUST_NATI" length="3" type="C" desc="国别代码" />
+		<field name="CUST_JOB" length="20" type="C" desc="职业代码[预留]" /> 
+		<field name="BANK_KZHY" length="1" type="C" desc="卡折合一标志[预留]" />
+		<field name="BANK_YBTH" length="1" type="C" desc="活期一本通号[预留]" />
+		<field name="FLAG_STAT" length="1" type="C" desc="是否产生对账单[预留]" /> 
+		<field name="FLAG_PWD_ENVE" length="1" type="C" desc="密码信封标志 0：默认，输入密码 1：密码信封" />
+		<field name="CUST_POST" length="6" type="C" desc="邮政编码[预留]" />
+		<field name="CUST_EMAIL" length="100" type="C" desc="邮箱[预留]" /> 
+		<field name="FLAG_OVER" length="1" type="C" desc="透支标志[预留]" />
+		<field name="ENSU_TYPE" length="1" type="C" desc="担保方式[预留]" />
+		<field name="ENSU_NO" length="20" type="C" desc="客户担保编号[预留]" /> 
+		<field name="OVER_AMT" length="20" type="C" desc="联机透支额度[预留]" />
+		<field name="MODI_PWD_TYPE" length="1" type="C" desc="修改密码标志[预留]" />
+		<field name="CARD_CONT" length="30" type="C" desc="发卡联系人[预留]" /> 
+		<field name="CARD_TRAC2" length="30" type="C" desc="磁道2信息[预留]" />
+		<field name="CARD_TRAC3" length="30" type="C" desc="磁道3信息[预留]" />
+		<field name="VOUC_NO" length="20" type="C" desc="凭证号[预留]" /> 
+		<field name="VOUC_TYPE" length="1" type="C" desc="凭证种类[预留]" />
+		<field name="VOUC_BANO" length="30" type="C" desc="凭证批号[预留]" />
+		<field name="VOUC_SENO" length="30" type="C" desc="凭证序号[预留]" /> 
+		<field name="FLAG_SIGN_EBANK" length="1" type="C" desc="是否开网银。0：不开，1：开" />
+		<field name="FLAG_SIGN_MBANK" length="1" type="C" desc="是否开手机银行。0：不开，1：开" />
+		<field name="FLAG_SIGN_SBANK" length="1" type="C" desc="是否开短信通知0。0：不开，1：开" /> 
+		<field name="FLAG_SIGN_DEPO" length="1" type="C" desc="是否开储蓄理财。0：不开，1：开" />
+		<field name="FLAG_SIGN_RES1" length="1" type="C" desc="是否开预留1。0：不开，1：开" />
+		<field name="FLAG_SIGN_RES2" length="1" type="C" desc="是否开预留2。0：不开，1：开" /> 
+		<field name="TOKEN_TYPE" length="1" type="C" desc="安全工具类型" />
+		<field name="TOKEN_NO" length="30" type="C" desc="安全工具序列号" />
+		<field name="SIGN_ORGAN" length="20" type="C" desc="经办机构（号）" /> 
+		<field name="SIGN_USER" length="20" type="C" desc="经办客户经理（号）" />
+		<field name="SIGN_DEVI_TYPE" length="2" type="C" desc="经办终端类型 0：iPad 1：Android Pad" />
+		<field name="SIGN_DEVI_NO" length="20" type="C" desc="经办设备（号）" /> 
+		<field name="SIGN_TIME" length="20" type="C" desc="经办时间" />
+		<field name="SIGN_GPS" length="20" type="C" desc="经办GPS位置" />
+		<field name="SIGN_STATE" length="1" type="C" desc="当前业务状态。0：未提交；1：已提交，未审批；2：正在审批；3：正在审批，待补件；6：已取消7：审批通过；8：审批未通过；9：审批通过，但开卡交易执行失败" /> 
+		<field name="SIGN_APPR_MARK" length="450" type="C" desc="批复备注" />
+		<field name="DECA_RES1" length="30" type="C" desc="推荐工号" />
+		<field name="DECA_RES2" length="30" type="C" desc="名族" /> 
+		<field name="DECA_RES3" length="30" type="C" desc="预留3" />
+		<field name="CHK_ID" length="20" type="C" desc="正在审核人" /> 
+		<field name="CHK_TIME" length="20" type="C" desc="审核时间" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ErrorCode">
+	
+	<!-- 加载P_ERROR_CODE错误码 -->
+	<select id="findAllErrCode" resultClass="java.util.HashMap">
+		<![CDATA[
+				SELECT ERR_CODE,
+					APP_ID,
+					ERR_MSG_CN AS CN ,
+					ERR_MSG_HK AS HK ,
+					ERR_MSG_EN AS EN 
+				FROM ${schema.configPlat}.P_ERROR_CODE	]]>
+	</select>
+	
+	<!-- 加载P_ERROR_MAPPING错误码 -->
+	<select id="findAllErrMapping" resultClass="java.util.HashMap">
+		<![CDATA[
+				SELECT 
+					RECORD_ID,
+					ERR_CODE,
+					REF_ERR_CODE,
+					SOU_SYS,
+					REF_MSG_CN AS CN,
+					REF_MSG_HK AS HK,
+					REF_MSG_EN AS EN 
+				FROM ${schema.configPlat}.P_ERROR_MAPPING	]]>
+	</select>
+	
+	
+
+</sqlMap>
+

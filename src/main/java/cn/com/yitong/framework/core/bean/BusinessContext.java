@@ -1,6 +1,20 @@
 package cn.com.yitong.framework.core.bean;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.Node;
+
 import cn.com.yitong.consts.AppConstants;
+import cn.com.yitong.consts.NS;
+import cn.com.yitong.consts.SessConsts;
 import cn.com.yitong.core.util.DictUtils;
 import cn.com.yitong.core.util.ThreadContext;
 import cn.com.yitong.framework.base.IBusinessContext;
@@ -12,18 +26,6 @@ import cn.com.yitong.framework.net.IRequstBuilder;
 import cn.com.yitong.framework.service.ICommonService;
 import cn.com.yitong.framework.util.CtxUtil;
 import cn.com.yitong.util.StringUtil;
-import cn.com.yitong.util.YTLog;
-import org.apache.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 统一资源上下文 ，业务总线 reqeust|session|application data selectNode
@@ -33,16 +35,13 @@ import java.util.Map;
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class BusinessContext implements IBusinessContext {
-
-	private Logger logger = YTLog.getLogger(this.getClass());
-
 	private HttpServletRequest request;
 	private HttpSession session;
-
+	// 公共数据
+	private Map<String, String> header = new HashMap();
 	private Element root;
 	// 请求参数区域
 	private Element params;
-
 	private Map paraMap;
 	// 临时请求内容
 	private Object requestEntry;
@@ -66,7 +65,10 @@ public class BusinessContext implements IBusinessContext {
 		this.session = request.getSession();
 		init();
 	}
-
+	public BusinessContext(String type) {
+		this.paramType = type;
+		init();
+	}
 	public BusinessContext(HttpServletRequest request, String type) {
 		this.request = request;
 		this.session = request.getSession();
@@ -97,7 +99,7 @@ public class BusinessContext implements IBusinessContext {
 	}
 
 	@Override
-	public boolean initParamCover(IParamCover paramCover, final String transCode, boolean signed) {
+	public boolean initParamCover(IParamCover paramCover, String transCode, boolean signed) {
 		try {
 			ThreadContext.put(CtxUtil.TRANS_CODE_KEY, transCode);
 			ThreadContext.put(CtxUtil.BUSINESS_CONTEXT_KEY, this);
@@ -109,9 +111,13 @@ public class BusinessContext implements IBusinessContext {
 			if (!pcover.cover(this, request, signed, transCode)) {
 				return false;
 			}
+			String cifNo = this.getSessionText(SessConsts.CIF_NO);
+			if (StringUtil.isNotEmpty(cifNo)) {
+				setParam(NS.CIF_NO, cifNo);
+			}
 			return true;
 		} catch (Exception e) {
-			logger.error("initParamCover异常，异常原因：",e);
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -121,10 +127,12 @@ public class BusinessContext implements IBusinessContext {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString() {
 		return getBaseContext().asXML();
 	}
 
+	@Override
 	public Element getRequestContext(String transCode) {
 		Element rctx = (Element) root.selectSingleNode("requestContext[@transCode='" + transCode + "']");
 		if (rctx == null) {
@@ -134,6 +142,7 @@ public class BusinessContext implements IBusinessContext {
 		return rctx;
 	}
 
+	@Override
 	public Element getResponseContext(String transCode) {
 		Element rctx = (Element) root.selectSingleNode("responseContext[@transCode='" + transCode + "']");
 		if (rctx == null) {
@@ -143,18 +152,22 @@ public class BusinessContext implements IBusinessContext {
 		return rctx;
 	}
 
+	@Override
 	public Element getRequestContext() {
 		return root.element("requestContext");
 	}
 
+	@Override
 	public Element getResponseContext() {
 		return root.element("responseContext");
 	}
 
+	@Override
 	public String getResponseStatus() {
 		return status;
 	}
 
+	@Override
 	public void setErrorInfo(String errCode, String errMsg, String transCode) {
 		Element rspCtx = getResponseContext(transCode);
 		saveNode(rspCtx, AppConstants.STATUS, errCode);
@@ -162,6 +175,7 @@ public class BusinessContext implements IBusinessContext {
 		this.status = errCode;
 	}
 
+	@Override
 	public void setSuccessInfo(String sucCode, String sucMsg, String transCode) {
 		Element rspCtx = getResponseContext(transCode);
 		saveNode(rspCtx, AppConstants.STATUS, sucCode);
@@ -169,6 +183,7 @@ public class BusinessContext implements IBusinessContext {
 		this.status = sucCode;
 	}
 
+	@Override
 	public Element saveNode(Element parent, String name, String text) {
 		Element element = (Element) parent.selectSingleNode(name);
 		if (element == null) {
@@ -178,12 +193,14 @@ public class BusinessContext implements IBusinessContext {
 		return element;
 	}
 
+	@Override
 	public Element addNode(Element parent, String name, String text) {
 		Element element = parent.addElement(name);
 		element.setText(text);
 		return element;
 	}
 
+	@Override
 	public String getParam(String xpath) {
 		if (isMapParamType()) {
 			return StringUtil.getString(paraMap, xpath, "");
@@ -202,56 +219,66 @@ public class BusinessContext implements IBusinessContext {
 		return params.selectNodes(xpath);
 	}
 
-	public boolean setParam(String xpath, String text) {
+	@Override
+	public boolean setParam(String xpath, Object text) {
 		if (isMapParamType()) {
 			paraMap.put(xpath, text);
 			return true;
 		}
 		Node node = params.selectSingleNode(xpath);
 		if (node != null) {
-			node.setText(StringUtil.isEmpty(text) ? "" : text);
+			node.setText(StringUtil.isEmpty(text.toString()) ? "" : text.toString());
 		} else {
-			params.addElement(xpath).setText(StringUtil.isEmpty(text) ? "" : text);
+			params.addElement(xpath).setText(StringUtil.isEmpty(text.toString()) ? "" : text.toString());
 		}
 		return true;
 	}
 
+	@Override
 	public String getSessionText(String name) {
 		return (String) session.getAttribute(name);
 	}
 
+	@Override
 	public Element getSessionElement(String name) {
 		return null;
 	}
 
-	public void saveSessionText(String name, String value) {
+	@Override
+	public void saveSessionText(String name, Object value) {
 
 		session.setAttribute(name, value);
 	}
 
+	@Override
 	public void saveSessionList(String name, List<Map> value) {
 
 		session.setAttribute(name, value);
 	}
 
+	@Override
 	public List<Map> getSessionList(String name) {
 
 		return (List<Map>) session.getAttribute(name);
 	}
 
+	@Override
 	public boolean saveSession(IMBElement elem) {
 		session.setAttribute(elem.getName(), elem.generyObject());
 		return true;
 	}
 
+	@Override
 	public Element getBaseContext() {
 		return root;
 	}
 
+	@Override
 	public Element getParamContext() {
 		return params;
 	}
 
+	@Override
 	public HttpSession getHttpSession() {
 		return session;
 	}
@@ -382,6 +409,15 @@ public class BusinessContext implements IBusinessContext {
 
 	/**
 	 * 事务前置处理
+	 * 
+	 * @param commonService
+	 * @param ctx
+	 * @param transCode
+	 * @param json2MapParamCover
+	 * @param requestBuilder
+	 * @param confParser
+	 * @param rst
+	 * @return
 	 */
 	private boolean transPrev(ICommonService commonService, IBusinessContext ctx, String transCode, IParamCover json2MapParamCover,
 			IRequstBuilder requestBuilder, IEBankConfParser confParser, Map<String, Object> rst) {
@@ -389,4 +425,30 @@ public class BusinessContext implements IBusinessContext {
 		commonService.generyTransLogSeq(ctx, transCode);
 		return CtxUtil.transPrev(ctx, transCode, json2MapParamCover, requestBuilder, confParser, rst);
 	}
+
+	@Override
+	public void removeParam(String xpath) {
+		// TODO Auto-generated method stub
+		paraMap.remove(xpath);
+
+	}
+
+	@Override
+	public Object findAttribute(String name) {
+		if (paraMap.containsKey(name)) {
+			return paraMap.get(name);
+		} else if (header.containsKey(name)) {
+			return header.get(name);
+
+		} else {
+			return session.getAttribute(name);
+		}
+	}
+
+	@Override
+	public Map getHeadMap() {
+		// TODO Auto-generated method stub
+		return header;
+	}
+
 }

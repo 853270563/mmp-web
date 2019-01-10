@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="businessList" desc="功能列表查询"   ibatisStatement="MYW_BUSI_PACKAGE.queryBusiSelByPageId">
+	<snd>
+		<field name="BUSSI_OWNER" type="C" length="20" desc="业务所属用户" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E">
+			<field name="BUSI_ID" type="C" length="20" desc="业务编号" />
+			<field name="BUSI_OWNER" type="C" length="20" desc="拥有者" />
+			<field name="BUSI_ORDER" length="2" type="C" desc="排序号" />
+			<field name="BUSI_TYPE" length="2" type="C" desc="业务类别" />
+			<field name="MENU_NAME" length="20" type="C" desc="业务名称" />
+			<field name="MENU_URL" length="2" type="C" desc="业务地址" />
+			<field name="MENU_DESC" length="2" type="C" desc="业务描述" />
+			<field name="FILE_ADDR" length="2" type="C" desc="业务图标地址" />
+		</field-list>
+	</rcv>
+</trans>

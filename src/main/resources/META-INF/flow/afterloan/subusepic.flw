@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="subusepic.flw" desc="已提交贷款用途影像凭证的用户列表">
+  <nodes>
+    <node id="418fa5f8-20be-4e3c-8cf1-0a3786f26189" xPos="370" yPos="100" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqReceiptDetail" desc="嵌套流程路径,不含文件后缀"/>
+      </data-map>
+    </node>
+    <node id="04e5e8c8-bee3-4e11-81e6-b7660decdcd4" xPos="370" yPos="210" Width="180" Height="40">
+      <desc>已上传影像用户</desc>
+      <beanId>subUsePicOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="418fa5f8-20be-4e3c-8cf1-0a3786f26189" to="04e5e8c8-bee3-4e11-81e6-b7660decdcd4"/>
+  </lines>
+</diagram>

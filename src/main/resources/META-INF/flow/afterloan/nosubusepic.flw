@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="nosubusepic.flw" desc="未提交贷款用途影响凭证的客户">
+  <nodes>
+    <node id="4f363c51-55ab-463e-83ec-4a482413a00d" xPos="330" yPos="80" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="loan/inqReceiptDetail" desc="嵌套流程路径,不含文件后缀"/>
+      </data-map>
+    </node>
+    <node id="cbf20aa3-8eba-480d-9f05-08b4eac53e55" xPos="330" yPos="210" Width="180" Height="40">
+      <desc>未上传影像用户</desc>
+      <beanId>noSubUsePicOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="d2bb53d6-68d5-4011-a30e-0a610cfc73c9" xPos="330" yPos="330" Width="180" Height="40">
+      <desc>是否电话通知过滤</desc>
+      <beanId>isMobileOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="4f363c51-55ab-463e-83ec-4a482413a00d" to="cbf20aa3-8eba-480d-9f05-08b4eac53e55"/>
+    <line desc="" condition="" from="cbf20aa3-8eba-480d-9f05-08b4eac53e55" to="d2bb53d6-68d5-4011-a30e-0a610cfc73c9"/>
+  </lines>
+</diagram>

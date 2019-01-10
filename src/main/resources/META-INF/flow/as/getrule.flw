@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="getrule.flw" desc="获取委托规则">
+  <nodes>
+    <node id="82be6c61-83ac-4982-8bf4-c2ed9e9cab02" xPos="420" yPos="270" Width="50" Height="50">
+      <desc>安硕Http通讯</desc>
+      <beanId>netToolsAsOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/getrule" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="citycode.flw" desc="获取市级编码">
+  <nodes>
+    <node id="b0b9c4ac-ee0a-41e3-8ac9-6ad2b743bf47" xPos="300" yPos="80" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="93b1cfb3-6042-4630-9043-d368cc34a8ed" xPos="300" yPos="180" Width="180" Height="40">
+      <desc>不分页数据查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="citycode.querycitycodelist" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="27f03766-e763-46d2-8a67-5e80e564778b" xPos="300" yPos="270" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="hg/citycode" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="58559ca4-38b2-41b2-a386-a8f82e97c69d" xPos="300" yPos="360" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="b0b9c4ac-ee0a-41e3-8ac9-6ad2b743bf47" to="93b1cfb3-6042-4630-9043-d368cc34a8ed"/>
+    <line desc="" condition="" from="93b1cfb3-6042-4630-9043-d368cc34a8ed" to="27f03766-e763-46d2-8a67-5e80e564778b"/>
+    <line desc="" condition="" from="27f03766-e763-46d2-8a67-5e80e564778b" to="58559ca4-38b2-41b2-a386-a8f82e97c69d"/>
+  </lines>
+</diagram>

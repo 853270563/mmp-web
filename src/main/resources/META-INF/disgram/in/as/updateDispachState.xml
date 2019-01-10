@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="as/updateDispachState" desc="更新派单状态">
+	<snd>
+		<body>
+			<field name="BAR_CODE" type="C" desc="条码号" required="true"/>
+			<field name="STATE" type="C" required="true" desc="派单状态"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<body>
+			
+		</body>
+	</rcv>
+</trans>

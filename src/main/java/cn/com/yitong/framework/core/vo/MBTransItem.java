@@ -14,14 +14,17 @@ public class MBTransItem {
 	private String name;
 	private String targetName;
 	private String type;
-	private boolean requred;
+	private boolean required;
 	private String desc;
 	private String xmlPath;
 	private String client;
+	//是否从数据总线取值
+	private boolean isCtx;
 	// 第一级 分隔符
 	private String delimiter;
 	// 第二级分隔符
 	private String itemDelimiter;
+	private String comment;
 
 	private int length;// 内容长度
 	private int dolt;// 小数位数
@@ -82,13 +85,7 @@ public class MBTransItem {
 		this.length = length;
 	}
 
-	public boolean isRequred() {
-		return requred;
-	}
 
-	public void setRequred(boolean requred) {
-		this.requred = requred;
-	}
 
 	public List<MBTransItem> getChildren() {
 		return children;
@@ -240,7 +237,7 @@ public class MBTransItem {
 		bf.append(",\t client:").append(client);
 		bf.append(",\t length:").append(length);
 		bf.append(",\t dolt:").append(dolt);
-		bf.append(",\t required:").append(requred);
+		bf.append(",\t required:").append(required);
 		bf.append(",\t default:").append(defaultValue);
 		bf.append(",\t mapKey:").append(mapKey);
 		bf.append(",\t descName:").append(descName);
@@ -250,6 +247,34 @@ public class MBTransItem {
 		bf.append(",\t seqType:").append(seqType);
 		bf.append("]");
 		return bf.toString();
+	}
+
+	public boolean isCtx() {
+		return isCtx;
+	}
+
+	public void setCtx(boolean isCtx) {
+		this.isCtx = isCtx;
+	}
+
+	public void setProperties(Map<String, String> properties) {
+		this.properties = properties;
+	}
+
+	public void setRequired(boolean required) {
+		this.required = required;
+	}
+
+	public boolean isRequired() {
+		return required;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

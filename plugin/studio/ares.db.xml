@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <db name="mobliefinance" desc="移动金融营数据库">
+    <db_driver>oracle.jdbc.driver.OracleDriver</db_driver>
+    <db_url>jdbc:oracle:thin:@198.198.200.116:1521:orcl</db_url>
+    <db_user>aresv3</db_user>
+    <db_pass>8D443BDE1F85D3D665366AEC89E226D996802E57FA672B90E5B75AEC89A265D9</db_pass>
+    <db_type>oracle</db_type>
+    <is_jndi>false</is_jndi>
+  </db>
+</root>

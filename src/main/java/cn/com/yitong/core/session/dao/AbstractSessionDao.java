@@ -44,7 +44,7 @@ public abstract class AbstractSessionDao implements SessionDao {
      * @return
      */
     protected Session create(String id) {
-        return new SimpleSession((String)null);
+		return new SimpleSession((String) null);
     }
 
     /**

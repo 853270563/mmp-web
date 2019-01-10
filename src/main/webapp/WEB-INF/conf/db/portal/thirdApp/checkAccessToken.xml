@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="checkAccessToken" desc="验证访问令牌">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+        <field name="accessToken" length="20" type="C" desc="访问令牌[在请求头里带]" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+        <field name="effective" length="1" type="C" desc="是否有效" />
+        <field name="userId" length="64" type="C" desc="用户标识" />
+        <field name="userName" length="255" type="C" desc="用户名称" />
+        <field name="role" length="64" type="C" desc="权限标识" />
+	</rcv>
+</trans>

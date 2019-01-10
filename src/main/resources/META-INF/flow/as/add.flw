@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="add.flw" desc="新增委托预评">
+  <nodes>
+    <node id="c46272ea-a7a0-4dfb-8867-ee16a181c204" xPos="430" yPos="290" Width="50" Height="50">
+      <desc>安硕Http通讯</desc>
+      <beanId>netToolsAsOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/add" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

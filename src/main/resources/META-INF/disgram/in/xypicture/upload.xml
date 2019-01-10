@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/upload" desc="影像上传">
+	<snd>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见影像文档"/>
+		<field name="BUSI_START_DATE" desc="申请时间" required="true" comment="yyyyMMdd"/>
+		<field name="BATCH_ID" desc="影像批次号" required="true" />
+		<field name="AMOUNT" desc="总数" required="true" />
+		<field name="ID" desc="授信ID" required="true" />
+		<field name="CONTRACT_NO" desc="借款合同编号" required="true"/>
+		<field name="RECEIPT_NO" desc="借据编号"  required="true"/>
+		<field name="LIST" type="E" desc="图片列表" required="true" >
+			<field name="IMG_BASE64" desc="图片base64字符串" required="true" />
+		</field>
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

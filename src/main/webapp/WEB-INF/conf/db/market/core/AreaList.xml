@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="AreaList" desc="区域静态数据同步"><!-- ibatisStatement="AREA_INFO.areaInfoQuery" -->
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+			<field name="PRI_AREA_ID" length="200" type="C" desc="省编号" xpath="PROV_ID" />
+			<field name="PRI_AREA_NAME_EN" length="100" type="C" desc="省英文名" />
+			<field name="PRI_AREA_NAME_CN" length="100" type="C" desc="省中文名" xpath="PROV_NAME" />
+			<field-list name="CITY_LIST" type="E">
+				<field name="CITY_AREA_ID" length="200" type="C" desc="城市编号" xpath="CITY_ID" />
+				<field name="CITY_AREA_NAME_EN" length="100" type="C" desc="城市英文名" />
+				<field name="CITY_AREA_NAME_CN" length="100" type="C" desc="城市中文名" xpath="CITY_NAME" />
+				<field-list name="TOWN_LIST" type="E">
+					<field name="TOWN_AREA_ID" length="200" type="C" desc="区镇编号" xpath="TOWN_ID" />
+					<field name="TOWN_AREA_NAME_EN" length="100" type="C" desc="区镇英文名" />
+					<field name="TOWN_AREA_NAME_CN" length="100" type="C" desc="区镇中文名" xpath="TOWN_NAME" />
+				</field-list>
+			</field-list>
+		</field-list>
+	</rcv>
+</trans>

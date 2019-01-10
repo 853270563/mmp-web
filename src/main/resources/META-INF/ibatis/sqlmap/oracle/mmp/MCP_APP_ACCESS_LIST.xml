@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MCP_APP_ACCESS_LIST">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.configPlat}.MCP_APP_ACCESS_LIST T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(0) CNT 
+			FROM ${schema.configPlat}.MCP_APP_ACCESS_LIST T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		<![CDATA[ INSERT INTO ${schema.configPlat}.MCP_APP_ACCESS_LIST ]]>
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="ID">
+				ID
+			</isNotNull>
+			<isNotNull prepend="," property="APP_ID">
+				APP_ID
+			</isNotNull>
+			<isNotNull prepend="," property="APP_NAME">
+				APP_NAME
+			</isNotNull>
+			<isNotNull prepend="," property="SHA1">
+				SHA1
+			</isNotNull>
+			<isNotNull prepend="," property="VERSION">
+				VERSION
+			</isNotNull>
+			)
+		</dynamic>
+		VALUES
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="ID">
+				#ID#
+			</isNotNull>
+			<isNotNull prepend="," property="APP_ID">
+				#APP_ID#
+			</isNotNull>
+			<isNotNull prepend="," property="APP_NAME">
+				#APP_NAME#
+			</isNotNull>
+			<isNotNull prepend="," property="SHA1">
+				#SHA1#
+			</isNotNull>
+			<isNotNull prepend="," property="VERSION">
+				#VERSION#
+			</isNotNull>
+			)
+		</dynamic>		
+	</insert>
+
+	<!-- 删除时存放删除表的信息 -->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.configPlat}.MCP_APP_ACCESS_LIST
+		select * from ${schema.configPlat}.MCP_APP_ACCESS_LIST where ID= #ID#
+	</insert>
+
+	<!-- 查詢P_WARM_TIPS_OP是否有待審核的數據 -->
+	<select id="findOp" parameterClass="map" resultClass="java.util.HashMap">
+		select *
+		from ${schema.configPlat}.MCP_APP_ACCESS_LIST t1
+		INNER JOIN ${schema.configPlat}.AUDI_DETAIL_OP t2 ON t1.AUDI_ID = t2.AUDI_ID
+		where t1.ID = #ID# and t2.AUDI_STAT ='3'
+	</select>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.ID) FROM ${schema.configPlat}.MCP_APP_ACCESS_LIST p
+			 WHERE P.ID=#ID#
+		]]>
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.configPlat}.MCP_APP_ACCESS_LIST ]]>
+		<dynamic prepend="set">
+			<!-- 現在審核ID -->
+			<isNotNull property="AUDI_ID" prepend=","><![CDATA[ AUDI_ID = #AUDI_ID# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where ID = #ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.configPlat}.MCP_APP_ACCESS_LIST where ID = #ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<!--<include refid="coreSql" />-->
+		select * from ${schema.configPlat}.MCP_APP_ACCESS_LIST t1
+	</select>
+	 
+	
+</sqlMap>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/write/rushTask" desc="记录抢单任务">
+	<snd>
+		<field name="CUSTMOER_NAME" desc="客户姓名" required="true" />
+		<field name="HOURSE_ADDR" desc="房产地址" required="true" />
+		<field name="TASK_ID" desc="任务ID" required="true" />
+		<field name="BUSI_START_DATE" desc="申请时间" required="true" />
+		<field name="WORK_NUMBER" desc="客户经理" required="true" />
+		<field name="IS_TIMEOUT" desc="是否超时"  default="0"/>
+		<field name="PHONE" desc="手机号码"  required="true" />
+		<field name="CUSTMOER_TYPE" desc="客户类型" comment="01:新客户，02：存量客户，03：新增加抵押物" required="true" />
+	</snd>
+</trans>

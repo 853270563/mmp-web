@@ -17,7 +17,8 @@ import cn.com.yitong.consts.Properties;
  */
 public class DateUtil {
 
-	public static final String DATE_FORMATTER = "yyyy-MM-dd";
+	public static final String DATE_FORMATTER = Properties
+			.getString("DATE_FORMATTER");
 
 	public static final SimpleDateFormat sdf = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss.SSS");
@@ -81,10 +82,13 @@ public class DateUtil {
 	}
 
 	/**
-	 * @param date 需要格式化的日期對像
-	 * @param formatter 格式化的字符串形式
+	 * @param date
+	 *            需要格式化的日期對像
+	 * @param formatter
+	 *            格式化的字符串形式
 	 * @return 按照formatter指定的格式的日期字符串
-	 * @throws java.text.ParseException  無法解析的字符串格式時拋出
+	 * @throws java.text.ParseException
+	 *             無法解析的字符串格式時拋出
 	 */
 	public static String formatDateToStr(Date date, String formatter) {
 		if (date == null)
@@ -99,6 +103,9 @@ public class DateUtil {
 
 	/**
 	 * 生成默认格式的日期
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String formatDateToStr(Date date) {
 		return formatDateToStr(date, DATE_FORMATTER);
@@ -106,8 +113,11 @@ public class DateUtil {
 
 	/**
 	 * 將日期按照指定的模式格式化
-	 * @param date {@link java.util.Date}
-	 * @param format 如：yyyy/MM/dd
+	 * 
+	 * @param date
+	 *            {@link java.util.Date}
+	 * @param format
+	 *            如：yyyy/MM/dd
 	 * @return 返回空表示格式化產生異常
 	 */
 	public static String format(Date date, String format) {
@@ -124,6 +134,11 @@ public class DateUtil {
 
 	/**
 	 * 将一种字符日期转化成另外一种日期格式
+	 * 
+	 * @param date
+	 * @param fmtSrc
+	 * @param fmtTag
+	 * @return
 	 */
 	public static String format(String date, String fmtSrc, String fmtTag) {
 		if (null == fmtSrc)
@@ -152,6 +167,10 @@ public class DateUtil {
 
 	/**
 	 * 計算指定年月的日期數
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
 	 */
 	public static int maxDayOfMonth(int year, int month) {
 		switch (month) {
@@ -179,6 +198,10 @@ public class DateUtil {
 
 	/**
 	 * 获取指定年月的日期數
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
 	 */
 	public static int maxDayOfMonth(String year, String month) {
 		return maxDayOfMonth(Integer.parseInt(year), Integer.parseInt(month));
@@ -186,6 +209,10 @@ public class DateUtil {
 
 	/**
 	 * 获取指定年月上月月末日期
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
 	 */
 	public static String getLastMonthDate(String year, String month) {
 		return getLastMonthDate(Integer.parseInt(year), Integer.parseInt(month));
@@ -193,6 +220,10 @@ public class DateUtil {
 
 	/**
 	 * 获取指定年月上月月末日期
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
 	 */
 	public static String getLastMonthDate(int year, int month) {
 		if (month <= 1) {
@@ -203,9 +234,8 @@ public class DateUtil {
 		}
 		StringBuffer bfDate = new StringBuffer();
 		bfDate.append(year);
-		if (month < 10) {
+		if (month < 10)
 			bfDate.append("0");
-		}
 		bfDate.append(month);
 		bfDate.append(maxDayOfMonth(year, month));
 		return bfDate.toString();
@@ -213,14 +243,24 @@ public class DateUtil {
 
 	/**
 	 * 提前N天的日期
+	 * 
+	 * @param date
+	 * @param days
+	 * @return
 	 */
 	public static Date beforeDate(Date date, int days) {
 		Calendar c = new GregorianCalendar();
 		c.setTime(date);
 		c.add(Calendar.DAY_OF_YEAR, -days);
 		return c.getTime();
+
 	}
 
+	/**
+	 * @param date
+	 * @param days
+	 * @return
+	 */
 	public static Date addHour(Date date, int hour) {
 		Calendar c = new GregorianCalendar();
 		c.setTime(date);
@@ -230,6 +270,8 @@ public class DateUtil {
 
 	/**
 	 * 一周前的日期
+	 * 
+	 * @return
 	 */
 	public static Date getLastWeek() {
 		return getNextDay(-7);
@@ -237,6 +279,9 @@ public class DateUtil {
 
 	/**
 	 * 取相对天数，正数为向后，负数为向前
+	 * 
+	 * @param day
+	 * @return
 	 */
 	public static Date getNextDay(int day) {
 		Calendar c = new GregorianCalendar();
@@ -381,6 +426,9 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的下一周日期
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String getNextWeekDay(String dateStr, int weekday) {
 		Calendar cal = new GregorianCalendar();
@@ -393,6 +441,9 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的当前一周日期
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String getCurrWeekDay(String dateStr, int weekday) {
 		Calendar cal = new GregorianCalendar();
@@ -403,6 +454,9 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的下个月日期
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String getCurrMonthDay(String dateStr, int day) {
 		Calendar cal = new GregorianCalendar();
@@ -420,6 +474,9 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的下个月日期
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String getNextMonthDay(String dateStr, int day) {
 		Calendar cal = new GregorianCalendar();
@@ -438,6 +495,10 @@ public class DateUtil {
 
 	/**
 	 * 前几个月日期
+	 * 
+	 * @param dateStr
+	 * @param number
+	 * @return
 	 */
 	public static String beforeMonthDate(String dateStr, int number) {
 		Calendar cal = new GregorianCalendar();
@@ -449,6 +510,7 @@ public class DateUtil {
 		day = Math.min(endDay, day);
 		cal.set(Calendar.MONTH, month - number);
 		cal.set(Calendar.DATE, day);
+
 		return format(cal.getTime(), DATE_FORMATTER);
 	}
 
@@ -470,8 +532,12 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的预约日期 weekday
+	 * 
+	 * @param date
+	 * @return
 	 */
-	public static String getPlanWeekDay(String startDate, String endDate, int day) {
+	public static String getPlanWeekDay(String startDate, String endDate,
+			int day) {
 		String dt = getCurrWeekDay(startDate, day);
 		if (dt.compareTo(startDate) < 0) {
 			dt = getNextWeekDay(startDate, day);
@@ -484,8 +550,12 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的预约日期day
+	 * 
+	 * @param date
+	 * @return
 	 */
-	public static String getPlanMonthDay(String startDate, String endDate, int day) {
+	public static String getPlanMonthDay(String startDate, String endDate,
+			int day) {
 		String dt = getCurrMonthDay(startDate, day);
 		if (dt.compareTo(startDate) < 0) {
 			dt = getNextMonthDay(startDate, day);
@@ -498,6 +568,9 @@ public class DateUtil {
 
 	/**
 	 * 将字符串yyyyMMdd 格式成 字符串yyyy-MM-dd
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String fmtmat(String date) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -512,6 +585,9 @@ public class DateUtil {
 
 	/**
 	 * 将字符串yyyyMMddHHmmss 格式成 字符串yyyy-MM-dd HH:mm:ss
+	 * 
+	 * @param date
+	 * @return
 	 */
 	public static String fmtmatfulldate(String date) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -525,11 +601,29 @@ public class DateUtil {
 	}
 	
 	/**
+	 * 将字符串yyyy-MM-dd HH:mm:ss 格式成 字符串yyyyMMdd
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String fmtmatdate(String date) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Date newDate = df.parse(date);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			return sdf.format(newDate);
+		} catch (Exception ex) {
+			return date;
+		}
+	}
+	
+	/**
      * 通用格式转换
      * @param dateStr 输入日期字符串
      * @return boolean :true,可正常转换；false，不可正常转换或者异常
      */
-    public static boolean dateFormat(String dateStr, String formatter) {
+    public static boolean dateFormat(String dateStr,String formatter) {
+
         try {
             Date date = DateUtils.parseDate(dateStr, DateFormatter.DATE_PATTERNS);
             SimpleDateFormat format = new SimpleDateFormat(formatter);
@@ -539,4 +633,17 @@ public class DateUtil {
             return false;
         }
     }
+
+	public static void main(String[] args) {
+		/*
+		 * int threadSize = 20; for (int i = 0; i < threadSize; i++) { new
+		 * Thread(new Runnable() { int max = 100; int index = 0;
+		 * 
+		 * @Override public void run() { while (index < max) { index++; String
+		 * rst = DateUtil.beforeMonthDate( DateUtil.todayStr(), 3);
+		 * System.out.println("thread is " + index + " rst is " + rst); } }
+		 * }).start(); }
+		 */
+	}
+
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="getDetails.flw" desc="查询派单详情">
+  <nodes>
+    <node id="9a9fad46-857f-48b5-94a1-52661925a76a" xPos="380" yPos="320" Width="50" Height="50">
+      <desc>简单任务</desc>
+      <beanId>queryDetailsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+        <data key="*transCode" expr="as/getDetails" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

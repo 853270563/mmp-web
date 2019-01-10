@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/h5upload" desc="h5影像上传">
+	<snd>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见影像文档"/>
+		<field name="BUSI_START_DATE" desc="申请时间" required="true" comment="yyyyMMdd"/>
+		<field name="TASK_ID" desc="任务ID" required="true" />
+		<field name="LIST" type="E" desc="图片列表" required="true" >
+			<field name="IMG_BASE64" desc="图片base64字符串" required="true" />
+		</field>
+		
+	</snd>
+	<rcv>
+	<field name="LIST" type="E" desc="列表" required="true" >
+			<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见影像文档"/>
+			<field name="BUSI_START_DATE" desc="申请时间" required="true" comment="yyyyMMdd"/>
+			<field name="BATCH_ID" desc="影像批次号" required="true" />
+			<field name="FILE_CN_NAME" desc="文件名称" required="true" />
+		</field>
+	</rcv>
+</trans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="JjkTranCheckPassword" desc="卡验密">
+	<snd>
+		<field name="beiy" length="20" type="C" desc="备用"/>
+		<field name="bzh" length="2" type="C" desc="币种号" required="true"/>
+		<field name="czy" length="9" type="C" desc="操作员"  required="true"/>
+		<field name="jgm" length="4" type="C" desc="机构码"  required="true"/>
+		<field name="jmmm" length="16" type="C" desc="加密密码" />
+		<field name="jmzl" length="1" type="C" desc="加密种类" />
+		<field name="jym" length="4" type="C" desc="交易码" />
+		<field name="khh" length="20" type="C" desc="客户号" />
+		<field name="kmkzz" length="20" type="C" desc="科目控制字" />
+		<field name="mm" length="6" type="C" desc="密码" />
+		<field name="sblx" length="1" type="C" desc="设备类型"  required="true"/>
+		<field name="sqczy" length="4" type="C" desc="授权操作员" />
+		<field name="track2" length="37" type="C" desc="磁道信息" />
+		<field name="track3" length="8" type="C" desc="三磁道信息" />
+		<field name="wdlsh" length="8" type="C" desc="网点流水号" />
+		<field name="xh" length="8" type="C" desc="卡序号" />
+		<field name="zh" length="22" type="C" desc="卡号/帐号"  required="true"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="70" type="C" desc="返回消息" />
+		<field name="zjlsh" length="8" type="C" desc="主机流水号" />
+		<field name="czylsh" length="8" type="C" desc="操作员流水号" />
+	</rcv>
+</trans>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqTotalAmount" desc="查询客户的总量授信情况">
+	<snd>
+		<field name="ID_TYPE" desc="证件类型" target="id_type" comment="110001	居民身份证
+																		021   	第一代居民身份证
+																		110003	临时居民身份证
+																		110005	户口簿
+																		110007	中国人民解放军军人身份证件
+																		110009	中国人民武装察身份证件
+																		110011	离休干部荣誉证
+																		110013	军官退休证
+																		110015	文职干部退休证
+																		110017	军事院校学员证
+																		110019	港澳居民往来内地通行证
+																		110021	台湾居民来往大陆通行证
+																		110023	中华人民共和国因私护照
+																		110025	中华人民共和国因公护照
+																		110027	外国护照
+																		110029	外国人永久居留证
+																		119998	系统使用的个人证件识别标识，在现实中不存在
+																		119999	其他个人证件识别标识
+																		Z00000	移植的不规范个人身份证件
+																				"/>
+		<field name="ID_NO" desc="证件号码" target="id_no" />
+		<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="授信总量合同编号"  target="total_amount_contract_no"/>
+		<field name="TOTAL_AMOUNT_NO" desc="总量授信编号"  target="total_amount_no"/>
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="列表" target="totalamountlist">
+			<field name="TOTAL_AMOUNT_NO" desc="总量授信编号"  target="total_amount_no"/>
+			<field name="CURRENCY" desc="币种"  comment="CNY人民币  USD美元" target="currency"/>
+			<field name="LOAN_MONEY" desc="总量授信额度"  target="loan_money"/>
+			<field name="REST_TOTAL_MONEY" desc="总量授信余额"  target="rest_total_money"/>
+			<field name="BANK_NO" desc="记账机构"  target="bank_no"/>
+			<field name="WORK_NUMBER" desc="客户经理" target="user_no"/>
+			<field name="CUSTOMER_NO" desc="客户编号" target="customer_no"/>
+			<field name="MOBILE" desc="客户电话" target="mobile"/>
+			<field name="PURPOSE" desc="用途" target="purpose"/>
+			<field name="START_DATE" desc="起始日期" target="start_date"/>
+			<field name="END_DATE" desc="结束日期" target="end_date"/>
+			<field name="PERIOD" desc="期限" target="period"/>
+			<field name="TOTAL_AMOUNT_CONTRACT_NO" desc="授信总量合同编号"  target="total_amount_contract_no"/>
+			<field name="CONTRACT_DATE" desc="合同签订日" target="contract_date"/>
+			<field name="SOURCE_TYPE" desc="还款来源"  target="source_type" comment="0	其他资产 
+																	1	工资收入
+																	2	经营收入
+																	3	租金收入
+																	4	家庭收入
+																	"/>
+			<field name="OTHER_ASSETS" desc="其他资产状况" target="other_assets"/>
+			<field name="GUARANTEE" desc="主要担保方式" target="guarantee" comment="0	其他
+																1	信用
+																2	保证
+																3	抵押
+																4	质押
+																		" />
+			<field name="IS_CREDIT" desc="是否信用担保" comment="0否 1是" target="is_credit"/>
+			<field name="IS_ASSURE" desc="是否保证担保" comment="0否 1是" target="is_assure"/>
+			<field name="IS_PLEDGE" desc="是否抵押担保" comment="0否 1是" target="is_pledge"/>
+			<field name="IS_IMPAWN" desc="是否质押担保" comment="0否 1是" target="is_impawn"/>
+			<field name="ASSURE_CONTRACT_NO" desc="保证合同编号" target="assure_contract_no"/>
+			<field name="PLEDGE_TYPE" desc="抵押担保方式" comment="0无  
+																1商品房(住宅)产权房现房
+																2商品房(住宅)产权房期房
+																3写字楼(产权)现房抵押
+																4写字楼(产权)期房抵押
+																5自建办公楼现房抵押 
+																6商用门面抵押" target="pledge_type"/>
+			<field name="IS_INVEBTORY" desc="是否存量" comment="0否 1是" target="is_inventory"/>
+			<field name="IS_CYCLE" desc="是否循环" comment="0否 1是" target="is_cycle"/>
+			<field name="IS_RELATION_APPLY" desc="是否申请人关联方" comment="0否 1是" target="is_relation_apply"/>
+			<field name="IS_RELATION_TRANS" desc="是否我行关联交易" comment="0否 1是" target="is_relation_trans"/>
+			<field name="RISK_TYPE" desc="风险类别" comment="0未知  1一般  2中等  3高" target="risk_type"/>
+			<field name="IS_OFFSITE" desc="是否异地业务" comment="0否 1是" target="is_offsite"/>
+			<field name="CERTIFICATE_NO" desc="公证书编号" target="certificate_no"/>
+			<field name="LOAN_MODE" desc="放款方式" comment="0无  1先抵押后放款   2先放款后抵押" target="loan_mode"/>
+			<field name="PLEDGE_CONTRACT_NO" desc="最高额抵押合同编号" target="pledge_contract_no"/>
+			<field name="ADD_INFO" desc="补充信息" target="add_info"/>
+			<field name="APPROVAL_INFO" desc="审批结果" target="approval_info"/>
+			<field name="DEPT_NO" desc="部门编号" target="dept_no"/>
+			<field name="LONE_NO" desc="条线编号" target="line_no"/>
+			<field name="CHANNEL_NO" desc="渠道编号" target="channel_no"/>
+			<field name="MARKET_USER_NO" desc="营销人员" target="market_user_no"/>
+			<field name="MERCHANT_CODE" desc="合作商户编号" target="merchant_code"/>
+			<field name="REQ_APPLY_TIME" desc="申请时间" target="req_apply_time"/>
+			<field name="REQ_APPLY_SERIALNO" desc="申请流水号" target="req_apply_serialno"/>
+			<field name="REQ_APPLY_NO" desc="申请编号" target="req_apply_no"/>
+			<field name="STATUS" desc="状态" target="status"/>
+			<field name="EMERGENCYINFOLIST" desc="紧急联系人信息列表" target="emergencyinfolist">
+				<field name="EMERGENCY_NAME" desc="紧急联系人姓名" target="emergency_name"/>
+				<field name="ID_TYPE" desc="证件类型" target="id_type" comment="110001	居民身份证
+																		021   	第一代居民身份证
+																		110003	临时居民身份证
+																		110005	户口簿
+																		110007	中国人民解放军军人身份证件
+																		110009	中国人民武装察身份证件
+																		110011	离休干部荣誉证
+																		110013	军官退休证
+																		110015	文职干部退休证
+																		110017	军事院校学员证
+																		110019	港澳居民往来内地通行证
+																		110021	台湾居民来往大陆通行证
+																		110023	中华人民共和国因私护照
+																		110025	中华人民共和国因公护照
+																		110027	外国护照
+																		110029	外国人永久居留证
+																		119998	系统使用的个人证件识别标识，在现实中不存在
+																		119999	其他个人证件识别标识
+																		Z00000	移植的不规范个人身份证件
+																		"/>
+				<field name="ID_NO" desc="紧急联系人证件号码" target="id_no"/>
+				<field name="MOBILE" desc="紧急联系人电话" target="mobile"/>
+				<field name="RELATION" desc="关系" comment="0非亲属  1配偶  2父母  3子女  4兄弟姐妹  5其他亲属" target="relation"/>
+			</field>
+		</field>
+	</rcv>
+</trans>

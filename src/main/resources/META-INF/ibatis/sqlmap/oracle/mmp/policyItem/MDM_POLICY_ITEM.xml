@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MDM_POLICY_ITEM">
+
+    <!-- 根据系统类型 和 实体类型、实体Id 应用范围 查询策略 -->
+    <select id="queryPolicyBySystemTypeAndObj" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT
+        distinct m.*
+        FROM
+        ${schema.configPlat}.mdm_label t,
+        ${schema.configPlat}.mdm_label_policy p,
+        ${schema.configPlat}.mdm_policy m
+        WHERE
+        t.os_system = #osSystem#
+        AND t.option_type = #optionType#
+        AND p.label_id = t.label_id
+        AND m.policy_id = p.policy_id
+        AND EXISTS
+        (SELECT 1 FROM ${schema.configPlat}.mdm_label_condition tt
+        WHERE
+        tt.label_id = t.label_id
+        AND tt.obj_type = #objType#
+        AND tt.obj_id = #objId#) order by m.priority
+    </select>
+
+    <!-- 查询默认策略 -->
+    <select id="queryDefaultPolicy" parameterClass="map" resultClass="java.util.HashMap">
+        select p.* from ${schema.configPlat}.mdm_policy p
+        where  p.is_default = #isDefault#
+    </select>
+
+    <!-- 根据策略查询策略项 过滤操作系统 -->
+    <select id="queryPolicyItemByPolicyId" parameterClass="map" resultClass="java.util.HashMap">
+        select p.* from ${schema.configPlat}.mdm_policy_item p where p.policy_id = #policyId# and p.item_system in
+        <iterate property="osSystemList" conjunction="," close=")" open="(" >
+            #osSystemList[]#
+        </iterate>
+    </select>
+
+    <!-- 根据策略项 查询关联的 策略项值 -->
+    <select id="queryPolicyItemValueByPolicyItemId" parameterClass="map" resultClass="java.util.HashMap">
+        select p.* from ${schema.configPlat}.mdm_policy_value p where p.policy_item_id = #policyItemId#
+    </select>
+
+    <!-- 根据策略Id查询策略信息 -->
+    <select id="queryPolicyByPolicyId" parameterClass="map" resultClass="java.util.HashMap">
+        select p.* from ${schema.configPlat}.mdm_policy p where p.policy_id = #policyId#
+    </select>
+
+    <!-- 生成违规策略日志 -->
+    <insert id="insertViolatePolicyLog" parameterClass="map">
+        INSERT INTO ${schema.configPlat}.mdm_policy_log
+        (LOG_ID, USER_ID, DEVICE_UUID, OS_SYSTEM, POLICY_CODE, VIOLATE_POLICY_ID, EXC_RESULT, RESULT_MEMO, EXC_DTIME, CREATE_DTIME)
+        VALUES (#LOG_ID#, #USER_ID#, #DEVICE_UUID#, #OS_SYSTEM#, #POLICY_CODE#, #VIOLATE_POLICY_ID#, #EXC_RESULT#, #RESULT_MEMO#, #EXC_DTIME#, #CREATE_DTIME#)
+    </insert>
+</sqlMap>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="h5del.flw" desc="h5影像删除">
+  <nodes>
+    <node id="f501ee07-72d0-4d95-bb28-5a467d4aaa19" xPos="470" yPos="60" Width="50" Height="50">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="9a87e612-79dc-4147-9e2e-ec40205ba869" xPos="840" yPos="110" Width="50" Height="50">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="d731940f-7254-4d42-9e8c-9f0527071706" xPos="460" yPos="160" Width="50" Height="50">
+      <desc>不分页影像查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.qry" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="16269d93-62bc-4bb0-ae50-ee5f069b1641" xPos="460" yPos="250" Width="180" Height="40">
+      <desc>h5删除影像</desc>
+      <beanId>h5delpictureOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="59194d45-9824-44dc-a9f2-4c3e3d08dca1" xPos="860" yPos="330" Width="50" Height="50">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="13115887-ee9c-4e81-8c34-bf4263df0c55" xPos="460" yPos="360" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="f501ee07-72d0-4d95-bb28-5a467d4aaa19" to="9a87e612-79dc-4147-9e2e-ec40205ba869"/>
+    <line desc="" condition="" from="d731940f-7254-4d42-9e8c-9f0527071706" to="16269d93-62bc-4bb0-ae50-ee5f069b1641"/>
+    <line desc="" condition="" from="16269d93-62bc-4bb0-ae50-ee5f069b1641" to="59194d45-9824-44dc-a9f2-4c3e3d08dca1"/>
+    <line desc="" condition="" from="9a87e612-79dc-4147-9e2e-ec40205ba869" to="d731940f-7254-4d42-9e8c-9f0527071706"/>
+    <line desc="" condition="" from="59194d45-9824-44dc-a9f2-4c3e3d08dca1" to="13115887-ee9c-4e81-8c34-bf4263df0c55"/>
+  </lines>
+</diagram>

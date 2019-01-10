@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqReceipt.flw" desc="借据信息查询">
+  <nodes>
+    <node id="88707528-6ebb-4768-adfd-fe94b2e8a62a" xPos="310" yPos="150" Width="180" Height="40">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqReceipt" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

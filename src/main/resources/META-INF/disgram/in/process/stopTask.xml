@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/process/stopTask" desc="停单申请">
+	<snd>
+		<field name="CUSTOMER_MANAGER_NAME" desc="客户经理姓名" />
+		<field name="APPLY_CAUSE" desc="申请事由" required="true" length="1"/>
+		<field name="OTHER_REASONS" desc="其他说明" />
+		<field name="TASK_ID" desc="任务ID" />
+		<field name="WORK_NUMBER" desc="客户经理" required="true" />
+		<field name="PAUSE_START_TIME" desc="停单开始时间" required="true" comment="格式必须为 yyyy-mm-dd hh:mm:ss"/>
+		<field name="PAUSE_END_TIME" desc="停单结束时间" required="true" comment="格式必须为 yyyy-mm-dd hh:mm:ss"/>
+	</snd>
+</trans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="sP0034.flw" desc="紧急联系人信息修改接口">
+  <nodes>
+    <node id="86f65fe3-7fa0-493a-ad0b-549f4ff8d6dd" xPos="420" yPos="290" Width="50" Height="50">
+      <desc>网贷平台Http通讯</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0034" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="813a95ab-149a-418f-a4f1-c13c4346b69b" xPos="420" yPos="430" Width="180" Height="40">
+      <desc>嵌套子流程</desc>
+      <beanId>flowEmbedOp</beanId>
+      <data-map>
+        <data key="*flowPath" expr="timeOut/deleteTask" desc="嵌套流程路径,不含文件后缀"/>
+        <data key="TASK_ID" expr="${bar_code}" desc="用途说明"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="86f65fe3-7fa0-493a-ad0b-549f4ff8d6dd" to="813a95ab-149a-418f-a4f1-c13c4346b69b"/>
+  </lines>
+</diagram>

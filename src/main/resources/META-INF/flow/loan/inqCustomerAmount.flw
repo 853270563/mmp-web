@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqCustomerAmount.flw" desc="查询客户的总量授信情况">
+  <nodes>
+    <node id="4926b8c2-2e89-4033-91dc-0f99c2ccd2f2" xPos="340" yPos="210" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqCustomerAmount" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

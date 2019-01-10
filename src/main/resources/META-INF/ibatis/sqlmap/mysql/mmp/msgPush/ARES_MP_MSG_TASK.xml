@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_MP_MSG_TASK">
+
+    <insert id="insertAresMpMsgTask" parameterClass="map">
+         insert into ${schema.configPlat}.ARES_MP_MSG_TASK
+         (TASK_ID,CHAN_TYPE,SEND_TYPE,PUSH_TYPE,MSG_TYPE,
+        APP_ID,CLIENT_APP_ID,REC_CUST_FROM,IS_TMPL,TMPL_ID,
+        TMPL_TAG_VAL,MSG_TITLE,MSG_BODY,EXT_BODY,CLICK_ACT_TYPE,
+        CLICK_ACT_BODY,PUSH_CLIENT_TYPE,DIST_VAL,PRIO_VAL,SEND_BEGIN_TIME,
+        SEND_END_TIME,SERIAL_NO,OPER_ID,STATUS,
+        AUDITOR_ID,AUDIT_INFO,CREATE_TIME,UPDATE_TIME)
+        VALUES
+        ( #TASKID#,#CHANTYPE#,#SENDTYPE#,#PUSHTYPE#,#MSGTYPE#,
+        #APPID#,#CLIENTAPPID#,#RECCUSTFROM#,#ISTMPL#,#TMPLID#,
+        #TMPLTAGVAL#,#MSGTITLE#,#MSGBODY#,#EXTBODY#,#CLICKACTTYPE#,
+        #CLICKACTBODY#,#PUSHCLIENTTYPE#,#DISTVAL#,#PRIOVAL#,#SENDBEGINTIME#,
+        #SENDENDTIME#,#SERIALNO#,#OPERID#,#STATUS#,
+        #AUDITORID#,#AUDITINFO#,#CREATETIME#,#UPDATETIME#)
+    </insert>
+	
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		select ${schema.interPlat}.nextval('SEQ_MP_MSG_TASK') as TASK_ID from dual
+	</select>
+
+	<select id="loadApp" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		Select
+			t.*
+		From
+			${schema.configPlat}.ARES_APP_INFO t
+		Where
+			t.APP_ID = #CLIENTAPPID#
+	</select>
+	
+	<select id="selectCustClient" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+        SELECT
+            T.CUST_ID
+            FROM
+            ${schema.configPlat}.ARES_MP_CUST_CLIENT T
+            WHERE
+            <isNotEqual compareValue="9" property="PUSHCLIENTTYPE">
+                T.CLIENT_TYPE = #PUSHCLIENTTYPE# AND
+            </isNotEqual>
+            T.CLIENT_APP_ID = #CLIENTAPPID#
+            AND T.CHAN_TYPE = #CHANTYPE#
+            AND T.DEL_FLAG = '0'
+        GROUP BY T.CUST_ID
+	</select>
+	
+	<select id="loadMsgType" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		Select
+			t.*
+		From
+			${schema.configPlat}.ARES_MP_MSG_TYPE t
+		where
+			t.TYPE_ID = #MSGTYPE#
+	</select>
+</sqlMap>
+

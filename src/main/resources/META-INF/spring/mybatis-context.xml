@@ -11,7 +11,12 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="cn.com.yitong"/>
         <property name="typeAliasesSuperType" value="cn.com.yitong.common.persistence.BaseEntity"/>
-        <property name="mapperLocations" value="classpath:META-INF/mybatis/mappings/${jdbc.type}/**/*.xml"/>
+        <property name="mapperLocations" >
+        	<list>
+        		<value>classpath:META-INF/mybatis/mappings/${jdbc.type}/**/*.xml</value>
+        		<value>classpath:META-INF/mybatis/${jdbc.type}/mapping/**/*.xml</value>
+        	</list>
+        </property>
         <property name="configLocation" value="classpath:META-INF/mybatis/mybatis-config.xml"></property>
     </bean>
 
@@ -22,8 +27,17 @@
         <property name="annotationClass" value="cn.com.yitong.common.persistence.annotation.MyBatisDao"/>
     </bean>
     <!-- MyBatis end -->
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" depends-on="sqlSessionFactory">
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" depends-on="sqlSessionFactory" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
-
+<!-- myBatis缓存 -->
+	<bean id="sqlSessionCache" class="cn.com.yitong.ares.dao.SqlSessionCache">
+		<property name="mapperLocations" >
+        	<list>
+        		<value>classpath:META-INF/mybatis/mappings/${jdbc.type}/**/*.xml</value>
+        		<value>classpath:META-INF/mybatis/${jdbc.type}/mapping/**/*.xml</value>
+        	</list>
+        </property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 </beans>

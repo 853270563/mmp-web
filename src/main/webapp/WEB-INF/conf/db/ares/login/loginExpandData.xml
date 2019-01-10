@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<trans name="loginExpandData" desc="登录拓展接口" ibatisStatement="">
+<trans name="loginExpandData" desc="登录拓展接口" ibatisStatement="SESSION_LOG.addSessionLog">
 	<snd>
-		<field name="USER_ID" length="100" type="C" desc="用户标识" client="userId" required="true"/>
+		<field name="USER_ID" length="100" type="C" desc="用户标识"  required="true"/>
 		<field name="ORG_ID" length="20" type="C" desc="机构号" client="orgId"/>
-        <field name="DEVICE_ID" length="100" type="C" desc="设备标识" client="deviceId" required="true"/>
-        <field name="APP_ID" length="100" type="C" desc="应用标识" client="appId" required="true"/>
-        <field name="APP_VER_ID" length="100" type="C" desc="应用版本标识" client="appVerId" required="true"/>
+        <field name="DEVICE_ID" length="100" type="C" desc="设备标识" client="deviceId"  />
+        <field name="APP_START_DTIME" length="32" type="C" desc="应用启动时间" client="appStartDTime" />
+        <field name="APP_STOP_DTIME" length="32" type="C" desc="应用结束时间" client="appStopDTime"/>
+        <field name="APP_ID" length="100" type="C" desc="应用标识" client="appId"  />
+        <field name="APP_VER_ID" length="100" type="C" desc="应用版本标识" client="appVerId" />
         <field name="POS" length="60" type="C" desc="位置XY" client="pos"/>
-        <field name="DEVICE_MODEL" length="20" type="C" desc="型号" client="deviceModel" require="true"/>
-		<field name="DEVICE_SYSTEM" length="20" type="C" desc="系统" client="deviceSystem" require="true"/>
+        <field name="DEVICE_MODEL" length="20" type="C" desc="型号" client="deviceModel" />
+		<field name="DEVICE_SYSTEM" length="20" type="C" desc="系统" client="deviceSystem"/>
+		<field name="OPERATE_DATE" length="20" type="C" desc="查询时间(yyyy-MM-dd HH24:mm:ss)" client="operateDate"/>
+		<field name="ROLE_ID" length="20" type="C" desc="角色id"/>
 	</snd>
 	<!-- 响应报文 -->
 	<rcv> 
@@ -16,28 +20,45 @@
 		<field name="STATUS" length="6" type="C" desc="返回码" /> 
 		<field name="MSG" length="100" type="C" desc="返回消息" />
 		<!-- A面菜单 -->
-		<field name="MAX_MENU_POSITION" length="100" type="C" desc="A面最大菜单坐标" />
-		<field-list name="menuA" type="E">
-			<field name="MENU_ID" length="100" type="C" desc="编号" />
-			<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
-			<field name="MENU_URL" length="100" type="C" desc="访问路径" />
-			<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
-			<field name="MENU_TYPE" length="100" type="C" desc="类型" />
-			<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
-			<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
-			<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
-			<field name="MENU_POSITION" length="100" type="C" desc="菜单坐标" />
+		<field-list name="MENU_A" type="E">
+				<field name="MENU_ID" length="100" type="C" desc="编号" />
+				<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+				<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+				<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+				<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+				<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
+				<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+				<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+				<field name="MENU_SORT" length="100" type="C" desc="顺序" />
+				<field name="MENU_CONTENT" length="100" type="C" desc="内容" />
+				<field name="MENU_DESC" length="100" type="C" desc="描述" />
+				<field-list name="SUB_MENU" type="E" desc="子菜单">
+					<field name="MENU_ID" length="100" type="C" desc="编号" />
+					<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+					<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+					<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+					<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+					<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
+					<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+					<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+					<field name="MENU_SORT" length="100" type="C" desc="顺序" />
+					<field name="MENU_CONTENT" length="100" type="C" desc="内容" />
+					<field name="MENU_DESC" length="100" type="C" desc="描述" />
+					<field-list name="SUB_MENU" type="E" desc="子菜单">
+						<field name="MENU_ID" length="100" type="C" desc="编号" />
+						<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+						<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+						<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+						<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+						<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
+						<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+						<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+						<field name="MENU_SORT" length="100" type="C" desc="顺序" />
+						<field name="MENU_CONTENT" length="100" type="C" desc="内容" />
+						<field name="MENU_DESC" length="100" type="C" desc="描述" />
+					</field-list>
+				</field-list>
 		</field-list>
 		<!-- B面菜单 -->
-		<field-list name="menuB" type="E">
-			<field name="MENU_ID" length="100" type="C" desc="编号" />
-			<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
-			<field name="MENU_URL" length="100" type="C" desc="访问路径" />
-			<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
-			<field name="MENU_IMG_S" length="100" type="C" desc="选中后图片地址" />
-			<field name="MENU_TYPE" length="100" type="C" desc="类型" />
-			<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
-			<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
-		</field-list>
 	</rcv>
 </trans>

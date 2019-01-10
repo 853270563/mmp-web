@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="notifyBalanceCheck.flw" desc="余额不足异常通知">
+  <nodes>
+    <node id="4169d915-2bf3-4834-a636-7667132fb0cd" xPos="430" yPos="220" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/notifyBalanceCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

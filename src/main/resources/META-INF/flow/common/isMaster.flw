@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="isMaster.flw" desc="是否是主管">
+  <nodes>
+    <node id="bf0744c0-1d17-4d4d-8d29-8f13e39d7931" xPos="340" yPos="210" Width="180" Height="40">
+      <desc>权限检查</desc>
+      <beanId>permissionCheckOp</beanId>
+      <data-map>
+        <data key="*permission" expr="approval" desc="检查的权限"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

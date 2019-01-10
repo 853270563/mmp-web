@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xypicture">
+ <sql id="BaseColumnList">
+        TASK_ID,BATCH_ID
+        ,BUSI_START_DATE,BUSI_FILE_SCANUSER,BUSI_FILE_PAGENUM,CREATE_TIME,UPDATE_TIME,AMOUNT
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{TASK_ID},#{BATCH_ID},
+       #{BUSI_START_DATE},#{BUSI_FILE_SCANUSER},#{BUSI_FILE_PAGENUM},#{CREATE_TIME},#{UPDATE_TIME},#{AMOUNT}
+    </sql>
+    <!--文件类型表  -->
+	<sql id="BaseColumnList2">
+        TASK_ID,BUSI_FILE_TYPE
+        ,CREATE_TIME,UPDATE_TIME,SIZE
+    </sql>
+    <sql id="BaseColumnValueList2">
+        #{TASK_ID},#{BUSI_FILE_TYPE},
+       #{CREATE_TIME},#{UPDATE_TIME},#{AMOUNT}
+    </sql>
+    <sql id="TableClause"> BUSIV3.IMAGE_INFORMATION </sql>
+    <sql id="TableClause2"> BUSIV3.FILE_TYPE </sql>
+		<insert id="insert" parameterType="map">
+		        insert into
+		        <include refid="TableClause"/>
+		        (
+		        <include refid="BaseColumnList"/>
+		        ) values (
+		        <include refid="BaseColumnValueList"/>
+		        )
+		    </insert>
+    <update id="delete" parameterType="map">
+          delete from
+        <include refid="TableClause" />
+        <where>
+        	<if test="TASK_ID!=null and TASK_ID!='' " >
+        	TASK_ID=#{TASK_ID}
+        	</if>
+        	<if test="BATCH_ID!=null and BATCH_ID!='' " >
+        	 and	BATCH_ID=#{BATCH_ID}
+        	</if>
+        	<if test="FILE_CN_NAME!=null and FILE_CN_NAME!='' " >
+        	 and	FILE_CN_NAME=#{FILE_CN_NAME}
+        	</if>
+        </where>
+    </update>
+    <select id="qry" resultType="map">
+    select * from 
+      <include refid="TableClause" />
+       <where>
+        	<if test="TASK_ID!=null and TASK_ID!='' " >
+        	TASK_ID=#{TASK_ID}
+        	</if>
+        
+        </where>
+    </select>
+    <!-- 查询文件类型的个数 -->
+    <select id="qryFileType" resultType="map">
+    select <include refid="BaseColumnList2" /> from 
+      <include refid="TableClause2" />
+       <where>
+        	<if test="TASK_ID!=null and TASK_ID!='' " >
+        	TASK_ID=#{TASK_ID}
+        	</if>
+        	<if test="BUSI_FILE_TYPE!=null and BUSI_FILE_TYPE!='' " >
+        and	BUSI_FILE_TYPE=#{BUSI_FILE_TYPE}
+        	</if>
+        
+        </where>
+    </select>
+    <!--删除影像类型  -->
+    <delete id="deleteFileType">
+    delete from  <include refid="TableClause2" />
+    <where>
+    SIZE=0
+    </where>
+    </delete>
+    <!--文件类型表  -->
+    <insert id="insertFileType">
+    
+  		 insert into
+		        <include refid="TableClause2"/>
+		        (
+		        <include refid="BaseColumnList2"/>
+		        ) values (
+		        <include refid="BaseColumnValueList2"/>
+		        )
+    </insert>
+    <update id="updateFileType">
+    update   <include refid="TableClause2" />
+    <set>
+    SIZE=#{AMOUNT},
+	    
+   
+    UPDATE_TIME=#{UPDATE_TIME}
+    
+    </set>
+    <where>
+    <if test="TASK_ID!=null and TASK_ID!='' " >
+        	TASK_ID=#{TASK_ID}
+        	</if>
+    <if test="BUSI_FILE_TYPE!=null and BUSI_FILE_TYPE!='' " >
+        and	BUSI_FILE_TYPE=#{BUSI_FILE_TYPE}
+        	</if>
+    </where>
+    </update>
+    <update id="update">
+    update   <include refid="TableClause" />
+    <set>
+    AMOUNT=#{AMOUNT},
+	    <if test="BUSI_FILE_PAGENUM!=null and BUSI_FILE_PAGENUM!=''">
+	     BUSI_FILE_PAGENUM=#{BUSI_FILE_PAGENUM},
+	    </if>
+   
+    UPDATE_TIME=#{UPDATE_TIME}
+    
+    </set>
+    <where>
+    <if test="TASK_ID!=null and TASK_ID!='' " >
+        	TASK_ID=#{TASK_ID}
+        	</if>
+    </where>
+    </update>
+    
+</mapper>

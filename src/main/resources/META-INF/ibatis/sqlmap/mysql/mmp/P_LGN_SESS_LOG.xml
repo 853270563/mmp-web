@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="P_LGN_SESS_LOG">
+	
+	<!-- 查询sessionLog -->
+	<select id="queryById" parameterClass="string" resultClass="java.util.ArrayList">
+		<![CDATA[ 	
+			SELECT t.* FROM ${schema.interPlat}.P_LGN_SESS_LOG t WHERE t.SESS_ID = #SESS_ID:VARCHAR#
+		]]>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="saveLgnSessLog" parameterClass="map">
+		<selectKey type="pre" keyProperty="SESS_ID" resultClass="java.lang.String">
+			select ${schema.interPlat}.nextval('SEQ_SESS_LOG') from dual
+		</selectKey>
+		INSERT INTO ${schema.interPlat}.P_LGN_SESS_LOG
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="SESS_ID">
+				SESS_ID
+			</isNotNull>
+			<isNotNull prepend="," property="LGN_ID">
+				LGN_ID
+			</isNotNull>
+			<isNotNull prepend="," property="CIF_NO">
+				CIF_NO
+			</isNotNull>
+			<isNotNull prepend="," property="SYS_ID">
+				SYS_ID
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_TYP">
+				CLIENT_TYP
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_VERSION">
+				CLIENT_VERSION
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_ID">
+				CLIENT_ID
+			</isNotNull>
+			<isNotNull prepend="," property="SRV_IP">
+				SRV_IP
+			</isNotNull>
+			<isNotNull prepend="," property="CREATE_DATE">
+				CREATE_DATE
+			</isNotNull>
+			<isNotNull prepend="," property="CREATE_TIME">
+				CREATE_TIME
+			</isNotNull>
+			<isNotNull prepend="," property="LOSE_DATE">
+				LOSE_DATE
+			</isNotNull>
+			<isNotNull prepend="," property="LOSE_TIME">
+				LOSE_TIME
+			</isNotNull>
+			<isNotNull prepend="," property="SESS_STAT">
+				SESS_STAT
+			</isNotNull>
+			<isNotNull prepend="," property="LGN_STAT">
+				LGN_STAT
+			</isNotNull>
+			<isNotNull prepend="," property="EXIT_STAT">
+				EXIT_STAT
+			</isNotNull>
+			<isNotNull prepend="," property="AUTH_TYP">
+				AUTH_TYP
+			</isNotNull>
+			<isNotNull prepend="," property="SKIN_TYP">
+				SKIN_TYP
+			</isNotNull>
+			<isNotNull prepend="," property="LAGG">
+				LAGG
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_INFO">
+				CLIENT_INFO
+			</isNotNull>
+			<isNotNull prepend="," property="SESSION_ID">
+				SESSION_ID
+			</isNotNull>
+			)
+		</dynamic>
+		VALUES
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="SESS_ID">
+				#SESS_ID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="LGN_ID">
+				#LGN_ID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CIF_NO">
+				#CIF_NO:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="SYS_ID">
+				#SYS_ID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_TYP">
+				#CLIENT_TYP:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_VERSION">
+				#CLIENT_VERSION:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_ID">
+				#CLIENT_ID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="SRV_IP">
+				#SRV_IP:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CREATE_DATE">
+				#CREATE_DATE:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CREATE_TIME">
+				#CREATE_TIME:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="LOSE_DATE">
+				#LOSE_DATE:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="LOSE_TIME">
+				#LOSE_TIME:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="SESS_STAT">
+				#SESS_STAT:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="LGN_STAT">
+				#LGN_STAT:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="EXIT_STAT">
+				#EXIT_STAT:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="AUTH_TYP">
+				#AUTH_TYP:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="SKIN_TYP">
+				#SKIN_TYP:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="LAGG">
+				#LAGG:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="CLIENT_INFO">
+				#CLIENT_INFO:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="SESSION_ID">
+				#SESSION_ID:VARCHAR#
+			</isNotNull>
+			)
+		</dynamic>
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="updateLgnStat_ExitStat" parameterClass="map">
+		UPDATE ${schema.interPlat}.P_LGN_SESS_LOG P 
+		 <dynamic prepend="set" >
+		 	<isNotNull prepend="," property="EXIT_STAT">
+		 		P.EXIT_STAT = #EXIT_STAT:VARCHAR# 
+		 	</isNotNull>
+		 	<isNotNull prepend="," property="LOSE_DATE">
+		 		P.LOSE_DATE = #LOSE_DATE:VARCHAR#
+		 	</isNotNull>
+		 	<isNotNull prepend="," property="LOSE_TIME">
+		 		P.LOSE_TIME = #LOSE_TIME:VARCHAR#
+		 	</isNotNull>
+		 	<isNotNull prepend="," property="SESS_STAT_INVAIDATE">
+		 		P.SESS_STAT = #SESS_STAT_INVAIDATE:CHAR#
+		 	</isNotNull>
+		 </dynamic>
+		 <dynamic prepend="WHERE">
+		 	<isNotNull prepend="AND" property="LGN_ID">
+		 		P.LGN_ID = #LGN_ID:VARCHAR#
+		 	</isNotNull>
+		 	<isNotNull prepend="AND" property="SESSION_ID">
+		 		P.SESSION_ID = #SESSION_ID:VARCHAR#
+		 	</isNotNull>
+		 	<isNotNull prepend="AND" property="LGN_STAT">
+		 		P.LGN_STAT=#LGN_STAT:VARCHAR#
+		 	</isNotNull>
+		 	<isNotNull prepend="AND" property="SESS_STAT">
+		 		P.SESS_STAT = #SESS_STAT:CHAR#
+		 	</isNotNull>
+		 </dynamic>
+	</update>
+
+</sqlMap>
+

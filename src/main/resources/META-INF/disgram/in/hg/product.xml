@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="test/product" desc="我的产品">
+	<snd>
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="产品列表">
+			<field name="PROPA_NAME" desc="产品名称" />
+			<field name="PROPA_PIC_ADDR" desc="图片地址" />
+			<field name="FILE_ADDR" desc="文件地址" />
+			<field name="EDITOR_TIME" desc="编辑时间" />
+			<field name="SUMMARY" desc="说明" />
+		</field>
+	</rcv>
+</trans>

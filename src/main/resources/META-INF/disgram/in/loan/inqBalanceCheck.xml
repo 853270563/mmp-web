@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/inqBalanceCheck" desc="余额不足的客户的查询">
+	<snd>
+		<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+		<field name="START_DATE" desc="检查日期起" target="start_date"/>
+		<field name="END_DATE" desc="检查日期止" target="end_date"/>
+	</snd>
+	<rcv>
+		<field name="BALANCELIST" type="E" desc="" target="balancelist">
+			<field name="ID" desc="检查ID" required="true" target="id"/>
+			<field name="CUSTOMER_NAME" desc="姓名" required="true" target="customer_name"/>
+			<field name="MOBILE" desc="电话" required="true" target="mobile"/>
+			<field name="ID_NO" desc="证件号码" required="true" target="id_no"/>
+			<field name="WORK_NUMBER" desc="客户经理" required="true" target="user_no"/>
+			<field name="PAY_DATE" desc="应还日期" required="true" target="pay_date"/>
+			<field name="AMOUNT" desc="应还总额" required="true" target="amount"/>
+			<field name="ACCOUNT_NO" desc="还款账号" required="true" target="account_no"/>
+			<field name="BALANCE" desc="可用余额" required="true" target="balance"/>
+			<field name="DEAL_STATUS" desc="处理状态" required="true" target="status" comment="0：待处理 1：已处理"/>
+			<field name="IS_MOBILE" desc="是否电话通知" comment="0否 1是" target="is_mobile" />
+		</field>
+	</rcv>
+</trans>

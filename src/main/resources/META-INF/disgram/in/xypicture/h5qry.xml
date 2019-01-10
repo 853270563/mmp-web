@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/h5qry" desc="h5影像查询">
+	<snd>
+		<field name="TASK_ID" desc="任务ID" required="true" comment="任务ID"/>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见影像文档"/>
+	</snd>
+	<rcv>
+		<field name="LIST" type="E" desc="图片列表">
+			<field name="IMG_URL" desc="图片url地址" />
+			<field name="FILE_NO" desc="图片编号" />
+		</field>
+	</rcv>
+</trans>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/timeOut/deleteTask" desc="删除超时任务">
+	<snd>
+		<field name="TASK_ID" desc="任务ID" required="true" />
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

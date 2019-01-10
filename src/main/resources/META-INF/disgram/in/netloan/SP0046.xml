@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0046" excode="Fair_APP01" desc="公证人信息修改">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="borrower_name" length="50" type="C" desc="客户姓名"/>
+			<field name="borrower_gender" length="4" type="C" desc="性别"/>
+			<field name="borrower_idcard" length="18" type="C" desc="身份证号码"/>
+			<field name="marital_status" length="2" type="C" desc="婚姻状况"/>
+			<field name="spouse_name" length="50" type="C" desc="配偶-姓名"/>
+			<field name="spouse_gender" length="4" type="C" desc="配偶-性别"/>
+			<field name="spouse_idcard" length="18" type="C" desc="配偶-身份证号码"/>
+			<field name="spouse_regist_date" length="20" type="C" desc="配偶-登记日期"/>
+			<field name="spouse_is_hubei" length="2" type="C" desc="配偶-是否湖北省登记"/>
+			<field name="house_list" type="E" desc="房屋列表">
+				<field name="house_cert" length="100" type="C" desc="房产证书"/>
+				<field name="house_district_pro" length="4" type="C" desc="房屋区属_省"/>
+				<field name="house_district_city" length="4" type="C" desc="房屋区属_市"/>
+				<field name="house_district_county" length="4" type="C" desc="房屋区属_区"/>
+				<field name="co_owner_list" type="E" desc="共有人列表">
+					<field name="co_owner_name" length="50" type="C" desc="姓名"/>
+					<field name="co_owner_idcard" length="20" type="C" desc="证件号码"/>
+				</field>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>
+			<field name="reason_fail" length="100" type="C" desc="失败原因" />
+			<field name="manager_code" length="20" type="C" desc="客户经理员工号" />
+			<field name="bar_code" length="20" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

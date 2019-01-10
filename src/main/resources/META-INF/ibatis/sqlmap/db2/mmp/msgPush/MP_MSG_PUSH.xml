@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MP_MSG_PUSH">
+
+	<!-- 查询所有未发送，发送失败的客户消息
+	 	条件：发送开始时间小于等于当前时间，发送结束时间大于等于当前时间
+	 -->
+	<select id="queryCustMsgList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT M.* FROM
+			(   SELECT 
+					T.*, 
+					A.IS_CLOSE
+				FROM 
+					${schema.configPlat}.ARES_MP_CUST_MSG T
+					LEFT JOIN ${schema.configPlat}.ARES_MP_CUST_CLIENT A 
+						ON T.CUST_ID = A.CUST_ID <!-- 签约客户号 -->
+						AND T.DEVICE_ID = A.DEVICE_ID <!-- 设备标识 -->
+						AND T.CLIENT_TYPE = A.CLIENT_TYPE <!-- 终端类型 -->
+						AND T.CHAN_TYPE = A.CHAN_TYPE <!-- 通道类型 -->
+						AND T.CLIENT_APP_ID = A.CLIENT_APP_ID <!-- 客户端应用标识 -->
+						AND T.CLIENT_ID = A.CLIENT_ID <!-- 终端标识(令牌) -->
+				WHERE 
+					(T.STATUS = '0' 
+						OR T.STATUS = '3')
+					AND T.DEL_FLAG = '0'
+					AND <![CDATA[ T.SEND_BEGIN_TIME <= current timestamp ]]>
+					AND <![CDATA[ (T.SEND_END_TIME IS NULL 
+							OR T.SEND_END_TIME >= current timestamp
+						)]]> 
+			) M
+		WHERE M.IS_CLOSE = '0'
+		ORDER BY M.SEND_BEGIN_TIME ASC, M.PRIO_VAL ASC, M.DIST_VAL ASC, M.TASK_ID ASC
+	</select>
+	
+	<!-- 更新客户消息状态 -->
+	<update id="updateCustMsgStatus" parameterClass="map">
+		UPDATE
+			${schema.configPlat}.ARES_MP_CUST_MSG
+		SET
+			<isNotNull property="SEND_TIME">
+				SEND_TIME = current timestamp,
+				SEND_TIMES = SEND_TIMES + 1,
+			</isNotNull>
+			STATUS = #STATUS#,
+			UPDATE_TIME = current timestamp
+			<isNotNull property="TAKE_TIME">
+				, TAKE_TIME = #TAKE_TIME#
+			</isNotNull>
+		WHERE
+			MSG_ID = #MSG_ID#
+	</update>
+	
+	<!-- 更新客户消息状态 -->
+	<update id="updateCustMsgStatusB" parameterClass="map">
+		UPDATE
+			${schema.configPlat}.ARES_MP_CUST_MSG
+		SET
+			STATUS = #STATUS#,
+			UPDATE_TIME = current timestamp
+		WHERE
+			MSG_ID = #MSG_ID#
+			AND (STATUS = '0' OR STATUS = '3')
+	</update>
+	
+	<update id="updateCustMsgStatusToFail" parameterClass="map">
+		UPDATE
+			${schema.configPlat}.ARES_MP_CUST_MSG
+		SET
+			STATUS = #NEW_STATUS#,
+			UPDATE_TIME = current timestamp
+		WHERE
+			TASK_ID = #TASK_ID#
+			AND STATUS = #OLD_STATUS#
+	</update>
+	
+	<!-- 更新消息任务状态 -->
+	<update id="updateMsgTaskStatus" parameterClass="map">
+		UPDATE
+			${schema.configPlat}.ARES_MP_MSG_TASK
+		SET
+			STATUS = #STATUS#,
+			UPDATE_TIME = current timestamp
+		WHERE
+			TASK_ID = #TASK_ID#
+	</update>
+	
+	<select id="selectAllNowSendMsgTask" resultClass="java.util.HashMap">
+		SELECT
+			DISTINCT T.TASK_ID
+		FROM
+			${schema.configPlat}.ARES_MP_MSG_TASK T
+		WHERE
+			<![CDATA[ T.SEND_BEGIN_TIME <= current timestamp ]]>
+			AND <![CDATA[ (T.SEND_END_TIME IS NULL OR T.SEND_END_TIME >= current timestamp)]]> 
+			AND T.STATUS = '4'
+	</select>
+	
+	<select id="selectAllCustMsgStatusByTaskId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT
+			DISTINCT T.STATUS
+		FROM
+			${schema.configPlat}.ARES_MP_CUST_MSG T
+		WHERE
+			T.TASK_ID = #TASK_ID#
+	</select>
+	
+	<select id="selectAllUnSendSucMsgTask" resultClass="java.util.HashMap">
+		SELECT
+			DISTINCT T.TASK_ID
+		FROM
+			${schema.configPlat}.ARES_MP_MSG_TASK T
+		WHERE
+			T.SEND_END_TIME IS NOT NULL
+			AND <![CDATA[T.SEND_END_TIME < current timestamp]]>
+			AND (T.STATUS = '4' OR T.STATUS = '3')
+	</select>
+	
+	<select id="selectTaskCustStatus" parameterClass="map" resultClass="java.util.HashMap">
+		Select
+			distinct(t.STATUS) as STATUS
+		From
+			${schema.configPlat}.ARES_MP_MSG_TASK_CUST t
+		Where
+			t.TASK_ID = #TASK_ID#
+	</select>
+	
+	<select id="selectMsgType" resultClass="java.util.HashMap">
+		Select
+			t.TASK_ID,
+			t.MSG_TYPE
+		From
+			${schema.configPlat}.ARES_MP_MSG_TASK t
+		Where
+			t.DEL_FLAG = '0'
+			AND (t.STATUS = '3' OR t.STATUS = '4')
+	</select>
+	
+	<select id="selectMsgTypeList" resultClass="java.util.HashMap">
+		Select
+			t.TYPE_ID,
+			t.TYPE_NAME
+		From
+			${schema.configPlat}.ARES_MP_MSG_TYPE t
+		Where
+			t.DEL_FLAG = '0'
+			AND t.STATUS = '3'
+	</select>
+</sqlMap>

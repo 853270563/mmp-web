@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqBalanceCheck.flw" desc="余额不足异常查询">
+  <nodes>
+    <node id="9cde4b1f-73ad-4d5b-a174-3687f7a97b38" xPos="460" yPos="140" Width="180" Height="40">
+      <desc>完善查询时间</desc>
+      <beanId>finishQryDataOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="af9987cf-8099-4665-ba36-e47b56ecdb47" xPos="460" yPos="250" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="loan/inqBalanceCheck" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="a0334c19-a6ed-468d-9334-c6c999d4ac77" xPos="460" yPos="370" Width="180" Height="40">
+      <desc>过滤是否通知的数据</desc>
+      <beanId>isMobileOp</beanId>
+      <data-map>
+        <data key="*chickListName" expr="BALANCELIST" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="9cde4b1f-73ad-4d5b-a174-3687f7a97b38" to="af9987cf-8099-4665-ba36-e47b56ecdb47"/>
+    <line desc="" condition="" from="af9987cf-8099-4665-ba36-e47b56ecdb47" to="a0334c19-a6ed-468d-9334-c6c999d4ac77"/>
+  </lines>
+</diagram>

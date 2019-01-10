@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/hg/getAreaName" desc="根据编码获得地区名称">
+	<snd>
+		<field name="AREA_ID" type="C" desc="编码" required="true" />
+	</snd>
+	<rcv>
+		<field name="AREA_NAME" type="C" desc="名称" />
+	</rcv>
+</trans>

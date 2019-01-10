@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="CheckMiniBussiCardId" ibatisStatement="" desc="最小尾箱号查询（包括工具尾箱号）">
+	<!-- 请求报文 -->
+	<snd> 
+		<field name="BUSSICARDID" length="20" type="C" desc="卡号" />
+		<field name="USERID" length="20" type="C" desc="用户名" />
+		<field name="CARDTYPE" length="20" type="C" desc="卡类型" /> 
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="VALIDATE" length="20" type="C" desc="查询状态：验证通过1，验证不通过0" /> 
+	</rcv>
+</trans>

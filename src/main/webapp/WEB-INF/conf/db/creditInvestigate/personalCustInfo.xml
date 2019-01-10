@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="personalCustInfo" desc="个人客户信息">
+	<!--请求报文 -->
+	<snd>
+				<field name="customer_id" client="customerId" type="C"  required="true"   desc="客户编号" />  
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+				<!--公共字段 -->
+			<field name="STATUS" length="6" type="C" desc="返回码" />
+			<field name="MSG" length="100" type="C" desc="返回消息" />
+   			<field-list name="item"    type="E"  desc="解析响应报文体">
+					<field name="CustomerID" client="CustomerID" type="C" required="true"  default="20"    desc="客户编号" />  
+					<field name="MFCustomerID" client="MFCustomerID" type="C" required="true"  default="20"    desc="核心客户号" />  
+					<field name="CustomerName" client="CustomerName" type="C" required="true"  default="20"    desc="姓名" />  
+					<field name="Sex" client="Sex" type="C" required="true"  default="20"    desc="性别" />  
+					<field name="Nationality" client="Nationality" type="C"  default="20"    desc="民族" />  
+					<field name="CertType" client="CertType" type="C"   default="20"    desc="证件类型" />  
+					<field name="CertID" client="CertID" type="C" required="true"  default="20"    desc="证件号码" />  
+					<field name="CertValidDate" client="CertValidDate" type="C" required="true"  default="20"    desc="身份证有效期" />  
+					<field name="CertAddress" client="CertAddress" type="C" required="true"  default="20"    desc="  身份证地址" />  
+					<field name="SINo" client="SINo" type="C" required="true"  default="20"    desc="社会保险号" />  
+					<field name="IndType" client="IndType" type="C" required="true"  default="20"    desc="客户类型" />
+					<field name="IsGroup" client="IsGroup" type="C" required="true"  default="20"    desc="是否集团客户 "/>
+					<field name="EduExperienceEduExperience" client="EduExperience" type="C" required="true"  default="20"    desc=" 最高学历"/>
+					<field name="EduDegree" client="EduDegree" type="C" required="true"  default="20"    desc=" 最高学位"/>  
+					<field name="Staff" client="Staff" type="C" required="true"  default="20"    desc=" 是否本行员工"/>  
+					<field name="IsStockHodler" client="IsStockHodler" type="C" required="true"  default="20"    desc="是否我行股东 "/>  
+					<field name="IsRelative" client="IsRelative" type="C" required="true"  default="20"    desc=" 是否我行关联方"/>  
+					<field name="Population" client="Population" type="C" required="true"  default="20"    desc=" 家庭人数"/>  
+					<field name="Marriage" client="Marriage" type="C" required="true"  default="20"    desc=" 婚姻状况"/>  
+					<field name="isOtherArea" client="isOtherArea" type="C" required="true"  default="20"    desc=" 是否异地"/>
+					<field name="MobileTelephone" client="MobileTelephone" type="C" required="true"  default="20"    desc=" 手机号码"/>  
+					<field name="FamilyStatus" client="FamilyStatus" type="C" required="true"  default="20"    desc=" 居住状况"/>  
+					<field name="HaveWork" client="HaveWork" type="C" required="true"  default="20"    desc=" 有无单位"/>  
+					<field name="WorkCorp" client="WorkCorp" type="C" required="true"  default="20"    desc="单位名称 "/>  
+					<field name="HeadShip" client="HeadShip" type="C" required="true"  default="20"    desc=" 职务"/>  
+					<field name="InComeSource" client="InComeSource" type="C" required="true"  default="20"    desc=" 收入来源"/>  
+			</field-list>
+		</rcv>
+</trans>

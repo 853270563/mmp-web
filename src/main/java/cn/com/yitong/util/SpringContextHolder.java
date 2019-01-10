@@ -23,6 +23,14 @@ public class SpringContextHolder implements ApplicationContextAware,
 	private static ApplicationContext applicationContext = null;
 
 	private static Logger logger = Logger.getLogger(SpringContextHolder.class);
+/*
+	static {
+		File file = new File("log");
+		if (!file.isDirectory()) {
+			file.mkdir();
+		}
+		init();
+	}*/
 
 	/**
 	 * 加载spring上下文
@@ -102,4 +110,5 @@ public class SpringContextHolder implements ApplicationContextAware,
 					"applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
 		}
 	}
+
 }

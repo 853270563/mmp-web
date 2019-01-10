@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="toOtherDone.flw" desc="派单">
+  <nodes>
+    <node id="34422fc7-d5eb-4f4c-92fe-bcdda3cf6ada" xPos="370" yPos="160" Width="50" Height="50">
+      <desc>抵押物房产信息查询</desc>
+      <beanId>netToolsNetLoanOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="netloan/SP0047" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="c92f99b4-1fb8-4cc9-9f3b-566e4f9463d7" xPos="370" yPos="270" Width="180" Height="40">
+      <desc>参数组装</desc>
+      <beanId>buildArgsOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="b8a949fd-117f-457a-91c6-e6363dd10d54" xPos="370" yPos="380" Width="180" Height="40">
+      <desc>新增委托预评</desc>
+      <beanId>netToolsAsOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/add" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+    <node id="b3e59007-4a74-4ce3-bed6-02b83b65399b" xPos="370" yPos="490" Width="180" Height="40">
+      <desc>业务数据入库</desc>
+      <beanId>insertTBOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="34422fc7-d5eb-4f4c-92fe-bcdda3cf6ada" to="c92f99b4-1fb8-4cc9-9f3b-566e4f9463d7"/>
+    <line desc="" condition="" from="c92f99b4-1fb8-4cc9-9f3b-566e4f9463d7" to="b8a949fd-117f-457a-91c6-e6363dd10d54"/>
+    <line desc="" condition="" from="b8a949fd-117f-457a-91c6-e6363dd10d54" to="b3e59007-4a74-4ce3-bed6-02b83b65399b"/>
+  </lines>
+</diagram>

@@ -18,7 +18,7 @@ class EBankConst {
 
 	public static final String AT_NAME = "name";
 	public static final String AT_TARGET_NAME = "targetName";
-	public static final String AT_CLIENT = "client";
+	public static final String AT_CLIENT = "client";//是相对的，发送请求报文时，是从客户的key取值，接收响应报文时，把作为客户端的key
 	public static final String AT_HEADER = "header";
 	public static final String AT_DESC = "desc";
 	public static final String AT_TYPE = "type";

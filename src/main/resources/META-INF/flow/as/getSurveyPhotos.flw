@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="getSurveyPhotos.flw" desc="获取查勘图片信息">
+  <nodes>
+    <node id="c9a1b9cb-f762-4c3c-947d-0cc64171aa8c" xPos="340" yPos="280" Width="50" Height="50">
+      <desc>安硕Http通讯</desc>
+      <beanId>netToolsAsOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="as/getSurveyPhotos" desc="交易报文路径"/>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="请求字段清理，*为全部字段"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

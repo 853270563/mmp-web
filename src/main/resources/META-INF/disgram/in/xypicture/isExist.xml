@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/xypicture/isExist" desc="影像是否存在">
+	<snd>
+		<field name="BUSI_FILE_TYPE" desc="文件类型" required="true" comment="参见影像文档"/>
+		<field name="TASK_ID" desc="任务ID" required="true" />
+	</snd>
+	<rcv>
+		<field name="IS_EXIST" desc="存在true 不存在false" />
+	</rcv>
+</trans>

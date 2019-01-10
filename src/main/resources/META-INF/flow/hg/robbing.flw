@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="robbing.flw" desc="抢单参数">
+  <nodes>
+    <node id="54d35c7f-c31e-4f76-8653-dc7e46dbeb74" xPos="340" yPos="80" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="06bb977a-d8a4-4885-b44b-4c541044a7b2" xPos="340" yPos="160" Width="180" Height="40">
+      <desc>查询单条数据</desc>
+      <beanId>dbMapQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="robbing.queryRobbingFreq" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="f7210ce1-7c08-445f-938c-c5cbc4b151e4" xPos="340" yPos="240" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="hg/robbing" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="cbe349fa-8417-49df-8918-3e3f3af5d1dd" xPos="340" yPos="320" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="54d35c7f-c31e-4f76-8653-dc7e46dbeb74" to="06bb977a-d8a4-4885-b44b-4c541044a7b2"/>
+    <line desc="" condition="" from="06bb977a-d8a4-4885-b44b-4c541044a7b2" to="f7210ce1-7c08-445f-938c-c5cbc4b151e4"/>
+    <line desc="" condition="" from="f7210ce1-7c08-445f-938c-c5cbc4b151e4" to="cbe349fa-8417-49df-8918-3e3f3af5d1dd"/>
+  </lines>
+</diagram>

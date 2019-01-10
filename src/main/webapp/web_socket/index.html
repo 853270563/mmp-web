@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>websocket在线测试</title>
+    <meta content="WebSocket 在线测试 工具 物联网" name="description">
+    <meta content="WebSocket 在线测试 工具 物联网" name="keywords">
+    <link rel="stylesheet" href="CSS/min/index.css" />
+    <link rel="stylesheet" href="CSS/min/bootstrap.min.css" />
+    <meta charset="utf-8" />
+   
+</head>
+<body>
+<div class="page-header">
+    <h1 style="margin-top:-20px;margin-left:20px;">WebSocket 在线测试 v13 </h1>
+<!--     <div style="position:absolute;top:5px;left:500px;"><a href="http://www.blue-zero.com/WeBsocket/client.html" target="_blank" title="websocket与socket程序工具"><img style="margin-left:55px;" hight="46" width="46" src="IMG/Server.png" /><img src="IMG/new.gif" height="24" style="margin-top:-25px;" /><div style="font-weight:900;">Websocket与Socket</div></a></div>
+    <div style="position:absolute;top:5px;left:680px;"><a href="http://www.vjshi.com/profile/1044161.html" target="_blank"><img style="margin-left:12px;" hight="46" width="46" src="IMG/tv.png" /><img src="IMG/new.gif" height="24" style="margin-top:-25px;" /><div style="font-weight:900;color:red">视频素材库</div></a></div>
+    <div style="position:absolute;top:5px;left:780px;"><a href="http://www.blue-zero.com/chat/" target="_blank"><img style="margin-left:28px;" hight="46" width="46" src="IMG/chat.png" /><div style="font-weight:900;">点击进入聊天室</div></a></div>
+    <div style="position:absolute;top:5px;left:900px;"><a href="http://121.40.165.18/" target="_blank"><img style="margin-left:28px;" hight="46" width="46" src="IMG/lot.png" /><div style="font-weight:900;">物联网测控平台</div></a></div>
+    <div style="position:absolute;top:5px;left:1020px;"><a href="http://www.blue-zero.com/sf/WebSocket压力并发测试v106.zip" target="_blank"><img style="margin-left:34px;" hight="46" width="46" src="IMG/tool1.png" /><div style="font-weight:900;">并发压力测试工具</div></a></div> -->
+</div>
+<div>
+    <div class="zone_conn">
+        <input type="text" class="form-control" style="float:left;" id="inp_url" value="ws://121.40.165.18:8088" placeholder="连接的地址" />
+        <button type="button" id="btn_conn" class="btn btn-primary" style="float:left;margin-left:10px;margin-right:10px;" onclick="fun_initWebSocket();">连接</button>
+        <button type="button" id="btn_close" class="btn btn-danger" style="float:left;" disabled="disabled" onclick="fun_close();">断开</button>
+    </div>
+    <div class="clearboth">
+        1、连接格式为 ws://IP/域名:端口（示例ws://121.40.165.18:8088）<br />
+        2、对于<span style="color:red">内网</span>的测试环境，只需填入服务端的<span style="color:red">内网IP</span>和端口<br />
+        3、可连接我上面提供的服务端ws地址来测试您<span style="color:red">自己的客户端</span>
+    </div>
+    <div class="zone_send">
+<!--         <a id="emoji" style="position:relative;left:374px;bottom:5px;cursor:pointer;" data-toggle="popover" title="表情"><img style="outline-width:40px;" src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/huanglianwx_thumb.gif" />表情</a>
+ -->        <textarea id="inp_send" class="form-control" style="height:100px;" placeholder="发送的内容"></textarea>
+        <br />
+        <button type="button" id="btn_send" class="btn btn-info" onclick="fun_sendto();">发送（ctrl+回车）</button>
+        <div style='margin-top:10px;color:red;line-height:30px;'>1、平台兼容IE6及以上，服务端基于JAVA完成端口的socket监听</div>
+        <div style='color:red;line-height:30px;'>2、服务端未使用任何框架，原生方式实现，更清楚WebSocket底层流程</div>
+        <div style='color:red;line-height:30px;'>3、服务端支持多客户端数据收发</div>
+        <div style='color:red;line-height:30px;'>4、需要完整的【客户端/服务器】源码请咨询作者</div>
+        <div data-toggle="modal" data-target="#myModal" style='color:blue;line-height:30px;font-size:16px;cursor:pointer;text-decoration:underline;'><img src="IMG/wexin.png" height="30" style="margin-right:10px;" />联系作者</div>
+    </div>
+</div>
+<div style="position:absolute;top:100px;left:470px;">
+    <div id="div_msgzone" class="panel panel-default">
+        <div class="panel-heading">消息窗口</div>
+        <div id="div_msg" class="panel-body"></div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">感谢捐赠</h4>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                感谢您对作者的捐赠，您的付出都是对作者更好的呈现一些websocket体验的支持。
+                <br />如在开发websocket上有何疑问不解的地方或需要<span style="color:red">广告投放</span>，也可以加作者为好友。<div style="color:red;text-align:center;margin-top:10px;margin-bottom:10px;">互相交流、知无不言</div>
+                <div style='color:green;font-weight:900;margin-top:5px;margin-bottom:5px;margin-left:10px;'><img src="IMG/wexin.png" height="30" />微信：luanyujjj</div>
+                <div style='color:green;font-weight:900;margin-bottom:5px;'><img src="IMG/qq.png" height="30" />QQ ：853270563</div>
+                <img src="IMG/weixin.png" height="200" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="JS/min/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="JS/min/bootstrap.min.js"></script>
+<script type="text/javascript" src="JS/min/index.js"></script>
+ <script>
+        (function() {
+        	 $("#inp_url").val(sessionStorage.getItem("WEBSOCKET_URL"));
+        })(); 
+    </script>
+</body>
+</html>

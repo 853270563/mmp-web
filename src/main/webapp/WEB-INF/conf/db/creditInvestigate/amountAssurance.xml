@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="amountAssurance" ibatisStatement="" desc="额度担保信息">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		 <field  name="PAGE_NO" length="30" type="C" desc="第几页"  />
+		<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小"  /> 
+		<field name="serial_no" client="serialNo" type="C"  required="true"  default=""    desc="任务流水号" />  
+		<field name="object_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" /> 
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+        <field-list name="item" type="E">
+           			<field name="serialNo" client="serialNo" type="C" required="true"  default="100"    desc="担保合同编号" />
+   					<field name="contractType" client="contractType" type="C" required="true"  default="100"    desc="合同类型" />  
+   					<field name="guarantyType" client="guarantyType" type="C" required="true"  default="100"    desc="担保方式" />  
+   					<field name="guarantorName" client="guarantorName" type="C" required="true"  default="100"    desc="担保人名称" />  
+   					<field name="guarantyCurrency" client="guarantyCurrency" type="C" required="true"  default="100"    desc="担保币种" />  
+   					<field name="guarantyValue" client="guarantyValue" type="C" required="true"  default="100"    desc="担保总金额" />  
+   					<field name="inputUserName" client="inputUserName" type="C" required="true"  default="100"    desc="登记人" />  
+   					<field name="inputOrgName" client="inputOrgName" type="C" required="true"  default="100"    desc="登记机构" /> 
+        </field-list>
+	</rcv>
+</trans>
+	

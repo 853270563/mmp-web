@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="INTEFACE_STATE">
+
+	<!-- 查询 -->
+    <select id="queryInfo" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+       	select *
+     	from ${schema.busiPlat}.INTEFACE_STATE 
+     	where BAR_CODE=#BAR_CODE#
+    </select>
+    
+    <!-- 数据入库 -->
+    <insert id="insert" parameterClass="java.util.Map">
+       	insert into ${schema.busiPlat}.INTEFACE_STATE
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="BAR_CODE" >
+	       		BAR_CODE
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="CUST_APPLY" >	
+       			CUST_APPLY
+       		</isNotNull>
+       		<isNotNull prepend="," property="CUST_BASE" >
+       			CUST_BASE
+       		</isNotNull>
+       		<isNotNull prepend="," property="EMER_CONTACT" >
+       			EMER_CONTACT
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_BOOROWER" >
+       			COM_BOOROWER
+       		</isNotNull>
+       		<isNotNull prepend="," property="OTHER_RAPID" >
+       			OTHER_RAPID
+       		</isNotNull>
+       		<isNotNull prepend="," property="GUARANTOR" >
+       			GUARANTOR
+       		</isNotNull>
+       		<isNotNull prepend="," property="PHOTOES" >
+       			PHOTOES
+       		</isNotNull>
+       		<isNotNull prepend="," property="SURVEY_OPINION" >
+       			SURVEY_OPINION
+       		</isNotNull>
+       		<isNotNull prepend="," property="NOTAR_INFO" >
+       			NOTAR_INFO
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_ONE" >
+       			HOUSE_INFO_ONE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_TWO" >
+       			HOUSE_INFO_TWO
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_THREE" >
+       			HOUSE_INFO_THREE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_FOUR" >
+       			HOUSE_INFO_FOUR
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_FIVE" >
+       			HOUSE_INFO_FIVE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_SIX" >
+       			HOUSE_INFO_SIX
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_ONE" >
+       			COM_PERSON_ONE
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_TWO" >
+       			COM_PERSON_TWO
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_THREE" >
+       			COM_PERSON_THREE
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_FOUR" >
+       			COM_PERSON_FOUR
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_FIVE" >
+       			COM_PERSON_FIVE
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_SIX" >
+       			COM_PERSON_SIX
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_ONE" >
+       			HOUSE_SURVEY_ONE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_TWO" >
+       			HOUSE_SURVEY_TWO
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_THREE" >
+       			HOUSE_SURVEY_THREE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_FOUR" >
+       			HOUSE_SURVEY_FOUR
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_FIVE" >
+       			HOUSE_SURVEY_FIVE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_SIX" >
+       			HOUSE_SURVEY_SIX
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_ONE" >
+       			HOUSE_PHOTO_ONE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_TWO" >
+       			HOUSE_PHOTO_TWO
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_THREE" >
+       			HOUSE_PHOTO_THREE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_FOUR" >
+       			HOUSE_PHOTO_FOUR
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_FIVE" >
+       			HOUSE_PHOTO_FIVE
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_SIX" >
+       			HOUSE_PHOTO_SIX
+       		</isNotNull>
+       		) 
+       	</dynamic>	
+       	VALUES
+       	<dynamic prepend="(" >
+	       	<isNotNull prepend="," property="BAR_CODE" >
+	       		#BAR_CODE#
+	       	</isNotNull>
+	       	<isNotNull prepend="," property="CUST_APPLY" >	
+       			#CUST_APPLY#
+       		</isNotNull>
+       		<isNotNull prepend="," property="CUST_BASE" >
+       			#CUST_BASE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="EMER_CONTACT" >
+       			#EMER_CONTACT#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_BOOROWER" >
+       			#COM_BOOROWER#
+       		</isNotNull>
+       		<isNotNull prepend="," property="OTHER_RAPID" >
+       			#OTHER_RAPID#
+       		</isNotNull>
+       		<isNotNull prepend="," property="GUARANTOR" >
+       			#GUARANTOR#
+       		</isNotNull>
+       		<isNotNull prepend="," property="PHOTOES" >
+       			#PHOTOES#
+       		</isNotNull>
+       		<isNotNull prepend="," property="SURVEY_OPINION" >
+       			#SURVEY_OPINION#
+       		</isNotNull>
+       		<isNotNull prepend="," property="NOTAR_INFO" >
+       			#NOTAR_INFO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_ONE" >
+       			#HOUSE_INFO_ONE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_TWO" >
+       			#HOUSE_INFO_TWO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_THREE" >
+       			#HOUSE_INFO_THREE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_FOUR" >
+       			#HOUSE_INFO_FOUR#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_FIVE" >
+       			#HOUSE_INFO_FIVE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_INFO_SIX" >
+       			#HOUSE_INFO_SIX#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_ONE" >
+       			#COM_PERSON_ONE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_TWO" >
+       			#COM_PERSON_TWO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_THREE" >
+       			#COM_PERSON_THREE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_FOUR" >
+       			#COM_PERSON_FOUR#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_FIVE" >
+       			#COM_PERSON_FIVE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="COM_PERSON_SIX" >
+       			#COM_PERSON_SIX#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_ONE" >
+       			#HOUSE_SURVEY_ONE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_TWO" >
+       			#HOUSE_SURVEY_TWO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_THREE" >
+       			#HOUSE_SURVEY_THREE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_FOUR" >
+       			#HOUSE_SURVEY_FOUR#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_FIVE" >
+       			#HOUSE_SURVEY_FIVE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_SURVEY_SIX" >
+       			#HOUSE_SURVEY_SIX#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_ONE" >
+       			#HOUSE_PHOTO_ONE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_TWO" >
+       			#HOUSE_PHOTO_TWO#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_THREE" >
+       			#HOUSE_PHOTO_THREE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_FOUR" >
+       			#HOUSE_PHOTO_FOUR#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_FIVE" >
+       			#HOUSE_PHOTO_FIVE#
+       		</isNotNull>
+       		<isNotNull prepend="," property="HOUSE_PHOTO_SIX" >
+       			#HOUSE_PHOTO_SIX#
+       		</isNotNull>
+       		) 
+       	</dynamic>
+    </insert>
+    
+    <!-- 更新接口条用记录 -->
+    <update id="updateByTaskId" parameterClass="java.util.Map">
+		<![CDATA[ update ${schema.busiPlat}.INTEFACE_STATE ]]>
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="BAR_CODE">BAR_CODE = #BAR_CODE#</isNotNull>
+			<isNotNull prepend="," property="CUST_APPLY">CUST_APPLY = #CUST_APPLY#</isNotNull>
+			<isNotNull prepend="," property="CUST_BASE">CUST_BASE = #CUST_BASE#</isNotNull>
+			<isNotNull prepend="," property="EMER_CONTACT">EMER_CONTACT = #EMER_CONTACT#</isNotNull>
+			<isNotNull prepend="," property="COM_BOOROWER">COM_BOOROWER = #COM_BOOROWER#</isNotNull>
+			<isNotNull prepend="," property="OTHER_RAPID">OTHER_RAPID = #OTHER_RAPID#</isNotNull>
+			<isNotNull prepend="," property="GUARANTOR">GUARANTOR = #GUARANTOR#</isNotNull>
+			<isNotNull prepend="," property="PHOTOES">PHOTOES = #PHOTOES#</isNotNull>
+			<isNotNull prepend="," property="SURVEY_OPINION">SURVEY_OPINION = #SURVEY_OPINION#</isNotNull>
+			<isNotNull prepend="," property="NOTAR_INFO">NOTAR_INFO = #NOTAR_INFO#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_ONE">HOUSE_INFO_ONE = #HOUSE_INFO_ONE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_TWO">HOUSE_INFO_TWO = #HOUSE_INFO_TWO#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_THREE">HOUSE_INFO_THREE = #HOUSE_INFO_THREE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_FOUR">HOUSE_INFO_FOUR = #HOUSE_INFO_FOUR#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_FIVE">HOUSE_INFO_FIVE = #HOUSE_INFO_FIVE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_INFO_SIX">HOUSE_INFO_SIX = #HOUSE_INFO_SIX#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_ONE">COM_PERSON_ONE = #COM_PERSON_ONE#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_TWO">COM_PERSON_TWO = #COM_PERSON_TWO#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_THREE">COM_PERSON_THREE = #COM_PERSON_THREE#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_FOUR">COM_PERSON_FOUR = #COM_PERSON_FOUR#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_FIVE">COM_PERSON_FIVE = #COM_PERSON_FIVE#</isNotNull>
+			<isNotNull prepend="," property="COM_PERSON_SIX">COM_PERSON_SIX = #COM_PERSON_SIX#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_ONE">HOUSE_SURVEY_ONE = #HOUSE_SURVEY_ONE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_TWO">HOUSE_SURVEY_TWO = #HOUSE_SURVEY_TWO#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_THREE">HOUSE_SURVEY_THREE = #HOUSE_SURVEY_THREE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_FOUR">HOUSE_SURVEY_FOUR = #HOUSE_SURVEY_FOUR#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_FIVE">HOUSE_SURVEY_FIVE = #HOUSE_SURVEY_FIVE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_SURVEY_SIX">HOUSE_SURVEY_SIX = #HOUSE_SURVEY_SIX#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_ONE">HOUSE_PHOTO_ONE = #HOUSE_PHOTO_ONE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_TWO">HOUSE_PHOTO_TWO = #HOUSE_PHOTO_TWO#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_THREE">HOUSE_PHOTO_THREE = #HOUSE_PHOTO_THREE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_FOUR">HOUSE_PHOTO_FOUR = #HOUSE_PHOTO_FOUR#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_FIVE">HOUSE_PHOTO_FIVE = #HOUSE_PHOTO_FIVE#</isNotNull>
+			<isNotNull prepend="," property="HOUSE_PHOTO_SIX">HOUSE_PHOTO_SIX = #HOUSE_PHOTO_SIX#</isNotNull>
+		</dynamic>
+		<![CDATA[ where BAR_CODE=#BAR_CODE#]]>
+	</update>
+</sqlMap>
+

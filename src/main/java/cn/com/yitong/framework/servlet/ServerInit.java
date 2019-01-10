@@ -2,13 +2,17 @@ package cn.com.yitong.framework.servlet;
 
 import cn.com.yitong.common.utils.ConfigUtils;
 import cn.com.yitong.core.util.SecurityUtils;
+import cn.com.yitong.framework.base.IErrorCaches;
+
 import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServlet;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +33,8 @@ public class ServerInit extends HttpServlet {
 
 	static Logger logger =Logger.getLogger(ServerInit.class);
 	
+	public static IErrorCaches errorCaches;
+
 	// 静态数据标识
 	public static final boolean STATIC_DATA = false;
 
@@ -89,8 +95,9 @@ public class ServerInit extends HttpServlet {
             if (urls != null) {
                 while (urls.hasMoreElements()) {
                     java.net.URL url = urls.nextElement();
+                    BufferedReader reader = null;
                     try {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
+                        reader = new BufferedReader(new InputStreamReader(url.openStream(), "utf-8"));
                         Properties properties = new Properties();
                         properties.load(reader);
                         
@@ -99,6 +106,14 @@ public class ServerInit extends HttpServlet {
                         sBuilder.append("构建时间：").append(properties.getProperty("build.time")).append(".\n");
                     } catch (Throwable t) {
                         logger.error(t.getMessage(), t);
+                    }finally{
+                    	if(reader!=null){
+                    		try {
+                    			reader.close();
+							} catch (Exception e) {
+								logger.error(e.getMessage(), e);
+							}
+                    	}
                     }
                 }
             }

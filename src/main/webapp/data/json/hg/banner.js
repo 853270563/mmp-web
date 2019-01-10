@@ -1,0 +1,1 @@
+({"STATUS":"1","MSG":"交易成功！","LIST":[{"BANNER_ID":"","BANNER_PIC":"","FILE_ID":"","BANNER_NAME":"","ORGAN_LIMIT":"","BANNER_LVL":""}]})

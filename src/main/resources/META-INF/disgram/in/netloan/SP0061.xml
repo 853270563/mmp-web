@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/SP0061" excode="Contract_APP01" desc="合同信息完善接口">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="credit_count" length="18" type="C" desc="授信总量" required="true"/>
+			<field name="credit_count_timelimit" length="20" type="C" desc="有效使用期限" required="true"/>
+			<field name="repayment_account" length="50" type="C" desc="还款账号" required="true"/>
+			<field name="single_loan_status" length="2" type="C" desc="单笔贷款状态" required="true"/>
+			<field name="single_loan" length="18" type="C" desc="单笔贷款"/>
+			<field name="single_refund_timelimit" length="20" type="C" desc="单笔-还款期限"/>
+			<field name="single_rate_model" length="20" type="C" desc="单笔-利率模式"/>
+			<field name="single_buoyancy_ratio" length="10" type="C" desc="单笔-上浮比例"/>
+			<field name="single_reimburs" length="20" type="C" desc="单笔-还款日" />
+			<field name="loop_loan_status" length="2" type="C" desc="自助循环贷款状态" required="true"/>
+			<field name="loop_loan" length="18" type="C" desc="自助循环贷款"/>
+			<field name="loop_refund_timelimit" length="10" type="C" desc="自助循环贷款-还款期限" />
+			<field name="loop_rate_model" length="20" type="C" desc="自助循环贷款-利率模式" />
+			<field name="loop_buoyancy_ratio" length="20" type="C" desc="自助循环贷款-上浮比例" />
+			<field name="loop_reimburs" length="20" type="C" desc="自助循环贷款-还款日"/>
+			<field name="personal_credit_contract" type="M" desc="个人综合授信合同">
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="other_forms_security" length="2000" type="C" desc="其他担保方式"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="two_sides_agreed" length="2000" type="C" desc="其他费用，甲乙双方约定如下"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="relevant_departments" length="100" type="C" desc="有关部门"/>
+				<field name="party_a_copies" length="10" type="C" desc="甲方持有份数"/>
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+				<field name="party_b_copies" length="10" type="C" desc="乙方持有份数"/>
+			</field>
+			<field name="personal_pledge_contract" type="M" desc="个人最高额抵押合同">
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="two_sides_agreed" length="2000" type="C" desc="其他费用，甲乙双方约定如下"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="relevant_departments" length="100" type="C" desc="相关部门"/>
+				<field name="parties_copies" length="10" type="C" desc="各方持有的份数" />
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+			</field>
+			<field name="personal_cycle_contract" type="M" desc="个人自助循环借款合同">
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="relevant_departments" length="100" type="C" desc="相关部门"/>
+				<field name="parties_copies" length="10" type="C" desc="各方持有的份数" />
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+			</field>
+			<field name="personal_loan_contract" type="M" desc="个人借款合同">
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="relevant_departments" length="100" type="C" desc="相关部门"/>
+				<field name="parties_copies" length="10" type="C" desc="各方持有的份数" />
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+			</field>
+			<field name="personal_warranty_contract" type="E" desc="个人保证合同">
+				<field name="guarantor_name" length="80" type="C" desc="保证人姓名"/>
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="relevant_departments" length="100" type="C" desc="相关部门"/>
+				<field name="parties_copies" length="10" type="C" desc="各方持有的份数" />
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+			</field>
+			<field name="supple_agree_contract" type="M" desc="补充协议">
+				<field name="contract_no" length="50" type="C" desc="合同编号"/>
+				<field name="other_agreed_matters" length="2000" type="C" desc="其他约定事项"/>
+				<field name="notarization_name" length="500" type="C" desc="公证处全称"/>
+				<field name="total_number" length="10" type="C" desc="合同总份数"/>
+				<field name="id" length="20" type="C" desc="唯一编号"/>
+			</field>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="bar_code" length="32" type="C" desc="条码号"/>
+		</body>
+	</rcv>
+</trans>

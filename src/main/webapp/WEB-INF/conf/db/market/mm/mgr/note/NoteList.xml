@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="NoteList" ibatisStatement="P_SYS_NOTE.selfNoteList" desc="公告信息查询">
+	<!-- 请求报文 -->
+	<snd> 
+	    <field name="ORG_LIMIT" length="20" type="C" desc="机构ID" required="true"/>
+	    <field name="ROWNUM" length="20" type="C" desc="记录条数" required="false" /> 
+	    <field name="NOTE_TYP" length="20" type="C" desc="信息类型" required="false" /> 
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<field-list name="LIST" type="E">
+			<field name="NOTE_ID" length="20" type="C" desc="编号" />
+			<field name="NOTE_TITLE" length="100" type="C" desc="标题"/>
+			<field name="NOTE_CONTENT" length="6" type="C" desc="内容" />	
+			<field name="ORG_NAME" length="6" type="C" desc="机构名称" />	
+			<field name="VALID_DATE" length="6" type="C" desc="上架日期" />
+            <field name="INVALID_DATE" length="6" type="C" desc="下架日期" />			
+			<field name="IMP_FLG" length="6" type="C" desc="重要等级"  descName="IMP_FLG_LABEL" mapKey="LVL_TYPE" />		
+			<field name="NOTE_TYP" length="6" type="C" desc="公告类型"  descName="NOTE_TYP_LABEL" mapKey="NOTE_TYP" />	
+		</field-list> 
+	<!-- 	xpath="TYPE" xpath="KEY" -->
+	</rcv>
+</trans>

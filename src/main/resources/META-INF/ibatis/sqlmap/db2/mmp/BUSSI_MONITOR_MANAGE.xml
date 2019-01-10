@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BUSSI_MONITOR_MANAGE">
+
+	<insert id="addBussiMontorMng" parameterClass="map">
+	   <selectKey type="pre" keyProperty="ERR_LOG_ID" resultClass="java.lang.String">
+			SELECT ${schema.interPlat}.SEQ_BUSSI_MONITOR_MANAGE.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ${schema.interPlat}.BUSSI_MONITOR_MANAGE
+		(ERR_LOG_ID,ERR_FLOW_INSTANCE_ID,ERR_NODE_INSTANCE_ID,ERR_NODE_LOG,ERR_CREATE_TIME) 
+		VALUES (#ERR_LOG_ID#,#ERR_FLOW_INSTANCE_ID#,#ERR_NODE_INSTANCE_ID#,#ERR_NODE_LOG#,current timestamp) 
+	</insert>
+	
+
+</sqlMap>
+

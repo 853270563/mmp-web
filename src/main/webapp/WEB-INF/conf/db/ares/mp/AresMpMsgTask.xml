@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="AresMpMsgTask" desc="消息任务" ibatisStatement="">
+	<!-- 请求报文 -->
+    <snd>
+        <field name="CHANTYPE" length="1" type="C" desc="通道类型 1-手机银行、2-微信、3-PAD应用" default="0" required="true"/>
+        <field name="SENDTYPE" length="1" type="C" desc="消息发送类型,0-广播,1-点对点" default="0" required="true"/>
+        <field name="PUSHTYPE" length="1" type="C" desc="推送类型 0-消息，1-扩展" default="0" required="true"/>
+        <field name="MSGTYPE" length="64" type="C" desc="消息类型"/>
+        <field name="CLIENTAPPID" length="64" type="C" desc="客户端应用标识" required="true"/>
+        <field name="RECCUSTFROM" length="1" type="C" desc="接收客户号来源 0-全部，1-录入，2-上传，3-接口" />
+        <field name="RECCUST" type="C" desc="接收客户编号" />
+        <field name="MSGTITLE" length="128" type="C" desc="消息标题" required="true"/>
+        <field name="MSGBODY" length="4000" type="C" desc="消息内容" required="true"/>
+        <field name="EXTBODY" length="4000" type="C" desc="扩展内容" />
+        <field name="CLICKACTTYPE" length="1" type="C" desc="点击通知动作类型 0:打开应用1:打开网址，2，自定义"/>
+        <field name="CLICKACTBODY" length="512" type="C" desc="点击通知动作内容"/>
+        <field name="PUSHCLIENTTYPE" length="1" type="C" desc="推送终端类型 0 IOS 1 安卓 9 全部" default="1" required="true"/>
+        <field name="DISTVAL" type="N" desc="干扰值" required="true"/>
+        <field name="PRIOVAL" type="N" desc="优先级" required="true"/>
+        <field name="SENDBEGINTIME" length="20" type="C" desc="发送开始时间yyyy-MM-dd HH:mm:ss" required="true"/>
+        <field name="SENDENDTIME" length="20" type="C" desc="发送结束时间yyyy-MM-dd HH:mm:ss" />
+        <field name="OPERID" length="20" type="C" desc="操作人"/>
+    </snd>
+
+
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" type="C" desc="返回消息" />
+	</rcv>
+</trans>

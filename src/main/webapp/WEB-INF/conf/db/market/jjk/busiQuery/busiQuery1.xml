@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiQuery" desc="卡验密">
+	<snd>
+		<field name="YZM" length="20" type="C" desc="备用"/>
+	</snd>
+	<rcv>
+		<field name="CRDT_IN_ID" length="20" type="C" desc="备用" />
+		<field name="ADVANCE_BAR_CODE" length="20" type="C" desc="备用" />
+		<field name="CUST_NAME" length="20" type="C" desc="备用" />
+		<field name="CERT_NO" length="20" type="C" desc="备用" />
+		<field name="TYPE" length="20" type="C" desc="备用" />
+		<field name="STATE" length="20" type="C" desc="备用" />
+		<field name="REFUSE" length="20" type="C" desc="备用" />
+	</rcv>
+</trans>

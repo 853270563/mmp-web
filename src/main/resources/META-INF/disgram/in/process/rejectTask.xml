@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/process/rejectTask" desc="拒单申请">
+	<snd>
+		<field name="CUSTOMER_MANAGER_NAME" desc="客户经理姓名"  />
+		<field name="APPLY_CAUSE" desc="申请事由" required="true" />
+		<field name="OTHER_REASONS" desc="其他说明" />
+		<field name="TASK_ID" desc="任务ID" />
+		<field name="WORK_NUMBER" desc="客户经理" required="true" />
+		<field name="CUST_NAME" desc="客户姓名"/>
+		<field name="CUST_PHONE" desc="客户手机号码"/>
+	</snd>
+</trans>

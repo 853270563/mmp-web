@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="inqBatchCustomerInfo.flw" desc="根据客户经理查询批量客户信息">
+  <nodes>
+    <node id="8a55c6b7-d227-4640-b250-23dd98e655f9" xPos="410" yPos="190" Width="50" Height="50">
+      <desc>网贷核心Http通讯</desc>
+      <beanId>netToolsNetCoreOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines/>
+</diagram>

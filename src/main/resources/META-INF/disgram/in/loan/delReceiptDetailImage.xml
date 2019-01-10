@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/loan/delReceiptDetailImage" desc="删除借据授信影像资料">
+	<snd>
+		<field name="CONTRACT_NO" desc="借款合同编号" target="contract_no"/>
+		<field name="RECEIPT_NO" desc="借据编号" target="receipt_no"/>
+		<field name="ID" desc="借据授信ID" required="true"  target="id"/>
+		<field name="IMAGELIST" type="E" desc="影像列表"  target="imagelist">
+			<field name="IMAGE_TYPE" desc="影像类型" comment="影像字典文件" target="image_type" />
+			<field name="IMAGE_PATH" desc="图片地址" required="true" target="image_path" comment="影像批次号"/>
+			<field name="FILE_EXT" desc="图片后缀" required="true" target="file_ext" />
+			<field name="IMAGE_FLAG" desc="图片分表标识" required="true" target="image_flag" comment="开始日期"/>
+		</field>
+	</snd>
+	<rcv>
+	</rcv>
+</trans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config id="login" title="登录流程">
+	<!-- 服务编排 -->
+	<actions>
+		<!-- 第一个节点 index=1; 操作类 id=jsonParamInitOp; -->
+		<action index="1" ref="jsonParamInitOp" title="初始化报文"></action>
+		<!-- 第一个节点 index=2; -->
+		<action index="2" ref="imageCodeCheckOp" title="图形验证码"></action>
+		<action index="3" ref="loadCustInfoByLoginIdOp" title="加载客户信息"></action>
+		<action index="4" ref="loginSessionCreateOp" title="创建用户会话"></action>
+	</actions>
+</config>

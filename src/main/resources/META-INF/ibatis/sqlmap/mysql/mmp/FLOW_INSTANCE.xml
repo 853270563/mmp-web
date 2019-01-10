@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FLOW_INSTANCE">
+
+
+<!--     <select id="getSeqFlowInstanceId" resultClass="java.util.HashMap" >
+  		select DATE_FORMAT(NOW(), '%Y%m%d') || ${schema.interPlat}.seq_BUSSI_MONITOR_MANAGE.nextval as FLOW_INSTANCE_ID from dual 
+  	</select> -->
+  	
+    <select id="getSeqFlowInstanceId" resultClass="java.util.HashMap" >
+  		select CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'),${schema.interPlat}.nextval('seq_flow_instance')) as FLOW_INSTANCE_ID from dual
+  	</select>
+<!--   	
+	<insert id="addFlowInstance" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.BUSSI_MONITOR_MANAGE
+		(ERR_LOG_ID,ERR_FLOW_INSTANCE_ID,ERR_NODE_INSTANCE_ID,ERR_NODE_LOG,ERR_CREATE_TIME) 
+		VALUES (#ERR_LOG_ID#,#ERR_FLOW_INSTANCE_ID#,#ERR_NODE_INSTANCE_ID#,#ERR_NODE_LOG#,NOW()) 
+	</insert> -->
+	
+	
+	<insert id="insertFlowInstance" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.FLOW_INSTANCE
+		(FLOW_INSTANCE_ID,INSTANCE_STATUS,CREATE_TIME,UPDATE_TIME,TRANS_ID,FLOW_ID) 
+		VALUES (#FLOW_INSTANCE_ID#,#INSTANCE_STATUS#,NOW(),#UPDATE_TIME#,#TRANS_ID#,#FLOW_ID#) 
+	</insert>
+	
+	
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT t1.FLOW_INSTANCE_ID,t1.INSTANCE_STATUS,t1.CREATE_TIME,t1.UPDATE_TIME,t1.TRANS_ID,t1.FLOW_ID,t1.TRAN_CODE,t2.CUST_NAME,t2.CUST_MOBI_PHONE
+		FROM ${schema.interPlat}.FLOW_INSTANCE t1,${schema.interPlat}.JJK_TRAN_CARD t2
+		WHERE
+		t1.TRANS_ID = t2.TRANS_ID
+		ORDER BY t1.FLOW_INSTANCE_ID
+	</sql>
+	
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	
+
+</sqlMap>
+

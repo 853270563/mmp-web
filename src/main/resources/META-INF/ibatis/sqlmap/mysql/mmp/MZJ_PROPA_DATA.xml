@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MZJ_PROPA_DATA">
+
+	<sql id="queryDynSql"> 
+<!-- 		P.FILE_ID = F.FILE_ID  -->
+<!-- 		<isNotEmpty prepend="and" property="ORGAN_LIMIT"> -->
+<!-- 			P.ORGAN_LIMIT=#ORGAN_LIMIT# -->
+<!-- 		</isNotEmpty>  -->
+		<isNotEmpty prepend="and" property="ORGAN_LIMIT">
+			P.ORGAN_LIMIT=#ORGAN_LIMIT#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PROPA_NAME">
+			P.PROPA_NAME LIKE '%'||#PROPA_NAME#||'%'
+		</isNotEmpty> 
+	</sql>
+	
+<!--SELECT P.propa_Id, P.propa_name, P.propa_type, P.propa_pic, F.*  -->
+<!-- 		FROM ${schema.interPlat}.PROPA_DATA P, ${schema.interPlat}.MZJ_FILES_DATA  F -->
+<!-- 		<dynamic prepend="WHERE"> -->
+<!-- 			<include refid="queryDynSql" /> -->
+<!-- 		</dynamic>  -->
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT 
+			P.PROPA_ID AS RES_ID,'' AS RES_TYPE,P.FILE_ID, P.PROPA_NAME AS PRD_NAME, 
+			P.PROPA_TYPE AS PRD_TYPE,P.PRO_BUSI_TYPE AS PRD_BUSI_TYPE,P.PROPA_PIC AS IMG_URL,
+			P.PROPA_LVL, P.PROPA_ORDE, P.VAILD_DATE, P.ORGAN_LIMIT, P.EDITOR, P.EDITOR_TIME, 
+			P.AUDI_ID,W.FILE_ADDR AS PIC_PATH,Q.FILE_ADDR AS FILE_PATH,w.*
+		FROM ${schema.interPlat}.MZJ_PROPA_DATA P
+		LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  Q  ON P.PROPA_PIC=Q.FILE_ID
+		LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  W  ON P.FILE_ID=W.FILE_ID
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="and">
+				P.STATUS='1'
+			</isNotEmpty>
+			<isNotEmpty prepend="and">
+				P.VAILD_DATE >= DATE_FORMAT(NOW(),'%Y-%m-%d')
+			</isNotEmpty>
+			<include refid="queryDynSql" />
+		</dynamic> 
+		ORDER BY P.PROPA_ID
+
+		
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT P.* FROM ${schema.interPlat}.MZJ_PROPA_DATA P
+	</select> 
+</sqlMap>
+

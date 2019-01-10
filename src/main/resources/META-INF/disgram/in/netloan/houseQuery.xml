@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="netloan/houseQuery" excode="Room_APP01" desc="房号列表检索">
+	<snd>
+		<head>
+			<field name="tranType" type="C" desc="交易类型" required="true" default="0"/>
+			<field name="fileName" type="C" desc="文件名称" required="false"/>
+		</head>
+		<body>
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" required="true" />						
+			<field name="bar_code" length="32" type="C" desc="条码号" required="true"/>
+			<field name="house_code" length="20" type="C" desc="小区编号" required="true"/>
+			<field name="building_code" length="30" type="C" desc="楼栋编号" required="true"/>
+			<field name="current_floor" length="20" type="C" desc="楼层(实际层)"/>
+			<field name="search" length="80" type="C" desc="搜索条件"/>
+			<field name="pledge_county" length="6" type="C" desc="区域代码" required="true"/>
+			<field name="pledge_city" length="10" type="C" desc="城市代码" required="true"/>
+		</body>	
+	</snd>	
+	<rcv>
+		<head>
+			<field name="txnCod" type="C" desc="交易代码"/>
+			<field name="tranType" type="C" desc="交易类型"/>
+			<field name="fileName" type="C" desc="文件名称"/>
+			<field name="termDate" type="C" desc="交易日期"/>
+			<field name="termTime" type="C" desc="交易时间"/>
+		</head>
+		<body>
+			<field name="result" length="50" type="C" desc="结果"/>               
+			<field name="manager_code" length="32" type="C" desc="客户经理员工号" />               
+			<field name="reason_fail" length="100" type="C" desc="失败原因"/>              
+			<field name="list" type="E" desc="楼栋列表">             
+				<field name="room_no" length="20" type="C" desc="房号编号"/>
+				<field name="current_floor" length="20" type="C" desc="所在楼层"/>
+				<field name="room_name" length="80" type="C" desc="房号名称"/>
+				<field name="house_area" length="19" type="C" desc="面积"/>
+			</field> 
+		</body>
+	</rcv>
+</trans>

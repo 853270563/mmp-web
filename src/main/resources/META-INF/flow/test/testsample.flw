@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="testsample.flw" desc="测试交易">
+  <nodes>
+    <node id="b55152e9-f78a-48b7-b32d-7cc502741422" xPos="260" yPos="170" Width="180" Height="40">
+      <desc>简单任务</desc>
+      <type/>
+      <beanId>emptyOp2</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+        <data key="sample" expr="VALUE_1" desc="测试"/>
+      </data-map>
+    </node>
+    <node id="01be2a63-e891-4003-bad7-2343460274d9" xPos="250" yPos="320" Width="180" Height="40">
+      <desc>权限检查</desc>
+      <beanId>permissionCheckOp</beanId>
+      <data-map>
+        <data key="*permission" expr="view" desc="检查的权限"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="b55152e9-f78a-48b7-b32d-7cc502741422" to="01be2a63-e891-4003-bad7-2343460274d9"/>
+  </lines>
+</diagram>

@@ -1,0 +1,433 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+delete from PUB.TMP_NAME;
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP02001', 'Home ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03000', 'Account Services ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03001', 'Account Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03009', 'Account Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03010', 'Add /Delete Account ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03015', 'Suspend Account ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03023', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03024', 'Account Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03027', 'Monthly Statement ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03028', 'Activate /Cancel ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03031', 'Download ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03036', 'Request Previous Monthly Statement ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03039', 'Checkbook ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03040', 'Request Checkbook ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03045', 'Report loss of Checkbook ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03050', 'Report the loss of Passbook ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03055', 'Assets Certification Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP03060', 'Online Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04000', 'Transfer Remittance ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04001', 'Ordinary Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04011', 'Transfer within own A/C ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04021', 'Third-Party Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04031', 'Transfer to BOCM ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04041', 'Batch Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04061', 'Manage Your Payees ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04071', 'Transfer Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04100', 'QR Cord Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04101', 'Activate /Inactivate Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04111', 'QR Cord Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04121', 'Payment Collection via QR Code ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04131', 'Transaction History /Undo ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04200', 'Mobile No. Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04201', 'Activate /Inactivate Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04211', 'Mobile No. Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04221', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04300', 'Remittance ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04301', 'Remittance ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04311', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP04400', 'Appointment /Cycle Transfer Remittance Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05000', 'Payment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05001', 'Online Payment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05002', 'Payment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05005', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05010', 'Management Payee ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05022', 'Autopay ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05023', 'Request Autopay ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05030', 'Cancel /Modify Autopay ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05043', 'Donation ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05044', 'Donation ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05050', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP05200', 'Payee Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06000', 'Personal Financial Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06001', 'Wealthy & Investment Overview ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06002', 'Foreign Exchange ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06004', 'Foreign Exchange ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06010', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06015', 'Fixed Deposit ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06016', 'New order to Fixed Deposit ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06022', 'Withdraw Fixed Deposit ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06028', 'Enquiry and Amend renewal instructions ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06034', '風險承受能力評估');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06035', '風險承受能力評估');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06038', 'Insurance ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06039', 'Insurance Premium and Information ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06040', 'Insured management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06041', 'Enquiry 評估Grade ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06047', 'Travel Insurance Application ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06054', '購買Record Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06057', 'Download Terms and Conditions ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06058', 'Download Claim Form ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06059', 'Enquiry Service Statement ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06060', 'Calculator ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06066', 'Report the loss Fix Deposit Certification ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP06070', 'Financial 資訊& Tools ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07000', 'Credit Card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07002', 'Credit Card Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07007', 'Online Payment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07013', 'Promotion ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07015', 'Credit Card Account Information Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07021', 'Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07022', 'Payment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07028', 'Enquiry Credit Card Balance ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07029', 'Transaction History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07030', 'Enquiry Transation Record ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07032', 'Enquiry Monthly e-Statement ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07038', '額度Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07039', '辦理[Monthly Statement 分期Pay ]');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07040', '[Monthly Statement 分期Pay ]Plan ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07041', '主卡額度Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07042', '附屬卡額度Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07045', 'Enquiry Transation Record ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07050', '禮品換領');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07051', 'Select 禮品');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07053', '換領禮品Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07056', 'Online 購物安保Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07057', '一Times 性Password Online 保安Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP07061', '認證Record ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08000', 'Personal Loan ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08001', 'Personal Loan Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08002', 'Request ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08008', 'Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08015', 'Loan Detail Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08020', 'Loans Balance Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08023', 'Repayment Enquiry ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP08027', 'Enquiry of Collateral ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP09000', 'ATM card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP09001', 'Request ATM card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP09011', 'Replace ATM Card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP09016', 'Report loss of ATM Card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP09022', 'Suspend the ATM card ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10000', 'Appointment Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10009', 'Financial Products and Services Appointment ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10013', 'Appointment Service Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10400', 'Appointment /Cycle Transfer Remittance Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10500', 'Branch Appointment Queue ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP10600', 'Branch Remote ticket queue ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11000', 'Safety Center ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11001', 'Personal Information Management ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11007', 'iBanking Password Modify ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11010', 'SMS Reminder Services ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11021', 'Token Frozen ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11024', 'Transaction Limit Setting ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11028', 'SMS OTP Authentication ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11029', 'Close SMS OTP 認證版');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11035', 'Modify binding Mobile No for receiving SMS OTP ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11040', 'Suspension of iBanking ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11044', 'Questionnaire ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11045', 'Questionnaire ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP11048', 'Enquiry Questionnaire Records ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12000', 'Stock Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12001', 'Buy/Sell Order ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12002', 'IPO Subscription ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12004', 'IPO Subscription History ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12005', 'Streaming Stock Quote Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12019', 'Enquiry IPO Information and subscription ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12026', 'Securities A/C information ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12027', 'Fund Transfer ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12034', 'Request Streaming Stock Quote Service ');
+
+INSERT INTO PUB.TMP_NAME (R_ID, SRC_NAME)
+VALUES ('PP12038', 'Cancel Streaming Stock Quote Service ');
+
+
+
+</body>
+</html>

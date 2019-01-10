@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/client/qryHeadImg" desc="客户端查询头像">
+	<snd>
+		<field name="USER_ID" desc="用户ID" required="true" />
+	</snd>
+	<rcv>
+		<field name="IMG_BASE64" desc="base64图片" required="true" />
+	</rcv>
+</trans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="task">
+ <!-- 根据用户角色权限查询权限 -->
+    <select id="findAllUser" resultType="string" >
+        SELECT ID
+	      from ${schema.configPlat}.SYS_USER 
+	      where ERR_LGN_CNT=#{ERR_LGN_CNT}
+               
+    </select>
+    <update id="update">
+    
+    update ${schema.configPlat}.SYS_USER 
+    set ERR_LGN_CNT=0,PASSWORD=#{RESET_PASS_WORD} where ID=#{ID}
+    </update>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ChargeList"  ibatisStatement="CHARGE.queryChargeId" desc="资费">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="PRODUCT_ID" length="20" type="C" desc="资费产品编号" />	
+		<field name="CHARGE_ID" length="20" type="C" desc="资费编号" />	
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+ 					 <field name="CHARGE_ID" length="100" type="C" desc="资费编号" />
+ 					 <field name="CHARGE_NAME" length="100" type="C" desc="资费名称" />
+					<field name="CHARGE_COST" length="100" type="C" desc="资费标准" />
+					<field name="CHARGE_TERM" length="100" type="C" desc="资费备注" />
+					<field name="CHARGE_PRODUCT_ID" length="100" type="C" desc="资费产品编号" />
+					<field name="CHARGE_STATUS" length="100" type="C" desc="资费状态"   descName="CHARGE_STATUS_NAME" mapKey="CHARGE_STATUS"  />
+					<field name="CHARGE_TYPE" length="100" type="C" desc="资费类型"  descName="CHARGE_TYPE_NAME" mapKey="CHARGE_TYPE" />
+					<field name="CHARGE_OBJ" length="100" type="C" desc="资费对象" />
+					<field name="EXTEND1" length="100" type="C" desc="扩展字段1" />
+					<field name="EXTEND2" length="100" type="C" desc="扩展字段2" />
+					<field name="CHARGE_DESC" length="100" type="C" desc="资费描述" />
+					<field name="CREATE_DATE" length="100" type="C" desc="创建日期" />
+
+		</field-list>
+	</rcv>
+</trans>

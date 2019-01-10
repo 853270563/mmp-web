@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/process/waittingTask" desc="待我/已办审批">
+	<snd>
+		<field name="APPROVAL_STATE" desc="审批状态" required="true" comment="审批状态 0-待审批  1-已审批"/>
+			<field name="CUSTOMER_MANAGER_NAME" desc="客户经理姓名" />
+			<field name="PROCESS_TYPE" desc="申请类型" comment="0 - 拒单申请   1-停止申请"/>
+		<field name="NEXT_KEY" desc="起始标记" default="1" comment="" />
+    	<field name="PAGE_SIZE" desc="页记录数" default="5" comment="" />
+		
+	</snd>
+	<rcv>
+		<field name="TOTAL_NUM" desc="记录数"/>
+		<field name="NEXT_KEY" desc="下一页页码"  />
+		<field name="LIST" type="E" desc="代办/已办列表">
+			<field name="CUSTOMER_MANAGER_NAME" desc="客户经理姓名" required="true" />
+			<field name="APPLY_CAUSE" desc="申请事由" required="true" />
+			<field name="OTHER_REASONS" desc="其他说明" />
+			<field name="TASK_ID" desc="任务ID" />
+			<field name="PROCESS_TYPE" desc="申请类型" comment="0 - 拒单申请   1-停止申请"/>
+			<field name="WORK_NUMBER" desc="客户经理" required="true" />
+			<field name="APPLY_TIME" desc="申请时间" />
+			<field name="PROCESS_INST_ID" desc="流程ID" required="true" />
+			<field name="APPROVAL_STATE" desc="审批状态" required="true" comment="审批状态 0-待审批  1-已审批"/>
+			<field name="CUST_NAME" desc="客户姓名"/>
+			<field name="CUST_PHONE" desc="客户手机号码"/>
+		</field>
+	</rcv>
+</trans>

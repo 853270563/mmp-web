@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="banner">
+	<select id="queryBannerList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		select
+		T.BANNER_ID,T.BANNER_PIC,T.FILE_ID,T.BANNER_NAME,T.ORGAN_LIMIT,
+		T.BANNER_LVL,T.BANNER_ORDE,T.VAILD_DATE,T.EDITOR,T.EDITOR_TIME,
+		T.STATUS,T.DEL_FLAG,T.SUMMARY,O.FILE_TYPE AS
+		BANNER_PIC_TYPE,P.FILE_TYPE
+		,O.FILE_ADDR AS BANNER_PIC_ADDR
+		,P.FILE_ADDR
+		from ${schema.configPlat}.MZJ_BANNER_DATA T
+		LEFT JOIN
+		${schema.configPlat}.MZJ_FILES_DATA O ON
+		T.BANNER_PIC=O.FILE_ID
+		LEFT
+		JOIN ${schema.configPlat}.MZJ_FILES_DATA P ON
+		T.FILE_ID=P.FILE_ID WHERE
+		T.STATUS='1' AND T.EDITOR_TIME BETWEEN #{START_DATE} AND #{END_DATE}
+	</select>
+
+</mapper>

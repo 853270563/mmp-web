@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="timeOutTaskDay.flw" desc="更新超时天数">
+  <nodes>
+    <node id="8f5ecc9d-0f33-4d4c-a38c-5756b264be15" xPos="490" yPos="80" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="4ab71c8b-83c4-48ef-a08d-699a8041dc9d" xPos="490" yPos="190" Width="180" Height="40">
+      <desc>不分页已超时任务查询</desc>
+      <beanId>dbListQueryOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必输项检查"/>
+        <data key="*sqlId" expr="rushTask.qryTimeOut" desc="Mybatis SQL Statement"/>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+        <data key="IS_TIMEOUT" expr="1" desc="用途说明"/>
+      </data-map>
+    </node>
+    <node id="e85eb259-8b13-455c-be6a-a0e519bb3f6d" xPos="490" yPos="290" Width="180" Height="40">
+      <desc>更新天数</desc>
+      <beanId>handlerTaskOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="c0829677-475e-4da4-a21e-104fffa005f7" xPos="490" yPos="390" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="4ab71c8b-83c4-48ef-a08d-699a8041dc9d" to="e85eb259-8b13-455c-be6a-a0e519bb3f6d"/>
+    <line desc="" condition="" from="e85eb259-8b13-455c-be6a-a0e519bb3f6d" to="c0829677-475e-4da4-a21e-104fffa005f7"/>
+    <line desc="" condition="" from="8f5ecc9d-0f33-4d4c-a38c-5756b264be15" to="4ab71c8b-83c4-48ef-a08d-699a8041dc9d"/>
+  </lines>
+</diagram>

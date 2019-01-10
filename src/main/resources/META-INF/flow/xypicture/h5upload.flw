@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="h5upload.flw" desc="h5影像上传">
+  <nodes>
+    <node id="0a33ca86-b406-45aa-a309-8b18972413df" xPos="70" yPos="70" Width="180" Height="40">
+      <desc>请求参数检查</desc>
+      <beanId>requestCheckOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="e702fcc7-e80a-45dd-ac73-b983ec427d79" xPos="420" yPos="70" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="a3e7e19f-cf5d-4b15-a829-f1f4580c68c9" xPos="390" yPos="160" Width="180" Height="40">
+      <desc>上传到本地</desc>
+      <beanId>yxLocaluploadOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="1ef972ea-a778-4f3c-be8f-19e7fbe2294c" xPos="400" yPos="280" Width="180" Height="40">
+      <desc>影像上传</desc>
+      <beanId>netToolsXYuploadOp</beanId>
+      <data-map>
+        <data key="*required" expr="FILE_PATHS,BUSI_FILE_TYPE,TASK_ID" desc="必输项检查"/>
+        <data key="*sqlId" expr="xypicture.insert" desc="Mybatis SQL Statement"/>
+      </data-map>
+    </node>
+    <node id="dcc9fbc6-9a12-4b0f-babd-8c317a52d0b5" xPos="410" yPos="400" Width="180" Height="40">
+      <desc>响应报文过滤</desc>
+      <beanId>responsFilterOp</beanId>
+      <data-map>
+        <data key="*transCode" expr="${transCode}" desc="交易报文路径"/>
+      </data-map>
+    </node>
+    <node id="a84b238a-979c-42ac-b7e8-7a4ec92bd69a" xPos="430" yPos="530" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="0a33ca86-b406-45aa-a309-8b18972413df" to="e702fcc7-e80a-45dd-ac73-b983ec427d79"/>
+    <line desc="" condition="" from="e702fcc7-e80a-45dd-ac73-b983ec427d79" to="a3e7e19f-cf5d-4b15-a829-f1f4580c68c9"/>
+    <line desc="" condition="" from="a3e7e19f-cf5d-4b15-a829-f1f4580c68c9" to="1ef972ea-a778-4f3c-be8f-19e7fbe2294c"/>
+    <line desc="" condition="" from="1ef972ea-a778-4f3c-be8f-19e7fbe2294c" to="dcc9fbc6-9a12-4b0f-babd-8c317a52d0b5"/>
+    <line desc="" condition="" from="dcc9fbc6-9a12-4b0f-babd-8c317a52d0b5" to="a84b238a-979c-42ac-b7e8-7a4ec92bd69a"/>
+  </lines>
+</diagram>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TRAN_FROM">
+
+	<!-- 增加 -->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="TRANS_ID" type="pre" resultClass="string">
+			SELECT TO_CHAR(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_TRAN_FROM.NEXTVAL
+			FROM
+			DUAL
+		</selectKey>
+		INSERT INTO ${schema.interPlat}.TRAN_FROM
+		(
+		TRANS_ID,
+		TRAN_CODE,
+		TRAN_NAME,
+		CONTENT,
+		SIGN_ORGAN,
+		SIGN_USER,
+		SIGN_DEVI_TYPE,
+		SIGN_DEVI_NO,
+		SIGN_TIME,
+		SIGN_GPS,
+		TRANS_STATE,
+		FLOW_ID
+		)
+		VALUES
+		(
+		#TRANS_ID#,
+		#TRAN_CODE#,
+		#TRAN_NAME#,
+		#CONTENT:CLOB#,
+		#SIGN_ORGAN#,
+		#SIGN_USER#,
+		#SIGN_DEVI_TYPE#,
+		#SIGN_DEVI_NO#,
+		TO_DATE(#SIGN_TIME#,'yyyy-mm-dd HH24:MI:SS'),
+		#SIGN_GPS#,
+		#TRANS_STATE#,
+		#FLOW_ID#
+		)
+
+	</insert>
+
+	<!-- 查询缓存提交的交易记录 -->
+	<select id="queryTranFromByState1" parameterClass="map"
+		resultClass="java.util.HashMap">
+		select * from ${schema.interPlat}.TRAN_FROM t where t.TRANS_STATE='1'
+	</select>
+
+	<!-- update更新操作 -->
+	<update id="updateTranFromByState" parameterClass="map">
+		update
+		${schema.interPlat}.TRAN_FROM set TRANS_STATE=#TRANS_STATE# where TRANS_ID=#TRANS_ID#
+	</update>
+
+
+</sqlMap>
+
