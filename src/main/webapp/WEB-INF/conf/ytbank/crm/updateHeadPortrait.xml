@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="updateHeadPortrait" desc="修改头像" serviceId="00850000000074">
+    <!--请求报文 -->
+    <snd>
+        <field name="photo" length="20" type="C" desc="用户头像ID(CRM使用)" required="true"/>
+        <field name="headImg" length="20" type="C" desc="用户头像" required="true"/>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+    </snd>
+</trans>

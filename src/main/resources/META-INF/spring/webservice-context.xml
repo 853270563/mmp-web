@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:jaxws="http://cxf.apache.org/jaxws"  
+    xmlns:cxf="http://cxf.apache.org/core"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+    http://cxf.apache.org/jaxws   
+    http://cxf.apache.org/schemas/jaxws.xsd">  
+      
+    <import resource="classpath:META-INF/cxf/cxf.xml" />  
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />  
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />  
+         
+    <bean id="user" class="cn.com.yitong.modules.creditInvestigate.impl.AddUserImpl"/>  
+    <bean id="org" class="cn.com.yitong.modules.creditInvestigate.impl.AddOrgImpl"/>  
+    <bean id="pushMessage" class="cn.com.yitong.yantai.webservice.PushMessageImpl"/>  
+    <!-- <jaxws:endpoint id="addUser" implementor="#user" address="/OpUser" />  
+    <jaxws:endpoint id="addOrg" implementor="#org" address="/OpOrg" />   -->
+    <jaxws:server address="/OpUser" serviceClass="cn.com.yitong.modules.creditInvestigate.IAddUser">
+    	<jaxws:serviceBean><ref bean="user"/></jaxws:serviceBean>
+    </jaxws:server>
+    <jaxws:server address="/OpOrg" serviceClass="cn.com.yitong.modules.creditInvestigate.IAddOrg">
+    	<jaxws:serviceBean><ref bean="org"/></jaxws:serviceBean>
+    </jaxws:server>
+    <jaxws:server address="/pushMessage" serviceClass="cn.com.yitong.yantai.webservice.PushMessage">
+    	<jaxws:inInterceptors>
+   			 <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+ 		  </jaxws:inInterceptors>
+   		<jaxws:outInterceptors>
+    		<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
+  		 </jaxws:outInterceptors>
+    	<jaxws:serviceBean><ref bean="pushMessage"/></jaxws:serviceBean>
+    </jaxws:server>
+  
+</beans> 

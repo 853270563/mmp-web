@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MMP_USER_SYSTEM" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.market.jjk.model.UserSystem" >
+    <result column="MAP_ID" property="mapId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="SYST_CODE" property="systCode" jdbcType="VARCHAR" />
+    <result column="DEVI_TYPE" property="deviType" jdbcType="VARCHAR" />
+    <result column="DEVI_CODE" property="deviCode" jdbcType="VARCHAR" />
+    <result column="SYST_FLAG" property="systFlag" jdbcType="CHAR" />
+    <result column="START_DATE" property="startDate" jdbcType="DATE" />
+    <result column="END_DATE" property="endDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    MAP_ID, USER_ID, SYST_CODE, DEVI_TYPE, DEVI_CODE, SYST_FLAG, START_DATE, END_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MMP_USER_SYSTEM.Base_Column_List" />
+    from ${schema.interPlat}.USER_SYSTEM
+    <isParameterPresent >
+      <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="findPageByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+  	<include refid="public.pageBegin"/>
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MMP_USER_SYSTEM.Base_Column_List" />
+    from ${schema.interPlat}.USER_SYSTEM
+    <isParameterPresent >
+      <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+    <include refid="public.pageEnd"/>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+    select 
+    <include refid="MMP_USER_SYSTEM.Base_Column_List" />
+    from ${schema.interPlat}.USER_SYSTEM
+    where MAP_ID = #mapId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+    delete from ${schema.interPlat}.USER_SYSTEM
+    where MAP_ID = #mapId:VARCHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from ${schema.interPlat}.USER_SYSTEM
+    <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+  	<selectKey type="pre" keyProperty="mapId">
+  		select to_char(sysdate, 'YYYYMMDD') || ${schema.interPlat}.seq_user_system.nextval from dual;
+  	</selectKey>
+    insert into ${schema.interPlat}.USER_SYSTEM (MAP_ID, USER_ID, SYST_CODE, DEVI_TYPE, 
+      DEVI_CODE, SYST_FLAG, START_DATE, END_DATE)
+    values (#mapId:VARCHAR#, #userId:VARCHAR#, #systCode:VARCHAR#, #deviType:VARCHAR#, 
+      #deviCode:VARCHAR#, #systFlag:CHAR#, #startDate:DATE#, #endDate:DATE#)
+  </insert>
+  <insert id="insertSelective" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+  	<selectKey type="pre" keyProperty="mapId">
+  		select to_char(sysdate, 'YYYYMMDD') || ${schema.interPlat}.seq_user_system.nextval from dual;
+  	</selectKey>
+    insert into ${schema.interPlat}.USER_SYSTEM
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="mapId" >
+        MAP_ID
+      </isNotNull>
+      <isNotNull prepend="," property="userId" >
+        USER_ID
+      </isNotNull>
+      <isNotNull prepend="," property="systCode" >
+        SYST_CODE
+      </isNotNull>
+      <isNotNull prepend="," property="deviType" >
+        DEVI_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="deviCode" >
+        DEVI_CODE
+      </isNotNull>
+      <isNotNull prepend="," property="systFlag" >
+        SYST_FLAG
+      </isNotNull>
+      <isNotNull prepend="," property="startDate" >
+        START_DATE
+      </isNotNull>
+      <isNotNull prepend="," property="endDate" >
+        END_DATE
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="mapId" >
+        #mapId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userId" >
+        #userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="systCode" >
+        #systCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviType" >
+        #deviType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviCode" >
+        #deviCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="systFlag" >
+        #systFlag:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="startDate" >
+        #startDate:DATE#
+      </isNotNull>
+      <isNotNull prepend="," property="endDate" >
+        #endDate:DATE#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from ${schema.interPlat}.USER_SYSTEM
+    <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update ${schema.interPlat}.USER_SYSTEM
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.mapId" >
+        MAP_ID = #record.mapId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.userId" >
+        USER_ID = #record.userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.systCode" >
+        SYST_CODE = #record.systCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.deviType" >
+        DEVI_TYPE = #record.deviType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.deviCode" >
+        DEVI_CODE = #record.deviCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.systFlag" >
+        SYST_FLAG = #record.systFlag:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.startDate" >
+        START_DATE = #record.startDate:DATE#
+      </isNotNull>
+      <isNotNull prepend="," property="record.endDate" >
+        END_DATE = #record.endDate:DATE#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update ${schema.interPlat}.USER_SYSTEM
+    set MAP_ID = #record.mapId:VARCHAR#,
+      USER_ID = #record.userId:VARCHAR#,
+      SYST_CODE = #record.systCode:VARCHAR#,
+      DEVI_TYPE = #record.deviType:VARCHAR#,
+      DEVI_CODE = #record.deviCode:VARCHAR#,
+      SYST_FLAG = #record.systFlag:CHAR#,
+      START_DATE = #record.startDate:DATE#,
+      END_DATE = #record.endDate:DATE#
+    <isParameterPresent >
+      <include refid="MMP_USER_SYSTEM.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+    update ${schema.interPlat}.USER_SYSTEM
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="userId" >
+        USER_ID = #userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="systCode" >
+        SYST_CODE = #systCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviType" >
+        DEVI_TYPE = #deviType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviCode" >
+        DEVI_CODE = #deviCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="systFlag" >
+        SYST_FLAG = #systFlag:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="startDate" >
+        START_DATE = #startDate:DATE#
+      </isNotNull>
+      <isNotNull prepend="," property="endDate" >
+        END_DATE = #endDate:DATE#
+      </isNotNull>
+    </dynamic>
+    where MAP_ID = #mapId:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.UserSystem" >
+    update ${schema.interPlat}.USER_SYSTEM
+    set USER_ID = #userId:VARCHAR#,
+      SYST_CODE = #systCode:VARCHAR#,
+      DEVI_TYPE = #deviType:VARCHAR#,
+      DEVI_CODE = #deviCode:VARCHAR#,
+      SYST_FLAG = #systFlag:CHAR#,
+      START_DATE = #startDate:DATE#,
+      END_DATE = #endDate:DATE#
+    where MAP_ID = #mapId:VARCHAR#
+  </update>
+</sqlMap>

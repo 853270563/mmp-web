@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="querySysNotices" desc="全部信息" serviceId="00850000000005">
+    <!--请求报文 -->
+    <snd>
+
+        <field name="userId" length="20" type="C" desc="登录号（可不用）" required="true"/>
+        <field name="orgId" length="20" type="C" desc="机构号（可不用）" />
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="snId " length="20" type="C" desc="公告编号 " required="true"/>
+            <field name="snTitle" length="20" type="C" desc="标题" required="true"/>
+            <field name="snType" length="20" type="C" desc="类型" required="true"/>
+            <field name="snUserName" length="20" type="C" desc="发布人姓名" required="true"/>
+            <field name="snCreateDate" length="20" type="C" desc="创建时间"/>
+            <field name="snStatus" length="20" type="C" desc="发布状态" required="false"/>
+            <field name="snContent" length="20" type="C" desc="内容" required="false"/>
+            <field name="fileAdd" length="20" type="C" desc="附件ID" required="false"/>
+            <field name="snDate" length="20" type="C" desc="发布时间" required="false"/>
+            <field name="upFlag" length="20" type="C" desc="置顶标志(1置顶0不置顶)" required="false"/>
+        </field>
+    </rcv>
+</trans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="TodoInfoAdd" desc="金融日历客户意向删除" ibatisStatement="INVEST_INFO.delete,MOBILE_CUST_INFO.delete">
+	<!-- 请求报文 -->
+	<snd>
+		<field name="INVEST_INTE_ID" length="10" type="C" desc="投资意向ID" />
+		<field name="SYS_CUST_ID" length="20" type="C" desc="客户系统内ID" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

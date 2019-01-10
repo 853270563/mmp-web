@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="custMngLoaner" desc="客户管理">
+	<snd>
+		<field  name="cert_no"    length="9"   desc="身份证号 "/> 
+		<field  name="cust_name"    type="C"  length="1"  desc="客户姓名"/> 
+		<field  name="cust_type"  type="C"   length="2"   desc="客户类型"/>
+		<field  name="trans_type"  type="C"   length="12" default="0"  desc="0-查询，1-修改，2-新增" /> 
+		<field name="control_flag"  type="C"    desc="分页标非零0分页!0不分页" comment="trans_type为0时必输"/>
+		<field name="pageindex"  type="C"      desc="分页角码" comment="trans_type为0时必输"/>
+		<field name="pagesize"  type="C"      desc="分页大小" comment="trans_type为0时必输"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list  name="LIST"  type="E"   >    
+			<field name="cust_no" type="C" required="true"  default="20"    desc="客户号" />  
+			<field name="cust_name"  type="C" required="true"  default="20"    desc="客户姓名" />  
+			<field name="cert_no" type="C" required="true"  default="20"    desc="身份证号" />  
+			<field name="cust_type"  type="C" required="true"  default="20"    desc="客户类型" />
+			<field name="cust_mng"  type="C" required="true"  default="20"    desc="客户经理" />  
+			<field name="mng_org"  type="C" required="true"  default="20"    desc="管理机构" />
+		</field-list>   
+	</rcv>
+</trans>

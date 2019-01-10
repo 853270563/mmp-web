@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_SESSION" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.modules.session.model.AresSession" >
+    <result column="SESSION_ID" property="sessionId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="VISIT_TIME" property="visitTime" jdbcType="TIMESTAMP" />
+    <result column="INVALID_TIME" property="invalidTime" jdbcType="TIMESTAMP" />
+    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+    <result column="KEY" property="key" jdbcType="VARCHAR" />
+    <result column="EVENT_ID" property="eventId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="DEVICE_ID" property="deviceId" jdbcType="VARCHAR" />
+    <result column="SERVER_IP" property="serverIp" jdbcType="VARCHAR" />
+    <result column="AUTH_STATUS" property="authStatus" jdbcType="VARCHAR" />
+    <result column="DATA" property="data" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    SESSION_ID, CREATE_TIME, VISIT_TIME, INVALID_TIME, MSG_ID, KEY, EVENT_ID, USER_ID, 
+    DEVICE_ID, SERVER_IP, AUTH_STATUS, DATA, VERSION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="Base_Column_List" />
+    from ${schema.configPlat}.ARES_SESSION
+    <isParameterPresent >
+      <include refid="Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${schema.configPlat}.ARES_SESSION
+    where SESSION_ID = #sessionId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="string" >
+    delete from ${schema.configPlat}.ARES_SESSION
+    where SESSION_ID = #sessionId:VARCHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from ${schema.configPlat}.ARES_SESSION
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.modules.session.model.AresSession" >
+    insert into ${schema.configPlat}.ARES_SESSION (SESSION_ID, CREATE_TIME, VISIT_TIME, INVALID_TIME,
+      MSG_ID, KEY, EVENT_ID, USER_ID, DEVICE_ID, 
+      SERVER_IP, AUTH_STATUS, DATA, VERSION)
+    values (#sessionId:VARCHAR#, #createTime:TIMESTAMP#, #visitTime:TIMESTAMP#, #invalidTime:TIMESTAMP#, 
+      #msgId:VARCHAR#, #key:VARCHAR#, #eventId:VARCHAR#, #userId:VARCHAR#, #deviceId:VARCHAR#, 
+      #serverIp:VARCHAR#, #authStatus:VARCHAR#, #data:VARCHAR#, #version:DECIMAL#)
+  </insert>
+  <insert id="insertSelective" parameterClass="cn.com.yitong.modules.session.model.AresSession" >
+    insert into ${schema.configPlat}.ARES_SESSION
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="sessionId" >
+        SESSION_ID
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        CREATE_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="visitTime" >
+        VISIT_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="invalidTime" >
+        INVALID_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="msgId" >
+        MSG_ID
+      </isNotNull>
+      <isNotNull prepend="," property="key" >
+        KEY
+      </isNotNull>
+      <isNotNull prepend="," property="eventId" >
+        EVENT_ID
+      </isNotNull>
+      <isNotNull prepend="," property="userId" >
+        USER_ID
+      </isNotNull>
+      <isNotNull prepend="," property="deviceId" >
+        DEVICE_ID
+      </isNotNull>
+      <isNotNull prepend="," property="serverIp" >
+        SERVER_IP
+      </isNotNull>
+      <isNotNull prepend="," property="authStatus" >
+        AUTH_STATUS
+      </isNotNull>
+      <isNotNull prepend="," property="data" >
+        DATA
+      </isNotNull>
+      <isNotNull prepend="," property="version" >
+        VERSION
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="sessionId" >
+        #sessionId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="visitTime" >
+        #visitTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="invalidTime" >
+        #invalidTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="msgId" >
+        #msgId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="key" >
+        #key:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="eventId" >
+        #eventId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userId" >
+        #userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviceId" >
+        #deviceId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="serverIp" >
+        #serverIp:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="authStatus" >
+        #authStatus:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="data" >
+        #data:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="version" >
+        #version:DECIMAL#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from ${schema.configPlat}.ARES_SESSION
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update ${schema.configPlat}.ARES_SESSION
+    <dynamic prepend="set" >
+      VERSION = VERSION + 1,
+      <isNotNull prepend="," property="record.sessionId" >
+        SESSION_ID = #record.sessionId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createTime" >
+        CREATE_TIME = #record.createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.visitTime" >
+        VISIT_TIME = #record.visitTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.invalidTime" >
+        INVALID_TIME = #record.invalidTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.msgId" >
+        MSG_ID = #record.msgId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.key" >
+        KEY = #record.key:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.eventId" >
+        EVENT_ID = #record.eventId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.userId" >
+        USER_ID = #record.userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.deviceId" >
+        DEVICE_ID = #record.deviceId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.serverIp" >
+        SERVER_IP = #record.serverIp:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.authStatus" >
+        AUTH_STATUS = #record.authStatus:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.data" >
+        DATA = #record.data:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update ${schema.configPlat}.ARES_SESSION
+    set SESSION_ID = #record.sessionId:VARCHAR#,
+      CREATE_TIME = #record.createTime:TIMESTAMP#,
+      VISIT_TIME = #record.visitTime:TIMESTAMP#,
+      INVALID_TIME = #record.invalidTime:TIMESTAMP#,
+      MSG_ID = #record.msgId:VARCHAR#,
+      KEY = #record.key:VARCHAR#,
+      EVENT_ID = #record.eventId:VARCHAR#,
+      USER_ID = #record.userId:VARCHAR#,
+      DEVICE_ID = #record.deviceId:VARCHAR#,
+      SERVER_IP = #record.serverIp:VARCHAR#,
+      AUTH_STATUS = #record.authStatus:VARCHAR#,
+      DATA = #record.data:VARCHAR#,
+      VERSION = VERSION + 1
+    <isParameterPresent >
+      <include refid="Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.modules.session.model.AresSession" >
+    update ${schema.configPlat}.ARES_SESSION
+    <dynamic prepend="set" >
+      VERSION = VERSION + 1,
+      <isNotNull prepend="," property="createTime" >
+        CREATE_TIME = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="visitTime" >
+        VISIT_TIME = #visitTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="invalidTime" >
+        INVALID_TIME = #invalidTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="msgId" >
+        MSG_ID = #msgId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="key" >
+        KEY = #key:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="eventId" >
+        EVENT_ID = #eventId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userId" >
+        USER_ID = #userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deviceId" >
+        DEVICE_ID = #deviceId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="serverIp" >
+        SERVER_IP = #serverIp:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="authStatus" >
+        AUTH_STATUS = #authStatus:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="data" >
+        DATA = #data:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where SESSION_ID = #sessionId:VARCHAR#
+    <isNotNull property="version">
+      and VERSION = #version:DECIMAL#
+    </isNotNull>
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.modules.session.model.AresSession" >
+    update ${schema.configPlat}.ARES_SESSION
+    set CREATE_TIME = #createTime:TIMESTAMP#,
+      VISIT_TIME = #visitTime:TIMESTAMP#,
+      INVALID_TIME = #invalidTime:TIMESTAMP#,
+      MSG_ID = #msgId:VARCHAR#,
+      KEY = #key:VARCHAR#,
+      EVENT_ID = #eventId:VARCHAR#,
+      USER_ID = #userId:VARCHAR#,
+      DEVICE_ID = #deviceId:VARCHAR#,
+      SERVER_IP = #serverIp:VARCHAR#,
+      AUTH_STATUS = #authStatus:VARCHAR#,
+      DATA = #data:VARCHAR#,
+      VERSION = VERSION + 1
+    where SESSION_ID = #sessionId:VARCHAR#
+    <isNotNull property="version">
+      and VERSION = #version:DECIMAL#
+    </isNotNull>
+  </update>
+  <!-- 根据USER_ID与DEVICE_UUID更新ARES_SESSION的事件ID-->
+  <update id="updateAresSessionByUserIdAndDeviceUUID" parameterClass="map">
+  		update ${schema.configPlat}.ARES_SESSION 
+  		set EVENT_ID = #eventId# 
+  		where USER_ID = #userId# and DEVICE_ID = #deviceUuid#
+  </update>
+
+  <update id="updateEventId" parameterClass="map">
+    UPDATE ${schema.configPlat}.ARES_SESSION SET
+    EVENT_ID = #eventId#
+    WHERE SESSION_ID = #sessionId#
+  </update>
+
+  <select id="queryAccessCount" parameterClass="string" resultClass="int">
+    SELECT count(0) FROM ${schema.configPlat}.ARES_SESSION
+    WHERE EVENT_ID = #eventId#
+  </select>
+  
+  <!-- 登陆成功后把同一设备号其它有效SESSION置为无效 -->
+  <update id = "setSessionInvalidByDeviceId" parameterClass="map">
+  		update ${schema.configPlat}.ARES_SESSION 
+  		set INVALID_TIME = VISIT_TIME
+  		where DEVICE_ID = #deviceUuid#
+  </update>
+
+  <select id="querySessionInfoById" parameterClass="map" resultClass="java.util.HashMap">
+      SELECT * FROM ${schema.configPlat}.ARES_SESSION WHERE SESSION_ID = #SESSION_ID#
+  </select>
+
+</sqlMap>

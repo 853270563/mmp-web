@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Service>  
+  <Service_Header>    
+    <msg_interval>30</msg_interval>    
+    <msg_expiry>36000</msg_expiry>    
+    <msglog>1</msglog>    
+    <timeout>3000</timeout>    
+    <name>任务数量</name>    
+    <service_sn>1510097000009013119</service_sn>    
+    <service_id>00660000000000</service_id>    
+    <requester_id>0097</requester_id>    
+    <branch_id>866117311</branch_id>    
+    <channel_id>39</channel_id>    
+    <service_time>20160817155625</service_time>    
+    <version_id/>    
+    <service_response>      
+      <status>COMPLETE</status>      
+      <code>000000</code>      
+      <desc>交易执行成功</desc>      
+      <requester_code/>      
+      <requester_desc/>    
+    </service_response>    
+    <start_timestamp>2016-08-17 15:39:37.990</start_timestamp>    
+    <trace_msg>IBM.SERVICE.RES.OUTPUT-return reponse to requester</trace_msg>    
+    <end_timestamp>2016-08-17 15:39:38.137</end_timestamp>  
+  </Service_Header>  
+  <Service_Body>    
+    <ext_attributes>      
+      <INM-TELLER-ID>86601876    </INM-TELLER-ID>      
+      <INM-BRANCH-ID>866117311</INM-BRANCH-ID>      
+      <T_KEY_LABEL>X0CS0097</T_KEY_LABEL>      
+      <INNER_DataProcPara>0,1,0</INNER_DataProcPara>    
+    </ext_attributes>    
+    <request>      
+      <cert_no>341215199212011525</cert_no>      
+      <cust_name>菊花信</cust_name>      
+      <start_date></start_date>      
+      <end_date></end_date>      
+    </request>    
+    <MAC>F818B2FC9035A078</MAC>    
+    <response>
+      <prg_cnt>9</prg_cnt>       
+      <cust_mng>9</cust_mng>       
+      <loaned_mng>24</loaned_mng>       
+      <rsk_mng>6</rsk_mng>       
+    </response>  
+  </Service_Body>
+</Service>

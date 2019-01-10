@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ItemList" ibatisStatement="SYS_DICT.ItemClientSyn" desc="数据字典加载">
+	<!-- 请求报文 -->
+	<snd> 
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E">
+			<field name="ITEM_TYP" length="100" type="C" desc="类型" xpath="TYPE"/>
+			<field name="VALUE" length="100" type="C" desc="值" xpath="KEY"/>
+			<field name="LABEL" length="6" type="C" desc="文本" />		
+		</field-list> 
+	</rcv>
+</trans>

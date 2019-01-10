@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="query" desc="客户移交审批下客户详细信息">
+    <!--请求报文 -->
+    <snd>
+        <!--报文头 -->
+        <!--报文体 -->
+        <body>
+
+            <!--请求体 -->
+                <field name="custId" length="20" type="C" desc="客户id" required="false"/>
+                <!--分页-->
+                <field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+                    <field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+                    <field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+                    <field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+                </field-extend>
+        </body>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <!--请求体 -->
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="name" length="20" type="C" desc="客户类型" required="true"/>
+            <field name="cuAppUser" length="20" type="C" desc="申请人" required="true"/>
+        </field>
+    </rcv>
+</trans>

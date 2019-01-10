@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="creditBusiProgQuery" desc="客户经理名下信贷业务进度查询">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100002" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="CustomerName" client="CustomerName" type="C"   default=""    desc="客户姓名" />
+				<field name="UserID" client="UserID" type="C"   default=""    desc="客户姓名" />
+				<field name="CertID" client="CertID" type="C"   default=""    desc="证件号码" />  
+				<field name="BeginDate" client="BeginDate" type="C"   default=""    desc="开始时间" />  
+				<field name="EndDate" client="EndDate" type="C"   default=""    desc="结束时间" />  
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	 
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<head>
+   		    	<field-response name="service_response"  xpath="Service_Header/service_response" type="S" desc="解析响应报文头">
+   		 			<field name="status" client="status" type="C" length="19"  	desc="交易状态"  />
+					<field name="code"	client="code"   type="C" length="14"   required="true" 	desc="提供方响应码"   />
+					<field name="desc" 	client="desc" 	 type="C" length="200" required="true"  desc="提供方响应描述"  />
+   		   	 	</field-response>
+   			</head>
+   			<body>
+   			    <field-response name="response"  xpath="Service_Body/response"  type="S"  desc="解析响应报文体">
+					<field-list name="list"   type="E"  >
+						<field name="TaskSerialNo" client="TaskSerialNo" type="C"   default="40"    desc="任务流水号" />  
+						<field name="ApplySerialNo" client="ApplySerialNo" type="C"   default="80"    desc="业务流水号" />  
+						
+						<field name="BusinessName" client="BusinessName" type="C"  default="20"    desc="业务类型" />  
+						<field name="BusinessType" client="BusinessType" type="C"   default="20"    desc="业务类型代码" /> 
+						 
+						<field name="CustomerName" client="CustomerName" type="C"   default="100"    desc="客户姓名" />  
+						<field name="CertType" client="CertType" type="C"   default="20"    desc="证件类型代码" />  
+						
+						<field name="CertID" client="CertID" type="C"   default="20"    desc="证件号码" />  
+						<field name="CellPhone" client="CellPhone" type="C"   default="20"    desc="手机号" />
+						
+						<field name="BusinessSum" client="BusinessSum" type="C"   default="20"    desc="贷款金额" />
+						<field name="PhaseName" client="PhaseName" type="C" default="80"    desc="当前业务阶段" />
+						<field name="PhaseNo" client="PhaseNo" type="C"  default="32"    desc="阶段号" />
+						<field name="PhaseType" client="PhaseType" type="C"   default="18"    desc="阶段类型" />
+						<field name="InputUserName" client="InputUserName" type="C"  default="32"    desc="客户经理" />
+						<field name="InputOrgName" client="InputOrgName" type="C"  default="80"    desc="归属机构" />
+						
+					</field-list>
+				</field-response>
+			</body>
+		</rcv>
+</trans>

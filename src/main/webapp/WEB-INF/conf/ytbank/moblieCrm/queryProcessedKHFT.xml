@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryProcessedKHFT" ibatisStatement="" desc="客户访谈（到期预警已处理）">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+    <snd>
+        <!-- 客户信息  -->
+        <field  name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"  />
+        <!-- <field  name="pageIndex" length="30" type="C" desc="第几页"  />
+        <field  name="pageSize" length="30" type="C" desc="每一页大小"  />  -->
+        <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+        <field name="status" length="20" type="C" desc="状态" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+        <field name="SEQ" length="16" type="C" desc="流水号" />
+        <field name="TRANS_TYPE" length="4" type="C" desc="交易类型" /><!-- 0001：新增客户进件信息 -->
+        <field name="TRANS_CODE" length="4" type="C" desc="交易结果码" /><!-- 0000：表示交易成功 其它均为交易失败 -->
+        <field name="TRANS_DESC" length="128" type="C" desc="交易结果描述" />
+        <field name="TRANS_DATE" length="8" type="C" desc="响应日期" />
+        <field name="TRANS_TIME" length="6" type="C" desc="响应时间" />
+
+        <field-list name="item" type="E">
+            <field name="dueDate" length="120" type="C" desc="到期日" required="true"/>
+            <field name="warnName" length="20" type="C" desc="到期类型 " required="true"/>
+            <field name="remark" length="20" type="C" desc="提醒内容（备注）" required="true"/>
+            <field name="visitType" length="120" type="C" desc="访谈类型" required="true"/>
+            <field name="visitDate" length="20" type="C" desc="访谈时间" required="false"/>
+            <field name="visitDesc" length="120" type="C" desc="访谈内容" required="false"/>
+            <field name="visitChannel" length="20" type="C" desc="访谈方式" required="false"/>
+
+        </field-list>
+    </rcv>
+</trans>

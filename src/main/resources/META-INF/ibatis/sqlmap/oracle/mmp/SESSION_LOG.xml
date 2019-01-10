@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SESSION_LOG">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"><!-- 
+	<isNotNull prepend="AND" property="SESS_LOG_ID"><![CDATA[ SESS_LOG_ID = #SESS_LOG_ID# ]]></isNotNull>
+<isNotNull prepend="AND" property="USER_ID"><![CDATA[ USER_ID = #USER_ID# ]]></isNotNull>
+<isNotNull prepend="AND" property="DEVICE_ID"><![CDATA[ DEVICE_ID = #DEVICE_ID# ]]></isNotNull>
+<isNotNull prepend="AND" property="APP_START_DTIME"><![CDATA[ APP_START_DTIME = #APP_START_DTIME# ]]></isNotNull>
+<isNotNull prepend="AND" property="APP_STOP_DTIME"><![CDATA[ APP_STOP_DTIME = #APP_STOP_DTIME# ]]></isNotNull>
+<isNotNull prepend="AND" property="APP_ID"><![CDATA[ APP_ID = #APP_ID# ]]></isNotNull>
+<isNotNull prepend="AND" property="APP_VER_ID"><![CDATA[ APP_VER_ID = #APP_VER_ID# ]]></isNotNull>
+<isNotNull prepend="AND" property="POS_X"><![CDATA[ POS_X = #POS_X# ]]></isNotNull>
+<isNotNull prepend="AND" property="POS_Y"><![CDATA[ POS_Y = #POS_Y# ]]></isNotNull>
+	
+	--></sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.configPlat}.ARES_SESSION_LOG T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.SESS_LOG_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(0) CNT 
+			FROM ${schema.configPlat}.ARES_SESSION_LOG T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.configPlat}.ARES_SESSION_LOG
+		( SESS_LOG_ID,USER_ID,DEVICE_ID,APP_START_DTIME,APP_STOP_DTIME,APP_ID,APP_VER_ID,POS_X,POS_Y,DEVICE_MODEL,DEVICE_SYSTEM ,SESSION_ID)
+		VALUES ( #SESS_LOG_ID#,#USER_ID#,#DEVICE_ID#,#APP_START_DTIME#,#APP_STOP_DTIME#,#APP_ID#,#APP_VER_ID#,#POS_X#,#POS_Y#,#DEVICE_MODEL#,#DEVICE_SYSTEM#,#SESSION_ID#)
+	</insert>
+
+	<!-- 删除时存放删除表的信息 -->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.configPlat}.ARES_SESSION_LOG
+		select * from ${schema.configPlat}.ARES_SESSION_LOG where SESS_LOG_ID= #SESS_LOG_ID#
+	</insert>
+
+	<!-- 查詢P_WARM_TIPS是否有待審核的數據 -->
+	<select id="findOp" parameterClass="map" resultClass="java.util.HashMap">
+		select *
+		from ${schema.configPlat}.ARES_SESSION_LOG t1
+		INNER JOIN ${schema.configPlat}.AUDI_DETAIL t2 ON t1.AUDI_ID = t2.AUDI_ID
+		where t1.SESS_LOG_ID = #SESS_LOG_ID# and t2.AUDI_STAT ='3'
+	</select>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.SESS_LOG_ID) FROM ${schema.configPlat}.ARES_SESSION_LOG p
+			 WHERE P.SESS_LOG_ID=#SESS_LOG_ID#
+		]]>
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.configPlat}.ARES_SESSION_LOG ]]>
+		<dynamic prepend="set">
+		<isNotNull prepend="," property="USER_ID"><![CDATA[ USER_ID = #USER_ID# ]]></isNotNull>
+		<isNotNull prepend="," property="DEVICE_ID"><![CDATA[ DEVICE_ID = #DEVICE_ID# ]]></isNotNull>
+		<isNotNull prepend="," property="APP_START_DTIME"><![CDATA[ APP_START_DTIME = #APP_START_DTIME# ]]></isNotNull>
+		<isNotNull prepend="," property="APP_STOP_DTIME"><![CDATA[ APP_STOP_DTIME = #APP_STOP_DTIME# ]]></isNotNull>
+		<isNotNull prepend="," property="APP_ID"><![CDATA[ APP_ID = #APP_ID# ]]></isNotNull>
+		<isNotNull prepend="," property="APP_VER_ID"><![CDATA[ APP_VER_ID = #APP_VER_ID# ]]></isNotNull>
+		<isNotNull prepend="," property="POS_X"><![CDATA[ POS_X = #POS_X# ]]></isNotNull>
+		<isNotNull prepend="," property="POS_Y"><![CDATA[ POS_Y = #POS_Y# ]]></isNotNull>
+		
+			<!-- 現在審核ID -->
+		<isNotNull property="AUDI_ID" prepend=","><![CDATA[ AUDI_ID = #AUDI_ID# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where SESS_LOG_ID = #SESS_LOG_ID# ]]>
+	</update>
+
+
+    <update id="updateByUserId" parameterClass="map">
+        <![CDATA[ update ${schema.configPlat}.ARES_SESSION_LOG ]]>
+        <dynamic prepend="set">
+            VERSION = VERSION + 1
+        </dynamic>
+        <![CDATA[ where USER_ID = #USER_ID# ]]>
+    </update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.configPlat}.ARES_SESSION_LOG where SESS_LOG_ID = #SESS_LOG_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	
+	<select id="queryBySessionId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT
+			T.*
+		FROM  ${schema.configPlat}.ARES_SESSION_LOG T
+		WHERE
+			T.SESSION_ID = #SESSION_ID#
+		ORDER BY
+			T.APP_START_DTIME DESC
+	</select>
+
+	<!-- 根据session更新session状态 -->
+	<update id="updateSessionKickedStatus" parameterClass="map">
+		update ${schema.configPlat}.ARES_SESSION_LOG
+		<dynamic prepend="set">
+			VERSION = VERSION + 1, SESSION_STATUS = #sessStatus#
+		</dynamic>
+		 where SESSION_ID in
+			<iterate conjunction="," open="(" close=")">
+				#sessIds[]#
+			</iterate>
+	</update>
+</sqlMap>
+

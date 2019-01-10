@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryProcessedCust" desc="资金异动下的已处理客户" serviceId="00850000000047">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+        <field name="status" length="20" type="C" desc="状态" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="dueDate" length="120" type="C" desc="到期日" required="true"/>
+            <field name="warnName" length="20" type="C" desc="到期类型 " required="true"/>
+            <field name="remark" length="20" type="C" desc="提醒内容（备注）" required="true"/>
+            <field name="visitType" length="120" type="C" desc="访谈类型" required="true"/>
+            <field name="visitDate" length="20" type="C" desc="访谈时间" required="false"/>
+            <field name="visitDesc" length="120" type="C" desc="访谈内容" required="false"/>
+            <field name="visitChannel" length="20" type="C" desc="访谈方式" required="false"/>
+        </field>
+    </rcv>
+</trans>

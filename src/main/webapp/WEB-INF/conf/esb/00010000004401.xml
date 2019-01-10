@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="00010000004401" desc="尾箱余额查询">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00010000004401" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="11" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			<!--扩展域 -->
+			<field-extend name="ext_attributes" type="S" xpath="Service_Body/ext_attributes" desc="报文 体扩展数据">
+					<field name="INM-TELLER-ID" client="INM_TELLER_ID" type="C"  length="12"  default="" desc="柜员代号" />
+					<field name="INM-BRANCH-ID" client="INM_BRANCH_ID" type="C"  length="12"  default="" desc="网点代号" />
+			</field-extend>
+				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+					<field  name="TFT-INSTN-NO"  client="TFT_INSTN_NO"  type="C"    length="9"  required="true"  desc="查询机构号 " comment="若查询类型为2，请输入机构代码"  /> 
+					<field  name="TFT-BBS-QUERY-KIND"  client="TFT_BBS_QUERY_KIND"  type="C"  length="1" required="true"  desc="查询类型" comment="1：营业机构2：自助设备3：全部" /> 
+					<field  name="TFT-CURR-COD"  client="TFT_CURR_COD"  type="C"   length="2"  required="true"  desc="币别"  comment="详见数据字典-币别和币种"/>
+					<field  name="TFT-OPR-NO"  client="TFT_OPR_NO"  type="C"   length="12"  default=""  desc="操作员号"  comment="柜员代码" /> 
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<head>
+   		    	<field-response name="service_response"  xpath="Service_Header/service_response" type="S" desc="解析响应报文头">
+   		 			<field name="status" client="status" type="C" length="19"  	desc="交易状态"  />
+					<field name="code"	client="code"   type="C" length="14"   required="true" 	desc="提供方响应码"   />
+					<field name="desc" 	client="desc" 	 type="C" length="200" required="true"  desc="提供方响应描述"  />
+   		   	 	</field-response>
+   			</head>
+   			<body>
+   			    <field-response name="response"  xpath="Service_Body/response"  type="S"  desc="解析响应报文体">
+					<field  name="CM-SUM-FACE-BAL"  client="CM_SUM_FACE-BAL"  type="C"  length="15"  desc="合计金额"  />    
+					<field  name="CM-TOTAL-COUNT"  client="CM_TOTAL_COUNT"  type="C"  length="15"  desc="总条数"  />    
+					<field-list  name="CM-DOC-GRP"  client="CM_DOC_GRP"  type="E"   >    
+						<field  name="CM-OPUN-INIL-1_CHN"  client="CM_OPUN_INIL_1_CHN"  type="C"  length="15"  desc="营业单位中文名称"  />
+						<field  name="CM-OPR-NO"  client="CM_OPR_NO"  type="C"  length="12"  desc="操作员号"  />  
+						<field  name="CM-OPR-NAME"  client="CM_OPR_NAME"  type="C"  length="20"  desc="操作员姓名"  />            
+						<field  name="CM-CSHBX-YSD-BAL"  client="CM_CSHBX_YSD_BAL"  type="C"  length="15"  desc="昨日箱内库存现金"  />          
+						<field  name="CM-TD-IN-AMT"  client="CM_TD_IN_AMT"  type="C"  length="15"  desc="本日收入"  />   
+						<field  name="CM-TD-OUT-AMT"  client="CM-TD-OUT-AMT"  type="C"  length="15"  desc="本日付出"  />   
+						<field  name="CM-CSH-FROM-BSN-BOX"  client="CM_CSH_FROM_BSN_BOX"  type="C"  length="15"  desc="从业务库出库现金"  />   
+						<field  name="CM-CSH-INTO-BSN-BOX"  client="CM_CSH_INTO_BSN_BOX"  type="C"  length="15"  desc="交业务库出库现金"  />   
+						<field  name="CM-CSHBX-TD-BAL"  client="CM_CSHBX_TD_BAL"  type="C"  length="15"  desc="本日箱内库存现金"  />   
+						<field  name="CM-CURR-COD-CHN"  client="CM_CURR_COD_CHN"  type="C"  length="22"  desc="币别中文名称"  />   
+						<field  name="CM-ATM-TYP"  client="CM_ATM_TYP"  type="C"  length="8"  desc="设备编号"  />   
+						<field  name="CM-MSET-ADDR"  client="CM_MSET_ADDR"  type="C"  length="60"  desc="装机地址"  />   
+						<field  name="CM-ATM-FL-FLG"  client="CM_ATM_FL-FLG"  type="C"  length="1"  desc="附行/离行"  comment="0：附行1：离行" />   
+					</field-list>   
+					            
+				</field-response>
+			</body>
+		</rcv>
+</trans>

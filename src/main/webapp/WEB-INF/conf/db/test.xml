@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="test" desc="柜员签到">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080001000001" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="0018" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			<!--分页-->
+			<field-extend name="page_control" type="E" xpath="Service_Body/page_control" desc="分页">
+				<field name="control_flag" client="control_flag" type="C" required="true"  default="0" desc="分页标记非零0分页!0不分页" />
+				<field name="pageindex" client="pageindex" type="C" required="true"  default="1"    desc="分页角码" />
+				<field name="pagesize" client="pagesize" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>
+				<!--请求体 -->
+			<field-request name="request" type="E" xpath="Service_Body/request" desc="请求体">
+				<field name="customerName" client="customerName" type="C"  required="true"  default="{customerName}"    desc="客户名称" />  
+				<field name="businessName" client="businessName" type="C"  required="true"  default="{businessName}"    desc="业务品种" />  
+				<field name="user_id" client="user_id" type="C" required="true"  default=""    desc="用户名" />  
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="requester_code"     required="true" length="19"  xpath="Service_Header/service_response/requester_code"   type="C" default="" desc=""/>
+			<field name="requester_desc"     required="true" length="19"  xpath="Service_Header/service_response/requester_desc"   type="C" default="" desc=""/>
+			<field name="service_sn"     required="true" length="19"  xpath="Service_Header/service_sn"   type="C" default="8027777770209011171" desc=""/>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080001000001" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="0018" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="service_time"    required="true" length="2"   xpath="Service_Header/service_time"   type="C" default="39" desc="服务时间"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response"   type="T" default="01" desc="总数"/>
+				<!--请求体 -->
+			<field name="request" type="E" xpath="Service_Body/request" desc="请求体">
+				<field name="customerName" client="customerName" type="C"  default=""    desc="客户名称" />  
+				<field name="businessName" client="businessName" type="C" default=""    desc="业务品种" />  
+				<field name="user_id" client="user_id" type="C" required="true"  default=""    desc="用户名" />  
+			</field>
+   			     <field name="item"  xpath="Service_Body/response/list/item"  type="E"  desc="解析响应报文体">
+				     	<field name="serialNo" client="serialNo" type="C" required="true"  default="20"    desc="流程编号" />  
+				   		<field name="applySerialNo" client="applySerialNo" type="C" required="true"  default="20"    desc="业务编号" />  
+				   		<field name="objectType" client="objectType" type="C" required="true"  default="20"    desc="流程种类" />  
+						<field name="customerID" client="customerID" type="C" required="true"  default="20"    desc="客户编号" />  
+						<field name="customerName" client="customerName" type="C"  default="20"    desc="客户名称" />  
+						<field name="inputUserName" client="inputUserName" type="C"   default="20"    desc="客户经理" />  
+						<field name="inputOrgName" client="inputOrgName" type="C" required="true"  default="20"    desc="客户经理所在行" />  
+						<field name="businessName" client="businessName" type="C" required="true"  default="20"    desc="业务品种" />  
+						<field name="beginTime" client="beginTime" type="C" required="true"  default="20"    desc="开始时间" />  
+						<field name="endTime" client="endTime" type="C" required="true"  default="20"    desc="结束时间" />  
+						<field name="phaseName" client="phaseName" type="C" required="true"  default="20"    desc="当前阶段名称" />
+						<field name="updateDate" client="updateDate" type="C" required="true"  default="20"    desc="修改时间" />
+						<field name="flowNo" client="flowNo" type="C" required="true"  default="20"    desc="" />
+						<field name="phaseNo" client="phaseNo" type="C" required="true"  default="20"    desc="" />  
+				</field>
+		</rcv>
+</trans>

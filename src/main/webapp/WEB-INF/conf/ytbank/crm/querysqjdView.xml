@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="querysqjdView" desc="申请进度(待审核)" serviceId="00850000000049">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="客户id" required="false"/>
+        <field name="status" length="20" type="C" desc="状态 " required="false"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="excuUserName" length="120" type="C" desc="执行人" required="true"/>
+            <field name="excuDate" length="20" type="C" desc="执行时间" required="true"/>
+            <field name="excuStatusName" length="20" type="C" desc="状态" required="true"/>
+            <field name="excuDEsc" length="20" type="C" desc="意见/说明" required="true"/>
+        </field>
+    </rcv>
+</trans>

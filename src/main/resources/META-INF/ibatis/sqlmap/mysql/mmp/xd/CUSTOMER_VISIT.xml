@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CUSTOMER_VISIT">
+
+    <sql id="queryDynSql">
+        <isNotEmpty prepend="AND" property="CUSTOMER_VISIT_ID">
+            T.CUSTOMER_VISIT_ID = #CUSTOMER_VISIT_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="MOBILE">
+            T.MOBILE = #MOBILE#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ADDRESS">
+            T.ADDRESS = #ADDRESS#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="COMPANY">
+            T.COMPANY  = #COMPANY#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="POSITION">
+            T.POSITION = #POSITION#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="INTENTION">
+            T.INTENTION = #INTENTION#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="CONTACT">
+            T.CONTACT = #CONTACT#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="REMARK">
+            T.REMARK = #REMARK#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="USER_MANAGER_ID">
+            T.USER_MANAGER_ID = #USER_MANAGER_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="VISIT_TIME">
+            T.VISIT_TIME = #VISIT_TIME#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="CUSTOMER_NAME">
+            T.CUSTOMER_NAME LIKE '%'||#CUSTOMER_NAME#||'%'
+        </isNotEmpty>
+
+        <isNotEmpty prepend="AND" property="START_DATE">
+            <![CDATA[
+               T.VISIT_DATE >= #START_DATE#
+             ]]>
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="END_DATE">
+            <![CDATA[
+               T.VISIT_DATE <= #END_DATE#
+             ]]>
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="USER_MANAGER_NAME">
+            SU.USER_MANAGER_NAME = #USER_MANAGER_NAME#
+        </isNotEmpty>
+
+    </sql>
+
+    <sql id="coreSql">
+        SELECT T.* FROM ${schema.xd}.CUSTOMER_VISIT T
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+        <![CDATA[ ORDER BY T.CUSTOMER_VISIT_ID]]>
+    </sql>
+
+    <select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="public.pageBegin"/>
+        <include refid="coreSql"/>
+        <include refid="public.pageEnd"/>
+    </select>
+
+    <select id="pageCount" parameterClass="map" resultClass="int">
+        <![CDATA[
+			SELECT COUNT('') CNT
+			FROM ${schema.xd}.CUSTOMER_VISIT T
+		]]>
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+    </select>
+
+    <insert id="insert" parameterClass="map">
+        INSERT INTO ${schema.xd}.CUSTOMER_VISIT
+        (
+        CUSTOMER_VISIT_ID
+        <isNotEmpty prepend="," property="MOBILE">MOBILE</isNotEmpty>
+        <isNotEmpty prepend="," property="ADDRESS">ADDRESS</isNotEmpty>
+        <isNotEmpty prepend="," property="COMPANY">COMPANY</isNotEmpty>
+        <isNotEmpty prepend="," property="POSITION">POSITION</isNotEmpty>
+        <isNotEmpty prepend="," property="INTENTION">INTENTION</isNotEmpty>
+        <isNotEmpty prepend="," property="CONTACT">CONTACT</isNotEmpty>
+        <isNotEmpty prepend="," property="REMARK">REMARK</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_MANAGER_ID">USER_MANAGER_ID</isNotEmpty>
+        <isNotEmpty prepend="," property="VISIT_TIME">VISIT_TIME</isNotEmpty>
+        <isNotEmpty prepend="," property="VISIT_DATE">VISIT_DATE</isNotEmpty>
+        <isNotEmpty prepend="," property="CUSTOMER_NAME">CUSTOMER_NAME</isNotEmpty>
+        ) VALUES (
+        #CUSTOMER_VISIT_ID#
+        <isNotEmpty prepend="," property="MOBILE">#MOBILE#</isNotEmpty>
+        <isNotEmpty prepend="," property="ADDRESS">#ADDRESS#</isNotEmpty>
+        <isNotEmpty prepend="," property="COMPANY">#COMPANY#</isNotEmpty>
+        <isNotEmpty prepend="," property="POSITION">#POSITION#</isNotEmpty>
+        <isNotEmpty prepend="," property="INTENTION">#INTENTION#</isNotEmpty>
+        <isNotEmpty prepend="," property="CONTACT">#CONTACT#</isNotEmpty>
+        <isNotEmpty prepend="," property="REMARK">#REMARK#</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_MANAGER_ID">#USER_MANAGER_ID#</isNotEmpty>
+        <isNotEmpty prepend="," property="VISIT_TIME">#VISIT_TIME#</isNotEmpty>
+        <isNotEmpty prepend="," property="VISIT_DATE">#VISIT_DATE#</isNotEmpty>
+        <isNotEmpty prepend="," property="CUSTOMER_NAME">#CUSTOMER_NAME#</isNotEmpty>
+        )
+    </insert>
+
+    <update id="updateById" parameterClass="map">
+        <![CDATA[ update ${schema.xd}.CUSTOMER_VISIT ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="MOBILE">MOBILE = #MOBILE#</isNotNull>
+            <isNotNull prepend="," property="ADDRESS">ADDRESS = #ADDRESS#</isNotNull>
+            <isNotNull prepend="," property="COMPANY">COMPANY = #COMPANY#</isNotNull>
+            <isNotNull prepend="," property="POSITION">POSITION = #POSITION#</isNotNull>
+            <isNotNull prepend="," property="INTENTION">INTENTION = #INTENTION#</isNotNull>
+            <isNotNull prepend="," property="CONTACT">CONTACT = #CONTACT#</isNotNull>
+            <isNotNull prepend="," property="REMARK">REMARK = #REMARK#</isNotNull>
+            <isNotNull prepend="," property="USER_MANAGER_ID">USER_MANAGER_ID = #USER_MANAGER_ID#</isNotNull>
+            <isNotNull prepend="," property="VISIT_TIME">VISIT_TIME = #VISIT_TIME#</isNotNull>
+            <isNotNull prepend="," property="VISIT_DATE">VISIT_DATE = #VISIT_DATE#</isNotNull>
+            <isNotNull prepend="," property="CUSTOMER_NAME">CUSTOMER_NAME = #CUSTOMER_NAME#</isNotNull>
+        </dynamic>
+        <![CDATA[ where CUSTOMER_VISIT_ID = #CUSTOMER_VISIT_ID# ]]>
+    </update>
+
+    <delete id="delete" parameterClass="map">
+        <![CDATA[
+         delete from ${schema.xd}.CUSTOMER_VISIT where CUSTOMER_VISIT_ID = #CUSTOMER_VISIT_ID#
+        ]]>
+    </delete>
+
+    <select id="query" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="coreSql"/>
+    </select>
+
+    <select id="queryFull" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT
+          T.*,
+          SU.ID AS USER_MANAGER_ID, SU.NAME AS USER_MANAGER_NAME
+        FROM ${schema.xd}.CUSTOMER_VISIT T
+        LEFT JOIN ${schema.configPlat}.SYS_USER SU ON T.USER_MANAGER_ID = SU.ID
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+        <![CDATA[ ORDER BY T.CUSTOMER_VISIT_ID]]>
+    </select>
+
+    <select id="seq" resultClass="String">
+        select ${schema.interPlat}.nextval('SEQ_CUSTOMER_VISIT') from dual
+    </select>
+
+</sqlMap>
+

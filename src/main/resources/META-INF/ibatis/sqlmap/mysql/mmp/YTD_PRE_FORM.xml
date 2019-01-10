@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="YTD_PRE_FORM">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="FORM_STATUS">
+			T.FORM_STATUS = #FORM_STATUS#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="FORM_TYPE">
+			T.FORM_TYPE = #FORM_TYPE#
+		</isNotEmpty> 
+	</sql>
+	 
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.FORM_ID,T.FORM_NAME,T.FORM_CONTENT,T.FORM_STATUS,T.FORM_DATE,
+		T.FORM_TYPE AS BUSI_TYPE,O.LABEL AS BUSI_NAME 
+			FROM ${schema.interPlat}.YTD_PRE_FORM T 
+			LEFT JOIN ${schema.configPlat}.SYS_DICT O ON T.FORM_TYPE = O.VALUE
+			WHERE O.TYPE='formType' AND T.FORM_STATUS = #FORM_STATUS#
+			AND T.FORM_TYPE = #FORM_TYPE# limit 1
+	</select> 
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*,ROW_NUMBER() OVER(ORDER BY T.FORM_ID) AS RN 
+		FROM ${schema.interPlat}.YTD_PRE_FORM T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic> 
+	</sql>
+	
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<select id="queryFormTypeList" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.LABEL,T.VALUE FROM ${schema.configPlat}.SYS_DICT T WHERE T.TYPE=#TYPE#
+	</select> 
+	
+</sqlMap>
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryGSkhzbKpi" desc="零售客户查询" serviceId="00850000000002">
+    <!--请求报文 -->
+    <snd>
+                <field name="usrId" length="20" type="C" desc="用户id" required="true"/>
+                <field name="orgId" length="20" type="C" desc="机构id" required="false"/>
+                <field name="kpiType" length="20" type="C" desc="指标分类（1全行2公司3零售4小微5客户经理）" required="false"/>
+                <field name="remarks" length="20" type="C" desc="机构名" />
+                <field name="kpishow" length="20" type="C" desc="1 默认显示 2" />
+                <field name="pageindex" length="20" type="C" desc="分页角码" client="PAGE_NO" />
+                <field name="pagesize" length="20" type="C" desc="分页大小" client="PAGE_SIZE"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="KPI_DEFDATE" length="20" type="C" desc="指标编号"  required="true"/>
+            <field name="KPI_ICON" length="20" type="C" desc="指标名称" required="true"/>
+            <field name="KPI_ORDER_NO" length="20" type="C" desc="指标当前值" required="true"/>
+            <field name="KPI_VALUELD" length="20" type="N" desc="比上日（计算）" required="true"/>
+            <field name="ICON_RGB" length="20" type="N" desc="比上月（计算）" />
+            <field name="KPI_UNIT_NUM" length="20" type="N" desc="比年初（计算）" />
+            <field name="KPI_NAME" length="20" type="N" desc="比上月（计算）" />
+            <field name="KPI_DEFAULT" length="20" type="N" desc="比年初（计算）" />
+            <field name="KPI_VALUELY" length="20" type="N" desc="比上月（计算）" />
+            <field name="KPI_VALUE" length="20" type="N" desc="比年初（计算）" />
+            <field name="KPI_DEFUSER" length="20" type="N" desc="比上月（计算）" />
+            <field name="KPI_VALUELM" length="20" type="N" desc="比年初（计算）" />
+             <field name="KPI_NO" length="20" type="N" desc="比上月（计算）" />
+            <field name="KPI_TYPE" length="20" type="N" desc="比年初（计算）" />
+        </field>
+    </rcv>
+</trans>

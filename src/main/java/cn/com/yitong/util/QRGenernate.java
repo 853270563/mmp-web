@@ -33,11 +33,15 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  */
 public class QRGenernate {
 	
+	
+	
+	
 	 /**
 	    * 生成二维码图片
 	    * @param contents 字符串信息
 	    * @param width 大小
 	    * @param height
+	    * @param imgPath 生成存放路径
 	    */
 		public byte[] Encode(String contents, int width, int height) {
 			Hashtable<Object, Object> hints = new Hashtable<Object, Object>();
@@ -93,6 +97,7 @@ public class QRGenernate {
 	    * @param contents 字符串信息
 	    * @param width 大小
 	    * @param height
+	    * @param imgPath 生成存放路径
 	    */
 		public void Encode(String contents, int width, int height, OutputStream out) {
 			Hashtable<Object, Object> hints = new Hashtable<Object, Object>();
@@ -140,7 +145,7 @@ public class QRGenernate {
 	
 	/**
      * 解析二维码图片
-     * @param in
+     * @param imgPath
      * @return
      */
 	public String Decode(InputStream in) {

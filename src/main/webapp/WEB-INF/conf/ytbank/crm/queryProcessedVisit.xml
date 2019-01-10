@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryProcessedVisit" desc="客户关怀下的已处理客户" serviceId="00850000000044">
+    <!--请求报文 -->
+    <snd>
+        <field name="statusName" length="20" type="C" desc="状态" required="true"/>
+        <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+        <field name="UserId" length="20" type="C" desc="登录号" />
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="careType" length="120" type="C" desc="关怀类型(01 客户大事提醒,02 亲属生日,03 公司开业,04 结婚纪念日,05 客户生日)" required="true"/>
+            <field name="endate" length="20" type="C" desc="结束时间" required="true"/>
+            <field name="remark" length="20" type="C" desc="关怀内容（备注）" required="true"/>
+            <field name="visitType" length="120" type="C" desc="访谈类型" required="true"/>
+            <field name="visitChannelName" length="20" type="C" desc="访谈方式" required="true"/>
+            <field name="interviewDate" length="50" type="C" desc="访谈时间" required="true"/>
+            <field name="visitDesc" length="200" type="C" desc="访谈内容" required="false"/>
+        </field>
+    </rcv>
+</trans>

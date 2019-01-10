@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="P_PARAM_ANSY">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="APP_ID">
+			APP_ID = #APP_ID#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="COMD">
+			COMD = #COMD#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="STATUS">
+			STATUS = #STATUS#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="RID">
+			RID = #RID#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="CMD_ID">
+			CMD_ID = #CMD_ID#
+		</isNotEmpty> 
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		<![CDATA[  
+			SELECT 
+				p.*,ROW_NUMBER() OVER(ORDER BY RID) RN 
+			FROM ${schema.configPlat}.P_PARAM_ANSY P
+		]]>
+		<dynamic prepend="where">
+			<include refid="queryDynSql" />
+		</dynamic> 
+		<![CDATA[ ORDER BY RN ]]>
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select> 
+
+	<!-- 载入溫馨提示 -->
+	<select id="load" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	
+	<select id="seq" resultClass="string">
+      SELECT ${schema.interPlat}.nextval('SEQ_PUB') FROM DUAL
+	</select>
+	
+	<insert id="insert" parameterClass="map">
+		<![CDATA[
+			INSERT INTO ${schema.configPlat}.P_PARAM_ANSY
+				(
+				RID, 
+				COMD,
+				TOKEN,
+				OPT_DATE,
+				OPT_TIME,
+				STATUS
+				)
+			VALUES 
+				(
+					#RID#,
+					#COMD#,
+					#TOKEN#,
+					#OPT_DATE#,
+					#OPT_TIME#,
+					#STATUS#
+				)
+
+		]]>
+	</insert>
+	
+	<!-- 更新状态 -->
+	<update id="updateStatus" parameterClass="map">
+		<![CDATA[ 
+			UPDATE ${schema.configPlat}.P_PARAM_ANSY	SET STATUS = #STATUS# where RID = #RID#
+		]]>
+	</update> 
+	
+	<sql id="coreSqlLog">
+		<![CDATA[  
+			SELECT 
+				p.*,ROW_NUMBER() OVER(ORDER BY RID) RN 
+			FROM ${schema.configPlat}.P_PARAM_ANSY_LOG P
+		]]>
+		<dynamic prepend="where">
+			<include refid="queryDynSql" />
+		</dynamic> 
+		<![CDATA[ ORDER BY RN ]]>
+	</sql>
+	
+	<!-- 同步参数日志 -->
+	<select id="findLog" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSqlLog" />
+	</select>
+	
+	<insert id="insertAnsyLog" parameterClass="map">
+		<![CDATA[
+			INSERT INTO ${schema.configPlat}.P_PARAM_ANSY_LOG
+				(
+				RID,
+				APP_ID,
+				CMD_ID,
+				SER_IP,
+				SER_INFO,
+				STATUS,
+				OPT_DATE,
+				OPT_TIME
+				)
+			VALUES 
+				(
+				#RID#,
+				#APP_ID#,
+				#CMD_ID#,
+				#SER_IP#,
+				#SER_INFO#,
+				#STATUS#,
+				#OPT_DATE#,
+				#OPT_TIME#
+				)
+		]]>
+	</insert>
+	
+</sqlMap>
+

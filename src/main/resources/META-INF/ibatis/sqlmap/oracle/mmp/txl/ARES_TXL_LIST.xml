@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_TXL_LIST">
+
+	<!-- 查询所有机构列表 -->
+    <select id="queryAllOrgnList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        	T1.ID,
+        	T1.PARENT_ID,
+        	T1.NAME
+        FROM
+        	${schema.configPlat}.SYS_ORGAN T1
+        WHERE
+        	T1.DEL_FLAG = '0'
+    </select>
+    
+	<!-- 查询新增、修改、删除机构列表 -->
+    <select id="queryIudOrgnList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        	T1.ID,
+        	T1.PARENT_ID,
+        	T1.NAME,
+        	'I' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.SYS_ORGAN T1
+        WHERE
+        	T1.DEL_FLAG = '0' 
+        	AND <![CDATA[T1.CREATE_DATE > #synchroTime#]]>
+        UNION
+        SELECT
+        	T1.ID,
+        	T1.PARENT_ID,
+        	T1.NAME,
+        	'U' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.SYS_ORGAN T1
+        WHERE
+        	T1.DEL_FLAG = '0' 
+        	AND <![CDATA[T1.CREATE_DATE <= #synchroTime#]]>
+        	AND <![CDATA[T1.UPDATE_DATE > #synchroTime#]]>
+        UNION
+        SELECT
+        	T1.ID,
+        	T1.PARENT_ID,
+        	T1.NAME,
+        	'D' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.SYS_ORGAN T1
+        WHERE
+        	T1.DEL_FLAG = '1' 
+        	AND <![CDATA[T1.CREATE_DATE <= #synchroTime#]]>
+        	AND <![CDATA[T1.UPDATE_DATE > #synchroTime#]]>
+    </select>
+
+    <!-- 查询所有职员列表 -->
+    <select id="queryAllEmployeeList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        	T1.EMP_ID,
+        	T1.EMP_NAME,
+        	T1.MOBILE,
+        	T1.OFFICE_NO,
+        	T1.EMAIL,
+        	T1.ORGAN_ID
+        FROM
+        	${schema.configPlat}.TXL_EMPLOYEE T1
+        WHERE
+        	T1.DEL_FLAG = '0'
+    </select>
+    
+    <!-- 查询新增、修改、删除职员列表 -->
+    <select id="queryIudEmployeeList" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+        SELECT
+        	T1.EMP_ID,
+        	T1.EMP_NAME,
+        	T1.MOBILE,
+        	T1.OFFICE_NO,
+        	T1.EMAIL,
+        	T1.ORGAN_ID,
+        	'I' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.TXL_EMPLOYEE T1
+        WHERE
+        	T1.DEL_FLAG = '0'
+        	AND <![CDATA[T1.CREATE_DATE > #synchroTime#]]>
+        UNION
+        SELECT
+        	T1.EMP_ID,
+        	T1.EMP_NAME,
+        	T1.MOBILE,
+        	T1.OFFICE_NO,
+        	T1.EMAIL,
+        	T1.ORGAN_ID,
+        	'U' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.TXL_EMPLOYEE T1
+        WHERE
+        	T1.DEL_FLAG = '0'
+        	AND <![CDATA[T1.CREATE_DATE <= #synchroTime#]]>
+        	AND <![CDATA[T1.UPDATE_DATE > #synchroTime#]]>
+        UNION
+        SELECT
+        	T1.EMP_ID,
+        	T1.EMP_NAME,
+        	T1.MOBILE,
+        	T1.OFFICE_NO,
+        	T1.EMAIL,
+        	T1.ORGAN_ID,
+        	'D' AS IUD_FLAG
+        FROM
+        	${schema.configPlat}.TXL_EMPLOYEE T1
+        WHERE
+        	T1.DEL_FLAG = '1'
+        	AND <![CDATA[T1.CREATE_DATE <= #synchroTime#]]>
+        	AND <![CDATA[T1.UPDATE_DATE > #synchroTime#]]>
+    </select>
+    
+    <!-- 查询职员所有群组列表 -->
+    <select id="queryGroupListByLoginName" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT
+	   		T.EMP_ID,
+	       	T.GROUP_ID,
+	       	T.GROUP_NAME,
+	       	T.GROUP_TYPE
+		FROM
+			(SELECT
+	    		T1.EMP_ID,
+	        	T2.GROUP_ID,
+	        	T2.GROUP_NAME,
+	        	T2.GROUP_TYPE,
+	        	T2.OWNER_BY,
+	        	T2.DEL_FLAG
+	        FROM
+	        	${schema.configPlat}.TXL_EMPLOYEE_GROUP T1
+	        	LEFT JOIN ${schema.configPlat}.TXL_GROUP T2
+	        	ON T1.GROUP_ID = T2.GROUP_ID) T
+        WHERE
+        	T.DEL_FLAG = '0'
+        	AND T.OWNER_BY = #loginName#
+    </select>
+    
+    <select id="queryAllEmptyGroup" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+    	select
+ 			T.GROUP_ID,
+	       	T.GROUP_NAME,
+	       	T.GROUP_TYPE
+	    from
+	    	${schema.configPlat}.TXL_GROUP T
+	    where
+	    	T.DEL_FLAG = '0'
+        	AND T.OWNER_BY = #loginName#
+    </select>
+    
+    <!-- 查询职员增加，修改群组列表 -->
+    <select id="queryIudGroupListByLoginName" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT
+		  T.EMP_ID,
+		  T.GROUP_ID,
+		  T.GROUP_NAME,
+		  T.GROUP_TYPE,
+		  T.IUD_FLAG
+		FROM
+		  (SELECT T1.EMP_ID,
+		    T2.GROUP_ID,
+		    T2.GROUP_NAME,
+		    T2.GROUP_TYPE,
+		    T2.IUD_FLAG
+		  FROM ${schema.configPlat}.TXL_EMPLOYEE_GROUP T1
+		  LEFT JOIN
+		    (SELECT T3.GROUP_ID,
+		      T3.GROUP_NAME,
+		      T3.GROUP_TYPE,
+		      'I' AS IUD_FLAG
+		    FROM ${schema.configPlat}.TXL_GROUP T3
+		    WHERE T3.DEL_FLAG = '0'
+		    AND T3.OWNER_BY   = #loginName#
+		    AND <![CDATA[T3.CREATE_DATE > #synchroTime# ]]>
+		    UNION
+		    SELECT T3.GROUP_ID,
+		      T3.GROUP_NAME,
+		      T3.GROUP_TYPE,
+		      'U' AS IUD_FLAG
+		    FROM ${schema.configPlat}.TXL_GROUP T3
+		    WHERE T3.DEL_FLAG = '0'
+		    AND T3.OWNER_BY   = #loginName#
+		    AND <![CDATA[T3.CREATE_DATE <= #synchroTime# ]]>
+		    AND <![CDATA[T3.UPDATE_DATE > #synchroTime# ]]>
+		    ) T2
+		  ON T1.GROUP_ID = T2.GROUP_ID
+		  ) T
+		WHERE T.GROUP_ID IS NOT NULL
+    </select>
+    
+    <select id="queryIudEmptyGroup" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		SELECT T1.GROUP_ID,
+		  T1.GROUP_NAME,
+		  T1.GROUP_TYPE,
+		  'I' AS IUD_FLAG
+		FROM ${schema.configPlat}.TXL_GROUP T1
+		WHERE T1.DEL_FLAG = '0'
+		AND T1.OWNER_BY   = #loginName#
+		AND <![CDATA[T1.CREATE_DATE > #synchroTime# ]]>
+		UNION
+		SELECT T1.GROUP_ID,
+		  T1.GROUP_NAME,
+		  T1.GROUP_TYPE,
+		  'U' AS IUD_FLAG
+		FROM ${schema.configPlat}.TXL_GROUP T1
+		WHERE T1.DEL_FLAG = '0'
+		AND T1.OWNER_BY   = #loginName#
+		AND <![CDATA[T1.CREATE_DATE <= #synchroTime# ]]>
+		AND <![CDATA[T1.UPDATE_DATE > #synchroTime# ]]>
+    </select>
+    
+    <select id="queryDelGroupListByLoginName" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	    SELECT T.GROUP_ID
+	    FROM ${schema.configPlat}.TXL_GROUP T
+	    WHERE T.DEL_FLAG = '1'
+	    AND T.OWNER_BY   = #loginName#
+	    AND <![CDATA[T.CREATE_DATE <= #synchroTime# ]]>
+	    AND <![CDATA[T.UPDATE_DATE > #synchroTime# ]]>
+    </select>
+    
+    <insert id="insertGroup" parameterClass="java.util.Map">
+        insert into 
+        ${schema.configPlat}.TXL_GROUP (
+	        GROUP_ID,CREATE_BY,CREATE_DATE,UPDATE_BY,UPDATE_DATE,
+	        REMARKS,GROUP_NAME,GROUP_TYPE,OWNER_BY,DEL_FLAG
+        ) values (
+        	#GROUP_ID#,#CREATE_BY#,#CREATE_DATE#,#UPDATE_BY#,#UPDATE_DATE#,
+        	#REMARKS#,#GROUP_NAME#,#GROUP_TYPE#,#OWNER_BY#,#DEL_FLAG#
+        )
+    </insert>
+    
+    <update id="updateGroup" parameterClass="java.util.Map">
+        update 
+        	${schema.configPlat}.TXL_GROUP
+        <dynamic prepend="set">
+            <isNotEmpty property="CREATE_BY" prepend="," removeFirstPrepend="true">CREATE_BY=#CREATE_BY#</isNotEmpty>
+            <isNotEmpty property="CREATE_DATE" prepend="," removeFirstPrepend="true">CREATE_DATE=#CREATE_DATE#</isNotEmpty>
+            <isNotEmpty property="UPDATE_BY" prepend="," removeFirstPrepend="true">UPDATE_BY=#UPDATE_BY#</isNotEmpty>
+            <isNotEmpty property="UPDATE_DATE" prepend="," removeFirstPrepend="true">UPDATE_DATE=#UPDATE_DATE#</isNotEmpty>
+            <isNotEmpty property="REMARKS" prepend="," removeFirstPrepend="true">REMARKS=#REMARKS#</isNotEmpty>
+            <isNotEmpty property="GROUP_NAME" prepend="," removeFirstPrepend="true">GROUP_NAME=#GROUP_NAME#</isNotEmpty>
+            <isNotEmpty property="GROUP_TYPE" prepend="," removeFirstPrepend="true">GROUP_TYPE=#GROUP_TYPE#</isNotEmpty>
+            <isNotEmpty property="OWNER_BY" prepend="," removeFirstPrepend="true">OWNER_BY=#OWNER_BY#</isNotEmpty>
+            <isNotEmpty property="DEL_FLAG" prepend="," removeFirstPrepend="true">DEL_FLAG=#DEL_FLAG#</isNotEmpty>
+       	</dynamic>
+        where
+        	GROUP_ID = #GROUP_ID#
+    </update>
+    
+    <insert id="insertGroupEmployees" parameterClass="java.util.Map">
+    	insert into
+    	${schema.configPlat}.TXL_EMPLOYEE_GROUP (
+    		EMP_ID,GROUP_ID
+    	) values (
+    		#EMP_ID#,#GROUP_ID#
+    	)
+    </insert>
+    
+    <delete id="deleteGroupEmployees" parameterClass="java.util.Map">
+    	delete from
+    		${schema.configPlat}.TXL_EMPLOYEE_GROUP
+		<dynamic prepend="where">
+			GROUP_ID = #GROUP_ID#
+			<isNotEmpty property="EMP_ID">and EMP_ID = #EMP_ID#</isNotEmpty>
+		</dynamic>
+    </delete>
+</sqlMap>
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="bussDocument" ibatisStatement="" desc="业务文档信息">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!-- 客户信息  -->
+		 <field  name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"  />
+		<!-- <field  name="PAGE_NO" length="30" type="C" desc="第几页"  />
+		<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小"  />  -->
+		<field  name="applySerialNo" length="10" type="C" desc="业务编号 "/>
+		<field  name="serialNo" length="10" type="C" desc="任务编号 "/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		 <!-- 代办记录 -->
+        <field-list name="item" type="E">
+         		 <field name="docTitle" client="docTitle" type="C"   />  
+				<field name="docType" client="docType" type="C"  />  
+				<field name="docDate" client="docDate" type="C" />  
+				<field name="userName" client="userName" type="C" />  
+				<field name="orgName" client="orgName" type="C"  />  
+				<field name="inputTime" client="inputTime" type="C" />  
+				<field name="updateTime" client="updateTime" type="C" required="true"  default="20"   />
+				<field name="fullPath" client="fullPath" type="C"  />
+				<field name="docNo" client="docNo" type="C"  />
+        </field-list>
+	</rcv>
+</trans>
+	

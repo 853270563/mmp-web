@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertPersonKHFT" desc="客户访谈保存（到期预警未处理）" serviceId="00850000000046">
+    <!--请求报文 -->
+    <snd>
+        <field name="VISIT_DATE" length="20" type="C" desc="访谈时间" required="true"/>
+        <field name="VISIT_DESC" length="120" type="C" desc="访谈内容" required="true"/>
+        <field name="visitChannel" length="20" type="C" desc="访谈方式" required="true"/>
+        <field name="visitType" length="20" type="C" desc="访谈类型"/>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+        <field name="busiId" length="20" type="C" desc="附件id" />
+    </snd>
+</trans>

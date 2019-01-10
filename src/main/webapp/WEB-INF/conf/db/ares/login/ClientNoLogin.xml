@@ -4,8 +4,6 @@
 	<snd>
 	    <field name="deviceId" length="32" type="C" desc="设备标识" />
 	    <field name="appCode" length="32" type="C" desc="应用标识"/>
-		<field name="reuse" length="1" type="C" desc="是否复用已经存在的token：0-不复用，1-复用" />
-		<field name="token" length="32" type="C" desc="复用token"/>
 	</snd>
 	<!-- 响应报文 -->
 	<rcv>
@@ -16,6 +14,5 @@
 		<field name="skey" length="32" type="C" desc="密钥" />
 		<field name="token" length="32" type="C" desc="会话标识" />
 		<field name="UNIX_TIME" length="32" type="C" desc="服务器时间戳" />
-		<field name="reused" length="1" type="C" desc="是否能复用已经存在的token：0-不复用，1-复用" />
 	</rcv>
 </trans>

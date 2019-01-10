@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryAddPersonCust" desc="查询新增客户（在单个群下）" serviceId="00850000000064">
+    <!--请求报文 -->
+    <snd>
+        <field name="cgName" length="20" type="C" desc="客户群名称" required="true"/>
+        <field name="cgId" length="20" type="C" desc="客户群ID " required="true"/>
+        <field name="custName" length="20" type="C" desc="客户姓名 " required="true"/>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+        <field name="careType" length="20" type="C" desc="关注客户" required="true"/>
+        <field name="custLvl" length="20" type="C" desc="客户等级" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+            <field name="custLvl" length="20" type="C" desc="客户等级" required="true"/>
+        </field>
+    </rcv>
+</trans>

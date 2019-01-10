@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="querykhgz" desc="客户关注" serviceId="00850000000058">
+    <!--请求报文 -->
+    <snd>
+        <field name="custName" length="20" type="C" desc="客户名称" required="false"/>
+        <field name="careType" length="20" type="C" desc="关注类型" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名 " required="true"/>
+            <field name="currGradeName" length="20" type="C" desc="客户等级"  required="true"/>
+            <field name="careType" length="20" type="C" desc="关注类型(1关注客户2观察客户)" required="true" />
+            <field name="careId" length="20" type="C" desc="ID "  required="true"/>
+        </field>
+    </rcv>
+</trans>

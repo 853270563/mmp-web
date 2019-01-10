@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="PeProdInfo" ibatisStatement="MHJ_WMS_PEPRODINFO.pageQuery" desc="基金产品">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="PRODNAME" length="255" type="C" desc="基金产品名称"  />
+		<field name="FUNDTYPE" length="6" type="C" desc="基金产品类型" />
+		<field name="CORPNAME" length="200" type="C" desc="基金公司" />
+		<field name="CORPCODE" length="20" type="C" desc="基金公司code" />
+		<field name="NETVALUE" length="20" type="C" desc="当前净值区间[{n}-{n+m}]" />
+		<field name="ONEMONTH" length="20" type="C" desc="最近一月回报率区间[{n}-{n+m}]" />
+		<field name="THREEMONTH" length="20" type="C" desc="最近一季回报率区间[{n}-{n+m}]" />
+		<field name="SIXMONTH" length="20" type="C" desc="最近半年回报率区间[{n}-{n+m}]" />
+		<field name="SUMCUTAMT" length="20" type="C" desc="累计分红区间[{n}-{n+m}]" />
+		<!-- 排序字段 -->
+		<field name="NETVALUE_ORDER" length="1" type="C" desc="净值排序：0：升(asc) 1：降(desc)" />
+		<field name="INCREASE_DAY_ORDER" length="1" type="C" desc="日涨幅排序：0：升(asc) 1：降(desc)" />
+		<field name="ONEMONTH_NUM" length="1" type="C" desc="近一月1:10% 3:30% 5:50% 无限传空值" />
+		<field name="SIXMONTH_NUM" length="1" type="C" desc="近六个月1:10% 3:30% 5:50% 无限传空值" />
+		<!-- 分页字段 -->
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<field name="PAGE_SIZE" length="6" type="C" desc="页记录数" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!-- 下次查询的起始记录号，为空表示没有下页 -->
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+		    <field name="PRODUCT_ID" length="20" type="C" desc="产品编号"  />
+		     <field name="FUNDTYPE" length="20" type="C" desc="基金类型"  />
+			<field name="PRODNAME" length="255" type="C" desc="基金名称"  />
+			<field name="FUNDCODE" length="20" type="C" desc="基金代码"  />
+			<field name="PRICEDATE" length="200" type="C" desc="净值日期" />
+			<field name="NETVALUE" length="6" type="C" desc="单位净值" />
+			<field name="RLSSTATUS" length="6" type="C" desc="基金状态" />
+			<field name="INCREASE_DAY" length="6" type="C" desc="涨跌幅"/>
+			<field name="SUMCUTAMT" length="20" type="C" desc="累计分红" />
+			<field name="CORPNAME" length="200" type="C" desc="基金管理人" />
+			<field name="PRODUCT_TYPE" length="6" type="c" desc="基金类型" />
+			<field name="TOTALVALUE" length="20" type="C" desc="累计净值"  />
+			<field name="RISKTYPE" length="20" type="C" desc="风险等级" />
+			<field name="ONEMONTH" length="20" type="C" desc="最近一月"/>
+			<field name="THREEMONTH" length="20" type="C" desc="最近三月"  />
+			<field name="SIXMONTH" length="20" type="C" desc="最近六月"  />
+			<field name="ONEYEAR" length="20" type="C" desc="最近一年" />
+			<field name="TWOYEAR" length="20" type="C" desc="最近二年"  />
+			<field name="THREEYEAR" length="20" type="C" desc="最近三年"  />
+		</field-list>
+	</rcv>
+</trans>

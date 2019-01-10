@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryTaskwork" ibatisStatement="" desc="工作任务(客户经理)">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+    <snd>
+        <!-- 客户信息  -->
+        <field  name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"  />
+        <!-- <field  name="pageIndex" length="30" type="C" desc="第几页"  />
+        <field  name="pageSize" length="30" type="C" desc="每一页大小"  />  -->
+        <field name="beginDate" length="20" type="C" desc="任务开始时间" required="false"/>
+        <field name="endDate" length="20" type="C" desc="任务结束时间" required="false"/>
+        <field name="workType" length="20" type="C" desc="任务类型" required="false"/>
+        <field name="userId" length="50" type="C" desc="登录号" required="true"/>
+
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+        <field name="SEQ" length="16" type="C" desc="流水号" />
+        <field name="TRANS_TYPE" length="4" type="C" desc="交易类型" /><!-- 0001：新增客户进件信息 -->
+        <field name="TRANS_CODE" length="4" type="C" desc="交易结果码" /><!-- 0000：表示交易成功 其它均为交易失败 -->
+        <field name="TRANS_DESC" length="128" type="C" desc="交易结果描述" />
+        <field name="TRANS_DATE" length="8" type="C" desc="响应日期" />
+        <field name="TRANS_TIME" length="6" type="C" desc="响应时间" />
+
+        <field-list name="item" type="E">
+            <field name="twTitle " length="400" type="C" desc="任务标题 " />
+            <field name="twSetMan" length="20" type="C" desc="下发人" />
+            <field name="twEndDate" length="20" type="C" desc="任务结束时间" />
+            <field name="twStatus" length="20" type="C" desc="任务状态" />
+            <field name="twId" length="20" type="N" desc="任务序号"/>
+        </field-list>
+    </rcv>
+</trans>

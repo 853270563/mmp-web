@@ -10,6 +10,7 @@
         <property name="locations">
         	<list>
             	<value>classpath:META-INF/res/ares.properties</value>
+				<value>classpath:META-INF/res/application.properties</value>
         	</list>
         </property>
     </bean>
@@ -17,7 +18,7 @@
 	<bean id="springContextUtils" class="cn.com.yitong.common.utils.SpringContextUtils"></bean>
     
     <!-- 自动加载类 -->
-    <context:component-scan base-package="cn.com.yitong" />
+    <context:component-scan base-package="com.yitong,cn.com.yitong" />
 
     <!-- 异常统一处理 -->
     <!-- 注解优化处理 -->

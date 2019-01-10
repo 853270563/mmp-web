@@ -2,43 +2,47 @@
 <trans name="ClientLogin" desc="用户登录检查">
 	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
 	<snd>
-		<field name="USER_ID" length="20" required="true" type="C" desc="登录标识"/>
-		<field name="USER_PSW" length="32" type="C" required="true" desc="登录密码"/>
-		<field name="IMG_CODE" length="32" type="C" desc="图形验证码" />
-		<field name="APP_ID" length="20" required="true" type="C" desc="应用编号"/>
-		<field name="CLI_DEVICE_NO" length="64" required="true" type="C" desc="设备标识"/>
-		<field name="CLI_DEVICE_INFO" length="256" type="C" desc="设备信息"/><!--格式为： 设备名称等 -->
-		<field name="GPS" length="64" required="true" type="C" desc="gps定位信息"/><!--格式为： (经度,纬度);城市 -->
-		<field name="CLI_TYP" length="20" type="C" desc="客户端平台" mapKey="CLI_TYP"/><!-- 客户端平台：IOS，Android -->
-		<field name="CLI_VERSION" length="20" type="C" desc="客户端平台版本" /><!-- 客户端平台版本：IOS 7.0，Android 4.3-->
-		<field name="FORCE_LOGIN_FLAG" length="1" type="C" desc="是否强制登录"/><!--是否强制登录，0：非强制，1：强制登录-->
-		<field name="APP_CODE" length="32" type="C" desc="应用标识"/>
+		<field name="USER_ID" length="20" required="true" type="C" desc="登录标识" />
+	    <field name="USER_PSW" length="32" type="C" required="true" desc="登录密码"/>
+	    <field name="IMG_CODE" length="32" type="C" desc="图形验证码" />
+	    <field name="APP_ID" length="20" type="C" desc="应用编号" mapKey="APP_ID"/>
+	    <field name="LAGG" length="20" type="C" desc="语言" />		 
+		<!-- 客户端平台：IOS，Android -->
+	    <field name="CLI_TYP" length="20" type="C" comment="客户端平台" desc="0-ios 1 -android"/>
+		<!-- 客户端平台版本：IOS 7.0，Android 4.3-->
+	    <field name="CLI_VERSION" length="20" type="C" desc="客户端平台版本" />
+	    <field name="CLI_DEVICE_NO" length="32" type="C" desc="设备标识" default="wangkun"/>
+	    <field name="CLI_INFO" length="300" type="C" desc="客户端详情" />
+	    <field name="SKIN_TYP" length="20" type="C" desc="皮肤版本" />
+        <!--是否强制登录，0：非强制，1：强制登录-->
+	    <field name="FORCE_LOGIN_FLAG" length="1" type="C" desc="是否强制登录" default="0"/>
+		<field name="APP_CODE" length="32" type="C" desc="应用标识" default="0"/>
+		<field name="LOGIN_TYPE" length="1" type="C" desc="登录类型(0-密码，1-指纹)"/>
+		<field name="FINGER_CODE" length="1" type="C" desc="指纹"/>
+		<field name="LOGIN_ADDRESS" length="1" type="C" desc="登录地址"/>
 	</snd>
 	<!-- 响应报文 -->
 	<rcv>
 		<!--公共字段 -->
 		<field name="STATUS" length="6" type="C" desc="返回码" />
 		<field name="MSG" length="100" type="C" desc="返回消息" />
-		<field name="USER_SEX" length="1" type="C" desc="性别"/>
-		<field name="ID" length="32" type="C" desc="用户ID" xpath="ID"/>
+		
+		<field name="SEX" length="1" type="C" desc="性别" xpath="USER_SEX" mapKey="SEX" descName="SEX_DESC"/>
 		<field name="NAME" length="20" type="C" desc="中文名" xpath="NAME_CN"/>
 		<field name="ORG_ID" length="20" type="C" desc="机构号"/>
         <field name="EXT_ORG_ID" length="20" type="C" desc="所属分行机构号"/>
+         <field name="USER_TYPE" length="20" type="C" desc="用户类型"/>
 		<field name="ORG_NAME" length="20" type="C" desc="机构名称"/>
-		<field name="USER_NO" length="20" type="C" desc="员工编号"/>
-		<field name="USER_EMAIL" length="100" type="C" desc="邮箱"/>
-		<field name="USER_MOBILE" length="20" type="C" desc="手机"/>
-		<field name="USER_PHONE" length="20" type="C" desc="电话"/>
-		<field name="USER_ID" length="32" type="C" desc="用户登陆名"/>
+		<field name="USER_ID" length="20" type="C" desc="员工编号"/>
 		<!-- 0：否  1：是 -->
-	    <field name="USE_FIRST_MARK" length="1" type="C" desc="是否为首次登录"/>
+	    <field name="LGN_FIRST_FLAG" length="1" type="C" desc="是否为首次登录"/>
 	    <field name="LGN_CNT" length="1" type="C" desc="系统登录总次数" />
 	    <field name="LAST_LGN_DATE" length="10" type="C" desc="最近登录日期"  />
 	    <field name="LAST_LGN_TIME" length="10" type="C" desc="最近登录时间" />
-	    <field name="USER_TYP" length="02" type="C" desc="用户类型" mapKey="USER_TYP" descName="USER_TYP_DESC"/>
+	    <field name="USER_TYP" length="20" type="C" desc="移动crm用户类型" />
 	    <field name="ROLE_IDS" length="20" type="C" desc="角色列表，用逗号分隔"/>
 		<!-- 0：否  1：是 -->
-		<field name="RSET_PSW_MARK" length="1" type="C" desc="是否強制修改密碼"/>
+		<field name="REST_PWD_FLAG" length="1" type="C" desc="是否強制修改密碼"/>
 		<!-- 设备绑定 -->
 		<field name="RESULT" length="6" type="C" desc="设备校验结果" />
 		<field name="ERASE_SIGN" length="6" type="C" desc="擦除标识" />

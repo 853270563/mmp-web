@@ -18,6 +18,8 @@ public class MBTransItem {
 	private String desc;
 	private String xmlPath;
 	private String client;
+	//是否从数据总线取值
+	private boolean isCtx;
 	// 第一级 分隔符
 	private String delimiter;
 	// 第二级分隔符
@@ -250,6 +252,18 @@ public class MBTransItem {
 		bf.append(",\t seqType:").append(seqType);
 		bf.append("]");
 		return bf.toString();
+	}
+
+	public boolean isCtx() {
+		return isCtx;
+	}
+
+	public void setCtx(boolean isCtx) {
+		this.isCtx = isCtx;
+	}
+
+	public void setProperties(Map<String, String> properties) {
+		this.properties = properties;
 	}
 
 }

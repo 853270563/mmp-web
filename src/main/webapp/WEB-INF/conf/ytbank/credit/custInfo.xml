@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="custInfo" desc="公司、小企业客户概况">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100010" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="customer_id" client="customerId" type="C"  required="true"  default=""    desc="客户编号" />
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	  
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<!-- desc 格式说明    业务品种，字段含义/业务品种，字段含义-->
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+					<field name="serialNo" client="serialNo" type="C" required="true"  default="20"    desc="业务流程号" />  
+					<field name="enterpriseName" client="enterpriseName" type="C" required="true"  default="20"    desc="客户名称" />  
+					<field name="industryType" client="industryType" type="C" required="true"  default="20"    desc="国标行业分类" />  
+					<field name="customerID" client="customerID" type="C" required="true"  default="20"    desc="客户编号" />  
+					<field name="corpID" client="corpID" type="C"  default="20"    desc="组织机构代码" />  
+					<field name="certDate" client="certDate" type="C"   default="20"    desc="组织机构登记/年检/更新日期" />  
+					<field name="licenseNo" client="licenseNo" type="C" required="true"  default="20"    desc="工商营业执照号码" />  
+					<field name="orgNature" client="orgNature" type="C" required="true"  default="20"    desc="发生类型" />  
+					<field name="licenseDate" client="licenseDate" type="C" required="true"  default="20"    desc="  营业执照成立日" />  
+					<field name="licenseMaturity" client="licenseMaturity" type="C" required="true"  default="20"    desc="营业执照到期日" />  
+					<field name="registerAdd" client="registerAdd" type="C" required="true"  default="20"    desc="注册地址" />
+					<field name="mostBusiness" client="mostBusiness" type="C" required="true"  default="20"    desc="经营范围 "/>
+					<field name="registerCapital" client="registerCapital" type="C" required="true"  default="20"    desc=" 注册资本"/>
+					<field name="paiclUpCapital" client="paiclUpCapital" type="C" required="true"  default="20"    desc=" 实收资本"/>  
+					<field name="orgType" client="orgType" type="C" required="true"  default="20"    desc=" 企业类型"/>  
+					<field name="listingCorpOrNot" client="listingCorpOrNot" type="C" required="true"  default="20"    desc="上市公司类型 "/>  
+					<field name="captType" client="captType" type="C" required="true"  default="20"    desc=" 企业出资人成分"/>  
+					<field name="isGroup" client="isGroup" type="C" required="true"  default="20"    desc=" 是否集团客户"/>  
+					<field name="hasIERight" client="hasIERight" type="C" required="true"  default="20"    desc=" 有无进出口经营权"/>  
+					<field name="isHghTec" client="isHghTec" type="C" required="true"  default="20"    desc=" 是否高新技术企业"/>
+					<field name="isGFRZ" client="isGFRZ" type="C" required="true"  default="20"    desc=" 是否政府融资平台"/>  
+			</field>
+		</rcv>
+</trans>

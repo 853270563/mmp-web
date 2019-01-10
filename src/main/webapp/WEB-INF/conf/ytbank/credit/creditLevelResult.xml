@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="creditLevelResult" desc="信用等级评级结果">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100043" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="apply_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务申请编号" /> 
+				<field name="customer_id" client="customerId" type="C"  required="true"  default=""    desc="客户编号" /> 
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	 
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+		<head>
+		<field-response name="service_response"  xpath="Service_Header/service_response" type="S" desc="解析响应报文头">
+			<field name="status"     required="true" length="19"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"     type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"     type="C" default="" desc=""/>
+	    </field-response>
+	    </head>
+	    
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<!-- desc 格式说明    业务品种，字段含义/业务品种，字段含义-->
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+					<field name="SerialNo" client="SerialNo" type="C" required="true"  default="20"    desc="评级记录号" />  
+					<field name="AccountMonth" client="AccountMonth" type="C" required="true"  default="20"    desc="会计月份" />  
+					<field name="ReportScopeName" client="ReportScopeName" type="C" required="true"  default="20"    desc="报表口径" />  
+					<field name="ModelName" client="ModelName" type="C" required="true"  default="20"    desc="评估模型" />  
+					<field name="EvaluateScore" client="EvaluateScore" type="C"  default="20"    desc="系统评估得分" />  
+					<field name="EvaluateResult" client="EvaluateResult" type="C"   default="20"    desc="系统评估结果" />  
+					<field name="SpecialResult" client="SpecialResult" type="C" required="true"  default="20"    desc="特例调整等级" />  
+					<field name="CognResult" client="CognResult" type="C" required="true"  default="20"    desc="人工认定结果" />  
+					<field name="ObjectType" client="ObjectType" type="C" required="true"  default="20"    desc="  对象类型" />  
+					<field name="ObjectNo" client="ObjectNo" type="C" required="true"  default="20"    desc="对象编号" />  
+					<field name="CognDate" client="CognDate" type="C" required="true"  default="20"    desc="评估日期" />
+					<field name="OrgName" client="OrgName" type="C" required="true"  default="20"    desc="评估机构" />
+					<field name="UserName" client="UserName" type="C" required="true"  default="20"    desc="评估客户经理" />
+			</field>
+		</rcv>
+</trans>

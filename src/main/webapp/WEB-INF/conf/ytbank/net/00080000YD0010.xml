@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="00080000YD0010" desc="消息推送" >
+	<!-- 解析请求报文 -->
+	<snd>
+		<body>
+			<field-request name="colt" type="E" xpath="Service_Body/request/colt" desc="解析请求报文体">
+				<field name="pk_value" client="pk_value" type="C" required="true" length="20"  desc="机构代码" />
+				<field name="author"  client="author" type="C" required="true" length="30" desc="申请人" />
+				<field name="orgid" client="orgid"  type="C" required="true" length="4" desc="申请部门" />
+				<field name="note"  client="note" type="C" required="true" length="20" desc="标题" />
+				<field name="remark" type="C"  client="remark" required="true" length="30" desc="正文内容简介" />
+				<field name="serno" type="C" client="serno"  required="true" length="4"  desc="贷款编号" />
+				<field name="cus_id"   client="cus_id"  type="C" required="true" length="20"   desc="贷款客户号" />
+				<field name="cus_name" client="cus_name"  type="C" required="true" length="30" desc="贷款客户名称" />
+				<field name="amt" client="amt"  type="C" required="true" length="4" desc="贷款金额" />
+				<field name="currentuserid" client="currentuserid"  type="C" required="true" length="4" desc="当前审批人" />
+			</field-request>
+		</body>
+	</snd>
+	<!-- 返回响应报文 -->
+	<rcv>
+    	<head>
+			<field-response name="service_response"  xpath="Service_Header"  type="S"  desc="组装响应报文头">
+				<field  name="status" client="status" type="C"  required="true" default="" length="19"	  desc="交易状态"/>
+				<field  name="code"	  client="RetCode"   type="C"  required="true" default="" length="14"	  desc="提供方响应码"/>
+				<field  name="desc"	  client="ErrMsg"	  type="C"  required="true" default="" length="200"  desc="提供方响应描述"/>
+				<field  name="requester_code" client=""   type="C"  required="true" default="" length="14"	  desc="提供方响应码"/>
+				<field  name="requester_desc" client=""	  type="C"  required="true" default="" length="200"  desc="提供方响应描述"/>
+			</field-response>
+		</head>
+ 		<body>	
+ 			<field-response name="response"  xpath="Service_Body"  type="S"  desc="组装响应报文体">
+				<field name="RetCode" client="RetCode" required="true" type="C" default="" length="20"  desc="返回代码" />
+				<field name="ErrMsg" client="ErrMsg"  required="true" type="C" default="" length="1"  desc="错误提示信息" />
+				<field name="Err_pk_value" client="Err_pk_value"  type="C" required="true" default="" length="100"  desc="失败审批号" />
+			</field-response>
+		</body>
+	</rcv>
+</trans>

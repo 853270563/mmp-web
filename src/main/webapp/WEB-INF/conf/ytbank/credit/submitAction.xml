@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="assureTrue" desc="评级终审确认接口">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000102012" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			
+  				<!--请求体 -->
+		<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+			<field name="serial_no" client="serialNo" type="C" required="true"  default="0" desc="任务流水号" />
+			<field name="object_no" client="applySerialNo" type="C" required="true"  default="0" desc="业务流水号" />
+			<field name="phase_opinion1" client="phaseOpinion1" type="C" required="true"  default="0" desc="意见" />
+			<field name="phase_action" client="phaseAction" type="C" required="true"  default="0" desc="审批人，多选用@连接" />
+			<field name="is_multiselect" client="isMultiselect" type="C" required="true"  default="0" desc="是否多选" />
+			<field name="role_ids" client="roleIds" type="C" required="true"  default="0" desc="角色ID" />
+			<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+				<field name="control_flag" client="control_flag" type="C" required="true"  default="0" desc="分页标非零0分页!0不分页" />
+				<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+				<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<!-- desc 格式说明    业务品种，字段含义/业务品种，字段含义-->
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+   					<field name="submitReturnValue" client="resultMsg" type="C" required="true"  default="100"    desc="保存返回的信息，success为保存成功" />  
+   			</field>
+		</rcv>
+</trans>
+   			

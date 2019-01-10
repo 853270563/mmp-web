@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Service> 
+  <Service_Header>
+    <service_id>00080000102012</service_id>
+     <requester_id>0018</requester_id>
+     <branch_id>802777777</branch_id>
+     <channel_id>01</channel_id>
+     <version_id>01</version_id>
+     <service_time>20101104111710</service_time>
+     <service_sn>8027777770209011171</service_sn>
+  </Service_Header>
+  <Service_Body>
+  	
+    <request>
+    <page_control>
+			<control_flag>0</control_flag>
+			<pageindex>1</pageindex>
+			<pagesize>10</pagesize>
+	</page_control>
+      <serial_no>{serialNo}</serial_no>
+      <object_no>{applySerialNo}</object_no>
+      <phase_opinion1>{phaseOpinion1}</phase_opinion1>
+      <phase_action>{phaseAction}</phase_action>
+      <is_multiselect>{isMultiselect}</is_multiselect>
+      <role_ids>{roleIds}</role_ids>
+    </request>  
+    <response></response> 
+  </Service_Body>
+</Service>

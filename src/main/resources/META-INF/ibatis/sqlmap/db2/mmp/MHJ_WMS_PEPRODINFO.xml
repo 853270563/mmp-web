@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MHJ_WMS_PEPRODINFO">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="AND" property="PRODNAME">
+		 <![CDATA[O.PRODNAME like '%' || #PRODNAME# || '%']]>
+		</isNotEmpty>
+	    <isNotEmpty prepend="AND" property="PRODUCT_ID">
+		 T.PRODUCT_ID=#PRODUCT_ID#
+ 		</isNotEmpty> 
+		<!--产品类型 -->
+		 <isNotEmpty prepend="AND" property="FUNDTYPE">
+		 <![CDATA[ O.FUNDTYPE in ($FUNDTYPE$) ]]>
+		</isNotEmpty> 
+		<!--基金公司-->
+		<isNotEmpty prepend="AND" property="CORPNAME">
+		 S.CORPNAME like '%' || #CORPNAME# || '%'
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="CORPCODE">
+		 S.CORPCODE = #CORPCODE#
+		</isNotEmpty> 
+		<!--当前净值 区间-->
+		<isNotEmpty prepend="AND" property="StartNetValue">
+		    <![CDATA[ P.NETVALUE>=#StartNetValue# ]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="EndNetValue">
+		 <![CDATA[  P.NETVALUE<#EndNetValue# ]]>
+		</isNotEmpty> 
+		<!--最近一月 投资回报率 区间-->
+		<isNotEmpty prepend="AND" property="StartOneRate">
+		 <![CDATA[U.ONEMONTH>=#StartRate# ]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="EndRate">
+		 <![CDATA[U.ONEMONTH<#ONEMONTH#]]>
+		</isNotEmpty> 
+		<!--最近一季 投资回报率 区间-->
+		<isNotEmpty prepend="AND" property="StartThreeRate">
+		 <![CDATA[U.THREEMONTH>=#StartThreeRate#]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="EndThreeRate">
+		 <![CDATA[U.THREEMONTH<#EndThreeRate#]]>
+		</isNotEmpty> 
+		<!--最近半年 投资回报率 区间-->
+		<isNotEmpty prepend="AND" property="StartSixRate">
+		<![CDATA[ U.SIXMONTH>=#StartSixRate#]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="EndSixRate">
+		<![CDATA[ U.SIXMONTH<#EndSixRate#]]>
+		</isNotEmpty> 
+		<!--累计分红 区间-->
+		<isNotEmpty prepend="AND" property="StartSumRate">
+		 <![CDATA[Q.SUMCUTAMT>=#StartSumRate#]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="EndSumRate">
+		 <![CDATA[Q.SUMCUTAMT<#EndSumRate#]]>
+		</isNotEmpty> 
+		 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.PRODUCT_ID,O.PRODNAME,O.FUNDCODE,P.PRICEDATE,P.NETVALUE,
+			Y.label AS RLSSTATUS,CAST(P.INCREASE_DAY*100 AS DECIMAL(10,2)) AS INCREASE_DAY,Q.SUMCUTAMT,
+			S.CORPNAME,S.CORPCODE,W.label AS FUNDTYPE,P.TOTALVALUE,X.label AS RISKTYPEDEC,
+			V.RISKTYPE,U.ONEMONTH,U.THREEMONTH,
+			U.SIXMONTH,U.ONEYEAR,U.TWOYEAR,U.THREEYEAR
+		FROM ${schema.interPlat}.MHJ_WMS_PEPRODINFO T
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_PROD O ON T.PRODUCT_ID = O.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_VALUENOW P ON T.PRODUCT_ID=P.FUNDCODE
+			LEFT JOIN (SELECT FUNDCODE,SUM(CUTAMT) AS SUMCUTAMT FROM ${schema.interPlat}.MHJ_MELON_INFO R GROUP BY R.FUNDCODE ) Q ON T.PRODUCT_ID = Q.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUNDCOMPANY S ON S.CORPCODE=O.ADMINBRAN 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_HISVALUE U ON T.PRODUCT_ID=U.FUNDCODE
+			LEFT JOIN ${schema.interPlat}.MHJ_PRODUCT V ON T.PRODUCT_ID=V.PRODCODE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT W  ON W.TYPE='FUNDTYPE'  AND  O.FUNDTYPE=W.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT X  ON X.TYPE='RISKTYPE'  AND  V.RISKTYPE=X.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT Y  ON Y.TYPE='RLSSTATUS'  AND  V.RLSSTATUS=Y.VALUE
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		order by 1
+		<isNotNull property="ONEMONTH_NUM" prepend=",">
+			ONEMONTH desc
+		</isNotNull>
+		<isNotNull property="SIXMONTH_NUM" prepend=",">
+			SIXMONTH desc
+		</isNotNull>
+		<isNotNull property="NETVALUE_ORDER" prepend=",">
+			<isEqual property="NETVALUE_ORDER" compareValue="0">
+				NETVALUE asc
+			</isEqual>
+			<isEqual property="NETVALUE_ORDER" compareValue="1">
+				NETVALUE desc
+			</isEqual>
+		</isNotNull>
+		<isNotNull property="INCREASE_DAY_ORDER" prepend=",">
+			<isEqual property="INCREASE_DAY_ORDER" compareValue="0">
+				INCREASE_DAY asc
+			</isEqual>
+			<isEqual property="INCREASE_DAY_ORDER" compareValue="1">
+				INCREASE_DAY desc
+			</isEqual>
+		</isNotNull>
+		
+	</sql>
+	
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.PRODUCT_ID) CNT FROM ${schema.interPlat}.MHJ_WMS_PEPRODINFO T
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_PROD O ON T.PRODUCT_ID = O.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_VALUENOW P ON T.PRODUCT_ID=P.FUNDCODE
+			LEFT JOIN (SELECT FUNDCODE,SUM(CUTAMT) AS SUMCUTAMT FROM ${schema.interPlat}.MHJ_MELON_INFO R GROUP BY R.FUNDCODE ) Q ON T.PRODUCT_ID = Q.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUNDCOMPANY S ON S.CORPCODE=O.ADMINBRAN
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_HISVALUE U ON T.PRODUCT_ID=U.FUNDCODE
+			LEFT JOIN ${schema.interPlat}.MHJ_PRODUCT V ON T.PRODUCT_ID=V.PRODCODE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT W  ON W.TYPE='FUNDTYPE'  AND  O.FUNDTYPE=W.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT X  ON X.TYPE='RISKTYPE'  AND  V.RISKTYPE=X.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT Y  ON Y.TYPE='RLSSTATUS'  AND  V.RLSSTATUS=Y.VALUE
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<select id="totalCount" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(T.PRODUCT_ID) CNT FROM ${schema.interPlat}.MHJ_WMS_PEPRODINFO T
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_PROD O ON T.PRODUCT_ID = O.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_VALUENOW P ON T.PRODUCT_ID=P.FUNDCODE
+			LEFT JOIN (SELECT FUNDCODE,SUM(CUTAMT) AS SUMCUTAMT FROM ${schema.interPlat}.MHJ_MELON_INFO R GROUP BY R.FUNDCODE ) Q ON T.PRODUCT_ID = Q.FUNDCODE 
+			LEFT JOIN ${schema.interPlat}.MHJ_FUNDCOMPANY S ON S.CORPCODE=O.ADMINBRAN
+			LEFT JOIN ${schema.interPlat}.MHJ_FUND_HISVALUE U ON T.PRODUCT_ID=U.FUNDCODE
+			LEFT JOIN ${schema.interPlat}.MHJ_PRODUCT V ON T.PRODUCT_ID=V.PRODCODE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT W  ON W.TYPE='FUNDTYPE'  AND  O.FUNDTYPE=W.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT X  ON X.TYPE='RISKTYPE'  AND  V.RISKTYPE=X.VALUE
+			LEFT JOIN ${schema.configPlat}.SYS_DICT Y  ON Y.TYPE='RLSSTATUS'  AND  V.RLSSTATUS=Y.VALUE
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(t.PRODUCT_ID) FROM ${schema.interPlat}.MHJ_WMS_PEPRODINFO t
+			 WHERE t.PRODUCT_ID=#PRODUCT_ID#
+		]]>
+	</select>
+	
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

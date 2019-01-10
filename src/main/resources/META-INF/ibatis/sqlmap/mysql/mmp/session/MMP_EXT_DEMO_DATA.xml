@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MMP_EXT_DEMO_DATA" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" >
+    <result column="DATA_ID" property="dataId" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="CREATE_DTIME" property="createDtime" jdbcType="TIMESTAMP" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" class="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" extends="MMP_EXT_DEMO_DATA.BaseResultMap" >
+    <result column="REQ_DATA" property="reqData" jdbcType="CLOB" />
+    <result column="RESP_DATA" property="respData" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    DATA_ID, URL, CREATE_DTIME, CODE
+  </sql>
+  <sql id="Blob_Column_List" >
+    REQ_DATA, RESP_DATA
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MMP_EXT_DEMO_DATA.Base_Column_List" />
+    ,
+    <include refid="MMP_EXT_DEMO_DATA.Blob_Column_List" />
+    from ${schema.interPlat}.EXT_DEMO_DATA
+    <isParameterPresent >
+      <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MMP_EXT_DEMO_DATA.Base_Column_List" />
+    from ${schema.interPlat}.EXT_DEMO_DATA
+    <isParameterPresent >
+      <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterClass="string" >
+    select 
+    <include refid="MMP_EXT_DEMO_DATA.Base_Column_List" />
+    ,
+    <include refid="MMP_EXT_DEMO_DATA.Blob_Column_List" />
+    from ${schema.interPlat}.EXT_DEMO_DATA
+    where DATA_ID = #dataId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="string" >
+    delete from ${schema.interPlat}.EXT_DEMO_DATA
+    where DATA_ID = #dataId:VARCHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from ${schema.interPlat}.EXT_DEMO_DATA
+    <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" >
+    insert into ${schema.interPlat}.EXT_DEMO_DATA (DATA_ID, URL, CREATE_DTIME, CODE,
+      REQ_DATA, RESP_DATA)
+    values (#dataId:VARCHAR#, #url:VARCHAR#, #createDtime:TIMESTAMP#, #code:VARCHAR#, 
+      #reqData:CLOB#, #respData:CLOB#)
+  </insert>
+  <insert id="insertSelective" parameterClass="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" >
+    insert into ${schema.interPlat}.EXT_DEMO_DATA
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="dataId" >
+        DATA_ID
+      </isNotNull>
+      <isNotNull prepend="," property="url" >
+        URL
+      </isNotNull>
+      <isNotNull prepend="," property="createDtime" >
+        CREATE_DTIME
+      </isNotNull>
+      <isNotNull prepend="," property="code" >
+        CODE
+      </isNotNull>
+      <isNotNull prepend="," property="reqData" >
+        REQ_DATA
+      </isNotNull>
+      <isNotNull prepend="," property="respData" >
+        RESP_DATA
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="dataId" >
+        #dataId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="url" >
+        #url:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createDtime" >
+        #createDtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="code" >
+        #code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reqData" >
+        #reqData:CLOB#
+      </isNotNull>
+      <isNotNull prepend="," property="respData" >
+        #respData:CLOB#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from ${schema.interPlat}.EXT_DEMO_DATA
+    <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.dataId" >
+        DATA_ID = #record.dataId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.url" >
+        URL = #record.url:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createDtime" >
+        CREATE_DTIME = #record.createDtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.code" >
+        CODE = #record.code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.reqData" >
+        REQ_DATA = #record.reqData:CLOB#
+      </isNotNull>
+      <isNotNull prepend="," property="record.respData" >
+        RESP_DATA = #record.respData:CLOB#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExampleWithBLOBs" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    set DATA_ID = #record.dataId:VARCHAR#,
+      URL = #record.url:VARCHAR#,
+      CREATE_DTIME = #record.createDtime:TIMESTAMP#,
+      CODE = #record.code:VARCHAR#,
+      REQ_DATA = #record.reqData:CLOB#,
+      RESP_DATA = #record.respData:CLOB#
+    <isParameterPresent >
+      <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    set DATA_ID = #record.dataId:VARCHAR#,
+      URL = #record.url:VARCHAR#,
+      CREATE_DTIME = #record.createDtime:TIMESTAMP#,
+      CODE = #record.code:VARCHAR#
+    <isParameterPresent >
+      <include refid="MMP_EXT_DEMO_DATA.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="url" >
+        URL = #url:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createDtime" >
+        CREATE_DTIME = #createDtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="code" >
+        CODE = #code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reqData" >
+        REQ_DATA = #reqData:CLOB#
+      </isNotNull>
+      <isNotNull prepend="," property="respData" >
+        RESP_DATA = #respData:CLOB#
+      </isNotNull>
+    </dynamic>
+    where DATA_ID = #dataId:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterClass="cn.com.yitong.modules.session.model.ExtDemoDataWithBLOBs" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    set URL = #url:VARCHAR#,
+      CREATE_DTIME = #createDtime:TIMESTAMP#,
+      CODE = #code:VARCHAR#,
+      REQ_DATA = #reqData:CLOB#,
+      RESP_DATA = #respData:CLOB#
+    where DATA_ID = #dataId:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.modules.session.model.ExtDemoData" >
+    update ${schema.interPlat}.EXT_DEMO_DATA
+    set URL = #url:VARCHAR#,
+      CREATE_DTIME = #createDtime:TIMESTAMP#,
+      CODE = #code:VARCHAR#
+    where DATA_ID = #dataId:VARCHAR#
+  </update>
+</sqlMap>

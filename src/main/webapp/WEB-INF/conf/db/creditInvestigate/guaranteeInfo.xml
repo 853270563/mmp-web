@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="guaranteeInfo" desc="抵押物信息详情">
+	<!--请求报文 -->
+	<snd>
+				<field name="guaranty_id" client="guarantyId" type="C"  required="true"    desc="抵押、质押编号" />
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+			<field-list name="item"  type="E"  desc="解析响应报文体">
+				<field name="GUARANTYTYPE" client="GuarantyType" type="C" required="true"  default="200"    desc="担保明细分类" />
+				<field name="GUARANTYSTATUS" client="GUARANTYSTATUS" type="C" required="true"  default="200"    desc="" />
+				<field name="OWNERID" client="OwnerID" type="C" required="true"  default="200"    desc="担保人编号" />
+				<field name="OWNERNAME" client="OwnerName" type="C" required="true"  default="200"    desc="共有人" />
+				<field name="OWNERTYPE" client="OwnerType" type="C" required="true"  default="200"    desc="出质人类型" />
+				<field name="RATE" client="RATE" type="C" required="true"  default="200"    desc="" /> 
+					<field name="CUSTGUARANTYTYPE" client="CUSTGUARANTYTYPE" type="C" required="true"  default="200"    desc="" />
+				<field name="SUBJECTNO" client="SUBJECTNO" type="C" required="true"  default="200"    desc="" />
+				<field name="RELATIVEACCOUNT" client="RelativeAccount" type="C" required="true"  default="200"    desc="权利人帐户帐号" />
+				<field name="GUARANTYSUBTYPE" client="GuarantySubType" type="C" required="true"  default="200"    desc="房产类型" />
+				<field name="GUARANTYOWNWAY" client="GuarantyOwnWay" type="C" required="true"  default="200"    desc="使用性质等等" />
+				<field name="GUARANTYUSING" client="GUARANTYUSING" type="C" required="true"  default="200"    desc="" /> 
+					<field name="GUARANTYAMOUNT" client="GuarantyAmount" type="C" required="true"  default="200"    desc="建筑面积" />
+				<field name="GUARANTYAMOUNT1" client="GuarantyAmount1" type="C" required="true"  default="200"    desc="保险费交缴期限等等" />
+				<field name="GUARANTYAMOUNT2" client="GuarantyAmount2" type="C" required="true"  default="200"    desc="地上附着物面积等等" />
+				<field name="GUARANTYDATE" client="GuarantyDate" type="C" required="true"  default="200"    desc="保险开始日期" />
+				<field name="BEGINDATE" client="BeginDate" type="C" required="true"  default="200"    desc="保险到期日期" />
+				<field name="OWNERTIME" client="OwnerTime" type="C" required="true"  default="200"    desc="仓单到期日期" /> 
+					<field name="GUARANTYDESCRIPT" client="GUARANTYDESCRIPT" type="C" required="true"  default="200"    desc="" />
+				<field name="ABOUTOTHERID4" client="AboutOtherID4" type="C" required="true"  default="200"    desc="发动机号" />
+				<field name="ABOUTSUM1" client="AboutSum1" type="C" required="true"  default="200"    desc="购置价" />
+				<field name="ABOUTSUM2" client="ABOUTSUM2" type="C" required="true"  default="200"    desc="" />
+				<field name="ABOUTRATE" client="AboutRate" type="C" required="true"  default="200"    desc="质押基金份额占总额" />
+				<field name="GUARANTYANA" client="Guarantyana" type="C" required="true"  default="200"    desc="存放地点" /> 
+					<field name="GUARANTYPRICE" client="GuarantyPrice" type="C" required="true"  default="200"    desc="质押黄金的市价值" />
+				<field name="EVALMETHOD" client="EvalMethod" type="C" required="true"  default="200"    desc="质物价值评估方式" />
+				<field name="EVALORGID" client="EvalOrgID" type="C" required="true"  default="200"    desc="评估机构组织机构代码" />
+				<field name="EVALORGNAME" client="EvalOrgName" type="C" required="true"  default="200"    desc="评估机构名称" />
+				<field name="EVALDATE" client="EvalDate" type="C" required="true"  default="200"    desc="价值评估时间" />
+				<field name="EVALNETVALUE" client="EvalNetValue" type="C" required="true"  default="200"    desc="评估价值" /> 
+					<field name="CONFIRMVALUE" client="ConfirmValue" type="C" required="true"  default="200"    desc="认定价值" />
+				<field name="GUARANTYRATE" client="GuarantyRate" type="C" required="true"  default="200"    desc="抵押率" />
+				<field name="THIRDPARTY2" client="ThirdParty2" type="C" required="true"  default="200"    desc="车辆识别代号/车架号" />
+				<field name="FLAG1" client="Flag1" type="C" required="true"  default="200"    desc="是否海关监控" />
+				<field name="FLAG2" client="Flag2" type="C" required="true"  default="200"    desc="海关是否同意抵押" />
+				<field name="FLAG3" client="Flag3" type="C" required="true"  default="200"    desc="是否有当年车船使用税证" /> 
+					<field name="FLAG4" client="Flag4" type="C" required="true"  default="200"    desc="年检是否正常" />
+				<field name="GUARANTYREGNO" client="GUARANTYREGNO" type="C" required="true"  default="200"    desc="" />
+				<field name="GUARANTYREGORG" client="GUARANTYREGORG" type="C" required="true"  default="200"    desc="" />
+				<field name="GUARANTYREGDATE" client="GUARANTYREGDATE" type="C" required="true"  default="200"    desc="" />
+				<field name="GUARANTYWODATE" client="GUARANTYWODATE" type="C" required="true"  default="200"    desc="" />
+				<field name="OTHERASSUMPSIT" client="OtherAssumpsit" type="C" required="true"  default="200"    desc="存单支取密码" /> 
+					<field name="INPUTORGID" client="InputOrgID" type="C" required="true"  default="200"    desc="登记机构" />
+				<field name="INPUTUSERID" client="InputUserID" type="C" required="true"  default="200"    desc="登记人" />
+				<field name="INPUTDATE" client="InputDate" type="C" required="true"  default="200"    desc="登记日期" />
+				<field name="UPDATEUSERID" client="UPDATEUSERID" type="C" required="true"  default="200"    desc="" />
+				<field name="UPDATEDATE" client="UpdateDate" type="C" required="true"  default="200"    desc="" />
+				<field name="REMARK" client="remark" type="C" required="true"  default="200"    desc="备注" />
+				<field name="SAPVOUCHTYPE" client="SAPVOUCHTYPE" type="C" required="true"  default="200"    desc="" />
+				<field name="CERTTYPE" client="CertType" type="C" required="true"  default="200"    desc="出质人证件类型" />
+				<field name="CERTID" client="CertID" type="C" required="true"  default="200"    desc="出质人证件号码" /> 
+				<field name="LOANCARDNO" client="LoanCardNo" type="C" required="true"  default="200"    desc="出质人贷款卡号" />
+				<field name="GUARANTYCURRENCY" client="GuarantyCurrency" type="C" required="true"  default="200"    desc="质押币种" />
+				<field name="EVALCURRENCY" client="EvalCurrency" type="C" required="true"  default="200"    desc="质物币种" />
+				<field name="GUARANTYSUM" client="GuarantySum" type="C" required="true"  default="200"    desc="质押担保金额" />
+				<field name="OWNERNAME1" client="OwnerName1" type="C" required="true"  default="200"    desc="共有人" />
+				<field name="OWNERTYPE1" client="OWNERTYPE1" type="C" required="true"  default="200"    desc="" />
+				<field name="OWNERID1" client="OWNERID1" type="C" required="true"  default="200"    desc="" />
+				<field name="OWNERRELATION" client="OwnerRelation" type="C" required="true"  default="200"    desc="与借款人关系" />
+				<field name="THIRDPARTY4" client="ThirdParty4" type="C" required="true"  default="200"    desc="占用形态" />
+				<field name="THIRDPARTY5" client="ThirdParty5" type="C" required="true"  default="200"    desc="权属来源" />
+				<field name="HOUSESTRUCTURE" client="HouseStructure" type="C" required="true"  default="200"    desc="房产结构" /> 
+				<field name="GUARANTYAMOUNT3" client="GuarantyAmount3" type="C" required="true"  default="200"    desc="宗海面积" />
+				<field name="EVALUATECOST" client="EvaluateCost" type="C" required="true"  default="200"    desc="评估费用" />
+				<field name="EVALENDDATE" client="EvalEndDate" type="C" required="true"  default="200"    desc="评估生效到期日期" />  
+				<field name="EVALBEGINDATE" client="EvalBeginDate" type="C" required="true"  default="200"    desc="评估生效开始日期" />
+				<field name="GUARANTYSUM1" client="GuarantySum1" type="C" required="true"  default="200"    desc="购置价" />
+				<field name="INSUREBEGINDATE" client="InsureBeginDate" type="C" required="true"  default="200"    desc="保险开始日期" />
+				<field name="INSUREENDDATE" client="InsureEndDate" type="C" required="true"  default="200"    desc="保险到期日期" />
+				<field name="INSURANCESUM" client="InsuranceSum" type="C" required="true"  default="200"    desc="保险金额" />
+				<field name="INSURANCECOST" client="InsuranceCost" type="C" required="true"  default="200"    desc="应缴保费" />
+				<field name="INSURANCECOST1" client="InsuranceCost1" type="C" required="true"  default="200"    desc="实缴保费" />
+				<field name="GUARANTYAMOUNT4" client="GuarantyAmount4" type="C" required="true"  default="200"    desc="使用权面积" /> 
+				<field name="ENDDATE" client="EndDate" type="C" required="true"  default="200"    desc="预计竣工日期" />
+				<field name="FLAG5" client="Flag5" type="C" required="true"  default="200"    desc="是否监管公司监管" />
+				<field name="MAINGUARANTYTYPE" client="MainGuarantyType" type="C" required="true"  default="200"    desc="抵押品分类明细" />  
+				<field name="MAINGUARANTYTYPENAME" client="MAINGUARANTYTYPENAME" type="C" required="true"  default="200"    desc="" />
+				<field name="GUARANTYSUM2" client="GuarantySum2" type="C" required="true"  default="200"    desc="目前已投资金额" />
+				<field name="OWNERADDRESS" client="OwnerAddress" type="C" required="true"  default="200"    desc="所有权人地址" />
+				<field name="GUARANTYLOCATION" client="GuarantyLocation" type="C" required="true"  default="200"    desc="抵押物位置" />
+				<field name="THIRDPARTY" client="ThirdParty" type="C" required="true"  default="200"    desc="立项批准单位" />
+				<field name="THIRDPARTY3" client="ThirdParty3" type="C" required="true"  default="200"    desc="项目名称" />
+				<field name="GUARANTYDESCRIBE2" client="GuarantyDescribe2" type="C" required="true"  default="200"    desc="保险费交缴方式" />
+				<field name="GUARANTYNAME" client="GuarantyName" type="C" required="true"  default="200"    desc="货物名称" /> 
+				<field name="GUARANTYRIGHTID" client="GuarantyRightID" type="C" required="true"  default="200"    desc="仓单号码" />
+				<field name="GUARANTYDESCRIBE1" client="GuarantyDescribe1" type="C" required="true"  default="200"    desc="开证行国家地区" />
+				<field name="THIRDPARTY1" client="ThirdParty1" type="C" required="true"  default="200"    desc="信用证类型" />
+				<field name="GUARANTYDESCRIBE3" client="GuarantyDescribe3" type="C" required="true"  default="200"    desc="保兑行所在国家和地区" />
+				<field name="ABOUTOTHERID1" client="AboutOtherID1" type="C" required="true"  default="200"    desc="币种" />
+				<field name="ABOUTOTHERID3" client="AboutOtherID3" type="C" required="true"  default="200"    desc="地上附着物名称" />
+				<field name="OTHERGUARANTYNAME" client="OtherGuarantyName" type="C" required="true"  default="200"    desc="他项权证名称" />
+				<field name="OTHERGUARANTYRIGHT" client="OtherGuarantyRight" type="C" required="true"  default="200"    desc="他项权证号" />
+				<field name="GUARANTYRESOUCE" client="GuarantyResouce" type="C" required="true"  default="200"    desc="保险公司名称" />
+				<field name="INSURANCENAME" client="InsuranceName" type="C" required="true"  default="200"    desc="投保人" />
+				<field name="INSUREOBJECT" client="InsureObject" type="C" required="true"  default="200"    desc="被保险人" />
+				<field name="BENEFICIARY" client="Beneficiary" type="C" required="true"  default="200"    desc="第一受益人" />
+				<field name="INSURECONDITION" client="InsureCondition" type="C" required="true"  default="200"    desc="保险责任情况" />
+				<field name="ABOUTOTHERID2" client="AboutOtherID2" type="C" required="true"  default="200"    desc="发动机号" />
+				<field name="LOCATION" client="Location" type="C" required="true"  default="200"    desc="坐落" />
+				<field name="GUARANTYDESCRIBE4" client="GuarantyDescribe4" type="C" required="true"  default="200"    desc="地号" />
+				<field name="RIGHTTYPE" client="RightType" type="C" required="true"  default="200"    desc="使用权类型" />
+				<field name="PURPOSE" client="PURPOSE" type="C" required="true"  default="200"    desc="车辆型号" />
+				<field name="INSURANCENO" client="INSURANCENO" type="C" required="true"  default="200"    desc="" />
+				<field name="INSURECERTNO" client="InsureCertNo" type="C" required="true"  default="200"    desc="保险单号码" />
+				<field name="GUARANTYBALANCERMB" client="GUARANTYBALANCERMB" type="C" required="true"  default="200"    desc="" />
+				<field name="GUARANTYCONTRACTTYPE" client="GuarantyContractType" type="C" required="true"  default="200"    desc="承保险种" />
+				<field name="GUARANTYCOSTRATE" client="GUARANTYCOSTRATE" type="C" required="true"  default="200"    desc="保险费率" />
+				<field name="ISINSURE" client="IsInsure" type="C" required="true"  default="200"    desc="是否需要购买保险" />
+				<field name="CONTRACTNO" client="CONTRACTNO" type="C" required="true"  default="200"    desc="" />
+				<field name="DEPOSITFROZEN" client="DepositFrozen" type="C" required="true"  default="200"    desc="质借编号" />
+				<field name="CONFIRMCURRENCY" client="ConfirmCurrency" type="C" required="true"  default="200"    desc="认定币种" />
+				<field name="SENDPJSTATUS" client="SENDPJSTATUS" type="C" required="true"  default="200"    desc="" />
+				<field name="REASON" client="REASON" type="C" required="true"  default="200"    desc="" />
+				<field name="RELAPERSON" client="RelaPerson" type="C" required="true"  default="200"    desc="联系人" />
+				<field name="RELATEL" client="RelaTel" type="C" required="true"  default="200"    desc="联系电话" />
+				<field name="GUARANTYNUMS" client="GUARANTYNUMS" type="C" required="true"  default="200"    desc="" />
+				<field name="RUKUCERT" client="RUKUCERT" type="C" required="true"  default="200"    desc="" />
+				<field name="CUSTOMERNAME" client="CustomerName" type="C" required="true"  default="200"    desc="关联借款人" />
+				<field name="CUSTOMERID" client="CUSTOMERID" type="C" required="true"  default="200"    desc="" />
+				<field name="UNDERWRITINGTIME" client="UNDERWRITINGTIME" type="C" required="true"  default="200"    desc="核保日期" />
+				<field name="UNDERWRITER1" client="UNDERWRITER1" type="C" required="true"  default="200"    desc="核保人1" />
+				<field name="UNDERWRITER2" client="UNDERWRITER2" type="C" required="true"  default="200"    desc="核保人2" />
+				<field name="ISGUARANTEEPRINCIPAL" client="ISGUARANTEEPRINCIPAL" type="C" required="true"  default="200"    desc="是否保本" />
+				<field name="DESCRIBE1" client="serialNo" type="C" required="true"  default="200"    desc="土地使用权人" />
+			</field-list>
+		</rcv>
+</trans>
+			

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="amountAllocate" ibatisStatement="" desc="额度分配信息">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!-- 客户信息  -->
+		 <field  name="applySerialNo"  length="30"  type="C"  desc="业务编号"/>
+		 <field name="serial_no" client="serialNo" type="C"  required="true"  default="{serial_no}"    />  
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		 <!-- 代办记录 -->
+        <field-list name="LIST" type="E">
+            <field name="serialNo" client="serialNo" type="C" required="true"    desc="流程编号" />  
+				<field name="updateDate" client="updateDate" type="C"  />  
+				<field name="inputOrgName" client="inputOrgName" type="C"  />
+				<field name="inputUserName" client="inputUserName" type="C"  />  
+				<field name="inputDate" client="inputDate" type="C" />  
+				<field name="otherDescribe" client="otherDescribe" type="C"  />  
+				<field name="minBailSum" client="minBailSum" type="C"  />  
+				<field name="minBusinessRate" client="minBusinessRate" type="C"  />  
+				<field name="gjRate" client="gjRate" type="C"  />  
+				<field name="maxTermDate" client="maxTermDate" type="C"  />  
+				<field name="cycleFlag" client="cycleFlag" type="C" />
+				<field name="businessSum" client="businessSum" type="C"  />
+				<field name="currency" client="currency" type="C"  />
+				<field name="divideName" client="divideName" type="C"    />  
+				<field name="divideType" client="divideType" type="C"     /> 
+        </field-list>
+	</rcv>
+</trans>
+	

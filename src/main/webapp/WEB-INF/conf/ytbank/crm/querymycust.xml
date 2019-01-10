@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="querymycust" desc="我的客户"  serviceId="00850000000052">
+    <!--请求报文 -->
+    <snd>
+        <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+        <field name="custGrade" length="20" type="C" desc="客户等级" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+        <field name="attentionFlag" length="20" type="C" desc="关注客户" />
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+            <field name="custGreLvl" length="20" type="C" desc="客户等级" required="true"/>
+        </field>
+    </rcv>
+</trans>

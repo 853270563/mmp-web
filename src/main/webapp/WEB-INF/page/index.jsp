@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"
+<%@ page language="java" import="java.util.*,java.nio.charset.Charset" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
@@ -46,15 +46,31 @@ button.selected{
 <body>
 	<div id="TEST_PANEL" align="center">
 		<div align="left" style="padding:10px 0px 0px 10px;height:50px;">
-			<ul class="group trans_model" data-name="MODO_TYPE" data-group="MODO_TYPE" data-label="模块">
+			<ul class="group trans_model" data-name="MODO_TYPE" data-group="MODO_TYPE" data-label="模塊">
 				<li data-value="PP" class="selected">全部服务</li>
 				<li data-value="PP01">01 用户登录</li>
-				<li data-value="PP02">02 应用管理</li>
-				<li data-value="PP03">03 信息服务</li>
-				<li data-value="PP04">04 文件上传</li>
-				<li data-value="PP05">05 公共服务</li>
-				<li data-value="PP06">06 对公开户</li>
-				<li data-value="PP07">07 设备管理</li>
+				<li data-value="PP02">02 设备管理</li>
+				<li data-value="PP04">04 应用管理</li>
+				<!-- <li data-value="PP03">03 消息推送</li>
+				<li data-value="PP05">05 资讯公告</li>
+				<li data-value="PP06">06 通讯录</li>
+				<li data-value="PP07">07 聚合信息</li>
+				<li data-value="PP08">08 统一认证</li>
+				<li data-value="PP10">09 业务包管理</li>
+				<li data-value="PP11">10 产品货架</li>
+				<li data-value="PP12">11 工具管理</li>
+				<li data-value="PP13">12 信息服务</li> -->
+				<li data-value="PP14">14 移动信贷</li>
+				<li data-value="PP15">15 联盟ESB</li>
+				<!-- <li data-value="PP15">14 智慧厅堂</li>
+				<br/>
+				<br/>
+				<li data-value="PP16">15 开卡接口</li> -->
+
+				<li data-value="PP20">20 产品展示</li>
+				<li data-value="PP21">21基础服务</li>
+				<li data-value="PP22">22webSocket服务</li>
+				<li data-value="PP23">移动CRM</li>
 			</ul>
 		</div> 
 		<hr>
@@ -91,11 +107,14 @@ button.selected{
 				<div id="RSP_FORM" class="bg01"></div>
 			</div>
 			<hr>  
+			<div>当前请求url:
+					<%=request.getRequestURL()  %><br>当前系统默认编码 <%=Charset.defaultCharset().name() %></div>
 		</div>
 	</div>
 </body>
 <script src="${ctx}js/auto_plugin.js"></script>
 <script>
+
 
 	/**
 	* 請在此處設置會話創建時需要的客戶號及登錄號
@@ -170,6 +189,11 @@ button.selected{
 		var url = $("#TRAN_URL").val();
 		var data = $("#REQ_DATA").val();
 		var ajax = new TransAjax();
+		if (/websocket/.test(url)) {
+			sessionStorage.setItem("WEBSOCKET_URL",url);
+		window.open("${ctx}web_socket/index.html"); 
+			return;			
+		}
 		ajax.sendPostData(url, data, function(rpdata) {
 //			alert("-------test callback-----\n" + JsonToStr(rpdata));
 			var rst = JsonToStr(rpdata).replace(/\}/g, "}\n").replace(/\[/g,
@@ -250,8 +274,10 @@ button.selected{
         return str.replace(/[^\x00-\xff]/g, "**").length;
     }
 
+
     function clean() {
         $("#RSP_DATA").val("");
     }
 </script>
+
 </html>

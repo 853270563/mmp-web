@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ParameterWinInfoQuery" desc="网点窗口信息查询">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号"	 required="true" />
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号" required="true" />
+		<field name="TRAN_FLAG" length="100" type="C" desc="" required="true" />
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期" required="true" />
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号" required="true" />
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户"	required="true" />
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间"	required="true" />
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号"	required="true" />
+	</snd-sys-header>
+	<snd>
+	    
+	    <field name="SUB_BRANCH_ID" length="20" type="C" desc="子操作网点号" required="true" />
+		<field name="QUERY_BRANCH_ID" length="20" type="C" desc="查询机构代码" required="true" />
+		<!-- <field name="EMBRANCH_ID" length="10" type="C" desc="分行号" required="false" /> -->
+		<field name="SUBSIDIARY_BRANCH_ID" length="10" type="C" desc="支行号" required="false" />
+		<field name="WINDOW_NO" length="20" type="C" desc="窗口号码" required="false" />
+		<field name="REMARK1" length="20" type="C" desc="备注1" required="false" />
+		<field name="REMARK2" length="30" type="C" desc="备注2" required="false" />
+		<field name="SOURCE_TYPE" length="20" type="C" desc="渠道代码" required="true"/>	
+		<field name="USER_ID" length="20" type="C" desc="柜员号" required="true"/> 
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv-sys-header>
+		<!--公共字段 -->
+		<field name="SERVICE_CODE" length="100" type="C" desc="" />
+		<field name="SERVICE_SCENE" length="100" type="C" desc="" />
+		<field name="CONSUMER_ID" length="100" type="C" desc="" />
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="" />
+		<field name="SERV_SEQ_NO" length="100" type="C" desc="" />
+		<field name="TRAN_DATE" length="100" type="C" desc="" />
+		 <field name="TRAN_TIMESTAMP" length="6" type="C" desc="" /> 
+		<field-list name="RET" length="100" type="E" desc="">
+			<field name="RET_MSG" length="100" type="C" desc="" />
+			<field name="RET_CODE" length="100" type="C" desc="" />
+		</field-list>
+		<field name="RET_STATUS" length="6" type="C" desc="" />
+		<field name="WS_ID" length="6" type="C" desc="" />
+		<field name="TRAN_FLAG" length="6" type="C" desc="" />
+		<field name="ORG_SYS_ID" length="6" type="C" desc="" />
+		<field name="BUSS_SEQ_NO" length="6" type="C" desc="" />  
+		 <field name="ORG_WS_ID" length="6" type="C" desc="" />  
+	   <field name="ORG_SVR_ID" length="6" type="C" desc="" />  
+	<field name="SVR_ID" length="6" type="C" desc="" />  
+	<field name="COLNAME_SEQ_NO" length="6" type="C" desc="" />  
+	 <field name="USER_LANG" length="6" type="C" desc="" />  
+		       
+		   
+	</rcv-sys-header>
+	<rcv>
+	    <field-list name="DETAIL_ARRAY" length="100" type="E" desc="">
+		    <field name="QUERY_BRANCH_ID" length="20" type="C" desc="查询机构代码" required="false" />
+		  <!--   <field name="EMBRANCH_ID" length="30" type="C" desc="分行号" required="false" />
+		    <field name="SUBSIDIARY_BRANCH_ID" length="30" type="C" desc="支行号" required="false" />  -->
+		    <field name="BUSS_TYPE" length="30" type="C" desc="业务类型" required="false" />
+		    <field name="WINDOW_NO" length="30" type="C" desc="窗口号码" required="false" />
+		    <field name="FACILITY_NO" length="30" type="C" desc="设备号" required="false" />
+		    <field name="BUSS_PRIORITY" length="30" type="C" desc="业务优先级" required="false" />
+		    <field name="MSG_PRIORITY" length="30" type="C" desc="信息优先级" required="false" />
+		    <field name="REMARK1" length="30" type="C" desc="备注1" required="false" />
+		    <field name="REMARK2" length="30" type="C" desc="备注2" required="false" />
+		    <field name="REMARK3" length="30" type="C" desc="备注3" required="false" />
+		  </field-list>
+	</rcv>
+</trans>

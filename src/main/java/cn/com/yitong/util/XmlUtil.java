@@ -1,7 +1,16 @@
 package cn.com.yitong.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Iterator;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import net.sf.json.JSON;
 import net.sf.json.xml.XMLSerializer;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -14,32 +23,23 @@ import org.dom4j.util.XMLErrorHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Iterator;
 
 public class XmlUtil {
-
-	private static Logger logger = LoggerFactory.getLogger(XmlUtil.class);
-
-	public static String readXml(String fileName) throws MalformedURLException, DocumentException {
+	public static String readXml(String fileName) throws MalformedURLException,
+			DocumentException {
 		return readFile(fileName).asXML();
 	}
 
-	public static Document readFile(String fileName) throws MalformedURLException, DocumentException {
+	public static Document readFile(String fileName)
+			throws MalformedURLException, DocumentException {
 		SAXReader reader = new SAXReader();
 		File file = new File(fileName);
 		System.out.println(file.getAbsolutePath());
 		return reader.read(new File(fileName));
 	}
 
-	public static Document readText(String text) throws MalformedURLException, DocumentException {
+	public static Document readText(String text) throws MalformedURLException,
+			DocumentException {
 		return DocumentHelper.parseText(text);
 	}
 
@@ -57,6 +57,7 @@ public class XmlUtil {
 			writer.close();
 			writer = null;
 		} catch (Exception e) {
+
 			e.printStackTrace();
 		} finally {
 			if (writer != null) {
@@ -73,6 +74,9 @@ public class XmlUtil {
 
 	/**
 	 * XML 转成 JSON
+	 * 
+	 * @param xmlStr
+	 * @return
 	 */
 	public static String xmlStrToJsonStr(String xmlStr) {
 		XMLSerializer xml = new XMLSerializer();
@@ -82,17 +86,22 @@ public class XmlUtil {
 
 	/**
 	 * JSON 转入 XML
+	 * 
+	 * @param jsonStr
+	 * @param parent
 	 */
 	public static void jsonStrToXmlStr(String jsonStr, Element parent) {
 		try {
 			JSONObject json = new JSONObject(jsonStr);
 			jsonToElement(json, parent);
 		} catch (JSONException e) {
+
 			e.printStackTrace();
 		}
 	}
 
-	public static void jsonToElement(JSONObject json, Element parent) throws JSONException {
+	public static void jsonToElement(JSONObject json, Element parent)
+			throws JSONException {
 		if (json == null || parent == null) {
 			return;
 		}
@@ -110,7 +119,8 @@ public class XmlUtil {
 		}
 	}
 
-	public static void jsonToElement(JSONArray jsonArray, String key, Element parent) throws JSONException {
+	public static void jsonToElement(JSONArray jsonArray, String key,
+			Element parent) throws JSONException {
 		if (jsonArray == null || parent == null) {
 			return;
 		}
@@ -130,7 +140,8 @@ public class XmlUtil {
 	/**
 	 * 通过XSD（XML Schema）校验XML
 	 */
-	public static boolean validateXMLByXSD(Document xmlDocument, String xsdFileName) {
+	public static boolean validateXMLByXSD(Document xmlDocument,
+			String xsdFileName) {
 		// String xsdFileName = "Q:\\_dev_stu\\xsdtest\\src\\note.xsd";
 		try {
 			// 创建默认的XML错误处理器
@@ -159,15 +170,27 @@ public class XmlUtil {
 			// 校验
 			validator.validate(xmlDocument);
 			if (errorHandler.getErrors().hasContent()) {
-				logger.error("XML文件通过XSD文件校验失败！\n", errorHandler.getErrors().asXML());
+				System.out.println("XML文件通过XSD文件校验失败！\n"
+						+ errorHandler.getErrors().asXML());
 				return false;
 			} else {
-				logger.debug("Good! XML文件通过XSD文件校验成功！");
+				System.out.println("Good! XML文件通过XSD文件校验成功！");
 			}
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return false;
+	}
+
+	public static void main(String[] args) throws MalformedURLException,
+			DocumentException {
+		String xmlfile = "D:/works/tfb_space/ibanking/WebContent/WEB-INF/data/xsd/cancleUser.xml";
+		String xsdfile = "D:/works/tfb_space/ibanking/WebContent/WEB-INF/conf/xsd/cancleUser.xsd";
+
+		Document doc = readFile(xmlfile);
+		System.out.println("document is :\t\n" + doc.asXML());
+		validateXMLByXSD(doc, xsdfile);
+
 	}
 }

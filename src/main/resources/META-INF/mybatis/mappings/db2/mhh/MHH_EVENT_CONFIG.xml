@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.yitong.modules.ares.servCtl.dao.impl.MhhEventConfigDao">
+<mapper namespace="cn.com.yitong.ares.servCtl.dao.impl.MhhEventConfigDao">
 
     <sql id="BaseColumnList">
         EVENT_ID,EVENT_NAME,LIMIT_COUNT,EVENT_LEVEL,PARENT_ID,
@@ -20,7 +20,7 @@
         </where>
     </sql>
 
-    <insert id="insert" parameterType="cn.com.yitong.modules.ares.servCtl.model.MhhEventConfig">
+    <insert id="insert" parameterType="cn.com.yitong.ares.servCtl.model.MhhEventConfig">
         insert into <include refid="TableClause" /> (
         <include refid="BaseColumnList" />
         ) values (
@@ -28,37 +28,38 @@
         )
     </insert>
 
-    <select id="queryById" parameterType="string" resultType="cn.com.yitong.modules.ares.servCtl.model.MhhEventConfig">
+    <select id="queryById" parameterType="string" resultType="cn.com.yitong.ares.servCtl.model.MhhEventConfig">
         <include refid="public.SelectById" />
     </select>
 
-    <update id="updateById" parameterType="cn.com.yitong.modules.ares.servCtl.model.MhhEventConfig">
+    <update id="updateById" parameterType="cn.com.yitong.ares.servCtl.model.MhhEventConfig">
         update <include refid="TableClause" />
         <set>
-        EVENT_NAME=#{eventName},
-        LIMIT_COUNT=#{limitCount},
-        EVENT_LEVEL=#{eventLevel},
-        PARENT_ID=#{parentId},
-        REMARKS=#{remarks}
+            EVENT_NAME=#{eventName},
+            LIMIT_COUNT=#{limitCount},
+            EVENT_LEVEL=#{eventLevel},
+            PARENT_ID=#{parentId},
+            REMARKS=#{remarks}
         </set> <include refid="WhereClause4Id" />
     </update>
 
-     <update id="updateByIdSelective" parameterType="cn.com.yitong.modules.ares.servCtl.model.MhhEventConfig">
-            update <include refid="TableClause" />
-            <set>
-                <if test="eventName!=null">EVENT_NAME=#{eventName},</if>
-                <if test="limitCount!=null">LIMIT_COUNT=#{limitCount},</if>
-                <if test="eventLevel!=null">EVENT_LEVEL=#{eventLevel},</if>
-                <if test="parentId!=null">PARENT_ID=#{parentId},</if>
-                <if test="remarks!=null">REMARKS=#{remarks}</if>
-            </set> <include refid="WhereClause4Id" />
-     </update>
+    <update id="updateByIdSelective" parameterType="cn.com.yitong.ares.servCtl.model.MhhEventConfig">
+        update <include refid="TableClause" />
+        <set>
+            <if test="eventName!=null">EVENT_NAME=#{eventName},</if>
+            <if test="limitCount!=null">LIMIT_COUNT=#{limitCount},</if>
+            <if test="eventLevel!=null">EVENT_LEVEL=#{eventLevel},</if>
+            <if test="parentId!=null">PARENT_ID=#{parentId},</if>
+            <if test="remarks!=null">REMARKS=#{remarks}</if>
+        </set> <include refid="WhereClause4Id" />
+    </update>
+
 
     <update id="deleteById" parameterType="string">
         <include refid="public.DeleteById" />
     </update>
 
-    <select id="queryByCriteria" resultType="cn.com.yitong.modules.ares.servCtl.model.MhhEventConfig" parameterType="CriteriaQuery">
+    <select id="queryByCriteria" resultType="cn.com.yitong.ares.servCtl.model.MhhEventConfig" parameterType="CriteriaQuery">
         <include refid="public.Select4Query" />
     </select>
 

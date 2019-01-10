@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="OnlineCheck" ibatisStatement="" desc="联网核查">
+	<!-- 请求报文 -->
+	<snd> 
+		<field name="PERSONNUM" length="20" type="C" desc="身份证号" />
+		<field name="NAME" length="20" type="C" desc="姓名" />
+		<field name="PER_PIC" length="20" type="C" desc="身份证图片数据" /> 
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="VALIDATE" length="20" type="C" desc="查询状态：验证通过1，验证不通过0" /> 
+		<field-list name="CUST_INFO" type="E"> 
+			<field name="REGISTEREDCUST" length="20" type="C" desc="注册状态0未注册，1已注册" />	
+			<field name="CUST_ID" length="20" type="C" desc="客户ID" />	
+			<field name="CUST_NAME" length="20" type="C" desc="客户姓名" />	
+			<field name="CARD_COUNT" length="20" type="C" desc="卡号数字" />	
+			<field name="PHONE" length="11" type="C" desc="电话" />	
+			<field name="ADDRESS" length="40" type="C" desc="地址" />	
+			<field name="ADDRESS" length="11" type="C" desc="手机" />	
+		</field-list> 
+		
+	</rcv>
+</trans>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="INVEST_INFO">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotNull prepend="AND" property="INVEST_INTE_ID">
+			T.INVEST_INTE_ID = #INVEST_INTE_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SYS_CUST_ID">
+			T.SYS_CUST_ID = #SYS_CUST_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="USER_ID">
+			T.USER_ID = #USER_ID#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INVEST_DIRE">
+			T.INVEST_DIRE = #INVEST_DIRE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INTE_PROD">
+			T.INTE_PROD = #INTE_PROD#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INTE_DATE">
+			T.INTE_DATE = #INTE_DATE#
+		</isNotNull>
+        <isNotEmpty prepend="AND" property="INTE_DATE_BEGIN">
+            <![CDATA[
+                T.INTE_DATE >= #INTE_DATE_BEGIN#
+            ]]>
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="INTE_DATE_END">
+            <![CDATA[
+                T.INTE_DATE <= #INTE_DATE_END#
+            ]]>
+        </isNotEmpty>
+        <isNotNull  property="MONEY_TYPE">
+			<isEqual prepend="and"  property="MONEY_TYPE"  compareValue ="1"> 
+				<![CDATA[	T.INTE_MONEY  >=0  AND  T.INTE_MONEY <= 100000]]>
+			</isEqual>
+			<isEqual prepend="and"   property="MONEY_TYPE"  compareValue ="2"> 
+				<![CDATA[	T.INTE_MONEY  >100000  AND  T.INTE_MONEY <= 1000000]]>
+			</isEqual>
+			<isEqual prepend="and"   property="MONEY_TYPE"  compareValue ="3"> 
+				<![CDATA[	T.INTE_MONEY  >1000000  AND  T.INTE_MONEY <= 3000000]]>
+			</isEqual>
+			<isEqual prepend="and"   property="MONEY_TYPE"  compareValue ="4"> 
+				<![CDATA[	T.INTE_MONEY  >3000000]]>
+			</isEqual>
+		</isNotNull>
+		<isNotNull prepend="AND" property="INTE_DEGREE">
+			T.INTE_DEGREE = #INTE_DEGREE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INTE_STATE">
+			T.INTE_STATE = #INTE_STATE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INTE_UPDATE_DATE">
+			T.INTE_UPDATE_DATE = #INTE_UPDATE_DATE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="INVEST_REMARK">
+			T.INVEST_REMARK = #INVEST_REMARK#
+		</isNotNull>
+		<isNotNull prepend="AND" property="RESERVE1">
+			T.RESERVE1 = #RESERVE1#
+		</isNotNull>
+		<isNotNull prepend="AND" property="RESERVE2">
+			T.RESERVE2 = #RESERVE2#
+		</isNotNull>
+		<isNotNull prepend="AND" property="RESERVE3 ">
+			T.RESERVE3 = #RESERVE3 #
+		</isNotNull>
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT substring(T.INTE_DATE, 1, 10) AS INTE_DATE_CAL, T.*, L.CUST_NAME,L.CUST_TYPE,L.CUST_CARD_ID,L.CUST_PHONE,L.CUST_OFFI_PHONE
+     	FROM ${schema.interPlat}.MJR_INVEST_INFO T LEFT JOIN ${schema.interPlat}.MOBILE_CUST_INFO L     ON T.SYS_CUST_ID = L.SYS_CUST_ID 
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.INVEST_INTE_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+	<select id="pageDetailQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		SELECT substring(T.INTE_DATE, 1, 10) AS INTE_DATE_CAL, T.*, L.CUST_NAME,L.CUST_TYPE,L.CUST_CARD_ID,L.CUST_PHONE,L.CUST_OFFI_PHONE
+     	FROM ${schema.interPlat}.MJR_INVEST_INFO T LEFT JOIN ${schema.interPlat}.MOBILE_CUST_INFO L     ON T.SYS_CUST_ID = L.SYS_CUST_ID 
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.INVEST_INTE_ID
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(t.INVEST_INTE_ID) CNT 
+			FROM ${schema.interPlat}.MJR_INVEST_INFO T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!--  -->
+	<select id="queryDayCount" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT  COUNT(T.INVEST_INTE_ID) NUM, T.INTE_DATE  FROM ${schema.interPlat}.MJR_INVEST_INFO T  
+	<dynamic prepend="WHERE ">
+		<isNotNull prepend="AND" property="USER_ID">
+			T.USER_ID = #USER_ID#
+		</isNotNull>
+			<isNotEmpty prepend="AND" property="INTE_DATE_BEGIN">
+            <![CDATA[T.INTE_DATE >= #INTE_DATE_BEGIN# ]]>
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="INTE_DATE_END">
+            <![CDATA[T.INTE_DATE <= #INTE_DATE_END#   ]]>
+        </isNotEmpty>
+		</dynamic>
+		group by t.inte_date
+		order by t.inte_date
+	</select>
+	
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="INVEST_INTE_ID" type="pre" resultClass="string">
+			select CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'),${schema.interPlat}.nextval('SEQ_INVEST_INFO')) from dual
+		</selectKey>
+		INSERT INTO
+		${schema.interPlat}.MJR_INVEST_INFO
+		(
+		INVEST_INTE_ID,SYS_CUST_ID,USER_ID,INVEST_DIRE,INTE_PROD,INTE_DATE,INTE_MONEY,INTE_DEGREE,INTE_STATE,INTE_UPDATE_DATE,INVEST_REMARK,RESERVE1,RESERVE2,RESERVE3
+		)
+		VALUES (
+		#INVEST_INTE_ID#,#SYS_CUST_ID#,#USER_ID#,#INVEST_DIRE#,#INTE_PROD#,#INTE_DATE#,#INTE_MONEY#,#INTE_DEGREE#,#INTE_STATE#,#INTE_UPDATE_DATE#,#INVEST_REMARK#,#RESERVE1#,#RESERVE2#,#RESERVE3#
+		)
+	</insert>
+
+	<!-- 删除时存放删除表的信息 -->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.interPlat}.MJR_INVEST_INFO
+		select * from ${schema.interPlat}.MJR_INVEST_INFO where INVEST_INTE_ID=
+		#INVEST_INTE_ID#
+	</insert>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.INVEST_INTE_ID) FROM ${schema.interPlat}.MJR_INVEST_INFO p 
+			 WHERE P.INVEST_INTE_ID=#INVEST_INTE_ID#
+		]]>
+	</select>
+
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.MJR_INVEST_INFO ]]>
+		<dynamic prepend="set">
+<isNotNull prepend="," property="USER_ID">
+USER_ID = #USER_ID#</isNotNull>
+<isNotNull prepend="," property="INVEST_DIRE">
+INVEST_DIRE = #INVEST_DIRE#</isNotNull>
+<isNotNull prepend="," property="INTE_PROD">
+INTE_PROD = #INTE_PROD#</isNotNull>
+<isNotNull prepend="," property="INTE_DATE">
+INTE_DATE = #INTE_DATE#</isNotNull>
+<isNotNull prepend="," property="INTE_MONEY">
+INTE_MONEY = #INTE_MONEY#</isNotNull>
+<isNotNull prepend="," property="INTE_DEGREE">
+INTE_DEGREE = #INTE_DEGREE#</isNotNull>
+<isNotNull prepend="," property="INTE_STATE">
+INTE_STATE = #INTE_STATE#</isNotNull>
+<isNotNull prepend="," property="INTE_UPDATE_DATE">
+INTE_UPDATE_DATE = #INTE_UPDATE_DATE#</isNotNull>
+<isNotNull prepend="," property="INVEST_REMARK">
+INVEST_REMARK = #INVEST_REMARK#</isNotNull>
+<isNotNull prepend="," property="RESERVE1">
+RESERVE1 = #RESERVE1#</isNotNull>
+<isNotNull prepend="," property="RESERVE2">
+RESERVE2 = #RESERVE2#</isNotNull>
+<isNotNull prepend="," property="RESERVE3">
+RESERVE3 = #RESERVE3#</isNotNull>
+			<!-- 现在审核ID -->
+			<isNotNull property="AUDI_ID" prepend=","><![CDATA[ AUDI_ID = #AUDI_ID# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where INVEST_INTE_ID = #INVEST_INTE_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.MJR_INVEST_INFO where INVEST_INTE_ID = #INVEST_INTE_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	<!-- 查询操作 -->
+	<select id="PRODUCT_MANAGE_RICHES" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ 
+			select a.user_id,a.name_cn from ${schema.configPlat}.sys_user a
+			inner join ${schema.configPlat}.sys_user_role b on a.id = b.user_id
+			inner join ${schema.configPlat}.sys_user c on a.id = c.id
+			where b.role_id = '1197' and c.login_name = #USER_ID#	
+		]]>
+	</select>
+
+</sqlMap>
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="groupCreditDisInfo" desc="集团授信额度分配">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100031" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="object_no" client="ApplySerialNo" type="C"  required="true"  default=""    desc="业务申请编号" />
+				<field name="sub_customer_id" client="CustomerID" type="C"  required="true"  default=""    desc="业务申请编号" />
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	    
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="serial_no" client="serialNo" type="C"  required="true"  default=""    desc="任务流水号" />  
+				<field name="phase_opinion1" client="phaseOpinion1" type="C"  required="true"  default=""    desc="选择意见" /> 
+			</field-request>
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="apply_no" client="ApplySerialNo" type="C"  required="true"  default=""    desc="业务申请编号" />
+				<field name="sub_customer_id" client="CustomerID" type="C"  required="true"  default=""    desc="业务申请编号" />    
+			</field-request>
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+   					<field name="serialNo" client="serialNo" type="C" required="true"  default="100"    desc="客户编号" />
+   					<field name="divideType" client="divideType" type="C" required="true"  default="100"    desc="切分类型" />  
+   					<field name="divideName" client="divideName" type="C" required="true"  default="100"    desc="切分信息" />  
+   					<field name="currency" client="currency" type="C" required="true"  default="100"    desc="币种" />
+   					<field name="businessSum" client="businessSum" type="C" required="true"  default="100"    desc="授信金额(元)" />
+   					<field name="cycleFlag" client="cycleFlag" type="C" required="true"  default="100"    desc="是否循环" />  
+   					<field name="maxTermDate" client="maxTermDate" type="C" required="true"  default="100"    desc="最高单笔期限(月)" />  
+   					<field name="gjRate" client="gjRate" type="C" required="true"  default="100"    desc="外币融资利率" />
+   					<field name="minBusinessRate" client="minBusinessRate" type="C" required="true"  default="100"    desc="最低浮动比率%" />
+   					<field name="minBailSum" client="minBailSum" type="C" required="true"  default="100"    desc="最低保证金比率%" />  
+   					<field name="otherDescribe" client="otherDescribe" type="C" required="true"  default="100"    desc="其他要求" />  
+   					<field name="inputDate" client="inputDate" type="C" required="true"  default="100"    desc="登记日期" />
+   					<field name="inputUserName" client="inputUserName" type="C" required="true"  default="100"    desc="登记人" />  
+   					<field name="inputOrgName" client="inputOrgName" type="C" required="true"  default="100"    desc="登记机构" />  
+   					<field name="updateDate" client="updateDate" type="C" required="true"  default="100"    desc="更新日期" />    
+   			</field>
+		</rcv>
+</trans>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram id="testsample.flw" desc="测试交易">
+  <nodes>
+    <node id="380729df-bd7f-4e20-8f05-cd430cc86d01" xPos="260" yPos="70" Width="180" Height="40">
+      <desc>事务开启</desc>
+      <beanId>transactionBeginOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+    <node id="b55152e9-f78a-48b7-b32d-7cc502741422" xPos="260" yPos="170" Width="180" Height="40">
+      <desc>简单任务</desc>
+      <type>condition</type>
+      <beanId>emptyOp2</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+        <data key="sample" expr="VALUE_1" desc="测试"/>
+      </data-map>
+    </node>
+    <node id="e3e28381-fc01-4773-a9ed-85850ff2c998" xPos="160" yPos="310" Width="180" Height="40">
+      <desc>简单任务</desc>
+      <beanId>emptyOp</beanId>
+      <data-map>
+        <data key="*required" expr="" desc="必需项检查"/>
+      </data-map>
+    </node>
+    <node id="cbe3125d-e3d5-43a4-8fdb-85149dd58d38" xPos="400" yPos="310" Width="180" Height="40">
+      <desc>总线清理</desc>
+      <beanId>paramRemoveOp</beanId>
+      <data-map>
+        <data key="*remove" expr="KEY_1,KEY_2" desc="清理总线KEY"/>
+      </data-map>
+    </node>
+    <node id="077658d2-e590-4617-9531-81afbfea5aa6" xPos="270" yPos="440" Width="180" Height="40">
+      <desc>事务提交</desc>
+      <beanId>transactionEndOp</beanId>
+      <data-map>
+        <data key="*dbName" expr="" desc="数据库名，指定数据源"/>
+      </data-map>
+    </node>
+  </nodes>
+  <lines>
+    <line desc="" condition="" from="380729df-bd7f-4e20-8f05-cd430cc86d01" to="b55152e9-f78a-48b7-b32d-7cc502741422"/>
+    <line desc="" condition="${RCV_NAME=='1'}" from="b55152e9-f78a-48b7-b32d-7cc502741422" to="e3e28381-fc01-4773-a9ed-85850ff2c998"/>
+    <line desc="" condition="${RCV_NAME=='2'}" from="b55152e9-f78a-48b7-b32d-7cc502741422" to="cbe3125d-e3d5-43a4-8fdb-85149dd58d38"/>
+    <line desc="" condition="" from="e3e28381-fc01-4773-a9ed-85850ff2c998" to="077658d2-e590-4617-9531-81afbfea5aa6"/>
+    <line desc="" condition="" from="cbe3125d-e3d5-43a4-8fdb-85149dd58d38" to="077658d2-e590-4617-9531-81afbfea5aa6"/>
+  </lines>
+</diagram>

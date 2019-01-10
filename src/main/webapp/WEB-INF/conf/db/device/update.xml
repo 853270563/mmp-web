@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="update" ibatisStatement="MZJ_RES_DATA.pageQuery"
+       desc="设备绑定查询">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <field name="UDID" length="20" required="true" type="C" desc="设备唯一标识" />
+        <field name="WIFI_MAC" length="20" required="true" type="C" desc="Wifi Mac" />
+        <field name="IMEI" length="20" required="true" type="C" desc="IMEI" />
+        <field name="PRODUCT" length="20" required="true" type="C" desc="产品型号" />
+        <field name="OS_VERSION" length="20" required="true" type="C" desc="系统版本" />
+        <field name="USER_TEL" length="20" type="C" desc="联系人电话" />
+        <field name="USER_MAIL" length="20" type="C" desc="联系人邮箱" />
+        <field name="IS_JAILBREAK" length="20" type="C" desc="IS_JAILBREAK" />
+
+        <field name="LOST_FLAG" length="1" type="C" desc="丢失标识" />
+        <field name="LOCK_FLAG" length="1" type="C" desc="锁定标识" />
+        <field name="ERASE_FLAG" length="1" type="C" desc="擦除标识" />
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+    </rcv>
+</trans>

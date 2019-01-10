@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         id="WebApp_ID" version="2.5">
-    <display-name>mmp-show</display-name>
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         id="WebApp_ID" version="2.4">
+    <display-name>mmp</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:META-INF/spring/*-context.xml</param-value>
     </context-param>
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>cn.com.yitong.ares.core.SpringContextLoaderListener</listener-class>
     </listener>
     <!--为了取得程序的绝对路径 -->
-    <context-param>
+   <!--  <context-param>
         <param-name>webAppRootKey</param-name>
         <param-value>mmp.root</param-value>
     </context-param>
@@ -20,7 +20,7 @@
         <listener-class>
             org.springframework.web.util.WebAppRootListener
         </listener-class>
-    </listener>
+    </listener> -->
 
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -34,10 +34,10 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <filter>
         <filter-name>jsonpFilter</filter-name>
-        <filter-class>cn.com.yitong.framework.filter.JsonpCallbackFilter</filter-class>
+        <filter-class>cn.com.yitong.framework.net.JsonpCallbackFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>jsonpFilter</filter-name>
@@ -46,11 +46,12 @@
 
     <filter>
         <filter-name>theadContextFiler</filter-name>
-        <filter-class>cn.com.yitong.framework.filter.ThreadContextFilter</filter-class>
+        <filter-class>cn.com.yitong.core.web.filter.ThreadContextFilter</filter-class>
         <init-param>
             <param-name>loginUrls</param-name>
-            <param-value>/ares/login/ClientNoLogin.do;/ares/appManage/saveAppVers.do;/fileUpload/breakpoint/zipUpload.do;/ares/file/upload.do
-            </param-value>
+            <param-value>/ares/login/ClientLogin.do;/login/LoginData.do;/ares/login/ClientNoLogin.do;
+            /ares/appManage/saveAppVers.do;/ares/fileserver/uploadFile.do;/ares/synDict/cleanSynDict.do
+   </param-value>
         </init-param>
     </filter>
 
@@ -58,25 +59,37 @@
         <filter-name>theadContextFiler</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
-    
-    <filter>
-    	<filter-name>log4jFilter</filter-name>
-    	<filter-class>cn.com.yitong.framework.filter.Log4jFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>log4jFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
-    </filter-mapping>
 
     <filter>
+        <filter-name>CasFilter</filter-name>
+        <filter-class>cn.com.yitong.portal.thirdApp.filter.CasFilter</filter-class>
+        <init-param>
+            <param-name>openUrls</param-name>
+            <param-value>/thirdApp/*</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CasFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+     <filter>
          <filter-name>SessionFilter</filter-name>
-         <filter-class>cn.com.yitong.framework.filter.SessionFilter</filter-class>
+         <filter-class>cn.com.yitong.framework.core.filter.SessionFilter</filter-class>
          <init-param>
              <param-name>exclude</param-name>
              <param-value>
-                 index.do;ares/login/Client*;/ares/login/ClientNoLogin.do;/ares/login/ClientLogin.do;test/*;/common/*;
-                 ares/login/BusiLog*;ares/login/NetworkHeart*;ares/appManage/*;download/userResource/*;/ares/file/upload.do;
-                 ares/login/imageValidateCode.do;/fileUpload/breakpoint/zipUpload.do;/ares/file/*;/download/platResource/*;
+                 index.do;ares.do;portal.do;ydyx.do;ares/login/*;test/*;common/*;ares/deviceInfo*;ares/login/BusiLog*;ares/login/NetworkHeart*;
+                 ares/appManage/getHtmlUpdateInfo.do;ares/appManage/getApkUpdateInfo.do;ares/appManage/roleApp.do;app/appManage/getApkUpdateInfo.do;
+                 ares/appManage/fileDownLoad.do;ares/appManage/oneFileDownLoad.do;ares/synDict/cleanSynDict.do;
+                 ares/mp/aresMpMsgTaskInsert.do;ares/mp/aresMpMsgTmplInsert.do;ares/mp/aresMpMsgTypeList.do;ares/appManage/saveAppVers.do;
+                 /download/userResource/file.do;/download/userResource/img.do;portal/note/noteList.do;download/userResource/bussDocumentInfo.do;
+                 download/userResource/surveyReport.do;
+                 download/userResource/financeReport.do;download/userResource/yxInfo.do;
+                 json/crud/list/ItemList.do;json/crud/AreaList.do;json/creditCard/cardConfirmation.do;
+                 ares/fileserver/getFilesStatus.do;ares/fileserver/uploadFile.do;ares/fileserver/getFile.do;ares/fileserver/delFile.do;
+                 /ares/fileserver/*;db/prodList.do;propa/list/bannerDataList.do
              </param-value>
          </init-param>
      </filter>
@@ -115,10 +128,19 @@
         <servlet-class>cn.com.yitong.framework.servlet.ServerInit</servlet-class>
         <load-on-startup>999</load-on-startup>
     </servlet>
-
+<servlet>  
+        <servlet-name>CXFServlet</servlet-name>  
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>  
+        <load-on-startup>2</load-on-startup>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>CXFServlet</servlet-name>  
+        <url-pattern>/webservice/*</url-pattern>  
+    </servlet-mapping>
     <!-- 前端会话渠道 -->
     <servlet>
-        <servlet-name>mbank</servlet-name>
+        <servlet-name>mmp</servlet-name>
         <servlet-class>cn.com.yitong.framework.servlet.SpringDispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextClass</param-name>
@@ -127,25 +149,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>mbank</servlet-name>
+        <servlet-name>mmp</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-<!--     <session-config> -->
-<!--         <session-timeout>15</session-timeout> -->
-<!--     </session-config> -->
-
-   	<servlet>
-		<servlet-name>fileDownLoadServlet</servlet-name>
-		<servlet-class>cn.com.yitong.framework.servlet.FileDownLoadServlet</servlet-class>
-		<init-param>
-			<param-name>serverPath</param-name>
-			<param-value>/apple/download/</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-	   <servlet-name>fileDownLoadServlet</servlet-name>
-	   <url-pattern>/apple/download/*</url-pattern>
-	</servlet-mapping>
+    <session-config> 
+        <session-timeout>15</session-timeout>
+    </session-config> 
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
@@ -154,6 +163,7 @@
 
     <welcome-file-list>
         <welcome-file>index.do</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
+        <!-- <welcome-file>index.jsp</welcome-file> -->
     </welcome-file-list>
+     <distributable/>
 </web-app>

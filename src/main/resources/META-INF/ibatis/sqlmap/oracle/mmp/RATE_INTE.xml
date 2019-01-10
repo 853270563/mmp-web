@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="RATE_INTE">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="PROD_TYPE_CODE">
+			T.PROD_TYPE_CODE = #PROD_TYPE_CODE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="PROD_MONT_YEAR">
+			T.PROD_MONT_YEAR = #PROD_MONT_YEAR#
+		</isNotEmpty>
+	</sql>
+	 
+	 <select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MGJ_INTEREST_RATE T
+	 </select> 
+	 
+	<!-- 查询SQL -->
+	<select id="queryRate" parameterClass="map" resultClass="java.util.HashMap">
+			SELECT T.*,B.PROD_CLAS AS PROD_CLASS FROM ${schema.interPlat}.MGJ_INTEREST_RATE T
+				LEFT JOIN ${schema.interPlat}.MGJ_INTEREST_RATE_CT B ON T.PROD_TYPE_CODE=B.PROD_TYPE_CODE
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<!-- 查询当前时间 -->
+ 	<select id="queryCurTime" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ SELECT to_char(sysdate,'yyyy-MM-dd HH24:mi:ss') AS CURRENT_TIME FROM DUAL ]]>
+	</select> 
+</sqlMap>
+

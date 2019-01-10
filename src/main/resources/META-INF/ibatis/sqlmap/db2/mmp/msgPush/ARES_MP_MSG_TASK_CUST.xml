@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_MP_MSG_TASK_CUST">
+
+    <insert id="insertAresMpMsgTaskCust" parameterClass="map">
+         insert into ${schema.configPlat}.ARES_MP_MSG_TASK_CUST
+         (TASK_CUST_ID,TASK_ID,TASK_BATCH_ID,CUST_ID,TMPL_ID,
+        TMPL_TAG_VAL,MSG_BODY,CREATE_TIME,UPDATE_TIME,
+        CLIENT_TYPE)
+        VALUES
+        (  #TASKCUSTID#,#TASKID#,#TASKBATCHID#,#CUSTID#,#TMPLID#,
+        #TMPLTAGVAL#,#MSGBODY#,#CREATETIME#,#UPDATETIME#,
+        #CLIENTTYPE#)
+    </insert>
+	
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		SELECT ${schema.configPlat}.SEQ_MP_MSG_TASK_CUST.NEXTVAL AS CUST_ID FROM DUAL
+	</select>
+</sqlMap>
+

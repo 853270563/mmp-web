@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryByCustId" desc="客户个人资料(客户访谈下)" serviceId="00850000000054">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="用户id" required="false"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="20" type="C" desc="客户姓名" required="true"/>
+            <field name="custGend" length="20" type="C" desc="客户性别" required="true"/>
+            <field name="custGrade" length="20" type="C" desc="客户等级" required="true"/>
+            <field name="custBorn" length="20" type="C" desc="生日" required="true"/>
+            <field name="custVoca" length="20" type="C" desc="客户职业" />
+            <field name="custWorkTyp" length="20" type="C" desc="行业" />
+            <field name="custInts" length="20" type="C" desc="风险偏好（是否是兴趣爱好）" />
+            <field name="custLvl" length="20" type="C" desc="客户星级" />
+        </field>
+    </rcv>
+</trans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="mpCustClientUpdate" desc="推送订阅">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="CUST_CLIENT_ID" length="16" type="C" desc="主键" required="true"/>
+		<field name="DEL_FLAG" length="1" type="C" desc="删除标识，0-未删除，1-已删除" required="true"/>
+		<field name="IS_CLOSE" length="1" type="C" desc="是否关闭，0-否，1-是" required="true"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<field name="IS_CLOSE" length="1" type="C" desc="是否关闭，0-否，1-是" />
+	</rcv>
+</trans>

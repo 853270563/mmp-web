@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="loadInfoGT"   desc="聚合信息详情">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="ID" length="64" type="C" desc="消息编号"  required="true"/>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 --> 
+		<field name="ID" length="64" type="C" desc="编号" />
+		<field name="NAME" length="200" type="C" desc="标题" />
+		<field name="SUMMARY" length="1024" type="C" desc="摘要" />
+		<field name="CONTENT" type="C" desc="内容" />
+		<field name="ACTION" length="1024" type="C" desc="动作" />
+		<field name="ACTION_TYPE" length="1" type="C" desc="动作类型" />
+		<field name="TYPE" length="1" type="C" desc="类别(1:消息，2:报表)" />
+		<field name="SOURCE" length="64" type="C" desc="来源" />
+		<field name="CREATE_DATE" length="19" type="C" desc="创建时间" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="updateOperateCust" desc="操作（我的客户下）" serviceId="00850000000053">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+        <field name="attentionFlag" length="20" type="C" desc="关注客户" />
+        <field name="userId" length="100" type="C" desc="登录号"  required="true"/>
+    </snd>
+</trans>

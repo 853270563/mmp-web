@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MHJ_FUND_VALUE">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+	    <isNotEmpty prepend="AND" property="FUNDCODE">
+		 T.FUNDCODE=#FUNDCODE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="NUM">
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="START_DATE">
+		    <![CDATA[ to_char( to_date(T.pricedate,'yyyy-MM-DD'),'yyyy-mm-dd')>=to_char( to_date(#START_DATE#,'yyyy-MM-DD'),'yyyy-mm-dd')]]>
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="END_DATE">
+		    <![CDATA[to_char( to_date(T.pricedate,'yyyy-MM-DD'),'yyyy-mm-dd')< =to_char( to_date( #END_DATE#,'yyyy-MM-DD'),'yyyy-mm-dd') ]]>
+		</isNotEmpty> 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.FUNDCODE,TO_CHAR( TO_DATE(T.PRICEDATE,'YYYY-MM-DD'),'YYYY-MM-DD') AS PRICEDATE,
+			T.NETVALUE,T.TOTALVALUE,T.INCREASE_DAY FROM ${schema.interPlat}.MHJ_FUND_VALUE T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.NETVALUE
+	</sql>
+	<sql id="queryNetValue">
+		SELECT MAX(T.NETVALUE) AS MAXNETVALUE,MAX(T.TOTALVALUE) AS MAXTOTALVALUE FROM ${schema.interPlat}.MHJ_FUND_VALUE T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.FUNDCODE
+	</sql>
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	<!-- 基金涨幅查询 -->
+	<select id="queryFund" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	<select id="queryFundNet" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="queryNetValue" />
+	</select>
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.FUNDCODE) CNT 
+			FROM ${schema.interPlat}.MHJ_FUND_VALUE T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MHJ_FUND_VALUE
+		( FUNDCODE,PRICEDATE,NETVALUE,TOTALVALUE,INCREASE_DAY ) 
+		VALUES ( #FUNDCODE#,#PRICEDATE#,#NETVALUE#,#TOTALVALUE#,#INCREASE_DAY#  )
+	</insert>
+
+	<!-- 删除时存放删除表的信息 -->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.interPlat}.MHJ_FUND_VALUE
+		select * from ${schema.interPlat}.MHJ_FUND_VALUE where FUNDCODE= #FUNDCODE#
+	</insert>
+
+	<!-- 查询P_WARM_TIPS_OP是否有待审核的数据 -->
+	<select id="findOp" parameterClass="map" resultClass="java.util.HashMap">
+		select *
+		from ${schema.interPlat}.MHJ_FUND_VALUE_OP t1
+		INNER JOIN ${schema.configPlat}.AUDI_DETAIL_OP t2 ON t1.AUDI_ID = t2.AUDI_ID
+		where t1.FUNDCODE = #FUNDCODE# and t2.AUDI_STAT ='3'
+	</select>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.FUNDCODE) FROM ${schema.interPlat}.MHJ_FUND_VALUE p 
+			 WHERE P.FUNDCODE=#FUNDCODE#
+		]]>
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.MHJ_FUND_VALUE ]]>
+		<dynamic prepend="set">
+			<!-- 现在审核ID -->
+			<isNotNull property="AUDI_ID" prepend=","><![CDATA[ AUDI_ID = #AUDI_ID# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where FUNDCODE = #FUNDCODE# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.MHJ_FUND_VALUE where FUNDCODE = #FUNDCODE# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

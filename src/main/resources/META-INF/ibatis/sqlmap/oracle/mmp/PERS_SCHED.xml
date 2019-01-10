@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PERS_SCHED">
+
+	<!-- 动态条件sql -->
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="AND" property="SCHED_STIME">
+			T.SCHED_STIME = #SCHED_STIME#
+		</isNotEmpty>
+       <isNotEmpty prepend="AND" property="SCHED_STIME_BEGIN">
+		 	<![CDATA[ TRUNC(to_date(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss'))  >=  to_date(#SCHED_STIME_BEGIN#,'yyyy-MM-dd HH24:mi:ss')  ]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="SCHED_STIME_END">
+		 	<![CDATA[ TRUNC(to_date(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss'))  <= to_date(#SCHED_STIME_END#,'yyyy-MM-dd HH24:mi:ss')]]>
+		</isNotEmpty>
+        <isNotEmpty prepend="AND" property="SCHED_TIMESPAN_BEGIN">
+            <![CDATA[
+              T.SCHED_TIMESPAN >= #SCHED_TIMESPAN_BEGIN#
+            ]]>
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="SCHED_TIMESPAN_END">
+            <![CDATA[
+              T.SCHED_TIMESPAN <= #SCHED_TIMESPAN_END#
+            ]]>
+        </isNotEmpty>
+        
+        <isNotEmpty prepend="AND" property="SCHED_SUBJECT">
+			T.SCHED_SUBJECT like '%'||#SCHED_SUBJECT#||'%'
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="USER_ID">
+			T.USER_ID = #USER_ID#
+		</isNotEmpty>
+	</sql>
+
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*, SUBSTR(T.Sched_Stime, 1, 10) AS SCHED_STIME_CAL FROM ${schema.interPlat}.MGJ_PERSION_SCHED T
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+		 ORDER BY T.SCHEDULEID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+	
+		<!-- 指定某月 的具体某天的记录数 -->
+	<select id="queryDayCountForMonth" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[  SELECT  COUNT(T.SCHEDULEID) NUM,to_char(TRUNC(TO_DATE(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss')),'yyyy-MM-dd') SCHED_STIME_TEMP  FROM ${schema.interPlat}.MGJ_PERSION_SCHED T  ]]>  
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="SCHED_STIME_BEGIN">
+			 	<![CDATA[ TRUNC(to_date(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss'))  >=  to_date(#SCHED_STIME_BEGIN#,'YYYY-MM-DD')  ]]> 
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="SCHED_STIME_END">
+			 	<![CDATA[ TRUNC(to_date(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss'))  <= to_date(#SCHED_STIME_END#,'YYYY-MM-DD')]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="USER_ID">
+				T.USER_ID = #USER_ID#
+			</isNotEmpty>
+		</dynamic>
+		<![CDATA[  group by  trunc(to_date(T.SCHED_STIME, 'yyyy-MM-dd HH24:mi:ss'))  ]]> 
+		order by SCHED_STIME_TEMP
+	</select>
+	
+		<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(t.SCHEDULEID) CNT 
+			FROM ${schema.interPlat}.MGJ_PERSION_SCHED T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	
+	
+	<!-- insert操作 -->
+	<insert id="addInfo" parameterClass="map">
+		<selectKey type="pre" keyProperty="SCHEDULEID" resultClass="java.lang.String">
+			SELECT ${schema.interPlat}.SEQ_PERS_SCHED.NEXTVAL FROM DUAL
+		</selectKey>
+		<![CDATA[ INSERT INTO ${schema.interPlat}.MGJ_PERSION_SCHED ]]>
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="SCHEDULEID">
+				SCHEDULEID
+			</isNotNull>
+			<isNotNull prepend="," property="USER_ID">
+				USER_ID
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_SUBJECT">
+				SCHED_SUBJECT
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_STIME">
+				SCHED_STIME
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_UNIT">
+				SCHED_UNIT
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_TIMESPAN">
+				SCHED_TIMESPAN
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_CONTENT">
+				SCHED_CONTENT
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_REMIND">
+				SCHED_REMIND
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_CTIME">
+				SCHED_CTIME
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_FULLEVENT">
+				SCHED_FULLEVENT
+			</isNotNull>
+			)
+		</dynamic>
+		VALUES
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="SCHEDULEID">
+				#SCHEDULEID#
+			</isNotNull>
+			<isNotNull prepend="," property="USER_ID">
+				#USER_ID#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_SUBJECT">
+				#SCHED_SUBJECT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_STIME">
+				#SCHED_STIME#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_UNIT">
+				#SCHED_UNIT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_TIMESPAN">
+				#SCHED_TIMESPAN#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_CONTENT">
+				#SCHED_CONTENT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_REMIND">
+				#SCHED_REMIND#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_CTIME">
+				#SCHED_CTIME#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_FULLEVENT">
+				#SCHED_FULLEVENT#
+			</isNotNull>
+			)
+		</dynamic>
+	</insert>
+	
+	<!-- update更新操作 -->
+	<update id="updateInfo" parameterClass="map">
+		<![CDATA[UPDATE ${schema.interPlat}.MGJ_PERSION_SCHED]]>
+		<dynamic prepend="set" >
+			<isNotNull prepend="," property="SCHED_SUBJECT">
+				SCHED_SUBJECT=#SCHED_SUBJECT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_STIME">
+				SCHED_STIME=#SCHED_STIME#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_ETIME">
+				SCHED_ETIME=#SCHED_ETIME#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_TIMESPAN">
+				SCHED_TIMESPAN=#SCHED_TIMESPAN#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_CONTENT">
+				SCHED_CONTENT=#SCHED_CONTENT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_REMIND">
+				SCHED_REMIND=#SCHED_REMIND#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_FULLEVENT">
+				SCHED_FULLEVENT=#SCHED_FULLEVENT#
+			</isNotNull>
+			<isNotNull prepend="," property="SCHED_FULLEVENT">
+				SCHED_FULLEVENT=#SCHED_FULLEVENT#
+			</isNotNull>
+			<isNotNull prepend="," property="CHECKED_STATUS">
+				CHECKED_STATUS=#CHECKED_STATUS#
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="USER_ID">
+				USER_ID=#USER_ID#
+			</isNotNull>
+			<isNotNull prepend="AND" property="SCHEDULEID">
+				SCHEDULEID=#SCHEDULEID#
+			</isNotNull>
+		</dynamic>
+	</update>
+	
+	<!-- 查询到期时间并且需要提醒的记录-->
+	<select id="queryPersSchedSendInfo" parameterClass="map" resultClass="java.util.HashMap">
+		 <![CDATA[ SELECT  *  FROM ${schema.interPlat}.MGJ_PERSION_SCHED T where to_date(t.SCHED_TIMESPAN,'yyyy-MM-dd hh24:mi:ss') < = sysdate and t.SCHED_REMIND='1' and t.CHECKED_STATUS='0']]>
+	</select>
+	
+	<!-- delete操作 -->
+	<delete id="deleteInfo" parameterClass="map">
+		<![CDATA[DELETE FROM ${schema.interPlat}.MGJ_PERSION_SCHED T WHERE T.SCHEDULEID =#SCHEDULEID#]]>
+	</delete>
+</sqlMap>

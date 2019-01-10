@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryzjyd" desc="资金异动" serviceId="00850000000033">
+    <!--请求报文 -->
+    <snd>
+        <field name="inputDate" length="20" type="C" desc="数据日期" required="false"/>
+        <field name="custName" length="20" type="C" desc="客户名称" required="false"/>
+        <field name="userId" length="100" type="C" desc="登陆人id" />
+        <field name="status" length="20" type="C" desc="状态" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="dcFlag" length="20" type="C" desc="异动方向(借贷标志(0取 1存))" required="true"/>
+            <field name="warnBal" length="20" type="C" desc="发生金额" required="true"/>
+            <field name="status" length="20" type="C" desc="状态(0未浏览 1已浏览)" required="true"/>
+        </field>
+    </rcv>
+</trans>

@@ -1,15 +1,17 @@
 package cn.com.yitong.core.util;
 
-import cn.com.yitong.common.utils.SpringContextUtils;
-import cn.com.yitong.core.cache.CacheNames;
-import cn.com.yitong.modules.ares.dictSyn.dao.DictDao;
-import cn.com.yitong.modules.ares.dictSyn.model.SysDict;
-import org.springframework.cache.Cache.ValueWrapper;
-import org.springframework.cache.CacheManager;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.cache.Cache.ValueWrapper;
+import org.springframework.cache.CacheManager;
+
+import cn.com.yitong.common.utils.SpringContextUtils;
+import cn.com.yitong.core.cache.CacheNames;
+import cn.com.yitong.core.dao.DictDao;
+import cn.com.yitong.core.model.SysDict;
 
 /**
  * 缓存工具类
@@ -49,7 +51,7 @@ public class DictUtils {
 	}
 
 	/**
-	 * 清楚 cacheName 缓存
+	 * 清除 cacheName 缓存
 	 * @param cacheName 缓存名称
 	 */
 	public static void cleanDictByCacheName(String cacheName) {
@@ -72,9 +74,22 @@ public class DictUtils {
 		}
 		return map;
 	}
+	public static List<Map<String, String>> getValue2LabelMap2(String dictTypeCode) {
+		List<SysDict> list = getDictionaries(dictTypeCode);
+		
+		List<Map<String,String>> rstList = new ArrayList<Map<String,String>>();
+		
+		for(SysDict dict:list) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("LABEL", dict.getLabel());
+			map.put("VALUE", dict.getValue());
+			rstList.add(map);
+		}
+		return rstList;
+	}
 	
 	/**
-	 * 根据数据字典TYPE、VALUE查询出对应的VALUE值的中文含义
+	 * 根据数据字典TYPE、VALUE查询出对应的VALUE值的label
 	 */
 	public static String getDictLabel(String value, String dictTypeCode, String defaultLabel) {
 		List<SysDict> list = getDictionaries(dictTypeCode);
@@ -88,9 +103,9 @@ public class DictUtils {
 	}
 
 	/**
-	 * 根据字典类型和描述 查询值
+	 * 根据字典类型和标签 查询值
 	 * @param dictTypeCode 字典类型
-	 * @param label 描述
+	 * @param label 标签
 	 * @param defaultValue 默认值
 	 * @return
 	 */
@@ -100,6 +115,26 @@ public class DictUtils {
 			for(SysDict dict : list) {
 				if(label.equals(dict.getLabel())) {
 					defaultValue = dict.getValue();
+					break;
+				}
+			}
+		}
+		return defaultValue;
+	}
+
+	/**
+	 * 根据字典类型和标签 查询排序
+	 * @param dictTypeCode 字典类型
+	 * @param label 标签
+	 * @param defaultValue 默认值
+	 * @return
+	 */
+	public static String getDictSort(String dictTypeCode, String label, String defaultValue) {
+		List<SysDict> list = getDictionaries(dictTypeCode);
+		if (null != list && list.size() > 0) {
+			for (SysDict dict : list) {
+				if (label.equals(dict.getLabel())) {
+					defaultValue = dict.getSort();
 					break;
 				}
 			}

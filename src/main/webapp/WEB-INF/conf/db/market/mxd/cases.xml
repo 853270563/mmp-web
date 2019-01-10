@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="cases" desc="案件查询">
+    <snd>
+        <field name="START_DATE" type="C" length="20" desc="开始日期" required="true"/>
+        <field name="END_DATE" type="C" length="20" desc="结束日期" required="true"/>
+        <field name="CASE_STATUS" type="C" length="20"
+               desc="案件状态"
+               mapKey="(多选'|'分割)01：待申请，02：待查询，03：待审批，04：已审批，05已拒绝，06：已完成，07：已作废"
+            />
+        <field name="CUSTOMER_NAME" type="C" length="50" desc="客户名称"/>
+        <field name="USER_MANAGER_ID" type="C" length="64" desc="客户经理编号"/>
+    </snd>
+
+    <rcv>
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+
+        <!-- 案件列表 -->
+        <field-list name="LIST" type="E">
+            <field name="CASE_ID" length="20" type="C" desc="案件编号" />
+            <field name="PRODUCT_ID" length="20" type="C" desc="产品编号" />
+            <field name="APPLY_AMOUNT" length="20" type="C" desc="贷款金额" />
+            <field name="CASE_STATUS" length="2" type="C" desc="贷款状态" />
+            <field name="CASE_DATE" length="2" type="C" desc="申请时间" />
+
+            <field name="CUSTOMER_ID" length="64" type="C" desc="客户编号" />
+            <field name="CUSTOMER_NAME" length="64" type="C" desc="客户名称" />
+            <field name="USER_MANAGER_ID" length="64" type="C" desc="客户经理编号" />
+            <field name="USER_MANAGER_NAME" length="64" type="C" desc="客户经理名称" />
+
+            <field name="PRODUCT_ID" length="64" type="C" desc="产品编号" />
+            <field name="PRODUCT_NAME" length="64" type="C" desc="产品名称" />
+        </field-list>
+    </rcv>
+</trans>

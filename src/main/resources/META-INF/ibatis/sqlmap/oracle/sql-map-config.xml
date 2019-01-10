@@ -11,6 +11,8 @@
 
     <typeHandler javaType="object" callback="cn.com.yitong.framework.dao.support.OracleObjectTypeHandler" />
 
+    <typeAlias alias="criteriaExample" type="cn.com.yitong.core.base.dao.CriteriaExample" />
+	
 	<!-- page 公共提取 -->
 	<sqlMap resource="META-INF/ibatis/sqlmap/oracle/ibatis-oracle-page.xml" /> 
 	

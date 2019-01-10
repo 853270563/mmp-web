@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BUSSI_FLOW_CONFIG">
+
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="FLOWCS_ID">
+			T.FLOWCS_ID in (SELECT FLOWCS_ID FROM ${schema.interPlat}.BUSSI_FLOW_CLASS  START WITH FLOWCS_ID = #FLOWCS_ID# CONNECT BY PRIOR FLOWCS_ID = FLOWCS_PARENT_ID)
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="FLOW_ID">
+		    T.FLOW_ID = #FLOW_ID#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="FLOW_NAME">
+		    T.FLOW_NAME like '%' || #FLOW_NAME# || '%'
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*,DATE_FORMAT(T.FLOW_TEMPLATE) FLOW_TEMPLATE1,C.FLOWCS_NAME FROM ${schema.interPlat}.BUSSI_FLOW_CONFIG T 
+		join ${schema.interPlat}.BUSSI_FLOW_CLASS C on c.FLOWCS_ID=T.FLOWCS_ID
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.FLOW_ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(1) CNT 
+			FROM ${schema.interPlat}.BUSSI_FLOW_CONFIG T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加、修改时将信息存放到op表中 -->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.BUSSI_FLOW_CONFIG
+		( FLOW_ID,FLOW_NAME,FLOW_TEMPLATE,PUBLISH_STATUS,VERSION_ID,CREATE_TIME,FLOW_BUSSI_TYPE,FLOWCS_ID,FLOW_DESC,FLOW_TMPL_JSON ) 
+		VALUES ( #FLOW_ID#,#FLOW_NAME#,#FLOW_TEMPLATE#,#PUBLISH_STATUS#,#VERSION_ID#,NOW(),#FLOW_BUSSI_TYPE#,#FLOWCS_ID#,#FLOW_DESC#,#FLOW_TMPL_JSON#  )
+	</insert>
+	
+	<insert id="insertPub" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.BUSSI_FLOW_CONFIG
+		( FLOW_ID,FLOW_NAME,FLOW_TEMPLATE,PUBLISH_STATUS,VERSION_ID,CREATE_TIME,PUBLISH_TIME,FLOW_BUSSI_TYPE,FLOWCS_ID,FLOW_DESC,FLOW_TMPL_JSON ) 
+		VALUES ( #FLOW_ID#,#FLOW_NAME#,#FLOW_TEMPLATE#,#PUBLISH_STATUS#,#VERSION_ID#,NOW(),NOW(),#FLOW_BUSSI_TYPE#,#FLOWCS_ID#,#FLOW_DESC#,#FLOW_TMPL_JSON# )
+		
+	</insert>
+
+	<!-- 删除时存放删除表的信�?-->
+	<insert id="insertSelect" parameterClass="map">
+		INSERT INTO
+		${schema.interPlat}.BUSSI_FLOW_CONFIG_OP
+		select * from ${schema.interPlat}.BUSSI_FLOW_CONFIG where FLOW_ID= #FLOW_ID#
+	</insert>
+
+	<!-- 查詢P_WARM_TIPS_OP是否有待審核的數�?-->
+	<select id="findOp" parameterClass="map" resultClass="java.util.HashMap">
+		select *
+		from ${schema.interPlat}.BUSSI_FLOW_CONFIG_OP t1
+		INNER JOIN ${schema.configPlat}.AUDI_DETAIL_OP t2 ON t1.AUDI_ID = t2.AUDI_ID
+		where t1.FLOW_ID = #FLOW_ID# and t2.AUDI_STAT ='3'
+	</select>
+
+	<select id="count" parameterClass="map" resultClass="int">
+		<![CDATA[ 
+			SELECT COUNT(P.FLOW_ID) FROM ${schema.interPlat}.BUSSI_FLOW_CONFIG p 
+			 WHERE P.FLOW_ID=#FLOW_ID#
+		]]>
+	</select>
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.BUSSI_FLOW_CONFIG ]]>
+		<dynamic prepend="set">
+			<isNotNull property="FLOW_ID" prepend=","><![CDATA[ FLOW_ID = #FLOW_ID# ]]></isNotNull>
+			<isNotNull property="FLOW_NAME" prepend=","><![CDATA[ FLOW_NAME = #FLOW_NAME# ]]></isNotNull>
+			<isNotEmpty property="FLOW_TEMPLATE" prepend=","><![CDATA[ FLOW_TEMPLATE = #FLOW_TEMPLATE# ]]></isNotEmpty>
+			<isNotNull property="VERSION_ID" prepend=","><![CDATA[ VERSION_ID = #VERSION_ID# ]]></isNotNull>
+			<isNotNull property="FLOWCS_ID" prepend=","><![CDATA[ FLOWCS_ID = #FLOWCS_ID# ]]></isNotNull>
+			<isNotNull property="FLOW_DESC" prepend=","><![CDATA[ FLOW_DESC = #FLOW_DESC# ]]></isNotNull>
+			<isNotEmpty property="FLOW_TMPL_JSON" prepend=","><![CDATA[ FLOW_TMPL_JSON = #FLOW_TMPL_JSON# ]]></isNotEmpty>
+			<isNotEmpty property="PUBLISH_STATUS" prepend=","><![CDATA[ PUBLISH_STATUS = #PUBLISH_STATUS# ]]></isNotEmpty>
+			
+		</dynamic>
+		<![CDATA[ where FLOW_ID = #FLOW_ID# ]]>
+	</update>
+	
+	<update id="pubFlow" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.BUSSI_FLOW_CONFIG ]]>
+		<dynamic prepend="set">
+			<isNotNull property="PUBLISH_STATUS" prepend=","><![CDATA[ PUBLISH_TIME=NOW() ]]></isNotNull>
+			<isNotNull property="PUBLISH_STATUS" prepend=","><![CDATA[ PUBLISH_STATUS = #PUBLISH_STATUS# ]]></isNotNull>
+			
+		</dynamic>
+		<![CDATA[ where FLOW_ID = #FLOW_ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.BUSSI_FLOW_CONFIG where FLOW_ID = #FLOW_ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	 <!-- 查询指定时间后发布的流程 -->
+	<select id="queryLastPub" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[ SELECT T.*,DATE_FORMAT(T.FLOW_TEMPLATE) FLOW_TEMPLATE1 FROM ${schema.interPlat}.BUSSI_FLOW_CONFIG T where 1=1 ]]>
+		<dynamic>
+			<isNotNull prepend="and" property="PUBLISH_TIME"><![CDATA[ PUBLISH_TIME<#PUBLISH_TIME# ]]></isNotNull>
+			<isNotNull prepend="and" property="FLOW_ID"><![CDATA[ FLOW_ID=#FLOW_ID# ]]></isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>
+

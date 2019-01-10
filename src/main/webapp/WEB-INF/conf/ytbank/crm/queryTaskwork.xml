@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryTaskwork" desc="工作任务(客户经理)" serviceId="00850000000029">
+    <!--请求报文 -->
+    <snd>
+        <field name="beginDate" length="20" type="C" desc="任务开始时间" required="false"/>
+        <field name="endDate" length="20" type="C" desc="任务结束时间" required="false"/>
+        <field name="workType" length="20" type="C" desc="任务类型" required="false"/>
+        <field name="userId" length="50" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="twTitle " length="400" type="C" desc="任务标题 " />
+            <field name="twSetMan" length="20" type="C" desc="下发人" />
+            <field name="twEndDate" length="20" type="C" desc="任务结束时间" />
+            <field name="twStatus" length="20" type="C" desc="任务状态" />
+            <field name="twId" length="20" type="N" desc="任务序号"/>
+        </field>
+    </rcv>
+</trans>

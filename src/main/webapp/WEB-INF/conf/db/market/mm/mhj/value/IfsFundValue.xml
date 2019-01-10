@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="IfsFundValue" ibatisStatement="MHJ_FUND_VALUE.queryFund" desc="基金涨幅表">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="FUNDCODE" length="6" type="C" desc="基金代码" required="true"/>
+		<field name="NUM" length="6" type="C" desc="查询时段（一个月：1三个月：3半年：6一年：12）"  required="true"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+		<field name="START_DATE" length="20" type="C" desc="开始时间" />
+		<field name="END_DATE" length="20" type="C" desc="结束时间" />
+		<field name="START_SCALE" length="20" type="C" desc="起始度量" />
+		<field name="END_SCALE" length="20" type="C" desc="终止度量" />
+		<field name="SCALE_SPACE" length="20" type="C" desc="度量步长" />
+		<field name="FLOW" length="20" type="A" desc="净值" />
+		<field name="ACC_FLOW" length="20" type="A" desc="累计净值" />
+		<!-- <field-list name="LIST" type="E">
+			<field name="PRICEDATE" length="20" type="C" desc="净值日期"  />
+			<field name="NETVALUE" length="14" type="C" desc="单位净值" />
+			<field name="TOTALVALUE" length="14" type="C" desc="累计净值" />
+		</field-list> -->
+	</rcv>
+</trans>

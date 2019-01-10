@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="visits" desc="拜访查询">
+    <snd>
+        <field name="START_DATE" type="C" length="20" desc="开始日期" required="true"/>
+        <field name="END_DATE" type="C" length="20" desc="结束日期" required="true"/>
+        <field name="CUSTOMER_NAME" type="C" length="200" desc="客户名称"/>
+        <field name="USER_MANAGER_ID" type="C" length="64" desc="客户经理编号"/>
+        <field name="INTENTION" type="C" length="20" desc="意向"/>
+    </snd>
+
+    <rcv>
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+
+        <!-- 产品列表 -->
+        <field-list name="LIST" type="E">
+            <field name="CUSTOMER_NAME" type="C" length="20" desc="客户名称" required="true"/>
+            <field name="MOBILE" type="C" length="20" desc="手机" required="true"/>
+            <field name="ADDRESS" type="C" length="200" desc="联系地址" />
+            <field name="COMPANY" type="C" length="200" desc="单位"/>
+            <field name="POSITION" type="C" length="200" desc="职位" />
+            <field name="INTENTION" type="C" length="20" desc="意向" keyMap="0：意向，1：拒绝，2：申办" />
+            <field name="CONTACT" type="C" length="200" desc="联系方式，QQ、邮箱.." />
+            <field name="REMARK" type="C" length="500" desc="备注" />
+            <field name="USER_MANAGER_ID" type="C" length="64" desc="客户经理编号" />
+            <field name="USER_MANAGER_NAME" type="C" length="200" desc="客户经理名称" />
+        </field-list>
+    </rcv>
+</trans>

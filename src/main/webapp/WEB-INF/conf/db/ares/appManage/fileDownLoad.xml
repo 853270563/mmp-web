@@ -4,4 +4,8 @@
 	<snd>
 		<field name="RES_PATH" type="C" desc="资源包路径"  required="true"/>
 	</snd>
+	<rcv>
+		<field name="MSG" type="C" desc="返回消息"  required="true"/>
+		<field name="STATUS" type="C" desc="返回状态"  required="true"/>
+	</rcv>
 </trans>

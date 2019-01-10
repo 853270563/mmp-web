@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.com.yitong.common.utils.ConfigUtils;
 import cn.com.yitong.common.utils.ServerUtils;
 import cn.com.yitong.core.session.Session;
 import cn.com.yitong.core.session.SessionException;
 import cn.com.yitong.core.session.util.SessionManagerUtils;
 import cn.com.yitong.core.session.vo.SimpleSession;
 import cn.com.yitong.core.session.vo.ValidateSession;
+import cn.com.yitong.core.util.SecurityUtils;
 
 /**
  * SessionDao基础实现
@@ -44,7 +46,8 @@ public abstract class AbstractSessionDao implements SessionDao {
      * @return
      */
     protected Session create(String id) {
-        return new SimpleSession((String)null);
+		return "1".equals(ConfigUtils.getValue("debug_model")) || !SecurityUtils.canCodec() ? new SimpleSession(id)
+				: new SimpleSession((String) null);
     }
 
     /**

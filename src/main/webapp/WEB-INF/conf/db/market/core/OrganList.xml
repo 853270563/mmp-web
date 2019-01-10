@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="OrganList" ibatisStatement="SYS_ORGAN.findAll_ZH" desc="数据字典加载">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!--过滤响应信息，并对数据字典进行解析-->
+		<field name="PARENT_ID" length="20" type="C" desc="上级机构"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+			<field name="ORG_ID" length="100" type="C" desc="值" />
+			<field name="ORG_NAME2" length="6" type="C" desc="文本"  xpath="ORG_NAME" />
+			<field name="ORG_LVL" length="6" type="C" desc="文本"  mapKey="ORG_LVL" descName="ORG_LVL_DESC"/>
+		</field-list>
+	</rcv>
+</trans>

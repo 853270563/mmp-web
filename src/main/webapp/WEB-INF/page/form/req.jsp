@@ -2,7 +2,7 @@
 	contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>ares移动营销</title>
+<title>大豐銀行</title>
 <%@ taglib uri="/WEB-INF/tlds/c.tld" prefix="c"%>
 <%@ taglib uri="/WEB-INF/tlds/fn.tld" prefix="fn"%>
 <%@ taglib uri="/WEB-INF/tlds/fmt.tld" prefix="fmt" %>
@@ -23,8 +23,8 @@
 		<div><b>接口名称：${conf.name } <br>接口描述：${conf.desc } </b></div>
 		<c:forEach items="${items}" var="item">
 			<div>
-				<label class="label">${item.desc} [${item.name}]:</label>
-				<input name="${item.name}" data-type="text" class="formInput" data-name="${item.name}" 
+				<label class="label">${item.desc} [${item.client}]:</label>
+				<input name="${item.client}" data-type="text" class="formInput" data-name="${item.client}" 
 					data-maxlength="${item.length }" data-minlength="" 
 					value="${item.defaultValue }"
 					data-required="${item['requred']}"> 

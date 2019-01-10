@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MZJ_RES_DATA">
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="AND" property="ORGAN_LIMIT">
+		 	T.ORGAN_LIMIT IN (SELECT P.ID FROM  ${schema.configPlat}.SYS_ORGAN  P  START WITH P.ID =#ORGAN_LIMIT# CONNECT BY PRIOR P.PARENT_ID=P.ID)
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="USER_ID">
+		 	T.EDITOR = #USER_ID#
+		</isNotEmpty> 
+	</sql>
+	 
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MZJ_RES_DATA T
+	</select> 
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.*,NVL(D.FILE_ADDR,'') AS PROPA_IMG ,NVL(F.FILE_ADDR,'') AS FILE_ADDR 
+		FROM
+		${schema.interPlat}.MZJ_RES_DATA T
+		INNER JOIN ${schema.interPlat}.MZJ_FILES_DATA  F ON T.FILE_ID = F.FILE_ID
+		LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  D  ON T.PROPA_PIC=D.FILE_ID
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+			<isNotEmpty prepend="AND" >
+		 		T.DEL_FLAG = '0'
+			</isNotEmpty> 
+		</dynamic>
+		ORDER BY T.RES_TYPE,T.BANNER_ORDE,T.RES_ID
+	</sql>
+	
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+</sqlMap>

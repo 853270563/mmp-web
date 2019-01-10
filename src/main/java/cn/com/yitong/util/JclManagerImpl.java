@@ -1,5 +1,9 @@
 package cn.com.yitong.util;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -8,12 +12,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
+
 
 public class JclManagerImpl {
 

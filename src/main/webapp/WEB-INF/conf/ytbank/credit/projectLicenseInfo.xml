@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="projectLicenseInfo" desc="项目许可证信息">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100036" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="apply_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流程编号" /> 
+			<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+				<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+				<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+				<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend> 
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<!-- desc 格式说明    业务品种，字段含义/业务品种，字段含义-->
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+					<field name="ObjectType" client="ObjectType" type="C" required="true"  default="20"    desc="对象类型" />  
+					<field name="ObjectNo" client="ObjectNo" type="C" required="true"  default="20"    desc="申请编号" />  
+					<field name="SerialNo" client="SerialNo" type="C" required="true"  default="20"    desc="流水号" />  
+					<field name="LCType" client="LCType" type="C" required="true"  default="20"    desc="许可证类型" />  
+					<field name="LCNo" client="LCNo" type="C"  default="20"    desc="许可证编号" />  
+					<field name="Flag1" client="Flag1" type="C"   default="20"    desc="项目状况" />  
+					<field name="LoadingDate" client="LoadingDate" type="C" required="true"  default="20"    desc="发证日" />  
+					<field name="ValidDate" client="ValidDate" type="C" required="true"  default="20"    desc="到期日" />  
+					<field name="UserName" client="UserName" type="C" required="true"  default="20"    desc="  登记人" />  
+					<field name="OrgName" client="OrgName" type="C" required="true"  default="20"    desc="登记机构" />  
+			</field>
+		</rcv>
+</trans>

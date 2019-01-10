@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="allTxlList"   desc="通讯录同步">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="synchroTime" length="17" type="C" desc="同步时间" />
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--新增机构 -->
+		<field-list name="orgNewList" type="E">
+			<field name="ID" length="64" type="C" desc="编号" />
+			<field name="PARENT_ID" length="64" type="C" desc="父级编号" />
+			<field name="NAME" length="100" type="C" desc="机构名称" />
+		</field-list>
+		<!--更新机构 -->
+		<field-list name="orgUpdateList" type="E">
+			<field name="ID" length="64" type="C" desc="编号" />
+			<field name="PARENT_ID" length="64" type="C" desc="父级编号" />
+			<field name="NAME" length="100" type="C" desc="机构名称" />
+		</field-list>
+		<!--删除机构 -->
+		<field-list name="orgDeleteList" type="E">
+			<field name="ID" length="64" type="C" desc="编号" />
+		</field-list>
+		<!--新增职员 -->
+		<field-list name="empNewList" type="E">
+			<field name="EMP_ID" length="64" type="C" desc="职员编号" />
+			<field name="EMP_NAME" length="200" type="C" desc="职员名称" />
+			<field name="MOBILE" length="15" type="C" desc="手机号" />
+			<field name="OFFICE_NO" length="15" type="C" desc="办公电话" />
+			<field name="EMAIL" length="255" type="C" desc="邮箱" />
+			<field name="ORGAN_ID" length="64" type="C" desc="所属机构" />
+		</field-list>
+		<!--更新职员 -->
+		<field-list name="empUpdateList" type="E">
+			<field name="EMP_ID" length="64" type="C" desc="职员编号" />
+			<field name="EMP_NAME" length="200" type="C" desc="职员名称" />
+			<field name="MOBILE" length="15" type="C" desc="手机号" />
+			<field name="OFFICE_NO" length="15" type="C" desc="办公电话" />
+			<field name="EMAIL" length="255" type="C" desc="邮箱" />
+			<field name="ORGAN_ID" length="64" type="C" desc="所属机构" />
+		</field-list>
+		<!--删除职员 -->
+		<field-list name="empDeleteList" type="E">
+			<field name="EMP_ID" length="64" type="C" desc="职员编号" />
+		</field-list>
+		<!--新增群组 -->
+		<field-list name="grpNewList" type="E">
+			<field name="GROUP_ID" length="64" type="C" desc="群组编号" />
+			<field name="GROUP_NAME" length="200" type="C" desc="群组名称" />
+			<field name="GROUP_TYPE" length="1" type="C" desc="群组类型(0:个人群组，1:公共群组)" />
+			<field-list name="empList" type="E">
+				<field name="EMP_ID" length="64" type="C" desc="职员编号" />
+			</field-list>
+		</field-list>
+		<!--更新群组 -->
+		<field-list name="grpUpdateList" type="E">
+			<field name="GROUP_ID" length="64" type="C" desc="群组编号" />
+			<field name="GROUP_NAME" length="200" type="C" desc="群组名称" />
+			<field name="GROUP_TYPE" length="1" type="C" desc="群组类型(0:个人群组，1:公共群组)" />
+			<field-list name="empList" type="E">
+				<field name="EMP_ID" length="64" type="C" desc="职员编号" />
+			</field-list>
+		</field-list>
+		<!--删除群组 -->
+		<field-list name="grpDeleteList" type="E">
+			<field name="GROUP_ID" length="64" type="C" desc="群组编号" />
+		</field-list>
+		<field name="updateTime" length="17" type="C" desc="同步时间" />
+		<!--公共字段 -->
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+</trans>

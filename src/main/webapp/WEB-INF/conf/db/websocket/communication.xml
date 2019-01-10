@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="communication" desc="websocket通讯">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<field name="userId" length="100" type="C" desc="把$userId替换为实际的USER_ID" />
+	</snd>
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="CONTENT" length="100" type="C" desc="消息内容" />
+		<field name="TITLE" length="100" type="C" desc="消息标题" />
+		<field name="URL" length="100" type="C" desc="消息URL" />
+		
+	</rcv>
+</trans>

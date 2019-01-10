@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryFiles" desc="附件" serviceId="00850000000006">
+    <!--请求报文 -->
+    <snd>
+        <field name="busiId" length="20" type="C" desc="附件id" required="true"/>
+    </snd>
+</trans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="pms113" desc="凭证号占用">
+	<snd>
+		<field name="bzh" length="2" type="c" desc="币种号"  required="true"/>
+		<field name="czy" length="4" type="c" desc="操作员"  required="true"/>
+		<field name="jgm" length="9" type="c" desc="机构码"  required="true"/>
+		<field name="sblx" length="1" type="c" desc="设备类型"  required="true"/>
+		<field name="jym" length="4" type="c" desc="交易码"  required="true"/>
+		<field name="kh" length="19" type="c" desc="卡号"  required="true"/>
+		<field name="qdh" length="4" type="c" desc="渠道号" required="true" />
+		<field name="xmbh" length="9" type="c" desc="项目号" required="true" />
+		<field name="ddxh" length="4" type="c" desc="调度序号"  required="true"/>
+		<field name="wwrq" length="8" type="c" desc="外围日期" required="true" />
+		<field name="wwlsh" length="16" type="c" desc="外围流水号"  required="true"/>
+		<field name="dzbz" length="1" type="c" desc="对账标志"  required="true"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="70" type="C" desc="返回消息" />
+		<field name="zjlsh" length="8" type="C" desc="主机流水号" />
+	</rcv>
+</trans>

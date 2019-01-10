@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="AREA_INFO">
+
+	<!-- 查找省份信息 -->
+	<select id="provInfoQuery" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MGJ_BRANCH_PROVINCE T
+	</select>
+	
+	<!-- 查找城市信息 -->
+	<select id="cityInfoQuery" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MGJ_BRANCH_CITY T
+	</select>
+	
+	<!-- 查找市区信息 -->
+	<select id="townInfoQuery" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.MGJ_BRANCH_TOWN T
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="showJudgeSign" ibatisStatement="" desc="是否显示贷审会意见">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		
+		 <field name="serialNo" client="serialNo" type="C"  required="true"  default=""    desc="任务流水号" />  
+		<field name="flowNo" client="flowNo" type="C"  required="true"  default=""    desc="流程代码" /> 
+		<field name="phaseNo" client="phaseNo" type="C"  required="true"  default=""    desc="阶段编号" /> 
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+        <field-list name="item" type="E">
+           			 <field name="displaySpecialOpinion" client="displaySpecialOpinion" type="C" required="true"  default="100"    desc="是否显示贷审会意见" /> 
+   					<field name="specialOpinionHeader" client="specialOpinionHeader" type="C" required="true"  default="100"    desc="显示标题" />  
+   					<field name="phaseOpinionValue" client="phaseOpinionValue" type="C" required="true"  default="100"    desc="审批意见" />  
+   					<field name="specialOpinionValue" client="specialOpinionValue" type="C" required="true"  default="100"    desc="贷审会意见" />  
+   					<field name="isShowRatingInfo" client="isShowRatingInfo" type="C" required="true"  default="100"    desc="是否显示评级意见" />  
+   					<field name="cognResultReadOnly" client="cognResultReadOnly" type="C" required="true"  default="100"    desc="是否显示贷审会意见" />  
+   					<field name="modelName" client="modelName" type="C" required="true"  default="100"    desc="评估模型" />  
+   					<field name="systemScore" client="systemScore" type="C" required="true"  default="100"    desc="系统评估得分" />  
+   					<field name="systemResult" client="systemResult" type="C" required="true"  default="100"    desc="系统评估结果" />   
+   					<field name="specialResult" client="specialResult" type="C" required="true"  default="100"    desc="特例调整等级" /> 
+   					<field name="cognResult" client="cognResult" type="C" required="true"  default="100"    desc="人工评定结果" />  
+   					<field name="isShowRatingLeaderInfo" client="isShowRatingLeaderInfo" type="C" required="true"  default="100"    desc="是否显示签署评级意见页面" />  
+   					<field name="ratingEndFlag" client="ratingEndFlag" type="C" required="true"  default="100"    desc="评级页面之评级意见 1:同意  4:否决" />  
+   					<field name="ratingEndOpinion" client="ratingEndOpinion" type="C" required="true"  default="100"    desc="评级页面之意见" />  
+   					<field name="isShowRatingInfo1" client="isShowRatingInfo1" type="C" required="true"  default="100"    desc="是否显示评级意见" />  
+   					<field name="cognResultReadOnly1" client="cognResultReadOnly1" type="C" required="true"  default="100"    desc="人工评定结果是否可修改" />  
+   					<field name="modelName1" client="modelName1" type="C" required="true"  default="100"    desc="评估模型" />  
+   					<field name="systemScore1" client="systemScore1" type="C" required="true"  default="100"    desc="系统评估得分" />   
+   					<field name="systemResult1" client="systemResult1" type="C" required="true"  default="100"    desc="系统评估结果" />  
+   					<field name="specialResult1" client="specialResult1" type="C" required="true"  default="100"    desc="特例调整等级" />  
+   					<field name="cognResult1" client="cognResult1" type="C" required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="displayRatingEndButton" client="displayRatingEndButton" type="C" required="true"  default="100"    desc="是否显示“评级终审确认”按钮" />  
+        </field-list>
+        <field-list name="specialOpinion"    type="E"  desc="解析响应报文体">
+   			        <field name="item0" client="item0" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item1" client="item1" type="C"  required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item2" client="item2" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item3" client="item3" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item4" client="item4" type="C"   required="true"  default="100"    desc="人工评定结果" />
+   		</field-list>	
+	</rcv>
+</trans>
+	

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CREDIT_ASSETS">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="and" property="BUSINESSNUM">
+			T.BUSINESSNUM =#BUSINESSNUM#
+		</isNotEmpty> 
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.CREDIT_ASSETS T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.ID
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT('') CNT 
+			FROM ${schema.interPlat}.CREDIT_ASSETS T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="ID" type="pre" resultClass="string">
+			select ${schema.interPlat}.SEQ_CREDIT_ASSETS.nextval from dual
+		</selectKey>
+		INSERT INTO ${schema.interPlat}.CREDIT_ASSETS
+		( ID,BUSINESSNUM,ASSESTTYPE,ASSESTAGREEDVALUE,ASSESTOWNEDVALUE,ASSESTSHAREVALUE,ASSESTNETVALUE,ISCOMASSEST,RECORDTIME,RECORDID,RECORDNME,RECORDORG,EXPANDFIELD1,EXPANDFIELD2,EXPANDFIELD3,EXPANDFIELD4,EXPANDFIELD5 ) 
+		VALUES ( #ID#,#BUSINESSNUM#,#ASSESTTYPE#,#ASSESTAGREEDVALUE#,#ASSESTOWNEDVALUE#,#ASSESTSHAREVALUE#,#ASSESTNETVALUE#,#ISCOMASSEST#,#RECORDTIME#,#RECORDID#,#RECORDNME#,#RECORDORG#,#EXPANDFIELD1#,#EXPANDFIELD2#,#EXPANDFIELD3#,#EXPANDFIELD4#,#EXPANDFIELD5#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.CREDIT_ASSETS ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="ID" prepend=","><![CDATA[ ID = #ID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="BUSINESSNUM" prepend=","><![CDATA[ BUSINESSNUM = #BUSINESSNUM# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ASSESTTYPE" prepend=","><![CDATA[ ASSESTTYPE = #ASSESTTYPE# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ASSESTAGREEDVALUE" prepend=","><![CDATA[ ASSESTAGREEDVALUE = #ASSESTAGREEDVALUE# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ASSESTOWNEDVALUE" prepend=","><![CDATA[ ASSESTOWNEDVALUE = #ASSESTOWNEDVALUE# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ASSESTSHAREVALUE" prepend=","><![CDATA[ ASSESTSHAREVALUE = #ASSESTSHAREVALUE# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ASSESTNETVALUE" prepend=","><![CDATA[ ASSESTNETVALUE = #ASSESTNETVALUE# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="ISCOMASSEST" prepend=","><![CDATA[ ISCOMASSEST = #ISCOMASSEST# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="RECORDTIME" prepend=","><![CDATA[ RECORDTIME = #RECORDTIME# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="RECORDID" prepend=","><![CDATA[ RECORDID = #RECORDID# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="RECORDNME" prepend=","><![CDATA[ RECORDNME = #RECORDNME# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="RECORDORG" prepend=","><![CDATA[ RECORDORG = #RECORDORG# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EXPANDFIELD1" prepend=","><![CDATA[ EXPANDFIELD1 = #EXPANDFIELD1# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EXPANDFIELD2" prepend=","><![CDATA[ EXPANDFIELD2 = #EXPANDFIELD2# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EXPANDFIELD3" prepend=","><![CDATA[ EXPANDFIELD3 = #EXPANDFIELD3# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EXPANDFIELD4" prepend=","><![CDATA[ EXPANDFIELD4 = #EXPANDFIELD4# ]]></isNotNull>
+		</dynamic>
+		<dynamic prepend="set"> 
+			<isNotNull property="EXPANDFIELD5" prepend=","><![CDATA[ EXPANDFIELD5 = #EXPANDFIELD5# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where ID = #ID# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.CREDIT_ASSETS where ID = #ID# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>
+

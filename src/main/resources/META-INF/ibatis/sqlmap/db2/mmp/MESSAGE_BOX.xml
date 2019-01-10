@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MESSAGE_BOX">
+
+<!-- 查询 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<![CDATA[
+		SELECT * FROM(SELECT a.MESSAGE_ID,b.MESSAGE_TITLE,b.MESSAGE_CONTENT,b.MESSAGE_STATUS,b.MESSAGE_CREATE_TIME,b.MESSAGE_CREATE_PERSON,row_number() over(ORDER BY b.MESSAGE_CREATE_TIME DESC) as rn FROM ${schema.configPlat}.MESSAGE_RECEIVE_USER a
+						LEFT JOIN ${schema.configPlat}.MESSAGE_BOX  b on a.MESSAGE_ID=b.MESSAGE_ID
+						WHERE  a.USER_ID=#USER_ID# AND b.MESSAGE_STATUS='1' )  WHERE rn <=20
+		]]>
+	</select>
+	<!--通过usrId查询一条消息  -->
+		<select id="findById" parameterClass="Map" resultClass="java.util.HashMap">
+		<![CDATA[
+
+				SELECT a.MESSAGE_ID,b.MESSAGE_TITLE,b.MESSAGE_CONTENT,a.USER_RECEIVE_STATUS,b.MESSAGE_CREATE_TIME,b.MESSAGE_CREATE_PERSON FROM ${schema.configPlat}.MESSAGE_RECEIVE_USER  a
+						LEFT JOIN ${schema.configPlat}.MESSAGE_BOX  b on a.MESSAGE_ID=b.MESSAGE_ID
+						WHERE  a.MESSAGE_ID=#MESSAGE_ID# AND a.USER_ID=#USER_ID#
+		]]>
+	</select>
+	<!--  设置是否已接收-->
+		<update id="updateById" parameterClass="map">
+		<![CDATA[
+		update ${schema.configPlat}.MESSAGE_RECEIVE_USER set USER_RECEIVE_STATUS='1' WHERE  USER_ID=#USER_ID#
+		]]>
+	</update>
+	<!-- 设置是否已读 -->
+			<update id="updateByMid" parameterClass="map">
+		<![CDATA[
+				update ${schema.configPlat}.MESSAGE_BOX set MESSAGE_READ_STATUS='1' WHERE  MESSAGE_ID=#MESSAGE_ID#
+		]]>
+	</update>
+				<!-- 从数据库中的SEQ_TRANS_CARDCONFIRM获取当前的SEQ（基数从10000开始） -->
+	<select id="SEQ_TRANS_CARDCONFIRM" resultClass="String">
+		SELECT  ${schema.configPlat}.SEQ_TRANS_CARDCONFIRM.NEXTVAL FROM SYSIBM.SYSDUMMY1
+	</select>
+
+	<select id="SEQ_CONFIRM" resultClass="String">
+		SELECT  ${schema.configPlat}.SEQ_CONFIRM.NEXTVAL FROM SYSIBM.SYSDUMMY1
+	</select>
+</sqlMap>
+

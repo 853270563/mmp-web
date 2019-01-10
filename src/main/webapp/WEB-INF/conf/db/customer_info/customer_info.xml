@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="customer_info" ibatisStatement="" desc="用户信息展示列表">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!-- 客户信息  -->
+		<field  name="cus_name" length="30" type="C" desc="用户名称"  />
+		<field  name="cus_no" length="30" type="C" desc="用户编号"  />
+		<field  name="ORG_ID" length="10" type="C" desc="组织机构代码" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="SEQ" length="16" type="C" desc="流水号" />
+		<field name="TRANS_TYPE" length="4" type="C" desc="交易类型" /><!-- 0001：新增客户进件信息 -->
+		<field name="TRANS_CODE" length="4" type="C" desc="交易结果码" /><!-- 0000：表示交易成功 其它均为交易失败 -->
+		<field name="TRANS_DESC" length="128" type="C" desc="交易结果描述" />
+		<field name="TRANS_DATE" length="8" type="C" desc="响应日期" />	
+		<field name="TRANS_TIME" length="6" type="C" desc="响应时间" />
+		 <!-- 贷款记录 -->
+        <field-list name="LIST" type="E">
+            <field name="LOAN_ID" length="20" type="C" desc="贷款编号" />
+            <field name="PRODUCT_ID" length="20" type="C" desc="产品编号" />
+            <field name="PRODUCT_NAME" length="20" type="C" desc="产品名称" />
+            <field name="LOAN_AMOUNT" length="20" type="C" desc="贷款金额" />
+            <field name="RESIDUE_AMOUNT" length="20" type="C" desc="剩余金额" />
+            <field name="LOAN_STATUS" length="2" type="C" desc="贷款状态" />
+            <field name="VALUE_DATE" length="2" type="C" desc="起息日" />
+        </field-list>
+	</rcv>
+</trans>
+	

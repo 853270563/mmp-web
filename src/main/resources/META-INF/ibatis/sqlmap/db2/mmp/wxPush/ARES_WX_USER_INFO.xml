@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_WX_USER_INFO">
+    <insert id="insertWxUserInfo" parameterClass="java.util.HashMap">
+        insert into ${schema.configPlat}.ARES_WX_USER_INFO
+         (
+            SUBSCRIBE,
+            OPENID,
+            NICKNAME,
+            SEX,
+            LANGUAGE,
+            CITY,
+            PROVINCE,
+            COUNTRY,
+            HEADIMGURL,
+            SUBSCRIBE_TIME,
+            CANCEL_TIME,
+            REMARK,
+            CUSTID,
+            STATUS)
+        VALUES
+           (#SUBSCRIBE#,
+            #OPENID#,
+            #NICKNAME#,
+            #SEX#,
+            #LANGUAGE#,
+            #CITY#,
+            #PROVINCE#,
+            #COUNTRY#,
+            #HEADIMGURL#,
+            current timestamp,
+            #CANCEL_TIME#,
+            #REMARK#,
+            #CUSTID#,
+            #STATUS#)
+    </insert>
+    <update id="updateWxUserInfoStatus" parameterClass="java.util.Map" >
+        UPDATE   ${schema.configPlat}.ARES_WX_USER_INFO
+        SET STATUS=#STATUS#,CANCEL_TIME= current timestamp WHERE  OPENID=#OPEN_ID#
+    </update>
+
+    <update id="updateWxUserInfo" parameterClass="java.util.Map" >
+        UPDATE   ${schema.configPlat}.ARES_WX_USER_INFO
+        SET
+        SUBSCRIBE_TIME=current timestamp
+        <isNotEmpty property="SUBSCRIBE">
+            ,SUBSCRIBE = #SUBSCRIBE#
+        </isNotEmpty>
+        <isNotEmpty property="NICKNAME">
+            ,NICKNAME = #NICKNAME#
+        </isNotEmpty>
+        <isNotEmpty property="SEX">
+            ,SEX = #SEX#
+        </isNotEmpty>
+        <isNotEmpty property="LANGUAGE">
+            ,LANGUAGE = #LANGUAGE#
+        </isNotEmpty>
+        <isNotEmpty property="CITY">
+            ,CITY = #CITY#
+        </isNotEmpty>
+        <isNotEmpty property="PROVINCE">
+            ,PROVINCE = #PROVINCE#
+        </isNotEmpty>
+        <isNotEmpty property="COUNTRY">
+            ,COUNTRY = #COUNTRY#
+        </isNotEmpty>
+        <isNotEmpty property="HEADIMGURL">
+            ,HEADIMGURL = #HEADIMGURL#
+        </isNotEmpty>
+        <isNotEmpty property="CANCEL_TIME">
+            ,CANCEL_TIME = #CANCEL_TIME#
+        </isNotEmpty>
+        <isNotEmpty property="REMARK">
+            ,REMARK = #REMARK#
+        </isNotEmpty>
+        <isNotEmpty property="CUSTID">
+            ,CUSTID = #CUSTID#
+        </isNotEmpty>
+        <isNotEmpty property="STATUS">
+            ,STATUS = #STATUS#
+        </isNotEmpty>
+        WHERE  OPENID=#OPENID#
+    </update>
+    <select id="findUserInfoByOpenId" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+        SELECT t.* from ${schema.configPlat}.ARES_WX_USER_INFO t where t.OPENID=#OPEN_ID#
+    </select>
+
+    <select id="findUserInfoByStatus" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+        SELECT t.* from ${schema.configPlat}.ARES_WX_USER_INFO t where t.STATUS='1'
+    </select>
+
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		SELECT ${schema.configPlat}.SEQ_WX_USER_INFO.NEXTVAL AS SUBSCRIBE FROM DUAL
+	</select>
+
+
+
+</sqlMap>
+

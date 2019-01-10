@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiQuery" desc="卡验密">
+	<snd>
+		<field name="bankNo" length="4" type="C" desc="分行号"/>
+		<field name="idNBR" length="18" type="C" required="true" desc="证件号码"/>
+		<field name="custName" length="30" type="C" desc="姓名"/>
+		<field name="barCode" length="20" type="C" desc="条形码"/>
+		<field name="barCode" length="20" type="C" desc="条形码"/>
+		<field name="sendCode" length="20" type="C"  required="true" desc="验证码"/>
+	</snd>
+	<rcv>
+	   <!--公共字段 -->
+		<field name="errorCode" length="4" type="C" desc="响应码" />
+		<field name="errorMsg" length="20" type="C" desc="响应描述" />
+		<field name="appCount" length="20" type="C" desc="申请资料记录数" />
+		
+		<field-list name="LIST" type="E"> 
+			<field name="barCode" length="20" type="C" desc="条形码" />
+			<field name="custName" length="30" type="C" desc="姓名" />
+			<field name="idNBR" length="18" type="C" desc="证件号码" />
+			<field name="cardType" length="3" type="C" desc="备用" />
+			<field name="auditingResult" length="1" type="C" desc="信审结果" />
+			<field name="rsCode" length="6" type="C" desc="拒绝原因代码" />
+			<field name="decidingDate" length="20" type="C" desc="信审决定日期" />
+			<field name="disposeStatus" length="4" type="C" desc="信审处理状态（拒绝\成功\待决）" />
+			<field name="emergency" length="1" type="C" desc="紧急程度" />
+			<field name="cobrand" length="8" type="C" desc="联名卡代号" />
+			<field name="tlbmlw" length="6" type="C" desc="通路代码" />
+			<field name="cardFormat" length="4" type="C" desc="卡板代码" />
+		</field-list>
+	</rcv>
+</trans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryIntention" desc="意向查询" ibatisStatement="">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+		<field name="START_TIME" length="20" type="C" desc="起始时间" />
+		<field name="END_TIME" length="20" type="C" desc="截止时间" />
+		<field name="PROD_ID" length="20" type="C" desc="产品编号" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+	<rcv>
+		<!-- 公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="INTENT_LIST" type="E">
+			<field name="INTENT_ID" length="20" type="C" desc="意向编号 " />
+			<field name="PROD_ID" length="20" type="C" desc="产品编号" />
+			<field name="PROD_NAME" length="50" type="C" desc="产品名称" />
+			<field name="CUST_NAME" length="50" type="C" desc="客户名称" />
+			<field name="AMOUNT" length="20" type="C" desc="购买金额" />
+			<field name="INTENT_TIME" length="20" type="C" desc="意向时间" />
+			<field name="INTENT_STATUS" length="20" type="C" desc="意向状态" />
+		</field-list>
+	</rcv>
+</trans>

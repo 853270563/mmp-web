@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="in/test/testsample" desc="测试交易">
+	<snd>
+		<field name="RCV_NAME" desc="收款人姓名" required="true" />
+	</snd>
+	<rcv>
+		<field name="EBUSER_NO" desc="登录人的客户号" />
+		<field name="LIST" type="E" desc="AA付款列表">
+			<field name="SKID" desc="收款编号" />
+		</field>
+	</rcv>
+</trans>

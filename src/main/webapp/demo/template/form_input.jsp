@@ -2,7 +2,7 @@
 	contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<%-- <%@ include file="/include/head.jsp"%> --%>
+<%@ include file="/include/head.jsp"%>
 <meta name="description" content="模板：表单录入页面" />
 <title>大丰銀行</title>
 <style type="text/css">

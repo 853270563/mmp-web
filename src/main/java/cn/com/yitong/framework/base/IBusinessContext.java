@@ -1,6 +1,5 @@
 package cn.com.yitong.framework.base;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.dom4j.Element;
 
+import cn.com.yitong.ares.jstl.PageContext;
 import cn.com.yitong.framework.core.vo.TransLogBean;
 import cn.com.yitong.framework.net.IEBankConfParser;
 import cn.com.yitong.framework.net.IParamCover;
@@ -20,7 +20,7 @@ import cn.com.yitong.framework.service.ICommonService;
  * @author yaoym
  * 
  */
-public interface IBusinessContext {
+public interface IBusinessContext extends PageContext {
 
 	public static final String PARAM_TYPE_XML = "xml";
 	public static final String PARAM_TYPE_MAP = "map";
@@ -168,7 +168,7 @@ public interface IBusinessContext {
 	 * @param text
 	 * @return
 	 */
-	public boolean setParam(String name, String text);
+	public boolean setParam(String name, Object value);
 
 	/**
 	 * 获取请求的参数对象数组
@@ -233,7 +233,7 @@ public interface IBusinessContext {
 	 * @param name
 	 * @param value
 	 */
-	public void saveSessionText(String name, String value);
+	public void saveSessionText(String name, Object value);
 
 	/**
 	 * 获取会话对象
@@ -243,6 +243,7 @@ public interface IBusinessContext {
 	 */
 	public Element getSessionElement(String name);
 
+	@Override
 	public String toString();
 
 	/**
@@ -304,5 +305,12 @@ public interface IBusinessContext {
 	 */
 	public Map<String, Object> getRst(ICommonService commonService, IBusinessContext ctx, String transCode, IParamCover json2MapParamCover,
 									  IRequstBuilder requestBuilder, IEBankConfParser confParser);
+
+	/**
+	 * @param dB_NAME
+	 */
+	public void removeParam(String xpath);
+
+	public Map getHeadMap();
 
 }

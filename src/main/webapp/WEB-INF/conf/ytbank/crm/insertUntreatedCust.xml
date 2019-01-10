@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertUntreatedCust" desc="资金异动下的未处理客户处理意见" serviceId="00850000000035">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="客户id" required="false"/>
+        <field name="status" length="20" type="C" desc="状态" />
+        <field name="disposeType" length="20" type="C" desc=" 处理方式" />
+    </snd>
+</trans>

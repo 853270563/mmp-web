@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Service> 
+  <Service_Header>
+    <service_id>00080000100003</service_id>
+     <requester_id>8160097</requester_id>
+     <branch_id>802777777</branch_id>
+     <channel_id>39</channel_id>
+     <version_id>01</version_id>
+     <service_time>20101104111710</service_time>
+     <service_sn>8027777770209011171</service_sn>
+  </Service_Header>
+  <Service_Body>
+      <request>
+      <page_control>
+      <control_flag>{controlFlag}</control_flag>
+      <pageindex>1</pageindex>
+      <pagesize>10</pagesize>
+      </page_control>
+      
+      <serial_no>{applySerialNo}</serial_no>
+	  <user_id>{userId}</user_id> 
+    </request>  
+    <response></response> 
+  </Service_Body>
+</Service>
+<!-- 响应 报文-->
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<Service>
+  <Service_Header>
+    <msg_interval>25</msg_interval>
+    <msg_expiry>38000</msg_expiry>
+    <msglog>1</msglog>
+    <timeout>3000</timeout>
+    <name>影像首页列表信息</name>
+    <service_sn>8160097000049008088</service_sn>
+    <service_time>20180417100406</service_time>
+    <service_id>00080000100003</service_id>
+    <requester_id>8160097</requester_id>
+    <branch_id>816010918</branch_id>
+    <channel_id>39</channel_id>
+    <version_id>01</version_id>
+    <service_response>
+      <status>COMPLETE</status>
+      <code>0000</code>
+      <desc>成功</desc>
+      <requester_code/>
+      <requester_desc/>
+      <detail_code/>
+      <requester_detail_code/>
+    </service_response>
+    <start_timestamp>2018-04-17 18:11:07.661</start_timestamp>
+    <trace_msg>IBM.SERVICE.RES.OUTPUT-return reponse to requester</trace_msg>
+    <end_timestamp>2018-04-17 18:11:07.786</end_timestamp>
+  </Service_Header>
+  <Service_Body>
+    <request>
+      <serial_no>2017111700000003</serial_no>
+      <user_id>2201</user_id>
+      <page_control>
+        <control_flag>1</control_flag>
+        <pageindex>1</pageindex>
+        <pagesize>10</pagesize>
+      </page_control>
+    </request>
+    <ext_attributes>
+      <PRO_GLB_APPS_SYS_ID>8160008</PRO_GLB_APPS_SYS_ID>
+      <PRO_SUB_APPS_SYS_ID>0000</PRO_SUB_APPS_SYS_ID>
+      <INNER_DataProcPara>0,1,0</INNER_DataProcPara>
+      <REQ_GLB_APPS_SYS_ID>8160097</REQ_GLB_APPS_SYS_ID>
+      <REQ_SUB_APPS_SYS_ID>0000</REQ_SUB_APPS_SYS_ID>
+    </ext_attributes>
+    <response>
+      <count>1</count>
+      <total>0</total>
+      <item>
+        <urlImage>http://36.32.193.161:9082/SunIAS/SunIASRequestServlet.do</urlImage>
+        <nowParam>UID=admin;PWD=111;AppID=XD;OrgID=816000000;OrgName=%E6%B5%B7%E9%98%B3%E6%94%AF%E8%A1%8C;UserID=2201;UserName=%E7%9B%B8%E5%BE%B7%E5%88%9A;</nowParam>
+        <infoList>
+          <string>BUSI_SERIAL_NO:2017022100000006;OBJECT_NAME:XDKHZL;QUERY_TIME:20170221;FILELEVEL:1;RIGHT:01001001;</string>
+          <string>BUSI_SERIAL_NO:2017111700000003;OBJECT_NAME:XDSX;QUERY_TIME:20170624;FILELEVEL:68;RIGHT:01001001;VersonBind:1;</string>
+          <string>BUSI_SERIAL_NO:2017111700000003sq;OBJECT_NAME:BCZL;QUERY_TIME:20170624;FILELEVEL:99;RIGHT:01001101;</string>
+        </infoList>
+      </item>
+    </response>
+  </Service_Body>
+</Service> -->

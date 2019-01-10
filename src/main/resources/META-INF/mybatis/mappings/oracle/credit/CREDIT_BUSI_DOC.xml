@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="credit">
+
+    <sql id="BaseColumnList">
+        ABSOLUTE_PATH,DOC_TITLE,DOC_TYPE,UPDATE_TIME,DOC_NO,
+        ATTACHMENT_NO,DOWNLOAD_URL,SERIA_NO
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{absolutePath},#{docTitle},#{docType},#{updateTime},#{docNo},
+        #{attachmentNo},#{fullPath},#{serialNo}
+    </sql>
+
+    <sql id="TableClause"> ${schema.interPlat}.CREDIT_BUSI_DOC </sql>
+
+    <sql id="WhereClause4Id">
+       <where>
+        <if test="docNo!=null">DOC_NO = #{docNo}</if>
+        <if test="attachmentNo!=null">and ATTACHMENT_NO=#{attachmentNo}</if>
+        <if test="serialNo!=null">and SERIA_NO = #{serialNo}</if>
+       </where>
+    </sql>
+
+    <insert id="insert" parameterType="map">
+        insert into
+        <include refid="TableClause"/>
+        (
+        <include refid="BaseColumnList"/>
+        ) values (
+        <include refid="BaseColumnValueList"/>
+        )
+    </insert>
+
+    <select id="queryById" parameterType="map" resultType="map">
+        <include refid="public.SelectById"/>
+    </select>
+
+    <update id="updateById">
+        update
+        <include refid="TableClause"/>
+        <set>
+            UPDATE_TIME = #{updateTime}
+        </set>
+        <include refid="WhereClause4Id"/>
+    </update>
+
+    <update id="updateByIdSelective" parameterType="cn.com.yitong.core.session.model.MhhSession">
+        update
+        <include refid="TableClause"/>
+        <set>
+            VERSION = VERSION + 1,
+            <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+            <if test="visitTime!=null">VISIT_TIME=#{visitTime},</if>
+            <if test="invalidTime!=null">INVALID_TIME=#{invalidTime},</if>
+            <if test="msgId!=null">MSG_ID=#{msgId},</if>
+            <if test="key!=null">KEY=#{key},</if>
+            <if test="eventId!=null">EVENT_ID=#{eventId},</if>
+            <if test="userId!=null">USER_ID=#{userId},</if>
+            <if test="deviceId!=null">DEVICE_ID=#{deviceId},</if>
+            <if test="serverIp!=null">SERVER_IP=#{serverIp},</if>
+            <if test="authStatus!=null">AUTH_STATUS=#{authStatus},</if>
+            <if test="data!=null">DATA=#{data},</if>
+            <if test="msgidSet!=null">MSGID_SET=#{msgidSet},</if>
+            <if test="errorId!=null">ERROR_ID=#{errorId},</if>
+            <if test="errorMsg!=null">ERROR_MSG=#{errorMsg}</if>
+        </set>
+        <include refid="WhereClause4Id"/>
+    </update>
+
+    <update id="deleteById" parameterType="string">
+        <include refid="public.DeleteById"/>
+    </update>
+
+    <select id="queryByCriteria" resultType="cn.com.yitong.core.session.model.MhhSession" parameterType="CriteriaQuery">
+        <include refid="public.Select4Query"/>
+    </select>
+
+    <select id="countByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Count4Query"/>
+    </select>
+
+    <select id="deleteByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Delete4Query"/>
+    </select>
+
+    <insert id="deleteSessionToBack" parameterType="string">
+        insert into ${schema.configPlat}.ARES_SESSION_HIS select * from ${schema.configPlat}.ARES_SESSION where session_id = #{sessionId}
+    </insert>
+</mapper>

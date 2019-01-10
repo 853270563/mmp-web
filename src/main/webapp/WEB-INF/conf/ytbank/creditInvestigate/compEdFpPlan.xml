@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="compEdFpPlan" ibatisStatement="" desc="担保公司额度分配方案">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+    <snd>
+        <!-- 担保公司额度分配方案  -->
+        <field name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"/>
+        <field name="apply_no" client="applySerialNo" type="C" required="true" default="" desc="业务流程编号"/>
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+        <field name="SEQ" length="16" type="C" desc="流水号"/>
+        <field name="TRANS_TYPE" length="4" type="C" desc="交易类型"/><!-- 0001：新增客户进件信息 -->
+        <field name="TRANS_CODE" length="4" type="C" desc="交易结果码"/><!-- 0000：表示交易成功 其它均为交易失败 -->
+        <field name="TRANS_DESC" length="128" type="C" desc="交易结果描述"/>
+        <field name="TRANS_DATE" length="8" type="C" desc="响应日期"/>
+        <field name="TRANS_TIME" length="6" type="C" desc="响应时间"/>
+        <!-- 代办记录 -->
+        <field-list name="LIST" type="E">
+            <field name="ObjectType" client="ObjectType" type="C" required="true" default="20" desc="对象类型"/>
+            <field name="ObjectNo" client="ObjectNo" type="C" required="true" default="20" desc="申请编号"/>
+            <field name="SerialNo" client="SerialNo" type="C" required="true" default="20" desc="序列号"/>
+            <field name="DivideCodeName" client="DivideCodeName" type="C" required="true" default="20" desc="条线类型"/>
+            <field name="BusinessSum" client="BusinessSum" type="C" default="20" desc="担保额度金额(元)"/>
+            <field name="CycleFlag" client="CycleFlag" type="C" default="20" desc="是否循环"/>
+            <field name="MinBailSum" client="MinBailSum" type="C" required="true" default="20" desc="初始保证金金额(元)"/>
+            <field name="BailRatio" client="BailRatio" type="C" required="true" default="20" desc="保证金续存比例%"/>
+            <field name="ApplicationOrgName" client="ApplicationOrgName" type="C" required="true" default="20"
+                   desc="  适用机构"/>
+            <field name="InputUserName" client="InputUserName" type="C" required="true" default="20" desc="登记人"/>
+            <field name="InputOrgName" client="InputOrgName" type="C" required="true" default="20" desc="登记机构"/>
+            <field name="InputDate" client="InputDate" type="C" required="true" default="20" desc="登记日期"/>
+            <field name="UpdateDate" client="UpdateDate" type="C" required="true" default="20" desc="更新日期"/>
+        </field-list>
+    </rcv>
+</trans>

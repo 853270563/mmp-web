@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="tailBoxBalanceQuery" desc="尾箱余额查询">
+	<snd>
+					<field  name="TFT_INSTN_NO"    length="9"  required="true"  desc="查询机构号 " comment="若查询类型为2，请输入机构代码"  /> 
+					<field  name="TFT_BBS_QUERY_KIND"    type="C"  length="1" required="true"  desc="查询类型" comment="1：营业机构2：自助设备3：全部" /> 
+					<field  name="TFT_CURR_COD"  type="C"   length="2"  required="true"  desc="币别"  comment="详见数据字典-币别和币种"/>
+					<field  name="TFT_OPR_NO"  type="C"   length="12"  default=""  desc="操作员号"  comment="柜员代码" /> 
+	</snd>
+		<rcv>
+   		 			<field name="STATUS" length="6" type="C" desc="返回码" />
+					<field name="MSG" length="100" type="C" desc="返回消息" />
+					<field  name="CM_SUM_FACE-BAL"  type="C"  length="15"  desc="合计金额"  />    
+					<field  name="CM_TOTAL_COUNT"   type="C"  length="15"  desc="总条数"  />    
+					<field-list  name="LIST"  type="E"   >    
+						<field  name="CM_OPUN_INIL_1_CHN"    type="C"  length="15"  desc="营业单位中文名称"  />
+						<field  name="CM_OPR_NO"   type="C"  length="12"  desc="操作员号"  />  
+						<field  name="CM_OPR_NAME"   type="C"  length="20"  desc="操作员姓名"  />            
+						<field  name="CM_CSHBX_YSD_BAL"   type="C"  length="15"  desc="昨日箱内库存现金"  />          
+						<field  name="CM_TD_IN_AMT"    type="C"  length="15"  desc="本日收入"  />   
+						<field  name="CM_TD_OUT_AMT"   type="C"  length="15"  desc="本日付出"  />   
+						<field  name="CM_CSH_FROM_BSN_BOX"   type="C"  length="15"  desc="从业务库出库现金"  />   
+						<field  name="CM_CSH_INTO_BSN_BOX"  type="C"  length="15"  desc="交业务库出库现金"  />   
+						<field  name="CM_CSHBX_TD_BAL"   type="C"  length="15"  desc="本日箱内库存现金"  />   
+						<field  name="CM_CURR_COD_CHN"   type="C"  length="22"  desc="币别中文名称"  />   
+						<field  name="CM_ATM_TYP"   type="C"  length="8"  desc="设备编号"  />   
+						<field  name="CM_MSET_ADDR"    type="C"  length="60"  desc="装机地址"  />   
+						<field  name="CM_ATM_FL_FLG"   type="C"  length="1"  desc="附行/离行"  comment="0：附行1：离行" />   
+					</field-list>   
+		</rcv>
+</trans>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="baseInfo" desc="基本信息">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100007" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="816777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="object_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" />  
+				<field name="object_type" client="objectType" type="C"  required="true"  default=""    desc="流程业务品种" />  
+					<!--分页-->
+			<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+				<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+				<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+				<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="requester_code"     required="true" length="19"  xpath="Service_Header/service_response/requester_code"   type="C" default="" desc=""/>
+			<field name="requester_desc"     required="true" length="19"  xpath="Service_Header/service_response/requester_desc"   type="C" default="" desc=""/>
+			<field name="service_sn"     required="true" length="19"  xpath="Service_Header/service_sn"   type="C" default="8167777770209011171" desc=""/>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100007" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="816777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="service_time"    required="true" length="2"   xpath="Service_Header/service_time"   type="C" default="39" desc="服务时间"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<field name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="object_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" />  
+				<field name="object_type" client="objectType" type="C"  required="true"  default=""    desc="流程业务品种" />  
+			</field>
+			<!-- desc 格式说明    业务品种，字段含义/业务品种，字段含义-->
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+					<field name="SERIALNO" client="serialNo" type="C" required="true"  default="20"    desc="业务流程号" />  
+					<field name="RELATIVESERIALNO" client="RELATIVESERIALNO" type="C" required="true"  default="20"    desc="评级记录流水号" />  
+					<field name="OCCURDATE" client="OccurDate" type="C" required="true"  default="20"    desc="发生日期" />  
+					<field name="CUSTOMERID" client="CustomerID" type="C" required="true"  default="20"    desc="客户编号" />  
+					<field name="CUSTOMERNAME" client="CustomerName" type="C"  default="20"    desc="客户名称" />  
+					<field name="BUSINESSTYPE" client="BusinessType" type="C"   default="20"    desc="业务品种" />  
+					<field name="BUSINESSSUBTYPE" client="BusinessSubType" type="C" required="true"  default="20"    desc="业务子类型" />  
+					<field name="OCCURTYPE" client="OccurType" type="C" required="true"  default="20"    desc="发生类型" />  
+					<field name="FUNDSOURCE" client="FundSource" type="C" required="true"  default="20"    desc="  银团贷款，资金来源/公司委托贷款，委托资金来源/个人委托贷款，委托资金来源/银团贷款，资金来源/公司委托贷款，委托资金来源" />  
+					<field name="OPERATETYPE" client="OPERATETYPE" type="C" required="true"  default="20"    desc="" />  
+					<field name="CURRENYLIST" client="CURRENYLIST" type="C" required="true"  default="20"    desc="" />
+					<field name="CURRENCYMODE" client="CURRENCYMODE" type="C" required="true"  default="20"    desc="" />
+					<field name="BUSINESSTYPELIST" client="BUSINESSTYPELIST" type="C" required="true"  default="20"    desc=" "/>
+					<field name="CALCULATEMODE" client="CALCULATEMODE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="USEORGLIST" client="USEORGLIST" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CYCLEFLAG" client="CycleFlag" type="C" required="true"  default="20"    desc="是否循环 "/>  
+					<field name="FLOWREDUCEFLAG" client="FLOWREDUCEFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CONTRACTFLAG" client="CONTRACTFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SUBCONTRACTFLAG" client="SUBCONTRACTFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SELFUSEFLAG" client="SELFUSEFLAG" type="C" required="true"  default="20"    desc=" "/>
+					<field name="CREDITAGGREEMENT" client="CREDITAGGREEMENT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="RELATIVEAGREEMENT" client="RELATIVEAGREEMENT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="LOANFLAG" client="LOANFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TOTALSUM" client="CostToTalSum" type="C" required="true"  default="20"    desc="国内保理，购销合同金额 "/>  
+					<field name="OURROLE" client="OURROLE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="REVERSIBILITY" client="REVERSIBILITY" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BILLNUM" client="BILLNUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="HOUSETYPE" client="HouseType" type="C" required="true"  default="20"    desc="法人购房按揭贷款，房产类型/法人购车按揭贷款，汽车类型 "/>  
+					<field name="LCTERMTYPE" client="LcTermType" type="C" required="true"  default="20"    desc="进口信用证开立，信用证期限类型/国内信用证开立，信用证期限类型/国内信用证项下买方押汇，国内证期限类型/ "/>  
+					<field name="RISKATTRIBUTE" client="RISKATTRIBUTE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SURETYPE" client="SURETYPE" type="C" required="true"  default="20"    desc="运输单据种类 "/>  
+					<field name="SAFEGUARDTYPE" client="SafeGuardType" type="C" required="true"  default="20"    desc="保函类型 "/>  
+					<field name="BUSINESSCURRENCY" client="BusinessCurrency" type="C" required="true"  default="20"    desc="业务币种 "/>  
+					<field name="BUSINESSSUM" client="BusinessSum" type="C" required="true"  default="20"    desc="申请金额 "/>  
+					<field name="BUSINESSPROP" client="BusinessProp" type="C" required="true"  default="20"    desc="贷款成数/银团贷款，我行贷款份额占比 "/>
+					<field name="TERMYEAR" client="TERMYEAR" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TERMMONTH" client="TermMonth" type="C" required="true"  default="20"    desc="期限(月) "/>  
+					<field name="TERMDAY" client="TermDay" type="C" required="true"  default="20"    desc="期限(天) "/>  
+					<field name="LGTERM" client="LGTerm" type="C" required="true"  default="20"    desc=" 进口信用证开立，远期天数/出口信用保险项下融资，发票总金额/ "/>  
+					<field name="BASERATETYPE" client="BaseRate" type="C" required="true"  default="20"    desc="基准年利率 "/>  
+					<field name="RATEFLOATTYPE" client="RateFloatType" type="C" required="true"  default="20"    desc="利率浮动方式 "/>  
+					<field name="RATEFLOAT" client="RateFloat" type="C" required="true"  default="20"    desc="利率浮动值 "/>
+					<field name="BUSINESSRATE" client="BusinessRate" type="C" required="true"  default="20"    desc="执行月利率 "/>  
+					<field name="ICTYPE" client="ICType" type="C" required="true"  default="20"    desc="收费方式 "/>  
+					<field name="ICCYC" client="ICCyc" type="C" required="true"  default="20"    desc=" 贷款承诺函，收费周期/贷款意向书，收费周期/银行信贷证明，收费周期/ "/>  
+					<field name="PDGRATIO" client="PdgRatio" type="C" required="true"  default="20"    desc="手续费率 "/>  
+					<field name="PDGSUM" client="phaseNo" type="C" required="true"  default="20"    desc="手续费金额 "/>  
+					<field name="PdgSum" client="PdgSum" type="C" required="true"  default="20"    desc="收费方式 "/>  
+					<field name="PDGPAYPERIOD" client="PdgPayPeriod" type="C" required="true"  default="20"    desc="收费周期 "/>  
+					<field name="PROMISESFEERATIO" client="PROMISESFEERATIO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="PROMISESFEESUM" client="PromisesFeeSum" type="C" required="true"  default="20"    desc="承诺费金额 "/>  
+					<field name="PROMISESFEEPERIOD" client="PromisesFeePeriod" type="C" required="true"  default="20"    desc="承诺费计收期 "/>  
+					<field name="PROMISESFEEBEGIN" client="PromisesFeeBegin" type="C" required="true"  default="20"    desc="承诺费计收起始日 "/>  
+					<field name="MFEERATIO" client="MFeeRatio" type="C" required="true"  default="20"    desc="国内保理，应收账款管理费费率/个贷其他合作商，最低首付款比例 "/>  
+					<field name="MFEESUM" client="MFeeSum" type="C" required="true"  default="20"    desc="信用证项下进口押汇，到单金额/信用证项下进口代付，到单金额/出口信用保险项下融资，交单金额/ "/> 
+					<field name="MFEEPAYMETHOD" client="MFEEPAYMETHOD" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="AGENTFEE" client="AgentFee" type="C" required="true"  default="20"    desc="代理费 "/>  
+					<field name="DEALFEE" client="DealFee" type="C" required="true"  default="20"    desc="国内保理，发票处理费/银团贷款，安排费 "/>  
+					<field name="TOTALCAST" client="TotalCast" type="C" required="true"  default="20"    desc="总成本 "/>  
+					<field name="DISCOUNTINTEREST" client="DISCOUNTINTEREST" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="PURCHASERINTEREST" client="PURCHASERINTEREST" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BARGAINORINTEREST" client="BARGAINORINTEREST" type="C" required="true"  default="20"    desc=" "/>
+					<field name="DISCOUNTSUM" client="DiscountSum" type="C" required="true"  default="20"    desc="出口退税帐户托管，截止申请日上月应收退税金额/房地产开发贷款，预计可做金额/ "/>  
+					<field name="BAILRATIO" client="BailRatio" type="C" required="true"  default="20"    desc="保证金比例 "/>  
+					<field name="BAILCURRENCY" client="BailCurrency" type="C" required="true"  default="20"    desc="保证金金额1 "/>  
+					<field name="BAILSUM" client="BailSum" type="C" required="true"  default="20"    desc=" 保证金金额"/>  
+					<field name="BAILACCOUNT" client="BailAccount" type="C" required="true"  default="20"    desc=" 商业承兑汇票贴现，保证金帐号/银行承兑汇票，保证金帐号/融资性保函，保证金帐号/ "/>  
+					<field name="FINERATETYPE" client="FINERATETYPE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FINERATE" client="FINERATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="DRAWINGTYPE" client="DrawingType" type="C" required="true"  default="20"    desc="保险合同编号 "/>  
+					<field name="FIRSTDRAWINGDATE" client="FIRSTDRAWINGDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="DRAWINGPERIOD" client="DrawingPeriod" type="C" required="true"  default="20"    desc="提款期限 "/>  
+					<field name="PAYTIMES" client="PAYTIMES" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="PAYCYC" client="PAYCYC" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="GRACEPERIOD" client="GracePeriod" type="C" required="true"  default="20"    desc="贷款宽限期/法人其他按揭贷款，按揭资产使用年限 "/> 
+					<field name="OVERDRAFTPERIOD" client="OverDraftPeriod" type="C" required="true"  default="20"    desc="连续透支期 "/>  
+					<field name="OLDLCNO" client="OldLCNo" type="C" required="true"  default="20"    desc="信用证项下进口押汇，信用证编号/信用证项下进口代付，信用证编号/信用证项下出口押汇，信用证编号/ "/>  
+					<field name="OLDLCTERMTYPE" client="OLDLCTERMTYPE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="REMITMODE" client="REMITMODE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OLDLCSUM" client="OLDLCSUM" type="C" required="true"  default="20"    desc="信用证金额 "/>  
+					<field name="OLDLCLOADINGDATE" client="OLDLCLOADINGDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OLDLCVALIDDATE" client="OLDLCVALIDDATE" type="C" required="true"  default="20"    desc=" "/>
+					<field name="DIRECTION" client="Direction" type="C" required="true"  default="20"    desc="贷款投向 "/>  
+					<field name="PURPOSE" client="Purpose" type="C" required="true"  default="20"    desc="用途 "/>  
+					<field name="PLANALLOCATION" client="PLANALLOCATION" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="IMMEDIACYPAYSOURCE" client="IMMEDIACYPAYSOURCE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="PAYSOURCE" client="PaySource" type="C" required="true"  default="20"    desc="还款说明/融资性保函，项目背景状况/非融资性保函，项目背景状况/ "/>  
+					<field name="CORPUSPAYMETHOD" client="CorpusPayMethod" type="C" required="true"  default="20"    desc="还款方式 "/>  
+					<field name="INTERESTPAYMETHOD" client="InterestPayMethod" type="C" required="true"  default="20"    desc="利息支付方式 "/>  
+					<field name="THIRDPARTY1" client="ThirdParty1" type="C" required="true"  default="20"    desc=" 法人购房按揭贷款，开发商名称/法人购置设备贷款，机器设备名称/法人其他按揭贷款，按揭资产类型或名称/ "/>  
+					<field name="THIRDPARTYID1" client="ThirdPartyID1" type="C" required="true"  default="20"    desc="国家助学贷款，贴息比例/商业承兑汇票保贴函，承兑人证件号码 "/>  
+					<field name="THIRDPARTY2" client="ThirdParty2" type="C" required="true"  default="20"    desc="法人购房按揭贷款，开发商资质等级/ "/>  
+					<field name="THIRDPARTYID2" client="THIRDPARTYID2" type="C" required="true"  default="20"    desc="项目所在国家（地区） "/>  
+					<field name="THIRDPARTY3" client="ThirdParty3" type="C" required="true"  default="20"    desc="申请人所在国家或地区 "/>  
+					<field name="THIRDPARTYID3" client="THIRDPARTYID3" type="C" required="true"  default="20"    desc="供保证期间 "/> 
+					<field name="THIRDPARTYREGION" client="THIRDPARTYREGION" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CARGOINFO" client="CargoInfo" type="C" required="true"  default="20"    desc="物品描述 "/>  
+					<field name="PROJECTNAME" client="ProjectName" type="C" required="true"  default="20"    desc="保函项下项目名称 "/>  
+					<field name="OPERATIONINFO" client="OPERATIONINFO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CONTEXTINFO" client="CONTEXTINFO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SECURITIESTYPE" client="SECURITIESTYPE" type="C" required="true"  default="20"    desc="票据种类 "/>  
+					<field name="SECURITIESREGION" client="SecuritiesRegion" type="C" required="true"  default="20"    desc="发行地，所在地 "/>
+					<field name="CONSTRUCTIONAREA" client="ConstructionArea" type="C" required="true"  default="20"    desc="建筑面积 "/>  
+					<field name="USEAREA" client="UseArea" type="C" required="true"  default="20"    desc="房产套内面积 "/>  
+					<field name="FLAG1" client="Flag1" type="C" required="true"  default="20"    desc=" 是否代开 等等 "/>  
+					<field name="FLAG2" client="Flag2" type="C" required="true"  default="20"    desc="单证相符等等 "/>  
+					<field name="FLAG3" client="Flag3" type="C" required="true"  default="20"    desc="是否收到开证行确认书等等 "/>  
+					<field name="TRADECONTRACTNO" client="TradeContractNo" type="C" required="true"  default="20"    desc="相关贸易合同号码等等 "/>  
+					<field name="INVOICENO" client="INVOICENO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TRADECURRENCY" client="TradeCurrency" type="C" required="true"  default="20"    desc="合同币种 "/>  
+					<field name="TRADESUM" client="TradeSum" type="C" required="true"  default="20"    desc="合同金额 "/>  
+					<field name="PAYMENTDATE" client="PAYMENTDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OPERATIONMODE" client="OPERATIONMODE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="VOUCHCLASS" client="VOUCHCLASS" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="VOUCHTYPE" client="VouchType" type="C" required="true"  default="20"    desc="主要担保方式 "/> 
+					<field name="VOUCHTYPE1" client="VouchType1" type="C" required="true"  default="20"    desc="其他担保方式 "/>  
+					<field name="VOUCHTYPE2" client="VOUCHTYPE2" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="VOUCHFLAG" client="VouchFlag" type="C" required="true"  default="20"    desc="有无其他担保方式 "/>  
+					<field name="WARRANTOR" client="Warrantor" type="C" required="true"  default="20"    desc="婚姻登记日期 "/>  
+					<field name="WARRANTORID" client="WARRANTORID" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OTHERCONDITION" client="OtherCondition" type="C" required="true"  default="20"    desc="其他条件和要求 "/>  
+					<field name="GUARANTYVALUE" client="GuarantyValue" type="C" required="true"  default="20"    desc="担保风险限额 "/>
+					<field name="GUARANTYRATE" client="GUARANTYRATE " type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BASEEVALUATERESULT" client="BASEEVALUATERESULT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="RISKRATE" client="RISKRATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="LOWRISK" client="LowRiskBailSum" type="C" required="true"  default="20"    desc="是否缴纳保证金 "/>  
+					<field name="OTHERAREALOAN" client="OtherAreaLoan" type="C" required="true"  default="20"    desc="是否异地业务 "/>  
+					<field name="LOWRISKBAILSUM" client="LowRiskBailSum" type="C" required="true"  default="20"    desc="初始保证金金额 "/>  
+					<field name="ORIGINALPUTOUTDATE" client="ORIGINALPUTOUTDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="EXTENDTIMES" client="EXTENDTIMES" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="LNGOTIMES" client="LNGOTIMES" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="GOLNTIMES" client="GOLNTIMES" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="DRTIMES" client="DRTIMES" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BASECLASSIFYRESULT" client="BASECLASSIFYRESULT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="APPLYTYPE" client="APPLYTYPE" type="C" required="true"  default="20"    desc=" "/> 
+					<field name="BAILRATE" client="BAILRATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FINISHORG" client="FINISHORG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OPERATEORGID" client="OperateOrgID" type="C" required="true"  default="20"    desc="经办机构 "/>  
+					<field name="OPERATEUSERID" client="OperateUserID" type="C" required="true"  default="20"    desc="经办人 "/>  
+					<field name="OPERATEDATE" client="OPERATEDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="INPUTORGID" client="InputOrgID" type="C" required="true"  default="20"    desc="登记机构 "/>  
+					<field name="INPUTUSERID" client="InputUserID" type="C" required="true"  default="20"    desc="登记人 "/>
+					<field name="INPUTDATE" client="InputDate" type="C" required="true"  default="20"    desc="登记日期 "/>  
+					<field name="UPDATEDATE" client="UpdateDate" type="C" required="true"  default="20"    desc="更新日期 "/>  
+					<field name="PIGEONHOLEDATE" client="PigeonholeDate" type="C" required="true"  default="20"    desc="归档日期 "/>  
+					<field name="REMARK" client="Remark" type="C" required="true"  default="20"    desc="备注 "/>  
+					<field name="FLAG4" client="FLAG4" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="PAYCURRENCY" client="PAYCURRENCY" type="C" required="true"  default="20"    desc="不同业务不同币种 "/>  
+					<field name="PAYDATE" client="PAYDATE" type="C" required="true"  default="20"    desc="最迟装运日 "/>  
+					<field name="DESCRIBE1" client="DESCRIBE1" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="DESCRIBE2" client="Describe2" type="C" required="true"  default="20"    desc="国内证类型，发票币种，信用证类型等等 "/>  
+					<field name="CLASSIFYRESULT" client="CLASSIFYRESULT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CLASSIFYDATE" client="CLASSIFYDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CLASSIFYFREQUENCY" client="CLASSIFYFREQUENCY" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="VOUCHNEWFLAG" client="VOUCHNEWFLAG" type="C" required="true"  default="20"    desc=" "/> 
+					<field name="ADJUSTRATETYPE" client="AdjustRateType" type="C" required="true"  default="20"    desc="利率调整方式 "/>  
+					<field name="ADJUSTRATETERM" client="ADJUSTRATETERM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="RATEADJUSTCYC" client="RATEADJUSTCYC" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FZANBALANCE" client="FZANBALANCE" type="C" required="true"  default="20"    desc="索汇金额 "/>  
+					<field name="ACCEPTINTTYPE" client="ACCEPTINTTYPE" type="C" required="true"  default="20"    desc="收息方式 "/>  
+					<field name="FIXCYC" client="FIXCYC" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="THIRDPARTYADD1" client="THIRDPARTYADD1" type="C" required="true"  default="20"    desc=" "/>
+					<field name="THIRDPARTYZIP1" client="ThirdPartyZIP1" type="C" required="true"  default="20"    desc="首付款比例，公积金贷款手续费比例等等 "/>  
+					<field name="THIRDPARTYADD2" client="THIRDPARTYADD2" type="C" required="true"  default="20"    desc="首付款来源 "/>  
+					<field name="THIRDPARTYZIP2" client="THIRDPARTYZIP2" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="THIRDPARTYADD3" client="THIRDPARTYADD3" type="C" required="true"  default="20"    desc="房产形式 "/>  
+					<field name="THIRDPARTYZIP3" client="THIRDPARTYZIP3" type="C" required="true"  default="20"    desc="房产类型 "/>  
+					<field name="EFFECTAREA" client="EFFECTAREA" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TERMDATE1" client="TERMDATE1" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TERMDATE2" client="TERMDATE2" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TERMDATE3" client="TERMDATE3" type="C" required="true"  default="20"    desc="信用证有效期，有效期，备用证有效期等等 "/>  
+					<field name="RATIO" client="RATIO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="TEMPSAVEFLAG" client="TEMPSAVEFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FLAG5" client="FLAG5" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CREDITCYCLE" client="CreditCycle" type="C" required="true"  default="20"    desc="是否循环 "/> 
+					<field name="GUARANTYFLAG" client="GUARANTYFLAG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ISLIQUIDITY" client="ISLIQUIDITY" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ISFIXED" client="ISFIXED" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ISPROJECT" client="ISPROJECT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="EXECUTEYEARRATE" client="ExecuteYearRate" type="C" required="true"  default="20"    desc="执行年利率 "/>  
+					<field name="EXPOSURESUM" client="EXPOSURESUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ASSISTMANAGER" client="AssistManager" type="C" required="true"  default="20"    desc=" 协办客户经理"/>
+					<field name="VOUCHCOMPANY" client="VouchCompany" type="C" required="true"  default="20"    desc="担保公司 "/>  
+					<field name="ISCOUNTYBUSINESS" client="IsCountyBusiness" type="C" required="true"  default="20"    desc="是否县域业务 "/>  
+					<field name="ISCOUNTYBUSINESS" client="IsCountyBusiness" type="C" required="true"  default="20"    desc="是否县域业务 "/>  
+					<field name="ISINVOLVEAGRI" client="IsInvolveAgri" type="C" required="true"  default="20"    desc="是否涉农 "/>  
+					<field name="INVOLVEAGRITYPE" client="InvolveAgriType" type="C" required="true"  default="20"    desc="涉农项目类型 "/>  
+					<field name="ISCONTROLCOMPANY" client="IsControlCompany" type="C" required="true"  default="20"    desc="存货是否监管公司监管 "/>  
+					<field name="CONTROLCOMPANYNAME" client="ControlCompanyName" type="C" required="true"  default="20"    desc="监管公司名称 "/>  
+					<field name="REPAYMENTSOURCE" client="RepaymentSource" type="C" required="true"  default="20"    desc="还款来源 "/>  
+					<field name="SYNTHCOSTRATIO" client="SynthCostRatio" type="C" required="true"  default="20"    desc="综合费用率 "/>  
+					<field name="ISLABOURCLOSETYPE" client="IsLabourCloseType" type="C" required="true"  default="20"    desc="是否劳动密集型 "/>  
+					<field name="OVERDUERATE" client="OverDueRate" type="C" required="true"  default="20"    desc="逾期月利率 "/>  
+					<field name="DIVERTFINERATE" client="DivertFineRate" type="C" required="true"  default="20"    desc="挤占挪用罚息月利率 "/>  
+					<field name="BELONGMANAGERDEPART" client="BelongManagerDepart" type="C" required="true"  default="20"    desc="归属管理部门 "/> 
+					<field name="ISFINANCEJOINUNION" client="IsFinanceJoinUnion" type="C" required="true"  default="20"    desc="是否融资合作联盟 "/>  
+					<field name="ISSAVEENERGYTYPE" client="IsSaveEnergyType" type="C" required="true"  default="20"    desc="是否节能环保项目及服务贷款 "/>  
+					<field name="OPPOSITERECEIPTNAME" client="OppositeReceiptName" type="C" required="true"  default="20"    desc="对方收款人名称 "/>  
+					<field name="LEASETYPE" client="LeaseType" type="C" required="true"  default="20"    desc="租赁方式 "/>  
+					<field name="LEASERATE" client="LeaseRate" type="C" required="true"  default="20"    desc="出租率 "/>  
+					<field name="LEASECAPTURERATE" client="LeaseCaptureRate" type="C" required="true"  default="20"    desc="租金收缴率 "/>  
+					<field name="HOUSEDEVELOPTYPE" client="HouseDevelopType" type="C" required="true"  default="20"    desc="房产开发类型 "/>
+					<field name="SHEDAREALOANTYPE" client="ShedareaLoanType" type="C" required="true"  default="20"    desc="棚户区改造贷款类型 "/>  
+					<field name="ISBUSINESSDEVELOPLOAN" client="IsBusinessDevelopLoan" type="C" required="true"  default="20"    desc="是否商用房开发贷款 "/>  
+					<field name="BUSINESSDEVELOPLOANTYPE" client="BusinessDevelopLoanType" type="C" required="true"  default="20"    desc="商用房开发贷款类型 "/>  
+					<field name="BORROWMONEYPEOTYPE" client="BorrowMoneyPeoType" type="C" required="true"  default="20"    desc="借款人类型 "/>  
+					<field name="TIEXIRATIO" client="TieXiRatio" type="C" required="true"  default="20"    desc="还款说明 "/>  
+					<field name="NEWTYPE" client="NewType" type="C" required="true"  default="20"    desc="新农村建设贷款，类型 "/>  
+					<field name="ISLABOURCLOSETIEXI" client="IsLabourCloseTieXi" type="C" required="true"  default="20"    desc="是否劳动密集型小企业贴息贷款 "/>  
+					<field name="ISHELPASSURELOAN" client="IsHelpAssureLoan" type="C" required="true"  default="20"    desc="是否联保贷 "/>  
+					<field name="FOCUSGROUPPRODUCTNAME" client="FocusGroupProductName" type="C" required="true"  default="20"    desc="集群名称 "/>  
+					<field name="ISCOOPERATIONPROJECT" client="IsCooperationProject" type="C" required="true"  default="20"    desc="是否合作项目 "/>  
+					<field name="COOPERATIONPROJECTNO" client="CooperationProjectNo" type="C" required="true"  default="20"    desc="合作项目协议号 "/>  
+					<field name="COOPERATIONPROJECTNAME" client="CooperationProjectName" type="C" required="true"  default="20"    desc="合作项目客户名称 "/>  
+					<field name="ISASSUREFUND" client="IsAssureFund" type="C" required="true"  default="20"    desc="是否担保基金担保 "/> 
+					<field name="BUYHOUSENUMIDENTIFY" client="BuyHouseNumIdentify" type="C" required="true"  default="20"    desc="购房套数认定 "/>  
+					<field name="ISPLEDGEIN" client="IsPledgeIn" type="C" required="true"  default="20"    desc="抵押权是否设在我行 "/>  
+					<field name="FINANCINGPLATTYPE" client="FinancingPlatType" type="C" required="true"  default="20"    desc="融资平台类型 "/>  
+					<field name="COSTTOTALSUM" client="CostToTalSum" type="C" required="true"  default="20"    desc="费用总金额 "/>  
+					<field name="ZICHOUFUNDRATIO" client="ZiChouFundRatio" type="C" required="true"  default="20"    desc="自筹资金比例 "/>  
+					<field name="STUDYABROADSCHOOL" client="StudyAbroadSchool" type="C" required="true"  default="20"    desc="留学国家 "/>  
+					<field name="SCHOOLNAME" client="SchoolName" type="C" required="true"  default="20"    desc="学校名称 "/>
+					<field name="STUDYDEGREE" client="StudyDegree" type="C" required="true"  default="20"    desc="攻读学位 "/>  
+					<field name="ISLITTLEPROFITPROJECT" client="ISLITTLEPROFITPROJECT" type="C" required="true"  default="20"    desc="是否财政贴息 "/>  
+					<field name="ISBAILSUMCOUNT" client="IsBailSumCount" type="C" required="true"  default="20"    desc="保证金是否定期计息 "/>  
+					<field name="BAILSUMCOUNTTYPE" client="BAILSUMCOUNTTYPE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ACCEPTBUSBALANCE" client="ACCEPTBUSBALANCE" type="C" required="true"  default="20"    desc="前期承兑业务余额 "/>  
+					<field name="PAYSUMSOURCE" client="PAYSUMSOURCE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILBORROWRELATIVE" client="BailBorrowRelative" type="C" required="true"  default="20"    desc="委托人借款人关联方关系 "/>  
+					<field name="ISTREATYNOASSURE" client="IsTreatyNoAssure" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ISTREATYAGENCY" client="IsTreatyAgency" type="C" required="true"  default="20"    desc="协议是否含扩大我行代理责任的具体事项 "/>  
+					<field name="ISEXISTTHREEASSURE" client="IsExistThreeAssure" type="C" required="true"  default="20"    desc="是否存在第三方担保或抵押 "/>  
+					<field name="PROCEDUREBASE" client="IsExistThreeAssure" type="C" required="true"  default="20"    desc="手续费收取基数 "/>  
+					<field name="TRUSTTREATYNO" client="TRUSTTREATYNO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="JINGYINGLOANSUM" client="JingYingLoanSum" type="C" required="true"  default="20"    desc="自营贷款金额 "/> 
+					<field name="JINGYINGLOANRATIO" client="JingYingLoanRatio" type="C" required="true"  default="20"    desc="自营贷款执行利率 "/>  
+					<field name="GONGJIJINLOANSUM" client="GongJiJInLoanSum" type="C" required="true"  default="20"    desc="公积金贷款金额 "/>  
+					<field name="GONGJIJINLOANRATIO" client="GongJiJinLoanRatio" type="C" required="true"  default="20"    desc="公积金贷款利率 "/>  
+					<field name="GUARANTYORGTYPE" client="GuarantyOrgType" type="C" required="true"  default="20"    desc="担保机构类型 "/>  
+					<field name="GUARANTYOBJECT" client="GuarantyObject" type="C" required="true"  default="20"    desc="担保对象 "/>  
+					<field name="VOUCHTREATYNO" client="VouchTreatyNo" type="C" required="true"  default="20"    desc="担保协议号 "/>  
+					<field name="BILLSUBTYPE" client="BillSubType" type="C" required="true"  default="20"    desc="票据类型 "/>
+					<field name="APPLICANTATTR" client="ApplicantAttr" type="C" required="true"  default="20"    desc="申请人属性 "/>  
+					<field name="ISSPECIAL" client="ISSPECIAL" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="APPLICATIONORG" client="APPLICATIONORG" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="APPLICATIONORGNAME" client="ApplicationOrgName" type="C" required="true"  default="20"    desc="额度适用机构 "/>  
+					<field name="TRADECONTRACTDATE" client="TradeContractDate" type="C" required="true"  default="20"    desc="贸易背景合同签订日期 "/>  
+					<field name="ISVOUCHCOMPANY" client="IsVouchCompany" type="C" required="true"  default="20"    desc="是否担保公司担保 "/>  
+					<field name="JINGYINGLOANCONTNO" client="JingYingLoanContN" type="C" required="true"  default="20"    desc="自营贷款借款合同号 "/>  
+					<field name="STUDENTFROMTYPE" client="StudentFromType" type="C" required="true"  default="20"    desc="申请类别 "/>  
+					<field name="ISOVERSEAS" client="ISOverSeas" type="C" required="true"  default="20"    desc="是否境外项目 "/>  
+					<field name="FUNDACCOUNT" client="FUNDACCOUNT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SOFTLOANENDDATE" client="SOFTLOANENDDATE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="AUTOFUND" client="AUTOFUND" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OVERDUERATETYPE" client="OVERDUERATETYPE" type="C" required="true"  default="20"    desc=" "/> 
+					<field name="JOINTYPE" client="JOINTYPE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="DSINTEPROPORTION" client="DSINTEPROPORTION" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OVERDUERATEFLOATTYPE" client="OVERDUERATEFLOATTYPE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OVERDUERATEFLOAT" client="OVERDUERATEFLOAT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="OVERDUERATEACCORD" client="OVERDUERATEACCORD" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILRATIO1" client="BAILRATIO1" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="RATEACCORD" client="RATEACCORD" type="C" required="true"  default="20"    desc=" "/>
+					<field name="INTMETHOD" client="INTMETHOD" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILCURRENCY1" client="BailCurrency1" type="C" required="true"  default="20"    desc="保证金币种2 "/>  
+					<field name="BAILSUM1" client="BailSum1" type="C" required="true"  default="20"    desc="保证金金额2 "/>  
+					<field name="LCCURRENCY" client="BailSum1" type="C" required="true"  default="20"    desc="信用证币种 "/>  
+					<field name="COUNTRYCODE" client="THIRDPARTY3" type="C" required="true"  default="20"    desc="项目所在国家（地区） "/>  
+					<field name="ISJOINXIXIA" client="IsJoinXiXia" type="C" required="true"  default="20"    desc="加入栖霞果蔬商会 "/>  
+					<field name="PICKGUARANTYTYPE" client="PickGuarantyType" type="C" required="true"  default="20"    desc="提货担保类型 "/>  
+					<field name="THIRDPARTYCERTTYPE" client="ThirdPartyCertType" type="C" required="true"  default="20"    desc="生产厂家证件类型 "/>  
+					<field name="THIRDPARTYCERTID" client="ThirdPartyCertID" type="C" required="true"  default="20"    desc="生产厂家证件号码 "/>  
+					<field name="THIRDPARTYNAME" client="ThirdPartyName" type="C" required="true"  default="20"    desc="生产厂家名称 "/>  
+					<field name="THIRDPARTYBAILACCOUNT" client="ThirdPartyBailAccount" type="C" required="true"  default="20"    desc="生产厂家保证金账号 "/>  
+					<field name="THIRDPARTYLOWRISKBAILSUM" client="ThirdPartyLowRiskBailSum" type="C" required="true"  default="20"    desc="生产厂家初始保证金金额 "/>  
+					<field name="THIRDPARTYBAILRATIO" client="ThirdPartyBailRatio" type="C" required="true"  default="20"    desc="生产厂家保证金续存比例 "/> 
+					<field name="THIRDPARTYBAILSUM" client="ThirdPartyBailSum" type="C" required="true"  default="20"    desc="生产厂家保证金金额 "/>  
+					<field name="FOURTHPARTYBAILACCOUNT" client="FOURTHPARTYBAILACCOUNT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FOURTHPARTYLOWRISKBAILSUM" client="FOURTHPARTYLOWRISKBAILSUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FOURTHPARTYBAILRATIO" client="FOURTHPARTYBAILRATIO" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="FOURTHPARTYBAILSUM" client="FOURTHPARTYBAILSUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="GOVERNBACKGROUND" client="GovernBackGround" type="C" required="true"  default="20"    desc="是否有政府背景 "/>  
+					<field name="ENTRUSTACCOUNT" client="EntrustAccount" type="C" required="true"  default="20"    desc="委托方存款账号 "/>
+					<field name="ENTRUSTCUSTOMERID" client="ENTRUSTCUSTOMERID" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="ENTRUSTCUSTOMERNAME" client="EntrustCustomerName" type="C" required="true"  default="20"    desc="委托单位名称 "/>  
+					<field name="ISBREAKMONEY" client="ISBREAKMONEY" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CPBAILACCOUNT" client="CPBAILACCOUNT" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CPLOWRISKBAILSUM" client="CPLOWRISKBAILSUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CPBAILRATIO" client="CPLOWRISKBAILSUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="CPBAILSUM" client="CPBAILSUM" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="SMALLCOMPANYCODE" client="SMALLCOMPANYCODE" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILSUM2" client="BAILSUM2" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILSUM3" client="BAILSUM3" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILSUM4" client="BAILSUM4" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="BAILSUM5" client="BAILSUM5" type="C" required="true"  default="20"    desc=" "/>  
+					<field name="THIRDPARTYCUSTOMERID" client="ThirdPartyCustomerID" type="C" required="true"  default="20"    desc="生产厂家客户编号 "/>
+					<field name="MICROCREDITAGRNO" client="ThirdPartyCustomerID" type="C" required="true"  default="20"    desc="合作协议编号 "/>
+					<field name="MICROCREDITAGRCUSTOMERID" client="MicroCreditAgrCustomerID" type="C" required="true"  default="20"    desc="合作协议客户名称 "/>
+					<field name="KERNELCUSTOMERID" client="KernelCustomerID" type="C" required="true"  default="20"    desc="核心单位客户编号 "/>
+					<field name="KERNELCUSTOMERNAME" client="KernelCustomerName" type="C" required="true"  default="20"    desc="核心单位名称 "/>
+					<field name="EIAPERMITNUM" client="EIAPermitNum" type="C" required="true"  default="20"    desc="环评许可证编号 "/>
+					<field name="ISRZZX" client="IsRZZX" type="C" required="true"  default="20"    desc="是否农业新型经营主体融资增信合作业务 "/>
+					<field name="RATETYPE" client="RATETYPE" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ISGOVCORE" client="ISGOVCORE" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ISFHJTSX" client="ISFHJTSX" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ISGOVBG" client="ISGOVBG" type="C" required="true"  default="20"    desc=" "/>
+					<field name="CREDITLEVEL" client="CREDITLEVEL" type="C" required="true"  default="20"    desc=" "/>
+					<field name="CURRENTLGD" client="CURRENTLGD" type="C" required="true"  default="20"    desc=" "/>
+					<field name="MODELNO" client="MODELNO" type="C" required="true"  default="20"    desc=" "/>
+					<field name="MERCHANTNAME" client="MERCHANTNAME" type="C" required="true"  default="20"    desc=" "/>
+					<field name="CORECOMPANYCUSTOMERNAME" client="CoreCompanyCustomerName" type="C" required="true"  default="20"    desc="核心企业名称 "/>
+					<field name="CORECOMPANYCUSTOMERID" client="CORECOMPANYCUSTOMERID" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ISKERNELCUSTOMERNAME" client="IsKernelCustomerName" type="C" required="true"  default="20"    desc="是否核心企业保证 "/>
+					<field name="STATICDATE" client="STATICDATE" type="C" required="true"  default="20"    desc=" "/>
+					<field name="MARKETINGORG" client="MARKETINGORG" type="C" required="true"  default="20"    desc=" "/>
+					<field name="MARKETINGNAME" client="MARKETINGNAME" type="C" required="true"  default="20"    desc=" "/>
+					<field name="MARKETINGNO" client="MARKETINGNO" type="C" required="true"  default="20"    desc=" "/>   
+					<field name="ZZFKFLAG" client="ZZFKFlag" type="C" required="true"  default="20"    desc="是否自主放款 "/>
+					<field name="ZDJJCUSTOMERID" client="ZDJJCUSTOMERID" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ISZDJJ" client="IsZDJJ" type="C" required="true"  default="20"    desc="是否签订转贷基金协议 "/>
+					<field name="MERCHANTID" client="MERCHANTID" type="C" required="true"  default="20"    desc=" "/>
+					<field name="ZDJJNAME" client="ZDJJName" type="C" required="true"  default="20"    desc="转贷基金公司 "/>
+					<field name="DEVELOPERSRATE" client="DEVELOPERSRATE" type="C" required="true"  default="20"    desc=" "/>
+					<field name="COOPARTIFICIALNO" client="CoopArtificialNo" type="C" required="true"  default="20"    desc="合作协议编号 "/>
+					<field name="COOPCUSTOMERNAME" client="CoopCustomerName" type="C" required="true"  default="20"    desc="合作方名称 "/>
+					<field name="COOPPROJECTNAME" client="CoopProjectName" type="C" required="true"  default="20"    desc="合作项目名称 "/>
+					<field name="COOPDEPOSITBANKNAME" client="CoopDepositBankName" type="C" required="true"  default="20"    desc="开户行名称 "/>
+					<field name="COOPACCOUNT" client="CoopAccount" type="C" required="true"  default="20"    desc="开户行账户 "/> 
+					<field name="COOPACCOUNTTYPE" client="CoopAccountType" type="C" required="true"  default="20"    desc="账户类型 "/>      
+					<field name="COOPDEPOSITBANKID" client="CoopDepositBankId" type="C" required="true"  default="20"    desc="开户行行号 "/>      
+					<field name="ISACCOUNTOFYTBANK" client="IsAccountOfYTbank" type="C" required="true"  default="20"    desc="是否本行账户"/>      
+					<field name="ISSUEBANK"     client="ISSUEBANK"  type="C" required="true"  default="20"    desc="开证行 "/>       
+					<field name="CONFIRMBANK" client="CONFIRMBANK" type="C" required="true"  default="20"    desc="保兑行（如有） "/>      
+					<field name="ACCEPTBANK" client="ACCEPTBANK" type="C" required="true"  default="20"    desc="承兑/承诺付款银行 "/>      
+					<field name="ACCEPTDATE" client="ACCEPTDATE" type="C" required="true"  default="20"    desc="承兑/承诺付款日期 "/>      
+					<field name="BUYERINFO" client="BUYERINFO" type="C" required="true"  default="20"    desc="买方名称及地址 "/>      
+					<field name="FORFAITINGTYPE" client="FORFAITINGTYPE" type="C" required="true"  default="20"    desc="福费廷业务类型 "/>      
+					<field name="BONDOUTCURRENCY" client="FORFAITINGTYPE" type="C" required="true"  default="20"    desc="买断债权的币种 "/>
+					<field name="BONDOUTVALUE" client="BONDOUTVALUE" type="C" required="true"  default="20"    desc="买断债权的金额 "/> 
+					<field name="BAILOUTDAYS" client="BAILOUTDAYS" type="C" required="true"  default="20"    desc=" "/>      
+					<field name="BUSINESSNO" client="BUSINESSNO" type="C" required="true"  default="20"    desc=" "/>      
+					<field name="ACCEPTINTTYPENAME" client="ACCEPTINTTYPENAME" type="C" required="true"  default="20"    desc="收息方式名称 "/>      
+					<field name="FORFAITINGDUEDATE" client="FORFAITINGDUEDATE" type="C" required="true"  default="20"    desc="福费廷业务到期日 "/>      
+					<field name="BUYOUTBANKINFO" client="BUYOUTBANKINFO" type="C" required="true"  default="20"    desc="买断行名称地址 "/>      
+					<field name="CARGONAME" client="CARGONAME" type="C" required="true"  default="20"    desc="货物名称 "/>      
+					<field name="ACCEPTVALUEDATE" client="AcceptValueDate" type="C" required="true"  default="20"    desc="承诺生效日"/>      
+					<field name="ISFULLCHARGEACCEPTFEE" client="isFullChargeAcceptFee" type="C" required="true"  default="20"    desc="是否全额收取承诺费 "/>      
+					<field name="RISKMITIGATIONMEASURES" client="RiskMitigationMeasures" type="C" required="true"  default="20"    desc="风险缓释措施 "/>      
+					<field name="ADMINISTRATIVELEVEL" client="AdministrativeLevel" type="C" required="true"  default="20"    desc="行政等级 "/>      
+					<field name="ISCIVILSERVANT" client="IsCivilServant" type="C" required="true"  default="20"    desc="是否公务员或事业编制 "/> 
+					<field name="CONNTRANS" client="ISCIVILSERVANT" type="C" required="true"  default="20"    desc=" "/>      
+					<field name="ISSUBMITCONNTRANS" client="ISSUBMITCONNTRANS" type="C" required="true"  default="20"    desc=" "/>      
+					<field name="ACTUALRATEFLOAT" client="ActualRateFloat" type="C" required="true"  default="20"    desc="实际利率上浮比例 "/>      
+					<field name="POUNDAGEORDISCOUNT" client="PoundageOrDiscount" type="C" required="true"  default="20"    desc="开发商手续费或贴息 "/>      
+					<field name="PRICEBASELINE" client="PRICEBASELINE" type="C" required="true"  default="20"    desc=" "/>      
+					<field name="ISTRADEAGGREEMENT" client="IsTradeAggreement" type="C" required="true"  default="20"    desc="是否有同业授信额度 "/>      
+					<field name="COOPSERIALNO" client="CoopSerialNo" type="C" required="true"  default="20"    desc="合作项目编号 "/>      
+					<field name="COOPSPECIALAGREEMENTNO" client="CoopSpecialAgreementNo" type="C" required="true"  default="20"    desc="信托计划协议编号 "/>      
+					<field name="COOPINDPURPOSETYPE" client="COOPINDPURPOSETYPE" type="C" required="true"  default="20"    desc="借款用途类型 "/>      
+					<field name="COOPINDPAWNORDERTYPE" client="CoopIndPawnOrderType" type="C" required="true"  default="20"    desc="抵押次序类型 "/> 
+					<field name="COOPINDFIRSTPLEDGEE" client="COOPINDFIRSTPLEDGEE" type="C" required="true"  default="20"    desc="第一抵押权人 "/>      
+					<field name="COOPFIRSTPLEDGEESUM" client="CoopFirstPledgeeSum" type="C" required="true"  default="20"    desc="已有一抵借款总额 "/>      
+					<field name="ISZEROBRAK" client="IsZeroBrak" type="C" required="true"  default="20"    desc="是否零制动业务 "/>
+					<field name="COOPREGION" client="CoopRegion" type="C" required="true"  default="20"    desc="区域 "/>      
+					<field name="COOPCITY" client="CoopCity" type="C" required="true"  default="20"    desc="楼盘所在城市 "/>      
+					<field name="COOPSALESMANAGER" client="CoopSalesManager" type="C" required="true"  default="20"    desc="营销客户经理 "/>    
+					<field name="ISWAREHOUSE" client="ISWAREHOUSE" type="C" required="true"  default="20"    desc="是否港仓通 "/>   
+			</field>
+		</rcv>
+</trans>

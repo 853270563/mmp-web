@@ -236,6 +236,9 @@ public class MessageTools {
 	 * @return
 	 */
 	public static boolean elementToMap(Element element, Map<String, Object> map) {
+		if (element == null) {
+			return false;
+		}
 		String type = element.attributeValue(MBElement.TYPE);
 		List<Element> elems = element.elements();
 		if (elems == null || elems.isEmpty()) {

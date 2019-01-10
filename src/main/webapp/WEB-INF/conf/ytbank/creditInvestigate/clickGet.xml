@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="clickGet" ibatisStatement="" desc="点击签署意见判断是否能签署意见">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+    <snd>
+        <!-- 点击签署意见判断是否能签署意见  -->
+        <field name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"/>
+        <field name="serialNo" client="serialNo" type="C" required="true" default="" desc="任务流水号"/>
+        <field name="flowNo" client="flowNo" type="C" required="true" default="" desc="流程代码"/>
+        <field name="phaseNo" client="phaseNo" type="C" required="true" default="" desc="阶段编号"/>
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+        <field name="SEQ" length="16" type="C" desc="流水号"/>
+        <field name="TRANS_TYPE" length="4" type="C" desc="交易类型"/><!-- 0001：新增客户进件信息 -->
+        <field name="TRANS_CODE" length="4" type="C" desc="交易结果码"/><!-- 0000：表示交易成功 其它均为交易失败 -->
+        <field name="TRANS_DESC" length="128" type="C" desc="交易结果描述"/>
+        <field name="TRANS_DATE" length="8" type="C" desc="响应日期"/>
+        <field name="TRANS_TIME" length="6" type="C" desc="响应时间"/>
+        <!-- 代办记录 -->
+        <field-list name="LIST" type="E">
+            <field name="saveResult" client="saveResult" type="C" required="true" default="100"
+                   desc="是否能签署意见，success为能签署意见"/>
+        </field-list>
+    </rcv>
+</trans>

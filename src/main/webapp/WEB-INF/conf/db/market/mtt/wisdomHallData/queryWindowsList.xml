@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryWindowsList" desc="查询窗口列表" ibatisStatement="">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		
+		<field-list name="WINDOW_LIST" type="E">
+			<field name="WINDOW_NO" length="20" type="C" desc="窗口编号" />
+			<field name="WINDOW_NAME" length="20" type="C" desc="窗口名称" />
+			<!-- 受理业务 -->
+			<field-list name="BUSI_TYPE_LIST" type="E">
+				<field name="BUSI_TYPE" length="20" type="C" desc="业务类型" />
+				<field name="BUSI_NAME" length="20" type="C" desc="业务名称" />
+				<field name="PRIORITY" length="1" type="C" desc="优先级0:低;1:高" />
+			</field-list>
+		</field-list>
+	</rcv>
+</trans>

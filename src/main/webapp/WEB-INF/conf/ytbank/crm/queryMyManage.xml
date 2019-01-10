@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryCustBranchKHGH" desc="其他事件小支行下经理详细信息" serviceId="00850000000067">
+    <!--请求报文 -->
+    <snd>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="name" length="120" type="C" desc="登录姓名" required="true"/>
+            <field name="loginDate" length="20" type="C" desc="最后登陆时间" required="true"/>
+            <field name="headImg" length="20" type="C" desc="用户头像  " required="true"/>
+            <field name="userPos" length="20" type="C" desc="岗位名称" required="true"/>
+            <field name="officeNmae" length="20" type="C" desc="归属部门名称" required="true"/>
+            <field name="PHOTO" length="20" type="C" desc="用户头像ID(CRM使用)" required="true"/>
+        </field>
+    </rcv>
+</trans>

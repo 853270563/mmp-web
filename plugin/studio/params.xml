@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<items id="input-type" desc="页面录入控件">
+		<item id="input" desc="输入框" comment="默认控件"></item>
+		<item id="text" desc="文本控件" comment=""></item>
+		<item id="select" desc="下拉框"></item>
+		<item id="switch" desc="开关控件" comment=""></item>
+		<item id="radiobox" desc="单选框" comment=""></item>
+		<item id="checkbox" desc="多选框"></item>
+		<item id="money" desc="金额控件"></item>
+		<item id="number" desc="数字控件"></item>
+		<item id="date" desc="日期控件"></item>
+		<item id="dateGroup" desc="时间区域" comment="包含时间区块单选框、起始日期与结束日期"></item>
+		<item id="password" desc="密码控件"></item>
+		<item id="pay-acct" desc="付款账号" comment="付款账号选择控件"></item>
+		<item id="acctGroup" desc="付款账号组" comment="付款账号选择控件，含账号余额显示。"></item>
+	</items>
+
+	<items id="field-type" desc="报文字段类型">
+		<item id="" desc="默认" comment="文本，字符串"></item>
+		<item id="D" desc="日期" comment="日期文本，如：yyyy-MM-dd"></item>
+		<item id="M" desc="金额" comment="数值类型，如：100.00"></item>
+		<item id="N" desc="整数" comment="整数类型，如：100"></item>
+		<item id="list" desc="列表" comment="列表类型，含子元素"></item>
+		<item id="map" desc="Map" comment="Map类型，含子元素"></item>
+	</items>
+
+	<items id="field-required" desc="是否必输项">
+		<item id="" desc="默认" comment="非必输项目"></item>
+		<item id="true" desc="必输项"></item>
+	</items>
+
+	<items id="pp-clazz" desc="模块分区">
+		<item id="PP00" desc="基础"></item>
+		<item id="PP01" desc="账户管理"></item>
+		<item id="PP02" desc="转账"></item>
+		<item id="PP03" desc="投资理财"></item>
+		<item id="PP04" desc="生活服务"></item>
+		<item id="PP05" desc="信用卡"></item>
+		<item id="PP06" desc="个人中心"></item>
+		<item id="PP07" desc="支付网关"></item>
+		<item id="PP08" desc="资金归集"></item>
+		<item id="PP09" desc="个人红包"></item>
+		<item id="PP10" desc="好友圈"></item>
+		<item id="PP11" desc="其他模块"></item>
+		<item id="PP12" desc="勋章"></item>
+		<item id="PP13" desc="贷款"></item>
+		<item id="PP14" desc="消息中心"></item>
+		<item id="PP99" desc="开发示例"></item>
+	</items>
+
+	<items id="tcp" desc="通讯协议">
+		<item id="http" desc="http通讯" comment="UrlConnect实现"></item>
+		<item id="soap" desc="SOAP通讯" comment="SOAP-Xml"></item>
+		<item id="socket" desc="Socket通讯" comment=""></item>
+		<item id="tuxedo" desc="Tuxedo通讯" comment=""></item>
+		<item id="ares-dubbo" desc="屹通Dubbo通讯适配" comment=""></item>
+		<item id="dap-dubbo" desc="文思Dubbo通讯适配" comment=""></item>
+	</items>
+
+	<items id="db-type" desc="数据库类型">
+		<item id="oracle" desc="" comment="V11g以上"></item>
+		<item id="db2" desc="" comment="V9.5以上"></item>
+		<item id="mysql" desc="" comment="V5.6以上"></item>
+		<item id="h2" desc="" comment=""></item>
+	</items>
+
+	<items id="db-driver" desc="数据库驱动">
+		<item id="com.mysql.jdbc.Driver" desc="mysql" comment=""></item>
+		<item id="com.ibm.db2.jcc.DB2Driver" desc="db2" comment=""></item>
+		<item id="oracle.jdbc.driver.OracleDriver" desc="oracle" comment=""></item>
+		<item id="org.h2.Driver" desc="h2" comment="本地临时数据库"></item>
+	</items>
+
+	<items id="db-url" desc="数据库URL">
+		<item id="jdbc:db2://localhost:5000/dbname" desc="db2" comment=""></item>
+		<item id="jdbc:oracle:thin:@localhost:1521:dbname" desc="oracle" comment=""></item>
+		<item id="jdbc:mysql://localhost:3306/dbname" desc="mysql" comment=""></item>
+		<item id="jdbc:h2:~/dbname" desc="h2" comment=""></item>
+	</items>
+	
+	<items id="db-jndi" desc="数据库JNDI">
+		<item id="java:comp/env/dbname" desc="tomcat-jndi" comment=""></item>
+		<item id="jdbc/dbname" desc="weblogic-jndi" comment=""></item>
+		<item id="jdbc/dbname" desc="websphere-jndi" comment=""></item>
+		<item id="java:comp/env/dbname" desc="jboss-jndi" comment=""></item>
+	</items>
+
+</root>

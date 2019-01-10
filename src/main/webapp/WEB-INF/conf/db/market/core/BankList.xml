@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="BankList" ibatisStatement="BRCH_INFO.pageQuery" desc="附近网点查询">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<field name="NEXT_KEY" length="20" type="C" desc="起始记录号" client="pageNo" />
+		<field name="PAGE_SIZE" length="20" type="C" desc="页记录数" client="pageSize" />
+		<field name="BANK_TYPE" length="20" type="C" desc="银行类型" client="BANK_TYPE" />
+		<field name="POS_X" length="20" type="C" desc="纬度" required="true" client="POS_X"/>
+		<field name="POS_Y" length="20" type="C" desc="经度" required="true" client="POS_Y"/>
+		<field name="RANGE" length="20" type="C" desc="范围" client="range"/>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="PAGE_NO" length="20" type="C" desc="下页起始记录号"/>
+		<field name="TOTAL_PAGE_COUNT" length="20" type="C" desc="下页起始记录号"/>
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+			<field name="BANK_ID" length="100" type="C" desc="银行编号" xpath="BRCH_ID" />
+			<field name="BANK_NAME" length="20" type="C" desc="银行名名称" xpath="BRCH_NAME" />
+			<field name="ADDRESS" length="200" type="C" desc="银行所在地址" xpath="BRCH_ADDR" />
+			<field name="BANK_TYPE" length="6" type="C" desc="银行类型" xpath="BRCH_TYPE" />
+			<field name="POS_X" length="6" type="C" desc="纬度" />
+			<field name="POS_Y" length="6" type="C" desc="经度"/>
+			<field name="DISTANCE" length="6" type="C" desc="附近网点的距离" />
+			<field name="BANK_TEL" length="20" type="C" desc="银行联系电话" xpath="BRCH_TEL1" />
+			<field name="ATM_TYPE" length="6" type="c" desc="ATM机类型" />
+			<field name="TRAFIC_ROUTE" length="10" type="C" desc="交通路线" xpath="BRCH_TRAF" />
+			<field name="TIME" length="20" type="C" desc="审核时间" xpath="CHK_DATE" />
+		</field-list>
+	</rcv>
+</trans>

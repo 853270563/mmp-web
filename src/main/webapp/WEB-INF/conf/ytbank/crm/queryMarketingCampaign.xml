@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryMarketingCampaign" desc="营销活动" serviceId="00850000000059">
+    <!--请求报文 -->
+    <snd>
+        <field name="activityName" length="20" type="C" desc="活动名称" required="false"/>
+        <field name="status" length="20" type="C" desc="活动状态" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="mkActId" length="120" type="C" desc="营销活动ID " required="true"/>
+            <field name="makActName" length="20" type="C" desc="营销活动名称 " required="true"/>
+            <field name="makActKsrq" length="20" type="C" desc="活动开始时间" required="true"/>
+            <field name="makActZt" length="20" type="C" desc="状态：1 未提交 2 已提交" required="true"/>
+        </field>
+    </rcv>
+</trans>

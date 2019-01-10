@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertEditGroCust" desc="增加行外客户（在新增客户页面下）"  serviceId="00850000000066">
+    <!--请求报文 -->
+    <snd>
+        <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+        <field name="custId" length="20" type="C" desc="客户id" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+        <field name="lxdh" length="20" type="C" desc="联系电话"/>
+        <field name="custIdt" length="20" type="C" desc="证件类型"/>
+        <field name="custIdtNo" length="20" type="C" desc="证件号码" />
+        <field name="mbreCustType" length="20" type="C" desc="客户类型" />
+        <field name="cgId" length="20" type="C" desc="客户群ID "  required="true"/>
+        <field name="custLvl" length="20" type="C" desc="客户等级 "  required="true"/>
+    </snd>
+</trans>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryCustAsset" desc="资产结构图（客户个人资料下）" serviceId="00850000000055">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="用户id" required="false"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="assetsType" length="120" type="C" desc="资产类型（1存款 2、保本理财 3、非保本理财4、贵金属）" required="true"/>
+            <field name="assetsName" length="20" type="C" desc="类型名称" required="true"/>
+            <field name="custAssetMavg" length="20" type="C" desc="月日均" required="true"/>
+            <field name="custAssetYavg" length="20" type="C" desc="年日均" required="true"/>
+            <field name="compYavg" length="20" type="C" desc="年日均较上月" />
+            <field name="custAccBal" length="20" type="C" desc="余额" />
+        </field>
+    </rcv>
+</trans>

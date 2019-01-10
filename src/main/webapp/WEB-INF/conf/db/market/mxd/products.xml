@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="products" desc="查询产品种类">
+    <snd>
+        <!--<field name="USER_MANAGER_ID" type="C" length="20" desc="客户经理编号" required="true"/>-->
+    </snd>
+
+    <rcv>
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+
+        <!-- 产品列表 -->
+        <field-list name="LIST" type="E">
+            <field name="PRODUCT_ID" length="20" type="C" desc="产品编号" />
+            <field name="PRODUCT_NAME" length="20" type="C" desc="产品名称" />
+            <field name="CURRENCY" length="20" type="C" desc="币种" />
+            <field name="AMOUNT" length="20" type="C" desc="金额" />
+            <field name="CREATE_TIME" length="2" type="C" desc="创建时间" />
+        </field-list>
+    </rcv>
+</trans>

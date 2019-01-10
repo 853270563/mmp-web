@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.com.yitong.common.utils.StringUtils;
 import cn.com.yitong.core.session.Session;
 import cn.com.yitong.core.session.util.SessionManagerUtils;
-import cn.com.yitong.framework.filter.ReusableHttpServletRequest;
+import cn.com.yitong.core.web.filter.ReusableHttpServletRequest;
 
 /**
  * 线程上下文管理类
@@ -28,7 +28,7 @@ public abstract class ThreadContext {
     public static final String CODEC_TYPE_KEY = ThreadContext.class.getName() + "_CODEC_TYPE";
     public static final String REQUEST_MESSAGE_KEY =  ThreadContext.class.getName() + "_MESSAGE_ID";
     public static final String CHECK_MESSAGE_ID =  ThreadContext.class.getName() + "_CHECK_MSG_ID";
-
+	public static final String TRANS_URL = "TRANS_URL";
     protected ThreadContext(){}
 
     /**

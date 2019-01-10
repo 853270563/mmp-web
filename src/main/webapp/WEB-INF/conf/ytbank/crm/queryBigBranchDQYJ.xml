@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryBigBranchDQYJ" desc="到期预警大支行详细信息" serviceId="00850000000021">
+    <!--请求报文 -->
+    <snd>
+        <field name="careType" length="20" type="C" desc="关怀类型( 03 公司开业 05客户生日)" required="false"/>
+        <field name="status" length="20" type="C" desc="状态 (0 未处理 1 逾期未处理 2 已完成 3 逾期处理)" required="false"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="careTypeName" length="20" type="C" desc="关怀类型" required="true"/>
+            <field name="statusName" length="20" type="C" desc="状态" required="true"/>
+            <field name="careId" length="20" type="C" desc="ID  " required="true"/>
+        </field>
+    </rcv>
+</trans>

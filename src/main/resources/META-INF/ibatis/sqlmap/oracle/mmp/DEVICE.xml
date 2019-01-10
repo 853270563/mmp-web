@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DEVICE">
+
+    <sql id="queryDynSql">
+        <isNotEmpty prepend="AND" property="DEVICE_ID">
+            T.DEVICE_ID = #DEVICE_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="UDID">
+            T.UDID = #UDID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="WIFI_MAC">
+            T.WIFI_MAC = #WIFI_MAC#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="IMEI">
+            T.IMEI = #IMEI#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="PRODUCT">
+            T.PRODUCT = #PRODUCT#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OS_VERSION">
+            T.OS_VERSION = #OS_VERSION#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="USER_TEL">
+            T.USER_TEL = #USER_TEL#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="USER_MAIL">
+            T.USER_MAIL = #USER_MAIL#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="CREATE_TIME">
+            T.CREATE_TIME = #CREATE_TIME#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="IS_JAILBREAK">
+            T.IS_JAILBREAK = #IS_JAILBREAK#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ASSET_ID">
+            T.ASSET_ID = #ASSET_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ORG_ID">
+            T.ORG_ID = #ORG_ID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="UPDATE_TIME">
+            T.UPDATE_TIME = #UPDATE_TIME#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="LOST_FLAG">
+            T.LOST_FLAG = #LOST_FLAG#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="LOCK_FLAG">
+            T.LOCK_FLAG = #LOCK_FLAG#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ERASE_FLAG">
+            T.ERASE_FLAG = #ERASE_FLAG#
+        </isNotEmpty>
+    </sql>
+
+    <!-- 查询SQL -->
+    <sql id="coreSql">
+        SELECT T.* FROM ${schema.interPlat}.DEVICE T
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+        <![CDATA[ ORDER BY T.DEVICE_ID]]>
+    </sql>
+    <!-- 分页查询 -->
+    <select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="public.pageBegin"/>
+        <include refid="coreSql"/>
+        <include refid="public.pageEnd"/>
+    </select>
+    <!-- 分页计数 -->
+    <select id="pageCount" parameterClass="map" resultClass="int">
+        <![CDATA[
+			SELECT COUNT('') CNT
+			FROM ${schema.interPlat}.DEVICE T
+		]]>
+        <dynamic prepend="WHERE">
+            <include refid="queryDynSql"/>
+        </dynamic>
+    </select>
+
+    <!-- 增加、修改时将信息存放到op表中 -->
+    <insert id="insert" parameterClass="map">
+        INSERT INTO ${schema.interPlat}.DEVICE
+        (
+        DEVICE_ID
+        <isNotEmpty prepend="," property="UDID">UDID</isNotEmpty>
+        <isNotEmpty prepend="," property="WIFI_MAC">WIFI_MAC</isNotEmpty>
+        <isNotEmpty prepend="," property="IMEI">IMEI</isNotEmpty>
+        <isNotEmpty prepend="," property="PRODUCT">PRODUCT</isNotEmpty>
+        <isNotEmpty prepend="," property="OS_VERSION">OS_VERSION</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_TEL">USER_TEL</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_MAIL">USER_MAIL</isNotEmpty>
+        <isNotEmpty prepend="," property="CREATE_TIME">CREATE_TIME</isNotEmpty>
+        <isNotEmpty prepend="," property="IS_JAILBREAK">IS_JAILBREAK</isNotEmpty>
+        <isNotEmpty prepend="," property="ASSET_ID">ASSET_ID</isNotEmpty>
+        <isNotEmpty prepend="," property="ORG_ID">ORG_ID</isNotEmpty>
+        <isNotEmpty prepend="," property="UPDATE_TIME">UPDATE_TIME</isNotEmpty>
+        <isNotEmpty prepend="," property="LOST_FLAG">LOST_FLAG</isNotEmpty>
+        <isNotEmpty prepend="," property="LOCK_FLAG">LOCK_FLAG</isNotEmpty>
+        <isNotEmpty prepend="," property="ERASE_FLAG">ERASE_FLAG</isNotEmpty>
+        ) VALUES (
+        #DEVICE_ID#
+        <isNotEmpty prepend="," property="UDID">#UDID#</isNotEmpty>
+        <isNotEmpty prepend="," property="WIFI_MAC">#WIFI_MAC#</isNotEmpty>
+        <isNotEmpty prepend="," property="IMEI">#IMEI#</isNotEmpty>
+        <isNotEmpty prepend="," property="PRODUCT">#PRODUCT#</isNotEmpty>
+        <isNotEmpty prepend="," property="OS_VERSION">#OS_VERSION#</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_TEL">#USER_TEL#</isNotEmpty>
+        <isNotEmpty prepend="," property="USER_MAIL">#USER_MAIL#</isNotEmpty>
+        <isNotEmpty prepend="," property="CREATE_TIME">#CREATE_TIME#</isNotEmpty>
+        <isNotEmpty prepend="," property="IS_JAILBREAK">#IS_JAILBREAK#</isNotEmpty>
+        <isNotEmpty prepend="," property="ASSET_ID">#ASSET_ID#</isNotEmpty>
+        <isNotEmpty prepend="," property="ORG_ID">#ORG_ID#</isNotEmpty>
+        <isNotEmpty prepend="," property="UPDATE_TIME">#UPDATE_TIME#</isNotEmpty>
+        <isNotEmpty prepend="," property="LOST_FLAG">#LOST_FLAG#</isNotEmpty>
+        <isNotEmpty prepend="," property="LOCK_FLAG">#LOCK_FLAG#</isNotEmpty>
+        <isNotEmpty prepend="," property="ERASE_FLAG">#ERASE_FLAG#</isNotEmpty>
+        )
+    </insert>
+
+
+    <update id="updateById" parameterClass="map">
+        <![CDATA[ update ${schema.interPlat}.DEVICE ]]>
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="UDID">UDID = #UDID#</isNotNull>
+            <isNotNull prepend="," property="WIFI_MAC">WIFI_MAC = #WIFI_MAC#</isNotNull>
+            <isNotNull prepend="," property="IMEI">IMEI = #IMEI#</isNotNull>
+            <isNotNull prepend="," property="PRODUCT">PRODUCT = #PRODUCT#</isNotNull>
+            <isNotNull prepend="," property="OS_VERSION">OS_VERSION = #OS_VERSION#</isNotNull>
+            <isNotNull prepend="," property="USER_TEL">USER_TEL = #USER_TEL#</isNotNull>
+            <isNotNull prepend="," property="USER_MAIL">USER_MAIL = #USER_MAIL#</isNotNull>
+            <isNotNull prepend="," property="CREATE_TIME">CREATE_TIME = #CREATE_TIME#</isNotNull>
+            <isNotNull prepend="," property="IS_JAILBREAK">IS_JAILBREAK = #IS_JAILBREAK#</isNotNull>
+            <isNotNull prepend="," property="ASSET_ID">ASSET_ID = #ASSET_ID#</isNotNull>
+            <isNotNull prepend="," property="ORG_ID">ORG_ID = #ORG_ID#</isNotNull>
+            <isNotNull prepend="," property="UPDATE_TIME">UPDATE_TIME = #UPDATE_TIME#</isNotNull>
+            <isNotNull prepend="," property="LOST_FLAG">LOST_FLAG = #LOST_FLAG#</isNotNull>
+            <isNotNull prepend="," property="LOCK_FLAG">LOCK_FLAG = #LOCK_FLAG#</isNotNull>
+            <isNotNull prepend="," property="ERASE_FLAG">ERASE_FLAG = #ERASE_FLAG#</isNotNull>
+        </dynamic>
+        <![CDATA[ where DEVICE_ID = #DEVICE_ID# ]]>
+    </update>
+
+    <delete id="delete" parameterClass="map">
+        <![CDATA[
+         delete from ${schema.interPlat}.DEVICE where DEVICE_ID = #DEVICE_ID#
+        ]]>
+    </delete>
+
+    <select id="query" parameterClass="map" resultClass="java.util.HashMap">
+        <include refid="coreSql"/>
+    </select>
+
+    <select id="seq" resultClass="String">
+        select ${schema.interPlat}.SEQ_DEVICE.nextval from dual
+    </select>
+
+</sqlMap>
+

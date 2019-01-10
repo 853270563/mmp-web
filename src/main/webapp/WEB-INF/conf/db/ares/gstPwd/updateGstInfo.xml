@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="udpateGstInfo" desc="设置手势密码">
+	<!-- 请求报文 -->
+	<snd>
+		<field name="USER_ID" length="50" type="VARCHAR2" required="true" desc="用户ID" />
+		<field name="GUESTER_PWD" length="256" type="VARCHAR2" required="true" desc="手势密码" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv>
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+	</rcv>
+</trans>

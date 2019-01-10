@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryMarketingTaskCase" desc="任务完成情况（营销任务下）" serviceId="00850000000014">
+    <!--请求报文 -->
+    <snd>
+        <field name="tiId" length="20" type="C" desc="任务编号" required="true"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="indexName" length="120" type="C" desc="指标名称" required="true"/>
+            <field name="indexSum" length="20" type="C" desc="累计完成指标" required="true"/>
+            <field name="unfinishedSum" length="20" type="C" desc="未完成" required="true"/>
+            <field name="indexId" length="20" type="C" desc="指标id"/>
+        </field>
+    </rcv>
+</trans>

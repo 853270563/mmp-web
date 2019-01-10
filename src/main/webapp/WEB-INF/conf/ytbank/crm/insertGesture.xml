@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertGesture" desc="手势登录" serviceId="00850000000075">
+    <!--请求报文 -->
+    <snd>
+        <field name="password" length="20" type="C" desc="手势密码" required="true"/>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+    </snd>
+</trans>

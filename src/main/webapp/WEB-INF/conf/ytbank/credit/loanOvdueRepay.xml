@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="loanOvdueRepay" desc="贷款逾期提醒">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100002" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="cert_no" client="cert_no" type="C"   default="1"    desc="身份证号" />  
+				<field name="cust_name" client="cust_name" type="C"   default="30"    desc="客户姓名" />
+				<field name="start_date" client="start_date" type="C"    default=""    desc="起始时间" /> 
+				<field name="end_date" client="end_date" type="C"   default=""    desc="结束时间" /> 
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<head>
+   		    	<field-response name="service_response"  xpath="Service_Header/service_response" type="S" desc="解析响应报文头">
+   		 			<field name="status" client="status" type="C" length="19"  	desc="交易状态"  />
+					<field name="code"	client="code"   type="C" length="14"   required="true" 	desc="提供方响应码"   />
+					<field name="desc" 	client="desc" 	 type="C" length="200" required="true"  desc="提供方响应描述"  />
+   		   	 	</field-response>
+   			</head>
+   			<body>
+   			    <field-response name="response"  xpath="Service_Body/response"  type="S"  desc="解析响应报文体">
+					<field-list name="list"   type="E"  >
+						<field name="loan_no" client="loan_no" type="C" required="true"  default="20"    desc="贷款编号" />  
+						<field name="cust_name" client="cust_name" type="C" required="true"  default="20"    desc="客户姓名" />  
+						<field name="cert_no" client="cert_no" type="C" required="true"  default="20"    desc="身份证号" />  
+						<field name="cust_type" client="cust_type" type="C" required="true"  default="20"    desc="客户类型" />
+						<field name="loan_limit" client="loan_limit" type="C" required="true"  default="20"    desc="贷款额度" />  
+						<field name="cust_mng" client="cust_mng" type="C" required="true"  default="20"    desc="客户经理" />
+						<field name="busi_sts" client="busi_sts" type="C" required="true"  default="20"    desc="业务状态" />
+						<field name="msg_nts" client="msg_nts" type="C" required="true"  default="20"    desc="消息提示" />
+					</field-list>
+				</field-response>
+			</body>
+		</rcv>
+</trans>

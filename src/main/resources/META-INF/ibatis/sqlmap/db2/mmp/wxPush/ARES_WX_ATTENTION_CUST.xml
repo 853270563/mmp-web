@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_WX_ATTENTION_CUST">
+    <insert id="insertAresWxAttentionCust" parameterClass="map">
+        insert into ${schema.configPlat}.ARES_WX_ATTENTION_CUST
+         (ATTENTION_ID,MSG_TYPE,EVENT,TO_USER_NAME,FROM_USER_NAME,
+        STATUS,CREATE_TIME,UPDATE_TIME)
+        VALUES
+        (#ATTENTION_ID#,#MSG_TYPE#,#EVENT#,#TO_USER_NAME#,#FROM_USER_NAME#,
+        #STATUS#,#CREATE_TIME#,#UPDATE_TIME#)
+    </insert>
+
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		SELECT ${schema.configPlat}.SEQ_WX_ATTENTION_CUST.NEXTVAL AS ATTENTION_ID FROM DUAL
+	</select>
+
+
+
+</sqlMap>
+

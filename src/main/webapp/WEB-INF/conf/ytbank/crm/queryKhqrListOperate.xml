@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryKhqrListOperate" desc="客户信息操作（客户确认下）" serviceId="00850000000037">
+    <!--请求报文 -->
+    <snd>
+        <field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+        <field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+        <field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custAssetMavg" length="120" type="C" desc="金融资产 " required="true"/>
+        </field>
+    </rcv>
+</trans>

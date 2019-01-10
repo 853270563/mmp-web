@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ARES_WX_CUST_MSG">
+    <insert id="insert" parameterClass="java.util.HashMap">
+        insert into ${schema.configPlat}.ARES_WX_CUST_MSG
+           (MSG_ID,
+            TASK_ID,
+            OPEN_ID,
+            MSG_BODY,
+            SEND_BEGIN_TIME,
+            SEND_END_TIME,
+            SEND_TIME,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME)
+        VALUES
+           (#MSG_ID#,
+            #TASK_ID#,
+            #OPEN_ID#,
+            #MSG_BODY#,
+            #SEND_BEGIN_TIME#,
+            #SEND_END_TIME#,
+            null,
+            '0',
+            current timestamp,
+            current timestamp)
+    </insert>
+    <update id="updateWxCustMsgStatus" parameterClass="java.util.Map" >
+        UPDATE   ${schema.configPlat}.ARES_WX_CUST_MSG
+        SET
+        UPDATE_TIME=current timestamp,
+        SEND_TIME=current timestamp
+        <isNotEmpty property="STATUS">
+            ,STATUS = #STATUS#
+        </isNotEmpty>
+        WHERE  MSG_ID=#MSG_ID#
+    </update>
+    <select id="findWxCustMsg" resultClass="java.util.HashMap">
+        SELECT t.* from ${schema.configPlat}.ARES_WX_CUST_MSG t where t.status='0'  AND <![CDATA[ T.SEND_BEGIN_TIME <= current timestamp ]]>
+					AND <![CDATA[ (T.SEND_END_TIME IS NULL
+							OR T.SEND_END_TIME >= current timestamp
+						)]]>
+    </select>
+
+	<select id="loadSeq" resultClass="java.util.HashMap">
+		SELECT ${schema.configPlat}.SEQ_WX_CUST_MSG.NEXTVAL AS MSG_ID FROM DUAL
+	</select>
+</sqlMap>
+

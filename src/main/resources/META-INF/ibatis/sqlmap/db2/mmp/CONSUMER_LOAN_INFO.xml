@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CONSUMER_LOAN_INFO">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+		<isNotEmpty prepend="and" property="BUSINESSNUM">
+			T.BUSINESSNUM =#BUSINESSNUM#
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.CONSUMER_LOAN_INFO T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.BUSINESSNUM
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT('') CNT 
+			FROM ${schema.interPlat}.CONSUMER_LOAN_INFO T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.CONSUMER_LOAN_INFO
+		( BUSINESSNUM,CUSTOMERNUM,CUSTOMERNAME,NATION,SEX,DOCUMENTTYPE,DOCUMENTNUM,CONTACT,CONTACTNUM,EDUCATION,HOUSEHOLD,RESIDENTIAL,RESIDENCE,POSTALCODE,EMPLOYMENT,JOBNAME,JOBPROPERTIES,CAREER,DUTY,WORKEXP,REVENUE,MARITALSTATUS,CHILDRENCASE,SPOUSENAME,SPOUSEDOCUMENTTYPE,SPOUSEDOCUMENTNUM,SPOUSECONTACT,SPOUSECONTACTNUM,SPOUSEJOBNAME,SPOUSERVENUE,ASSETSTOTAL,RECORDTIME,RECORDID,RECORDNME,RECORDORG,EXPANDFIELD1,EXPANDFIELD2,EXPANDFIELD3,EXPANDFIELD4,EXPANDFIELD5 ) 
+		VALUES ( #BUSINESSNUM#,#CUSTOMERNUM#,#CUSTOMERNAME#,#NATION#,#SEX#,#DOCUMENTTYPE#,#DOCUMENTNUM#,#CONTACT#,#CONTACTNUM#,#EDUCATION#,#HOUSEHOLD#,#RESIDENTIAL#,#RESIDENCE#,#POSTALCODE#,#EMPLOYMENT#,#JOBNAME#,#JOBPROPERTIES#,#CAREER#,#DUTY#,#WORKEXP#,#REVENUE#,#MARITALSTATUS#,#CHILDRENCASE#,#SPOUSENAME#,#SPOUSEDOCUMENTTYPE#,#SPOUSEDOCUMENTNUM#,#SPOUSECONTACT#,#SPOUSECONTACTNUM#,#SPOUSEJOBNAME#,#SPOUSERVENUE#,#ASSETSTOTAL#,#RECORDTIME#,#RECORDID#,#RECORDNME#,#RECORDORG#,#EXPANDFIELD1#,#EXPANDFIELD2#,#EXPANDFIELD3#,#EXPANDFIELD4#,#EXPANDFIELD5#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.CONSUMER_LOAN_INFO ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="BUSINESSNUM" prepend=","><![CDATA[ BUSINESSNUM = #BUSINESSNUM# ]]></isNotNull>
+			<isNotNull property="CUSTOMERNUM" prepend=","><![CDATA[ CUSTOMERNUM = #CUSTOMERNUM# ]]></isNotNull>
+			<isNotNull property="CUSTOMERNAME" prepend=","><![CDATA[ CUSTOMERNAME = #CUSTOMERNAME# ]]></isNotNull>
+			<isNotNull property="NATION" prepend=","><![CDATA[ NATION = #NATION# ]]></isNotNull>
+			<isNotNull property="SEX" prepend=","><![CDATA[ SEX = #SEX# ]]></isNotNull>
+			<isNotNull property="DOCUMENTTYPE" prepend=","><![CDATA[ DOCUMENTTYPE = #DOCUMENTTYPE# ]]></isNotNull>
+			<isNotNull property="DOCUMENTNUM" prepend=","><![CDATA[ DOCUMENTNUM = #DOCUMENTNUM# ]]></isNotNull>
+			<isNotNull property="CONTACT" prepend=","><![CDATA[ CONTACT = #CONTACT# ]]></isNotNull>
+			<isNotNull property="CONTACTNUM" prepend=","><![CDATA[ CONTACTNUM = #CONTACTNUM# ]]></isNotNull>
+			<isNotNull property="EDUCATION" prepend=","><![CDATA[ EDUCATION = #EDUCATION# ]]></isNotNull>
+			<isNotNull property="HOUSEHOLD" prepend=","><![CDATA[ HOUSEHOLD = #HOUSEHOLD# ]]></isNotNull>
+			<isNotNull property="RESIDENTIAL" prepend=","><![CDATA[ RESIDENTIAL = #RESIDENTIAL# ]]></isNotNull>
+			<isNotNull property="RESIDENCE" prepend=","><![CDATA[ RESIDENCE = #RESIDENCE# ]]></isNotNull>
+			<isNotNull property="POSTALCODE" prepend=","><![CDATA[ POSTALCODE = #POSTALCODE# ]]></isNotNull>
+			<isNotNull property="EMPLOYMENT" prepend=","><![CDATA[ EMPLOYMENT = #EMPLOYMENT# ]]></isNotNull>
+			<isNotNull property="JOBNAME" prepend=","><![CDATA[ JOBNAME = #JOBNAME# ]]></isNotNull>
+			<isNotNull property="JOBPROPERTIES" prepend=","><![CDATA[ JOBPROPERTIES = #JOBPROPERTIES# ]]></isNotNull>
+			<isNotNull property="CAREER" prepend=","><![CDATA[ CAREER = #CAREER# ]]></isNotNull>
+			<isNotNull property="DUTY" prepend=","><![CDATA[ DUTY = #DUTY# ]]></isNotNull>
+			<isNotNull property="WORKEXP" prepend=","><![CDATA[ WORKEXP = #WORKEXP# ]]></isNotNull>
+			<isNotNull property="REVENUE" prepend=","><![CDATA[ REVENUE = #REVENUE# ]]></isNotNull>
+			<isNotNull property="MARITALSTATUS" prepend=","><![CDATA[ MARITALSTATUS = #MARITALSTATUS# ]]></isNotNull>
+			<isNotNull property="CHILDRENCASE" prepend=","><![CDATA[ CHILDRENCASE = #CHILDRENCASE# ]]></isNotNull>
+			<isNotNull property="SPOUSENAME" prepend=","><![CDATA[ SPOUSENAME = #SPOUSENAME# ]]></isNotNull>
+			<isNotNull property="SPOUSEDOCUMENTTYPE" prepend=","><![CDATA[ SPOUSEDOCUMENTTYPE = #SPOUSEDOCUMENTTYPE# ]]></isNotNull>
+			<isNotNull property="SPOUSEDOCUMENTNUM" prepend=","><![CDATA[ SPOUSEDOCUMENTNUM = #SPOUSEDOCUMENTNUM# ]]></isNotNull>
+			<isNotNull property="SPOUSECONTACT" prepend=","><![CDATA[ SPOUSECONTACT = #SPOUSECONTACT# ]]></isNotNull>
+			<isNotNull property="SPOUSECONTACTNUM" prepend=","><![CDATA[ SPOUSECONTACTNUM = #SPOUSECONTACTNUM# ]]></isNotNull>
+			<isNotNull property="SPOUSEJOBNAME" prepend=","><![CDATA[ SPOUSEJOBNAME = #SPOUSEJOBNAME# ]]></isNotNull>
+			<isNotNull property="SPOUSERVENUE" prepend=","><![CDATA[ SPOUSERVENUE = #SPOUSERVENUE# ]]></isNotNull>
+			<isNotNull property="ASSETSTOTAL" prepend=","><![CDATA[ ASSETSTOTAL = #ASSETSTOTAL# ]]></isNotNull>
+			<isNotNull property="RECORDTIME" prepend=","><![CDATA[ RECORDTIME = #RECORDTIME# ]]></isNotNull>
+			<isNotNull property="RECORDID" prepend=","><![CDATA[ RECORDID = #RECORDID# ]]></isNotNull>
+			<isNotNull property="RECORDNME" prepend=","><![CDATA[ RECORDNME = #RECORDNME# ]]></isNotNull>
+			<isNotNull property="RECORDORG" prepend=","><![CDATA[ RECORDORG = #RECORDORG# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD1" prepend=","><![CDATA[ EXPANDFIELD1 = #EXPANDFIELD1# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD2" prepend=","><![CDATA[ EXPANDFIELD2 = #EXPANDFIELD2# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD3" prepend=","><![CDATA[ EXPANDFIELD3 = #EXPANDFIELD3# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD4" prepend=","><![CDATA[ EXPANDFIELD4 = #EXPANDFIELD4# ]]></isNotNull>
+			<isNotNull property="EXPANDFIELD5" prepend=","><![CDATA[ EXPANDFIELD5 = #EXPANDFIELD5# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</update>
+
+	<!-- 删除操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ delete from ${schema.interPlat}.CONSUMER_LOAN_INFO where BUSINESSNUM = #BUSINESSNUM# ]]>
+	</delete>
+
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	 
+	
+</sqlMap>

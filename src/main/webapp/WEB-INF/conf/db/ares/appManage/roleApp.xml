@@ -11,12 +11,10 @@
 		<!--公共字段 -->
 		<field-list name="LIST" type="E">
 			<field name="APP_ID" length="20" type="C" desc="应用ID" /> 
-			<field name="APP_TYPE" length="1" type="C" desc="应用类型（1：原生，2：web；3：react）" /> 
 			<field name="APP_NAME" length="200" type="C" desc="应用名称" /> 
 			<field name="ICON_URL" length="200" type="C" desc="应用图标" /> 
 			<field name="LATEST_VERS" length="20" type="C" desc="最新版本" /> 
 			<field name="APP_PACKAGE" length="80" type="C" desc="应用PACKAGE" /> 
-			<field name="APP_ACTIVITY" length="80" type="C" desc="应用ACTIVITY" /> 
 			<field name="RES_PATH" length="200" type="C" desc="资源包名" /> 
 			<field name="RES_URL" length="1024" type="C" desc="资源包镜像地址" /> 
 			<field name="PLIST_FILE_PATH" length="200" type="C" desc="plist文件名" />

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryBigBranchQTSJ" desc="其他事件大支行详细信息" serviceId="00850000000017">
+    <!--请求报文 -->
+    <snd>
+        <field name="orgId" length="20" type="C" desc="机构id" required="true"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="orgName" length="120" type="C" desc="机构名称 " required="true"/>
+            <field name="orgId" length="20" type="C" desc="机构id " required="true"/>
+            <field name="upNum" length="20" type="C" desc="客户评级上升数 " required="true"/>
+            <field name="downNum" length="20" type="C" desc="客户评级下降数 " required="true"/>
+        </field>
+    </rcv>
+</trans>

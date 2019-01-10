@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="custExecutives" ibatisStatement="" desc="客户高管信息">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd>
+		<!-- 客户高管信息  -->
+		
+		 <field  name="PAGE_NO" length="30" type="C" desc="第几页"  />
+		<field  name="PAGE_SIZE" length="30" type="C" desc="每一页大小"  />  
+		<field  name="customerId" length="10" type="C" desc="客户名称" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		 <!-- 代办记录 -->
+        <field-list name="item" type="E">
+           			 <field name="relativeID" client="relativeID" type="C" required="true"  default="20"    desc="高管客户ID" />  
+					<field name="customerName" client="customerName" type="C" required="true"  default="20"    desc="高管姓名" />  
+					<field name="certType" client="certType" type="C" required="true"  default="20"    desc="客户证件类型" />  
+					<field name="certID" client="certID" type="C" required="true"  default="20"    desc="证件号码" />  
+					<field name="customerType" client="customerType" type="C" required="true"  default="20"    desc="客户类型" />  
+					<field name="countryCodeName" client="countryCodeName" type="C"  default="20"    desc="国籍" />  
+					<field name="sex" client="sex" type="C" required="true"  default="20"    desc="性别" />  
+					<field name="birthday" client="birthday" type="C" required="true"  default="20"    desc="出生日期" />  
+					<field name="duty" client="duty" type="C" required="true"  default="20"    desc="学历" />  
+					<field name="passportDate" client="passportDate" type="C" required="true"  default="20"    desc="证件起始日期" />  
+					<field name="relationShip" client="relationShip" type="C" required="true"  default="20"    desc="担任职务" />  
+					<field name="oughtSum" client="oughtSum" type="C" required="true"  default="20"    desc="应出资金额" />  
+					<field name="passportMaturity" client="passportMaturity" type="C" required="true"  default="20"    desc="证件到期日期" />  
+					<field name="describe" client="describe" type="C" required="true"  default="20"    desc="工作简历" />  
+					<field name="telephone" client="telephone" type="C" required="true"  default="20"    desc="联系电话" />
+					<field name="engageTerm" client="engageTerm" type="C" required="true"  default="20"    desc="相关专业从业年限" />  
+					<field name="holdStock" client="holdStock" type="C" required="true"  default="20"    desc="持股情况（限100个汉字）" />    
+					<field name="inputUserName" client="inputUserName" type="C"   default="20"    desc="登记人" />  
+					<field name="inputOrgName" client="inputOrgName" type="C" required="true"  default="20"    desc="登记机构" />  
+					<field name="inputDate" client="inputDate" type="C" required="true"  default="20"    desc="登记日期" /> 
+					<field name="updateDate" client="updateDate" type="C" required="true"  default="20"    desc="更新日期" />   
+        </field-list>
+	</rcv>
+</trans>
+	

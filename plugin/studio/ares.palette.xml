@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project>
+	<!-- 通讯相关 -->
+	<group id="netTools" desc="通讯相关">
+		<component beanId="netTools4SocketOp" desc="联盟socket通讯">
+		</component>
+	</group>
+	<!-- 更多控件 -->
+	<group id="more" desc="更多控件">
+		<component beanId="onceSessionCheckOp" desc="单次会话检查">
+			<items>
+				<item key="*sessKey" desc="会话字段名" expr="SESS_KEY_1"></item>
+				<item key="*paramKey" desc="请求字段名" expr="PARAM_KEY_1"></item>
+			</items>
+		</component> 
+		<component beanId="sessionSubmitOp" desc="会话创建">
+			<items>
+				<item key="*SESS_USER_ID" desc="会话字段名" expr="${USER_ID}"></item>
+				<item key="*SESS_LOGIN_FLAG" desc="会话字段名" expr="1"></item>
+			</items>
+		</component>
+		<component beanId="flowListEmbedOp" desc="列表遍历流程">
+			<items>
+				<item key="*flowPath" desc="列表子流程相对路径" expr="embed/demo"></item>
+				<item key="*listKey" desc="列表数据变量名" expr="LIST"></item>
+				<item key="*itemKey" desc="子项数据变量名" expr="item"></item>
+				<item key="*itemIndex" desc="列表索引变量名" expr="index"></item>
+			</items>
+		</component>
+	</group>
+
+</project>
+
+

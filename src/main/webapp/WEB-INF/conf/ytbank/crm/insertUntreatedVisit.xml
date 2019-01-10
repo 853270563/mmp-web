@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertUntreatedVisit" desc="客户访谈详细信息保存" serviceId="00850000000043">
+    <!--请求报文 -->
+    <snd>
+        <field name="visitDate" length="20" type="C" desc="访谈时间" required="false"/>
+        <field name="visitDesc" length="200" type="C" desc="访谈内容" required="false"/>
+        <field name="visitChannel" length="20" type="C" desc=" 访谈方式" />
+        <field name="visitType" length="20" type="C" desc=" 访谈类型" />
+        <field name="userId" length="20" type="C" desc=" 登录号" required="true"/>
+    </snd>
+</trans>

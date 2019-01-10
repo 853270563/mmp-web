@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Service> 
+  <Service_Header>
+    <service_id>00080000102010</service_id>
+     <requester_id>0018</requester_id>
+     <branch_id>802777777</branch_id>
+     <channel_id>01</channel_id>
+     <version_id>01</version_id>
+     <service_time>20101104111710</service_time>
+     <service_sn>8027777770209011171</service_sn>
+  </Service_Header>
+  <Service_Body>
+  	
+    <request> 
+      <serial_no>{serialNo}</serial_no> 
+      <page_control>
+      <control_flag>1</control_flag>
+      <pageindex>1</pageindex>
+      <pagesize>10</pagesize>
+      </page_control> 
+    </request>  
+    <response></response> 
+  </Service_Body>
+</Service>

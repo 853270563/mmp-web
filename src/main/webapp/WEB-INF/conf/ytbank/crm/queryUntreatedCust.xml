@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryUntreatedCust" desc="资金异动下的未处理客户" serviceId="00850000000034">
+    <!--请求报文 -->
+    <snd>
+        <field name="custId" length="20" type="C" desc="客户id" required="false"/>
+        <field name="status" length="20" type="C" desc="状态" />
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+            <field name="warnType" length="20" type="C" desc="提醒类型(01大型单笔资金异动,02中型单笔资金异动,03小型单笔资金异动,04微型单笔资金异动,05大型累计资金异动,06中型累计资金异动,07小型累计资金异动,08微型累计资金异动,09零售单笔资金异动,10零售累计资金异动)" required="true"/>
+            <field name="dcFlag" length="20" type="C" desc="异动方向(借贷标志(0取 1存))" required="true"/>
+            <field name="warnBal" length="20" type="C" desc="发生金额" required="true"/>
+            <field name="inputDate" length="20" type="C" desc="数据日期" />
+            <field name="code" length="50" type="C" desc="行号(建表)" />
+            <field name="toCode" length="50" type="C" desc="对方账号(建表)"/>
+            <field name="toName" length="20" type="C" desc="户名(建表)"/>
+            <field name="toDate" length="20" type="C" desc="交易时间(建表)"/>
+            <field name="status" length="20" type="C" desc="状态(0未浏览 1已浏览)" required="true"/>
+            <field name="userName" length="20" type="C" desc="客户经理名称"/>
+            <field name="disposeType" length="20" type="C" desc="处理方式"/>
+        </field>
+    </rcv>
+</trans>

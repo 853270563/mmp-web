@@ -1,32 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<trans name="loginExpandData" desc="登录拓展接口" ibatisStatement="">
+<trans name="loginExpandData" desc="登录拓展接口" ibatisStatement="SESSION_LOG.addSessionLog">
 	<snd>
-		<field name="USER_ID" length="100" type="C" desc="用户标识" client="userId" required="true"/>
+		<field name="USER_ID" length="100" type="C" desc="用户标识"  required="true" default="admin"/>
 		<field name="ORG_ID" length="20" type="C" desc="机构号" client="orgId"/>
-        <field name="DEVICE_ID" length="100" type="C" desc="设备标识" client="deviceId" required="true"/>
-        <field name="APP_ID" length="100" type="C" desc="应用标识" client="appId" required="true"/>
-        <field name="APP_VER_ID" length="100" type="C" desc="应用版本标识" client="appVerId" required="true"/>
+        <field name="DEVICE_ID" length="100" type="C" desc="设备标识" client="deviceId" required="true" default="F526A6FDB0BE4877"/>
+        <field name="APP_START_DTIME" length="32" type="C" desc="应用启动时间" client="appStartDTime" required="true" default="2015-05-01"/>
+        <field name="APP_STOP_DTIME" length="32" type="C" desc="应用结束时间" client="appStopDTime"/>
+        <field name="APP_ID" length="100" type="C" desc="应用标识" client="appId" required="true" default="111"/>
+        <field name="APP_VER_ID" length="100" type="C" desc="应用版本标识" client="appVerId" required="true" default="222"/>
         <field name="POS" length="60" type="C" desc="位置XY" client="pos"/>
-        <field name="DEVICE_MODEL" length="20" type="C" desc="型号" client="deviceModel" require="true"/>
-		<field name="DEVICE_SYSTEM" length="20" type="C" desc="系统" client="deviceSystem" require="true"/>
+        <field name="DEVICE_MODEL" length="20" type="C" desc="型号" client="deviceModel" require="true" default="20-01"/>
+		<field name="DEVICE_SYSTEM" length="20" type="C" desc="系统" client="deviceSystem" require="true" default="ios"/>
+		<field name="OPERATE_DATE" length="20" type="C" desc="查询时间(yyyy-MM-dd HH24:mm:ss)" client="operateDate"/>
+		<field name="ROLE_ID" length="20" type="C" desc="角色id"/>
 	</snd>
 	<!-- 响应报文 -->
 	<rcv> 
 		<!--公共字段-->
 		<field name="STATUS" length="6" type="C" desc="返回码" /> 
 		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="jsonStr" length="4000" type="C" desc="业务包json数据" />
+		<!-- 利率字段 -->
+		<field-list name="rate" type="E">
+			<field name="PROD_TYPE_CODE" length="100" type="C" desc="业务类型代码" />
+			<field name="PROD_CODE" length="100" type="C" desc="业务代码" />
+			<field name="CCY_CODE" length="100" type="C" desc="货币代码" />
+			<field name="PROD_NAME" length="100" type="C" desc="业务名称" />
+			<field name="PROD_NAME_EN" length="100" type="C" desc="业务英文名称" />
+			<field name="PROD_MONT_YEAR" length="100" type="C" desc="业务利率模式" />
+			<field name="PROD_RATE" length="100" type="C" desc="利率" />
+			<field name="PROD_DESC" length="100" type="C" desc="备注" />
+			<field name="PROD_MINI_AMT" length="100" type="C" desc="起存金额" />
+			<field name="PROD_MINI_DESC" length="100" type="C" desc="起存金额描述" />
+			<field name="PROD_DATE" length="100" type="C" desc="生效日期" />
+			<field name="PROD_CLASS" length="1" type="C" desc="存贷款类型" />
+		</field-list>
+		<!-- 汇率字段 -->
+		<field-list name="exRate" type="E">
+			<field name="CURRENCYNAME" length="100" type="C" desc="货币名称" />
+			<field name="BUYINGRATE" length="100" type="C" desc="现汇买入价" />
+			<field name="CASHBUYINGRATE" length="100" type="C" desc="现钞买入价" />
+			<field name="SELLINGRATE" length="100" type="C" desc="现汇卖出价" />
+			<field name="CASHSELLINGRATE" length="100" type="C" desc="现钞卖出价" />
+			<field name="MIDDLERATE" length="100" type="C" desc="中行折算价" />
+			<field name="PUBLISHDATE" length="100" type="C" desc="发布日期" />
+			<field name="PUBLISHTIME" length="100" type="C" desc="发布时间" />
+		</field-list>
+		<!-- 资费字段 -->
+		<field-list name="charge" type="E">
+			<field name="PRODUCT_TYPE_ID" length="100" type="C" desc="产品类型编号" />
+			<field name="PRODUCT_TYPE_NAME" length="100" type="C" desc="产品类型名称" />
+			<field name="PRODUCT_TYPE_DESC" length="100" type="C" desc="产品类型描述" />
+			<field-list name="PRODUCTLIST" type="E">
+				<field name="PRODUCT_ID" length="100" type="C" desc="产品编号" />
+				<field name="PRODUCT_NAME" length="100" type="C" desc="产品名称" />
+				<field name="PRODUCT_DESC" length="100" type="C" desc="产品描述" />
+				<field-list name="CHARGELIST" type="E">
+					<field name="CHARGE_NAME" length="100" type="C" desc="资费名称" />
+					<field name="CHARGE_COST" length="100" type="C" desc="资费标准" />
+				</field-list>
+			</field-list>
+		</field-list>
 		<!-- A面菜单 -->
-		<field name="MAX_MENU_POSITION" length="100" type="C" desc="A面最大菜单坐标" />
 		<field-list name="menuA" type="E">
-			<field name="MENU_ID" length="100" type="C" desc="编号" />
-			<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
-			<field name="MENU_URL" length="100" type="C" desc="访问路径" />
-			<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
-			<field name="MENU_TYPE" length="100" type="C" desc="类型" />
-			<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
-			<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
-			<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
-			<field name="MENU_POSITION" length="100" type="C" desc="菜单坐标" />
+				<field name="MENU_ID" length="100" type="C" desc="编号" />
+				<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+				<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+				<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+				<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+				<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
+				<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+				<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+				<field-list name="MENU_LIST2" type="E">
+					<field name="MENU_ID" length="100" type="C" desc="编号" />
+					<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+					<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+					<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+					<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+					<field name="MENU_STATUS" length="100" type="C" desc="菜单状态"  descName="MENU_STATUS_LABEL" mapKey="VALID_FLAG"  />
+					<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+					<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+				</field-list>
+				
+				<field-list name="MENU_LIST3" type="E">
+						<field name="MENU_ID" length="100" type="C" desc="编号" />
+						<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+						<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+						<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+						<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+						<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+						<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+						<field name="MENU_DESC" length="100" type="C" desc="菜单说明" />
+					</field-list>
 		</field-list>
 		<!-- B面菜单 -->
 		<field-list name="menuB" type="E">
@@ -34,10 +99,33 @@
 			<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
 			<field name="MENU_URL" length="100" type="C" desc="访问路径" />
 			<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
-			<field name="MENU_IMG_S" length="100" type="C" desc="选中后图片地址" />
 			<field name="MENU_TYPE" length="100" type="C" desc="类型" />
 			<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
 			<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+			<field-list name="MENU_LIST2" type="E">
+				<field name="MENU_ID" length="100" type="C" desc="编号" />
+				<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+				<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+				<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+				<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+				<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+				<field name="MUDULE_ID" length="100" type="C" desc="模块编号" />
+			</field-list>
+		</field-list>
+		<!-- 广告及展架 -->
+		<field-list name="resFile" type="E"> 
+			<field name="RID" length="6" type="C" desc="产品编号" xpath="RES_ID" />
+			<field name="RES_TYPE" length="6" type="C" desc="资源类型" />	
+			<field name="PROD_NAME" length="6" type="C" desc="产品名称" xpath="PRD_NAME"/>	
+			<field name="PROD_TYPE" length="6" type="C" desc="产品分类" xpath="PRD_TYPE"/>	
+			<field name="PROD_MEMO" length="6" type="C" desc="产品说明" xpath="FILE_NAME"/>	
+			<field name="FILE_ID" length="100" type="C" desc="资源编号" />
+			<field name="FILE_TYPE" length="6" type="C" desc="文件类型"/>
+			<field name="FILE_URL" length="100" type="C" desc="资源路径" xpath="FILE_ADDR"/>
+			<field name="IMG_ID" length="100" type="C" desc="封面图片" />
+			<field name="IMG_URL" length="100" type="C" desc="封面图片" xpath="PROPA_IMG"/>
+			<field name="UPDATE_TIME" length="100" type="C" desc="修改时间" />
+			<field name="AUDI_ID" length="6" type="C" desc="版本号" />			
 		</field-list>
 	</rcv>
 </trans>

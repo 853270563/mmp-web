@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="busiPageAdd" desc="业务包添加"   ibatisStatement="MYW_BUSI_PACKAGE.insert">
+	<snd>
+		<field name="userId" type="C" length="20" desc="用户编号" required="true" />
+		<field name="jsonStr" type="C" length="8000" desc="json字符串" required="true" />
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="ERROR" length="1" type="C" desc="信息是否重复0；重复1不重复" />
+	</rcv>
+</trans>

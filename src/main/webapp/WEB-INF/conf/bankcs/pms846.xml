@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="CardStateQuery" desc="卡信息查询（卡状态）">
+	<snd>
+		<field name="bzh" length="2" type="C" desc="币种号" required="true"/>
+		<field name="czy" length="4" type="C" desc="操作员" required="true"/>
+		<field name="jgm" length="9" type="C" desc="机构码" required="true"/>
+		<field name="sblx" length="1" type="C" desc="设备类型" required="true"/>
+		<field name="jym" length="4" type="C" desc="交易码" required="true"/>
+		<field name="wdlsh" length="8" type="C" desc="网点流水号" required="true" />
+		<field name="kh" length="19" type="C" desc="卡号" required="true"/>
+	</snd>
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="70" type="C" desc="返回消息" />
+		<field name="zjlsh" length="8" type="C" desc="主机流水号" />
+		<field name="kzl" length="8" type="C" desc="卡片种类" />
+		<field name="hm" length="70" type="C" desc="户名" />
+		<field name="khh" length="20" type="C" desc="客户号" />
+		<field name="zjhm" length="20" type="C" desc="证件号码" />
+		<field name="jgm" length="9" type="C" desc="发卡机构码" />
+		<field name="czy" length="4" type="C" desc="发卡操作员号" />
+		<field name="kkrq" length="8" type="C" desc="开卡日期" />
+		<field name="zt" length="16" type="C" desc="状态" />
+		<field name="sxbz" length="16" type="C" desc="属性标志" />
+		<field name="yxq" length="8" type="C" desc="卡有效期" />
+		<field name="beiy" length="40" type="C" desc="备用" />
+	</rcv>
+</trans>

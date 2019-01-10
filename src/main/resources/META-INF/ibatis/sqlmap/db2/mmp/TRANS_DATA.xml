@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TRANS_DATA">
+	<sql id="queryDynSql">
+	 	<isNotEmpty prepend="AND" property="TRANS_ID">
+		 	T.TRANS_ID = #TRANS_ID#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="SIGN_TYPE">
+		 	T.SIGN_TYPE = #SIGN_TYPE#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="SIGN_STATE">
+		 	T.SIGN_STATE = #SIGN_STATE#
+		</isNotEmpty> 
+		<isNotEmpty prepend="AND" property="STARTDATE">
+		 	<![CDATA[ T.SIGN_TIME >= #STARTDATE# ]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="ENDDATE">
+		 	<![CDATA[ T.SIGN_TIME <= #ENDDATE# ]]>
+		</isNotEmpty>
+	</sql>
+	 
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.TRANS_DATA T
+	</select> 
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM	${schema.interPlat}.TRANS_DATA T 
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.SIGN_TIME DESC
+	</sql>
+	
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	
+	<select id="queryCardDetail" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.* FROM ${schema.interPlat}.TRANS_DATA T
+	</select> 
+</sqlMap>

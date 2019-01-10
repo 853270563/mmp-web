@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertOperateMyCust" desc="操作（在新增客户的我的客户下）" serviceId="00850000000065">
+    <!--请求报文 -->
+    <snd>
+        <field name="custName" length="120" type="C" desc="客户姓名" required="true"/>
+        <field name="custId" length="20" type="C" desc="客户id" required="true"/>
+        <field name="userId" length="100" type="C" desc="登录号" required="true"/>
+        <field name="careType" length="120" type="C" desc="关注客户（0 是 1 否）"/>
+        <field name="cgName" length="120" type="C" desc="客户群名称" required="true"/>
+        <field name="cgId" length="20" type="C" desc="客户群ID" required="true"/>
+        <field name="custLvl" length="20" type="C" desc="客户等级" required="true"/>
+    </snd>
+</trans>

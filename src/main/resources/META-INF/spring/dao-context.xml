@@ -11,8 +11,7 @@
 		
 	<!-- DRUID数据库连接池，通常来说，只需要修改initialSize、minIdle、maxActive。
 		  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。 -->
-	<bean id="dataSource" class="cn.com.yitong.framework.dao.support.AresDataBaseSource" init-method="init"  destroy-method="close">
-	<!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"  destroy-method="close">-->
+    <!-- <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"  destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
@@ -35,15 +34,14 @@
         <property name="poolPreparedStatements" value="true" />
 	    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
               
-      	<property name="filters" value="stat" /> 
-	</bean>
-	
+      	<property name="filters" value="stat" />
+	</bean>    -->
 	<!-- was jndi数据连接池配置 -->
-	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName">
-			<value>ARES_DS</value>
-		</property>
-	</bean> -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"  lazy-init="true"> 
+	 <property name="jndiName">
+	<value>${jndi}</value>
+	</property>
+	</bean>  
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
@@ -56,11 +54,24 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 配置事务特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="page*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
 
 	<!-- 以AspectJ方式 定义 AOP -->
 	<!-- 如果service没有基於介面，使用cgilib来实现AOP，定义proxy-target-class="true" 设定proxy-target-class="true" 
 		其实就是强制spring使用CGLIB代理！这裡我们service基於介面编程就变的毫无意义 -->
-	<aop:config proxy-target-class="true" />
-
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* cn.com.yitong.modules..*Service.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	
 </beans>

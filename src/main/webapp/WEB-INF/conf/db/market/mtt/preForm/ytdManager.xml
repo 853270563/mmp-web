@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ytdManager" desc="预填单" ibatisStatement="YTD_PRE_FORM.query">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+<!-- 		<field name="FORM_STATUS" length="2" type="C" desc="预填单状态" required="true" /> -->
+		<field name="FORM_TYPE" length="2" type="C" desc="预填单业务类型" required="true" />
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+        <field name="SUBMIT_URL" length="200" type="C" desc="提交地址" />
+		<field name="BUSI_TYPE" length="2" type="C" desc="业务类型" />
+		<field name="BUSS_NAME" length="20" type="C" desc="业务名称" />
+		<field-list name="FORMDATA" type="E">
+			<field name="NAME" length="2" type="C" desc="表单描述" />
+			<field name="FORM_NAME" length="20" type="C" desc="表单name值" />
+			<field name="FORM_TYPE" length="2" type="C" desc="表单类型" />
+			<field name="FORM_LIST" length="2000" type="C" desc="option数据[仅限FORM_TYPE=select时使用，其他类型时为空]" />
+			<field name="FIELDSIZE" length="5" type="C" desc="表单数据长度" />
+			<field name="PRETREATMENT" length="2" type="C" desc="是否需要验证预填单" />
+			<field name="FORM_VALIDATE" length="2" type="C" desc="是否必输项1必输2非必输" />
+            <field name="PRETREATMENT_VALUE" length="200" type="C" desc="验证正则表达式" />
+		</field-list>
+	</rcv>
+</trans>

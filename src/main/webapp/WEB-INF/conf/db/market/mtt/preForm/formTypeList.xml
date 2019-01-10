@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ytdManager" desc="预填单" ibatisStatement="YTD_PRE_FORM.queryFormTypeList">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+	<snd>
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="FORM_LIST" type="E">
+			<field name="LABEL" length="20" type="C" desc="预填单类型" />
+			<field name="VALUE" length="20" type="C" desc="预填单名称" />
+		</field-list>
+	</rcv>
+</trans>

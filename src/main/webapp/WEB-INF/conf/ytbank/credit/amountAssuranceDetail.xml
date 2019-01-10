@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="amountAssuranceDetail" desc="担保信息列表">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100042" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="816777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			
+  				<!--请求体 -->
+			<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="guarantycontract_no" client="serialNo" type="C"  required="true"  default=""    desc="担保合同编号" />  
+				<field name="apply_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" />  
+				<field name="contract_type" client="contractType" type="C"  required="true"  default=""    desc="合同类型" />  
+				<field name="guaranty_type" client="guarantyType" type="C"  required="true"  default=""    desc="担保方式" /> 
+				<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	 
+			</field-request>
+		</body>
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<field-request name="request" type="E" xpath="Service_Body/request" desc="请求体">
+				<field name="guarantycontract_no" client="serialNo" type="C"  required="true"  default=""    desc="担保合同编号" />  
+				<field name="apply_no" client="applySerialNo" type="C"  required="true"  default=""    desc="业务流水号" />  
+				<field name="contract_type" client="contractType" type="C"  required="true"  default=""    desc="合同类型" />  
+				<field name="guaranty_type" client="guarantyType" type="C"  required="true"  default=""    desc="担保方式" />  
+			</field-request>
+   			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+   					<field name="serialNo" client="serialNo" type="C" required="true"  default="100"    desc="担保合同编号" />
+   					<field name="contractType" client="contractType" type="C" required="true"  default="100"    desc="合同类型" />  
+   					<field name="GuaranteeForm" client="GuaranteeForm" type="C" required="true"  default="100"    desc="保证担保形式" />  
+   					<field name="YYSerialNo" client="YYSerialNo" type="C" required="true"  default="100"    desc="文本合同号" />  
+   					<field name="GuarantyTypeName" client="GuarantyTypeName" type="C" required="true"  default="100"    desc="担保方式" />  
+   					<field name="CheckGuarantyMan2" client="CheckGuarantyMan2" type="C" required="true"  default="100"    desc="保证金类型" />  
+   					<field name="ConfirmCurrency" client="ConfirmCurrency" type="C" required="true"  default="100"    desc="保证金币种2" />  
+   					<field name="BailRatio" client="BailRatio" type="C" required="true"  default="100"    desc="保证金比例" />
+   					<field name="GuarantorName" client="GuarantorName" type="C" required="true"  default="100"    desc="质押人名称" />
+   					<field name="CertType" client="CertType" type="C" required="true"  default="100"    desc="质押人证件类型" />  
+   					<field name="CertID" client="CertID" type="C" required="true"  default="100"    desc="质押人证件号码" />  
+   					<field name="LoanCardNo" client="LoanCardNo" type="C" required="true"  default="100"    desc="质押人贷款卡编号" />  
+   					<field name="SignDate" client="SignDate" type="C" required="true"  default="100"    desc="担保合同签订日" />  
+   					<field name="BeginDate" client="BeginDate" type="C" required="true"  default="100"    desc="担保合同起始日" />  
+   					<field name="EndDate" client="EndDate" type="C" required="true"  default="100"    desc="担保合同到期日" />  
+   					<field name="GuarantyCurrency" client="GuarantyCurrency" type="C" required="true"  default="100"    desc="质押担保币种" />   
+   					<field name="GuarantyValue" client="GuarantyValue" type="C" required="true"  default="100"    desc="担保合同编号" />
+   					<field name="RelativeSum" client="RelativeSum" type="C" required="true"  default="100"    desc="本笔贷款占用担保金额" />  
+   					<field name="InputUserName" client="InputUserName" type="C" required="true"  default="100"    desc="登记人" />  
+   					<field name="InputOrgName" client="InputOrgName" type="C" required="true"  default="100"    desc="登记机构" />  
+   					<field name="InputDate" client="InputDate" type="C" required="true"  default="100"    desc="登记时间" />  
+   					<field name="UpdateDate" client="UpdateDate" type="C" required="true"  default="100"    desc="更新时间" />  
+   			</field>
+   			<field name="Action"  xpath="Service_Body/response/list/Action"  type="E"  desc="解析响应报文体">
+   					<field name="GuarantyID" client="GuarantyID" type="C" required="true"  default="100"    desc="抵押物编号、质物编号" />
+   					<field name="GuarantyType" client="GuarantyType" type="C" required="true"  default="100"    desc="抵押物类型、质押类型" />  
+   					<field name="GuarantyTypeName" client="GuarantyTypeName" type="C" required="true"  default="100"    desc="抵押物类型、质押类型编码" />  
+   					<field name="OwnerID" client="OwnerID" type="C" required="true"  default="100"    desc="权利人编号、出质人编号" />  
+   					<field name="OwnerName" client="OwnerName" type="C" required="true"  default="100"    desc="权利人名称、出质人名称" />  
+   					<field name="CertID" client="CertID" type="C" required="true"  default="100"    desc="" />  
+   					<field name="CertType" client="CertType" type="C" required="true"  default="100"    desc="" />  
+   					<field name="GuarantySum" client="GuarantySum" type="C" required="true"  default="100"    desc="抵押担保金额、质押担保金额" />  
+   					<field name="GuarantyCurrenc" client="GuarantyCurrenc" type="C" required="true"  default="100"    desc="" />
+   					<field name="GuarantyRate" client="GuarantyRate" type="C" required="true"  default="100"    desc="抵押率%" />
+   			</field>
+		</rcv>
+</trans>   			

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CHARGE">
+	<!-- 根据chargeID 查询 -->
+	<select id="queryChargeId" parameterClass="map" resultClass="java.util.HashMap">
+		  SELECT T.* FROM ${schema.interPlat}.MGJ_CHARGE_INFO T
+		<dynamic prepend="WHERE ">
+	    <isNotEmpty prepend="and" property="CHARGE_ID">
+			T.CHARGE_ID = #CHARGE_ID#
+		</isNotEmpty> 
+		 <isNotEmpty prepend="and" property="PRODUCT_ID">
+			T.CHARGE_PRODUCT_ID = #PRODUCT_ID#
+		</isNotEmpty> 
+		</dynamic>
+		    ORDER BY T.CHARGE_ID
+	</select>
+	<!-- 根据查询产品的信息-->
+	<select id="queryProductByAll" parameterClass="map" resultClass="java.util.HashMap">
+		     SELECT T.* FROM ${schema.interPlat}.MGJ_CHARGE_PRODUCT T ORDER BY T.PRODUCT_ID
+	</select>
+		<!-- 查询所有与的产品类型-->
+	<select id="queryProductTypeAll" parameterClass="map" resultClass="java.util.HashMap">
+		      SELECT T.* FROM  ${schema.interPlat}.MGJ_CHARGE_PRODUCT_TYPE T ORDER BY T.PRODUCT_TYPE_ID
+	</select>
+
+	<!-- 查询产品类型-->
+	<select id="queryProductType" parameterClass="map" resultClass="java.util.HashMap">
+		     SELECT DISTINCT T.PRODUCT_TYPE_ID,T.PRODUCT_TYPE_NAME,T.PRODUCT_TYPE_DESC FROM ${schema.interPlat}.MGJ_CHARGE_PRODUCT_TYPE T
+	</select>
+	<!-- 查询产品信息-->
+	<select id="queryProductInfo" parameterClass="map" resultClass="java.util.HashMap">
+		     SELECT T.PRODUCT_ID,T.PRODUCT_NAME,T.PRODUCT_TYPE_ID,T.PRODUCT_DESC FROM ${schema.interPlat}.MGJ_CHARGE_PRODUCT T 
+				LEFT JOIN ${schema.interPlat}.MGJ_CHARGE_PRODUCT_TYPE P ON P.PRODUCT_TYPE_ID=T.PRODUCT_TYPE_ID
+				WHERE T.PRODUCT_TYPE_ID=#PRODUCT_TYPE_ID#
+	</select>
+	<!-- 查询资费详情-->
+	<select id="queryChargeInfo" parameterClass="map" resultClass="java.util.HashMap">
+		     SELECT T.CHARGE_NAME,T.CHARGE_COST FROM ${schema.interPlat}.MGJ_CHARGE_INFO T
+				LEFT JOIN ${schema.interPlat}.MGJ_CHARGE_PRODUCT Q ON T.CHARGE_PRODUCT_ID=Q.PRODUCT_ID
+				WHERE T.CHARGE_PRODUCT_ID=#PRODUCT_ID#
+	</select>
+</sqlMap>
+

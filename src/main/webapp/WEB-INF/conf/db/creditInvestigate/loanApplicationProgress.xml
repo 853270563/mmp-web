@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="loanApplicationProgress" ibatisStatement="" desc="贷款申请进度列表">
+	
+	<snd>
+		<field  name="CustomerName" length="10" type="C" desc="客户姓名 "/>
+		<field  name="CertID" length="10" type="C" desc="证件号码"/>
+		<field  name="BeginDate" length="10" type="C" desc="开始时间"/>
+		<field  name="EndDate" length="10" type="C" desc="结束时间"/>
+		<!--分页-->
+		<field name="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" /> 
+		<field name="PAGE_SIZE"  type="C" required="true"  default="10"    desc="分页大小" />
+	</snd>
+
+	<rcv>
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="TOTAL_NUM"  type="C"  desc="总条数" />
+		<field name="COUNT"  type="C"  desc="条数" />
+		<field-list name="LIST" type="E">
+			<field name="TaskSerialNo" length="16" type="C" desc="任务流水号" />
+			<field name="ApplySerialNo" length="4" type="C" desc="业务流水号" />
+			<field name="BusinessName" length="4" type="C" desc="业务类型" />
+			<field name="BusinessType" length="32" type="C" desc="业务类型代码" />
+			<field name="CustomerName" length="8" type="C" desc="客户名称" />
+			<field name="CertType" length="20" type="C" desc="证件类型代码" />
+			<field name="CertID" length="20" type="C" desc="证件号码" />
+			<field name="CellPhone" length="20" type="C" desc="手机号码" />
+			<field name="BusinessSum" length="20" type="C" desc="贷款金额" />
+			<field name="PhaseName" length="20" type="C" desc="当前业务阶段" />
+			<field name="PhaseNo" length="20" type="C" desc="阶段号" />
+			<field name="PhaseType" length="20" type="C" desc="阶段类型" />
+			<field name="InputUserName" length="20" type="C" desc="客户经理" />
+			<field name="InputOrgName" length="20" type="C" desc="归属机构" />
+		</field-list>
+	</rcv>
+</trans>

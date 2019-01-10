@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="BarSystem" desc="智能排队机系统(柜面系统)">
+
+	<snd-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号"  required="true"/>
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号"  required="true"/>
+		<field name="TRAN_FLAG" length="100" type="C" desc=""  required="true"/>
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期"  required="true"/>
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号"  required="true"/>
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户"  required="true"/>
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间"  required="true"/>
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号"  required="true"/>
+	</snd-sys-header>
+	
+	<snd>
+	
+			<field name="SUB_BRANCH_ID" length="20" type="C" desc="子操作网点号" required="false" />
+	
+		<field name="QUERY_BRANCH_ID" length="20" type="C" desc="子操作网点号" required="false" />
+		<field name="EMBRANCH_ID" length="30" type="C" desc="分行号" required="false"/>
+		<field name="SUBSIDIARY_BRANCH_ID" length="20" type="C" desc="支行号" required="false"/>
+		<field name="START_DATE" length="6" type="C" desc="开始日期" required="false" />
+		<field name="END_DATE" length="6" type="C" desc="终止日期" required="false"/>
+		<field name="BUSS_TYPE" length="50" type="C" desc="业务类型" required="false"/>
+		<field name="QUEUE_NO" length="20" type="C" desc="队列号码" required="false"/>
+		<field name="MEDIUM_TYPE" length="1" type="C" desc="介质类1:卡 2:折 3:身份证" required="false"/>
+		<field name="MEDIUM_NO" length="50" type="C" desc="介质号码" required="false"/>
+		<field name="WINDOW_NO" length="20" type="C" desc="窗口号码" required="false"/>
+		<field name="ACCEPT_TELLER_NO" length="30" type="C" desc="受理柜员" required="false"/>
+		<field name="QUEUE_STATUS" length="2" type="C" desc="队列状态0-取号等待 1-业务办理中 2-填单中 3-业务办理结束 4-过号 5-弃号 6-已营销 7-已转移 8-绿色通道 9-已复办" required="false"/>
+		<field name="ASSESSMENT_TYPE" length="30" type="C" desc="受理柜员" required="false"/>
+		<field name="OPER_TYPE" length="1" type="C" desc="分页标识1-最后一页2-上一页3-下一页4-当前页转入到平台内部要为字典_opertype_" required="true"/>
+		<field name="CURRENT_PAGE" length="10" type="C" desc="当前页码" required="true"/>
+		<field name="PAGE_ROW_COUNT" length="20" type="C" desc="每页记录数" required="true"/>
+		<field name="REMARK1" length="300" type="C" desc="备注1" required="false"/>
+		<field name="REMARK2" length="300" type="C" desc="备注2" required="false"/>	
+		
+		<field name="CHANNEL_DATE" length="300" type="C" desc="" required="false"/>	
+		<field name="CHANNEL_TIME" length="300" type="C" desc="" required="false"/>	
+		<field name="CHANNEL_SEQ_NO" length="300" type="C" desc="" required="false"/>	
+		<field name="SOURCE_TYPE" length="300" type="C" desc="" required="false"/>	
+		<field name="USER_ID" length="300" type="C" desc="" required="false"/>	
+				
+				
+		
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+		<rcv-sys-header>
+		<!--公共字段 -->
+		<field name="SERVICE_CODE" length="100" type="C" desc="" />
+		<field name="SERVICE_SCENE" length="100" type="C" desc="" />
+		<field name="CONSUMER_ID" length="100" type="C" desc="" />
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="" />
+		<field name="SERV_SEQ_NO" length="100" type="C" desc="" />
+		<field name="TRAN_DATE" length="100" type="C" desc="" />
+		<field name="TRAN_TIMESTAMP" length="6" type="C" desc="" />
+		<field-list name="RET" length="100" type="E" desc="">
+			<field name="RET_MSG" length="100" type="C" desc="" />
+			<field name="RET_CODE" length="100" type="C" desc="" />
+		</field-list>
+		 <field name="RET_STATUS" length="6" type="C" desc="" />
+	</rcv-sys-header>
+	
+	
+	<rcv>
+			<field name="TOTAL_ROWS" length="10" type="C" desc="总笔数" />
+			<field name="TOTAL_PAGES" length="10" type="C" desc="总页数" />
+			<field name="CURRENT_PAGE" length="10" type="C" desc="当前页码" />
+			<field name="PAGE_ROW_COUNT" length="20" type="C" desc="每页记录数" /> 
+			
+		<field-list name="QUEUE_INFO_ARRAY" length="6" type="E" desc="队列信息数组START" > 
+			<field name="QUERY_BRANCH_ID" length="20" type="C" desc="查询机构代码" />
+			
+			<!-- <field name="EMBRANCH_ID" length="30" type="C" desc="分行号" /> 
+ 			<field name="SUBSIDIARY_BRANCH_ID" length="20" type="C" desc="支行号" /> -->
+			
+			<field name="CREATION_DATE" length="8" type="C" desc="创建日期" />
+			<field name="BUSS_TYPE" length="50" type="C" desc="业务类型" />
+			<field name="QUEUE_NO" length="20" type="C" desc="队列号码" />
+			<field name="ENTRY_QUEUE_TIME" length="6" type="C" desc="取号时间" />
+			<field name="MEDIUM_TYPE" length="1" type="C" desc="介质类型1:卡 2:折 3:身份证" />
+			<field name="MEDIUM_NO" length="50" type="C" desc="介质号码" />
+			<field name="WAIT_TIME" length="6" type="C" desc="等待时间" />
+			<field name="WINDOW_NO" length="20" type="C" desc="窗口号码" />
+			<field name="ACCEPT_TELLER_NO" length="30" type="C" desc="受理柜员" />
+			<field name="DEAL_QUEUE_TIME" length="6" type="C" desc="叫号时间" />
+			<field name="QUEUE_STATUS" length="2" type="C" desc="队列状态0-取号等待 1-业务办理中 2-填单中 3-业务办理结束 4-过号 5-弃号 6-已营销 7-已转移 8-绿色通道 9-已复办" />
+			<field name="ACCEPT_TIME" length="6" type="C" desc="受理时间" />
+			<field name="BUSS_TYPE_NAME" length="150" type="C" desc="业务类型名称" />
+			<field name="BUSS_PRIORITY" length="4" type="C" desc="业务优先级" />
+			<field name="QUEUE_TYPE" length="2" type="C" desc="队列类型0-客户取号1-柜员取号（叫号不触发外设，直接更改数据库状态，特殊使用） 2-营销 3-转移 4-绿色通道 5-预约 6-复办" />
+			<field name="START_TIME" length="6" type="C" desc="开始时间" />
+			<field name="ASSESS_TIME" length="6" type="C" desc="评价时间" />
+			<field name="END_TIME" length="6" type="C" desc="结束时间" />
+			<field name="ASSESSMENT_TYPE" length="1" type="C" desc="评价结果码	1-满意,2-基本满意,3-较不满意,4-不满意" />			
+			<field name="MODIFY_ASSESS_TIME" length="6" type="C" desc="评价修改时间" />
+			<field name="CLIENT_SUGGEST" length="500" type="C" desc="客户意见" />
+			<field name="FORM_FLAG" length="1" type="C" desc="预填单标志0：否 1：是" />
+			<field name="RESERVE_NO" length="20" type="C" desc="预约号" />
+			<field name="NEW_QUEUE_NO" length="20" type="C" desc="队列号码（转移、复办时使用）" />
+			<field name="FACILITY_NO" length="20" type="C" desc="设备号" />
+			<field name="CALL_NUM" length="2" type="C" desc="呼叫次数" />
+			<field name="VIP_FLAG" length="1" type="C" desc="VIP标志1-是，2-否" />
+			<field name="CLIENT_GRADE" length="10" type="C" desc="客户等级" />
+			<field name="REMARK" length="300" type="C" desc="备注" />
+			<field name="REMARK1" length="300" type="C" desc="备注1" />
+			<field name="REMARK2" length="300" type="C" desc="备注2" />
+			<field name="MOD_TELLER" length="30" type="C" desc="维护柜员" />
+		</field-list>		
+	</rcv>
+</trans>

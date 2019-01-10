@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="MenuList"  ibatisStatement="P_MOBI_ROL_MENU.queryMenuUserBtypeList" desc="根据用户查询客户端B面菜单">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		
+		<field name="USER_ID" length="100" type="C" desc="用户编号"  required="true"/>
+		
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="MENU_UPDATE_TIME" length="100" type="C" desc="菜单更新时间" /> 
+		<!--交易数据 -->
+		<field-list name="LIST" type="E">
+					<field name="MENU_ID" length="100" type="C" desc="编号" />
+					<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+					<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+					<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+					<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+					<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+					<field-list name="MENU_LIST2" type="E">
+									<field name="MENU_ID" length="100" type="C" desc="编号" />
+									<field name="MENU_NAME" length="100" type="C" desc="菜单名称" />
+									<field name="MENU_URL" length="100" type="C" desc="访问路径" />
+									<field name="MENU_IMG" length="100" type="C" desc="图片地址" />
+									<field name="MENU_TYPE" length="100" type="C" desc="类型" />
+									<field name="MENU_PAR_ID" length="100" type="C" desc="上级菜单编号" />
+					</field-list>
+		</field-list>
+	</rcv>
+</trans>

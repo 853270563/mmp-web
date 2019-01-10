@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="CheckSendCode"  ibatisStatement="  " desc="短信验证码校验">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field name="MOBILE" length="30" type="C" desc="用户手机号码"  required="true"/>
+		<field name="SEND_CODE" length="6" type="C" desc="验证码"  required="true"/> 
+	</snd>
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+	</rcv>
+</trans>

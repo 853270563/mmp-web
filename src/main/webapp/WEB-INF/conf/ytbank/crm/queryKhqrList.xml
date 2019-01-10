@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryKhqrList" desc="客户确认列表信息" serviceId="00850000000036">
+    <!--请求报文 -->
+    <snd>
+        <field name="applyType" length="20" type="C" desc="接收类型" required="false"/>
+        <field name="loginUserId" length="20" type="C" desc="当前登录人信息" required="false"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="custName" length="120" type="C" desc="客户姓名 " required="true"/>
+            <field name="custGrade" length="20" type="C" desc="客户等级"  required="true"/>
+            <field name="applyType" length="20" type="C" desc="接收类型" required="true" />
+            <field name="cuApppDate" length="20" type="C" desc="申请日期"  required="true"/>
+            <field name="chkStatus" length="20" type="C" desc="状态(10：待审核 20：审核1通过 21：审核1不通过 30：审核2通过 31审核2不通过 40审核3通过 41审核3不通过 50审核4通过 51审核4不通过 60审核通过(接收))"  />
+        </field>
+    </rcv>
+</trans>

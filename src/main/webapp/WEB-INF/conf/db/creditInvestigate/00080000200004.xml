@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="00080000200004" desc="客户风险查询">
+	<!--请求报文 -->
+	<snd>
+		
+	
+				<!--请求体 -->
+				<field  name="ApplySerialNo" length="80" type="C" desc="业务流水号 "  required="true"/>
+				<field  name="TaskSerialNo" length="10" type="C" desc="任务流水号"   required="true"/>
+				<!--分页-->
+				<field name="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" /> 
+				<field name="PAGE_SIZE"  type="C" required="true"  default="10"    desc="分页大小" />
+				
+	</snd>
+	<!-- 响应报文 -->
+		<rcv>
+				<field name="STATUS" length="6" type="C" desc="返回码" />
+				<field name="MSG" length="100" type="C" desc="返回消息" />
+				<field name="TOTAL_NUM"  type="C"  desc="总条数" />
+				<field name="COUNT"  type="C"  desc="条数" />
+   			    <field-list name="LIST"   type="E"  desc="解析响应报文体">
+					<field name="CustomerName" length="16" type="C" desc="客户姓名" />
+					<field name="ApplySerialNo" length="4" type="C" desc="业务流水号" />
+					<field name="BusinessName" length="4" type="C" desc="业务类型" />
+					<field name="OccurType" length="32" type="C" desc="发生类型" />
+					<field name="CurrencyName" length="8" type="C" desc="币种" />
+					<field name="CellPhone" length="20" type="C" desc="手机号码" />
+					<field name="BusinessSum" length="20" type="C" desc="贷款金额" />
+					<field name="PhaseName" length="20" type="C" desc="当前业务阶段" />
+					<field name="PhaseType" length="20" type="C" desc="阶段类型" />
+					<field name="InputUserName" length="20" type="C" desc="处理人" />
+					<field name="InputOrgName" length="20" type="C" desc="处理人归属机构" />
+					<field name="BeginTime" length="20" type="C" desc="收到时间" />
+					<field name="EndTime" length="20" type="C" desc="完成时间" />
+					<field name="PhaseOpinion" length="20" type="C" desc="审核意见" />
+					<field name="MrPhaseOpinion" length="20" type="C" desc="委员意见" />
+				</field-list>
+		</rcv>
+</trans>

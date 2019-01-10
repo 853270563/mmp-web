@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SEQ">
+	<!-- 获得某一序列号的next值 -->
+	<select id="nextVal" parameterClass="String" remapResults="true" resultClass="int">
+		select ${schema.interPlat}.NEXTVAL($seqName$)
+	</select> 
+
+	<select id="P_TRANS_LOGS_SEQ" resultClass="int">
+		select ${schema.interPlat}.NEXTVAL('P_TRANS_LOGS_SEQ')
+	</select>
+
+	<!-- 日誌主鍵 -->
+	<select id="SEQ_OP" resultClass="int">
+		select ${schema.interPlat}.NEXTVAL('SEQ_OP')
+	</select>
+
+	<select id="SEQ_ERR_CODE" resultClass="int">
+		select ${schema.interPlat}.NEXTVAL('SEQ_PUB')
+	</select> 
+</sqlMap>
+

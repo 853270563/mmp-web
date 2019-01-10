@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="publicCreditPerson" ibatisStatement="" desc="共同申请人信息">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+    <snd>
+        <!-- 共同申请人信息  -->
+        <field name="controlFlag" length="30" type="C" desc="是否分页，0不分页，非0分页"/>
+        <field name="customer_id" client="customerId" type="C" required="true" default="" desc="业务流程编号"/>
+    </snd>
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+        <field name="SEQ" length="16" type="C" desc="流水号"/>
+        <field name="TRANS_TYPE" length="4" type="C" desc="交易类型"/><!-- 0001：新增客户进件信息 -->
+        <field name="TRANS_CODE" length="4" type="C" desc="交易结果码"/><!-- 0000：表示交易成功 其它均为交易失败 -->
+        <field name="TRANS_DESC" length="128" type="C" desc="交易结果描述"/>
+        <field name="TRANS_DATE" length="8" type="C" desc="响应日期"/>
+        <field name="TRANS_TIME" length="6" type="C" desc="响应时间"/>
+        <!-- 代办记录 -->
+        <field-list name="LIST" type="E">
+            <field name="CustomerID" client="CustomerID" type="C" required="true" default="20" desc="客户编号"/>
+            <field name="RelativeID" client="RelativeID" type="C" required="true" default="20" desc="关联客户编号"/>
+            <field name="CustomerName" client="CustomerName" type="C" required="true" default="20" desc="姓名"/>
+            <field name="CertType" client="CertType" type="C" required="true" default="20" desc="证件类型"/>
+            <field name="CertID" client="CertID" type="C" default="20" desc="证件号码"/>
+            <field name="CustomerType" client="CustomerType" type="C" default="20" desc="客户类型"/>
+            <field name="RelationName" client="RelationName" type="C" required="true" default="20" desc="与该客户关系"/>
+            <field name="Telephone" client="Telephone" type="C" required="true" default="20" desc="联系电话"/>
+            <field name="Describe" client="Describe" type="C" required="true" default="20" desc="  工作单位"/>
+            <field name="UserName" client="UserName" type="C" required="true" default="20" desc="登记人"/>
+            <field name="OrgName" client="OrgName" type="C" required="true" default="20" desc="登记机构"/>
+            <field name="InputDate" client="InputDate" type="C" required="true" default="20" desc="登记日期"/>
+            <field name="UpdateDate" client="UpdateDate" type="C" required="true" default="20" desc="更新日期"/>
+        </field-list>
+    </rcv>
+</trans>

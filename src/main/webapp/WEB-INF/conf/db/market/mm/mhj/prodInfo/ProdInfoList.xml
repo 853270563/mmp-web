@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="ProdInfoList" ibatisStatement="MHJ_PROD_INFO.pageQuery" desc="产品货架信息列表">
+	<!-- 请求报文 -->
+	<snd>  
+	    <field name="TA_CODE" length="20" type="C" desc="TA代码" />	
+	    <field name="PRD_CODE" length="20" type="C" desc="产品代码" />	
+	    <field name="STATUS" length="1" type="C" desc="产品状态" />	
+	    <field name="RISK_LEVEL" length="1" type="C" desc="风险等级" />	
+	    <field name="PRD_MANAGER" length="100" type="C" desc="产品管理人代码" />	
+	    <field name="PRD_ATTR" length="100" type="C" desc="产品属性[保本收益1、非保本收益2、浮动收益3]" />	
+	    <field name="PRD_ATTR_LABEL" length="100" type="C" desc="产品属性名称" />	
+	    <field name="P_FIRST_AMT_Q" length="100" type="C" desc="首次最低投资金额(万:W)[5:5W↓;10:10W↓;20:20W↓]" />	
+	    <field name="NOMINAL_DATE_Q" length="100" type="C" desc="产品名义期限" />	
+	    <field name="NAME_SEARCH_Q" length="100" type="C" desc="产品名称" />
+	    <field name="CURR_TYPE" length="1" type="C" desc="币种[0:人民币1:外币]"/>
+	    <field name="P_FIRST_AMT_S" length="100" type="C" desc="起点金额(万:W)[1:5W↓;2:5W-20W;3:20W-100W;4:100W↑]" />
+		<field name="NOMINAL_DATE_S" length="100" type="C" desc="投资期限(月:M)[1:1M↓;2:1M-3M;3:3M-6M;4:6M↑]" />	
+		<field name="GUEST_RATE" length="10" type="C" desc="收益率" />
+		<!-- 排序字段 -->
+	    <field name="GUEST_RATE_ORDER" length="1" type="C" desc="收益率排序[0:升(asc) 1:降(desc)]" />
+		<field name="NOMINAL_DATE_ORDER" length="1" type="C" desc="收益率排序[0:升(asc) 1:降(desc)]" />
+		<field name="END_DATE_ORDER" length="1" type="C" desc="收益率排序[0:升(asc) 1:降(desc)]" />	
+		<!-- 分页字段 -->
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />	
+		<field name="PAGE_SIZE" length="6" type="C" desc="页记录数" />	
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field name="TOTAL_NUM" length="100" type="C" desc="总行数" />
+		<!-- 下次查询的起始记录号，为空表示没有下页 -->
+		<field name="NEXT_KEY" length="6" type="C" desc="起始记录号" />
+			
+		<field-list name="LIST" type="E"> 
+				<field name="PRD_CODE" type="C" desc="产品代码"  />
+				<field name="PRD_TYPE" type="C" desc="产品类别"  descName="PRD_TYPE_LABEL" mapKey="PRD_TYPE" />
+				<field name="PRD_NAME" type="C" desc="产品名称"  />
+				<field name="IPO_START_DATE" type="C" desc="募集开始日期"  />
+				<field name="IPO_END_DATE" type="C" desc="募集结束日期"  />
+				<field name="NOMINAL_DATE" type="C" desc="产品名义期限"  />
+				<field name="INCOME_DATE" type="C" desc="产品起息日期"  />
+				<field name="END_DATE" type="C" desc="产品结束日"  />
+				<field name="P_FIRST_AMT" type="C" desc="首次最低投资金额"  />
+				<field name="P_APP_AMT" type="C" desc="追加最低投资金额"  />
+				<field name="CURR_TYPE" type="C" desc="币种"  />
+				<field name="CHANNELS" type="C" desc="允许渠道组"   descName="CHANNEL_TYPE_LABEL" mapKey="CHANNEL_TYPE" />
+				<field name="RISK_LEVEL" type="C" desc="风险等级"/>
+				<field name="RISK_NAME" type="C" desc="风险等级名称 "/>
+				<field name="STATUS" type="C" desc="产品状态"/>
+				<field name="STATUS_NAME" type="C" desc="产品状态名称"  />
+				<field name="P_SUB_UNIT" type="C" desc="最小购买单位"  />
+				<field name="P_MIN_RED" type="C" desc="单笔最少赎回份额"  />
+				<field name="P_MIN_HOLD" type="C" desc="最低持有份额"  />
+				<field name="GUEST_RATE" type="C" desc="预期收益率"  />
+				<field name="PROD_DESC" type="C" desc="理财说明书"  />
+				<field name="PROD_RISK" type="C" desc="理财风险说明书"  />
+				<field name="PRD_ATTR_LABEL" type="C" desc="产品属性名称"  />
+				<field-list name="FJLIST" type="E">
+					<field name="ATTA_ID" type="C" desc="附件编号"  />
+					<field name="ATTA_NAME" type="C" desc="附件名称"  />
+					<field name="FILE_ADDR" type="C" desc="附件地址"  />
+				</field-list>
+		</field-list> 
+	</rcv>
+</trans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="insertTaskWork" desc="工作任务详细信息保存" serviceId="00850000000030">
+    <!--请求报文 -->
+    <snd>
+        <field name="twTitle" length="120" type="C" desc="任务标题" required="true"/>
+        <field name="twBeginDate" length="20" type="C" desc="任务开始时间" required="true"/>
+        <field name="twEndDate" length="20" type="C" desc="任务结束时间" required="true"/>
+        <field name="twCont" length="20" type="C" desc="任务内容" required="true"/>
+        <field name="twFileId" length="20" type="C" desc="任务附件id" />
+        <field name="twStatus" length="20" type="C" desc="任务状态(0未下发/1已下发/2已完成/3已回收)" />
+    </snd>
+</trans>

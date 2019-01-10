@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.yitong.portal.thirdApp.dao.AresAuthorityDao">
+    <resultMap id="BaseResultMap" type="AresAuthority">
+        <id property="authCode" column="AUTH_CODE" jdbcType="VARCHAR" />
+        <result property="codeStatus" column="CODE_STATUS" jdbcType="VARCHAR" />
+        <result property="codeCreateTime" column="CODE_CREATE_TIME" jdbcType="TIMESTAMP" />
+        <result property="secretKey" column="SECRET_KEY" jdbcType="VARCHAR" />
+        <result property="portalSessionId" column="PORTAL_SESSION_ID" jdbcType="VARCHAR" />
+        <result property="userId" column="USER_ID" jdbcType="VARCHAR" />
+        <result property="appId" column="APP_ID" jdbcType="VARCHAR" />
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" />
+        <result property="accessToken" column="ACCESS_TOKEN" jdbcType="VARCHAR" />
+        <result property="lastAccessTime" column="LAST_ACCESS_TIME" jdbcType="TIMESTAMP" />
+        <result property="freshToken" column="FRESH_TOKEN" jdbcType="VARCHAR" />
+        <result property="freshLastAccessTime" column="FRESH_LAST_ACCESS_TIME" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        AUTH_CODE,CODE_STATUS,CODE_CREATE_TIME,SECRET_KEY,PORTAL_SESSION_ID,
+        USER_ID,APP_ID,CREATE_TIME,ACCESS_TOKEN,LAST_ACCESS_TIME,
+        FRESH_TOKEN,FRESH_LAST_ACCESS_TIME
+    </sql>
+
+    <sql id="BaseColumnValueList">
+        #{authCode},#{codeStatus},#{codeCreateTime},#{secretKey},#{portalSessionId},
+        #{userId},#{appId},#{createTime},#{accessToken},#{lastAccessTime},
+        #{freshToken},#{freshLastAccessTime}
+    </sql>
+
+    <sql id="TableClause"> ${schema.configPlat}.ARES_AUTHORITY </sql>
+
+    <sql id="WhereClause4Id">
+        <where>
+            AUTH_CODE = #{authCode}
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="AresAuthority">
+        insert into <include refid="TableClause" /> (
+        <include refid="BaseColumnList" />
+        ) values (
+        <include refid="BaseColumnValueList" />
+        )
+    </insert>
+
+    <select id="queryById" parameterType="string" resultMap="BaseResultMap">
+        <include refid="public.SelectById" />
+    </select>
+
+    <update id="updateById" parameterType="AresAuthority">
+        update <include refid="TableClause" />
+        <set>
+        CODE_STATUS=#{codeStatus},
+        CODE_CREATE_TIME=#{codeCreateTime},
+        SECRET_KEY=#{secretKey},
+        PORTAL_SESSION_ID=#{portalSessionId},
+        USER_ID=#{userId},
+        APP_ID=#{appId},
+        CREATE_TIME=#{createTime},
+        ACCESS_TOKEN=#{accessToken},
+        LAST_ACCESS_TIME=#{lastAccessTime},
+        FRESH_TOKEN=#{freshToken},
+        FRESH_LAST_ACCESS_TIME=#{freshLastAccessTime}
+        </set> <include refid="WhereClause4Id" />
+    </update>
+
+     <update id="updateByIdSelective" parameterType="AresAuthority">
+            update <include refid="TableClause" />
+            <set>
+                <if test="codeStatus!=null">CODE_STATUS=#{codeStatus},</if>
+                <if test="codeCreateTime!=null">CODE_CREATE_TIME=#{codeCreateTime},</if>
+                <if test="secretKey!=null">SECRET_KEY=#{secretKey},</if>
+                <if test="portalSessionId!=null">PORTAL_SESSION_ID=#{portalSessionId},</if>
+                <if test="userId!=null">USER_ID=#{userId},</if>
+                <if test="appId!=null">APP_ID=#{appId},</if>
+                <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+                <if test="accessToken!=null">ACCESS_TOKEN=#{accessToken},</if>
+                <if test="lastAccessTime!=null">LAST_ACCESS_TIME=#{lastAccessTime},</if>
+                <if test="freshToken!=null">FRESH_TOKEN=#{freshToken},</if>
+                <if test="freshLastAccessTime!=null">FRESH_LAST_ACCESS_TIME=#{freshLastAccessTime}</if>
+            </set> <include refid="WhereClause4Id" />
+     </update>
+
+
+    <update id="deleteById" parameterType="string">
+        <include refid="public.DeleteById" />
+    </update>
+
+    <select id="queryByCriteria" resultMap="BaseResultMap" parameterType="CriteriaQuery">
+        <include refid="public.Select4Query" />
+    </select>
+
+    <select id="countByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Count4Query" />
+    </select>
+
+    <select id="deleteByCriteria" resultType="int" parameterType="CriteriaQuery">
+        <include refid="public.Delete4Query" />
+    </select>
+</mapper>

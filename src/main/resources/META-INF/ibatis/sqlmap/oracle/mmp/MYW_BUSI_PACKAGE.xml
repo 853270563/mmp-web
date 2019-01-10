@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MYW_BUSI_PACKAGE">
+
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql"> 
+		<isNotEmpty prepend="and" property="PKG_ID">
+			T.PKG_ID= #PKG_ID#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="PKG_OWNER">
+			T.PKG_OWNER= #PKG_OWNER#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="PKG_IDS">
+			T.PKG_ID not in 
+			<iterate property="PKG_IDS" conjunction="," close=")" open="(" >
+				#PKG_IDS[]#
+			</iterate>
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 查询SQL -->
+	<sql id="coreSql">
+		SELECT T.* FROM ${schema.interPlat}.MYW_BUSI_PACKAGE T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+		ORDER BY T.PKG_ID DESC
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="public.pageBegin" />
+		<include refid="coreSql" />
+		<include refid="public.pageEnd" />
+	</select>
+
+	<!-- 分页计数 -->
+	<select id="pageCount" parameterClass="map" resultClass="int">
+		<![CDATA[
+			SELECT COUNT(T.PKG_ID) CNT 
+			FROM ${schema.interPlat}.MYW_BUSI_PACKAGE T
+		]]>
+		<dynamic prepend="WHERE">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+
+	<!-- 增加-->
+	<insert id="insert" parameterClass="map">
+		<selectKey keyProperty="PKG_ID" type="pre" resultClass="string">
+	        select to_char(sysdate, 'YYYYMMDD') || ${schema.interPlat}.SEQ_MYW_BUSI_PACKAGE.nextval from dual
+	    </selectKey>
+		INSERT INTO ${schema.interPlat}.MYW_BUSI_PACKAGE
+		( PKG_ID,PKG_NAME,PKG_DESC,PKG_OWNER,PKG_ADD_DATE,PKG_UPDATE_DATE,PKG_UPDATE_OWNER,PKG_ORDER,PKG_TYPE,PKG_PUB ) 
+		VALUES ( #PKG_ID#,#PKG_NAME#,#PKG_DESC#,#PKG_OWNER#,sysdate,#PKG_UPDATE_DATE#,#PKG_UPDATE_OWNER#,#PKG_ORDER#,#PKG_TYPE#,#PKG_PUB#  )
+	</insert> 
+ 
+	
+	<update id="updateById" parameterClass="map">
+		<![CDATA[ update ${schema.interPlat}.MYW_BUSI_PACKAGE ]]>
+		<dynamic prepend="set"> 
+			<isNotNull property="PKG_NAME" prepend=","><![CDATA[ PKG_NAME = #PKG_NAME# ]]></isNotNull>
+			<isNotNull property="PKG_DESC" prepend=","><![CDATA[ PKG_DESC = #PKG_DESC# ]]></isNotNull>
+			<isNotNull property="PKG_OWNER" prepend=","><![CDATA[ PKG_OWNER = #PKG_OWNER# ]]></isNotNull>
+			<isNotNull property="PKG_UPDATE_DATE" prepend=","><![CDATA[ PKG_UPDATE_DATE = sysdate ]]></isNotNull>
+			<isNotNull property="PKG_UPDATE_OWNER" prepend=","><![CDATA[ PKG_UPDATE_OWNER = #PKG_UPDATE_OWNER# ]]></isNotNull>
+			<isNotNull property="PKG_ORDER" prepend=","><![CDATA[ PKG_ORDER = #PKG_ORDER# ]]></isNotNull>
+			<isNotNull property="PKG_TYPE" prepend=","><![CDATA[ PKG_TYPE = #PKG_TYPE# ]]></isNotNull>
+			<isNotNull property="PKG_PUB" prepend=","><![CDATA[ PKG_PUB = #PKG_PUB# ]]></isNotNull>
+		</dynamic>
+		<![CDATA[ where PKG_ID = #PKG_ID# ]]>
+	</update>
+	<!-- 删除包操作 -->
+	<delete id="delete" parameterClass="map">
+		<![CDATA[ DELETE FROM ${schema.interPlat}.MYW_BUSI_PACKAGE T]]>
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</delete>
+	<!-- 删除业务操作 -->
+	<delete id="deleteBPS" parameterClass="map">
+		<![CDATA[ DELETE FROM ${schema.interPlat}.MYW_BUSI_PKG_SEL WHERE BUSI_OWNER = #BUSI_OWNER# ]]>
+	</delete>
+	<!-- 删除常用功能或者业务功能操作 -->
+	<delete id="deletePS" parameterClass="map">
+		<![CDATA[ DELETE FROM ${schema.interPlat}.MYW_BUSI_SEL WHERE BUSI_OWNER = #BUSI_OWNER# ]]>
+	</delete>
+	<!-- 查询操作 -->
+	<select id="query" parameterClass="map" resultClass="java.util.HashMap">
+		<include refid="coreSql" />
+	</select>
+	<!-- 根据用户名查询业务包列表 -->
+	<select id="queryBusiPageByOwer" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.PKG_ID,T.PKG_NAME,T.PKG_DESC,T.PKG_OWNER,T.PKG_UPDATE_OWNER,T.PKG_ORDER,T.PKG_TYPE,T.PKG_PUB FROM ${schema.interPlat}.MYW_BUSI_PACKAGE T
+		<dynamic prepend="WHERE ">
+			<include refid="queryDynSql" />
+		</dynamic>
+	</select>
+	<!-- 根据包编号查询业务列表 -->
+	<select id="queryBusiByPageId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT P.MENU_NO AS MENU_ID,P.MENU_NAME,P.MENU_URL,P.MENU_DESC,Q.FILE_ADDR
+			FROM ${schema.interPlat}.MYW_BUSI_PKG_SEL T
+	        LEFT JOIN ${schema.configPlat}.SYS_MOBILE_MENU P ON T.BUSI_ID = P.MENU_NO
+	        LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  Q ON P.MENU_IMG = Q.FILE_ID
+		<dynamic prepend="WHERE ">
+			<isNotEmpty prepend="and" property="PKG_ID">
+				T.PKG_ID= #PKG_ID#
+			</isNotEmpty>
+		</dynamic>
+		ORDER BY T.BUSI_ORDER ASC
+	</select>
+	<!-- 根据用户查询工具业务 -->
+	<select id="queryBusiSelByPageId" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT T.*, P.MENU_NO AS MENU_ID,P.MENU_NAME,P.MENU_URL,P.MENU_DESC,Q.FILE_ADDR  FROM ${schema.interPlat}.MYW_BUSI_SEL T 
+	        LEFT JOIN ${schema.configPlat}.SYS_MOBILE_MENU P ON T.BUSI_ID = P.MENU_NO          
+	        LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  Q ON P.MENU_IMG = Q.FILE_ID
+		<dynamic prepend="WHERE ">
+			<isNotEmpty prepend="and" property="BUSSI_OWNER">
+			T.BUSSI_OWNER= #BUSSI_OWNER#
+			</isNotEmpty>
+		</dynamic>
+		ORDER BY T.BUSI_ORDER ASC
+	</select>
+	<!-- 增加包业务关联表-->
+	<insert id="insertPageBusiConf" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MYW_BUSI_PKG_SEL ( PKG_ID,BUSI_ID,BUSI_ORDER,BUSI_OWNER) 
+		VALUES ( #PKG_ID#,#BUSI_ID#,#BUSI_ORDER#,#BUSI_OWNER#)
+	</insert>
+	<!-- 排序表操作区 -->
+	<!-- 增加包业务排序表-->
+	<insert id="insertBPO" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MYW_BUSI_PAK_ORDER ( PB_ID,PB_ORDER,PB_TYPE,PB_OWNER) 
+		VALUES ( #PB_ID#,#PB_ORDER#,#PB_TYPE#,#PB_OWNER#)
+	</insert>
+	<!-- 增加之前执行删除包业务排序表操作-->
+	<delete id="deleteBPO" parameterClass="map">
+		<![CDATA[ DELETE FROM ${schema.interPlat}.MYW_BUSI_PAK_ORDER WHERE PB_OWNER=#PB_OWNER#]]>
+	</delete>
+	<select id="queryBPO" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT * FROM ${schema.interPlat}.MYW_BUSI_PAK_ORDER T
+		<dynamic prepend="WHERE ">
+			<isNotEmpty prepend="and" property="PB_OWNER">
+			T.PB_OWNER= #PB_OWNER#
+			</isNotEmpty>
+		</dynamic>
+		ORDER BY T.PB_ORDER ASC
+	</select>
+	<!-- 查询单独业务信息 -->
+	<select id="queryMenu" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT P.MENU_NO AS MENU_ID,P.MENU_NAME,P.MENU_URL,P.MENU_DESC,Q.FILE_ADDR FROM ${schema.configPlat}.SYS_MOBILE_MENU P 
+	        LEFT JOIN ${schema.interPlat}.MZJ_FILES_DATA  Q ON P.MENU_IMG = Q.FILE_ID
+		<dynamic prepend="WHERE ">
+			<isNotEmpty prepend="and" property="MENU_NO">
+			P.MENU_NO= #MENU_NO#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 功能表操作区 -->
+	<!-- 增加功能表-->
+	<insert id="insertBusiSel" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.MYW_BUSI_SEL
+		( BUSI_ID,BUSI_OWNER,BUSI_ORDER,BUSI_TYPE ) 
+		VALUES ( #BUSI_ID#,#BUSI_OWNER#,#BUSI_ORDER#,#BUSI_TYPE#)
+	</insert> 
+	 
+</sqlMap>
+

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MGG_IMAGE_ATTA" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    <result column="ATTA_ID" property="attaId" jdbcType="CHAR" />
+    <result column="TRAN_CODE" property="tranCode" jdbcType="CHAR" />
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="ATTA_TYPE" property="attaType" jdbcType="CHAR" />
+    <result column="ATTA_NAME" property="attaName" jdbcType="VARCHAR" />
+    <result column="ATTA_URL" property="attaUrl" jdbcType="VARCHAR" />
+    <result column="ATTA_DIR_URL" property="attaDirUrl" jdbcType="VARCHAR" />
+    <result column="ATTA_SIZE" property="attaSize" jdbcType="DECIMAL" />
+    <result column="ATTA_UPDA_TIME" property="attaUpdaTime" jdbcType="TIMESTAMP" />
+    <result column="ATTA_USER" property="attaUser" jdbcType="VARCHAR" />
+    <result column="ATTA_RES1" property="attaRes1" jdbcType="VARCHAR" />
+    <result column="ATTA_RES2" property="attaRes2" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="BaseResultMap2" class="java.util.HashMap" >
+    <result column="ATTA_ID" property="attaId" jdbcType="CHAR" />
+    <result column="TRAN_CODE" property="tranCode" jdbcType="CHAR" />
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="ATTA_TYPE" property="attaType" jdbcType="CHAR" />
+    <result column="ATTA_NAME" property="attaName" jdbcType="VARCHAR" />
+    <result column="ATTA_URL" property="attaUrl" jdbcType="VARCHAR" />
+    <result column="ATTA_DIR_URL" property="attaDirUrl" jdbcType="VARCHAR" />
+    <result column="ATTA_SIZE" property="attaSize" jdbcType="DECIMAL" />
+    <result column="ATTA_UPDA_TIME" property="attaUpdaTime" jdbcType="VARCHAR" />
+    <result column="ATTA_USER" property="attaUser" jdbcType="VARCHAR" />
+    <result column="ATTA_RES1" property="attaRes1" jdbcType="VARCHAR" />
+    <result column="ATTA_RES2" property="attaRes2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    ATTA_ID, TRAN_CODE, TRANS_ID, ATTA_TYPE, ATTA_NAME, ATTA_URL, ATTA_DIR_URL, ATTA_SIZE, 
+    ATTA_UPDA_TIME, ATTA_USER, ATTA_RES1, ATTA_RES2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MGG_IMAGE_ATTA.Base_Column_List" />
+    from ${schema.interPlat}.MGG_IMAGE_ATTA
+    <isParameterPresent >
+      <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    select 
+    <include refid="MGG_IMAGE_ATTA.Base_Column_List" />
+    from ${schema.interPlat}.MGG_IMAGE_ATTA
+    where ATTA_ID = #attaId:CHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    delete from ${schema.interPlat}.MGG_IMAGE_ATTA
+    where ATTA_ID = #attaId:CHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from ${schema.interPlat}.MGG_IMAGE_ATTA
+    <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    <selectKey resultClass="java.lang.String" keyProperty="attaId" type="pre" >
+  		SELECT to_char(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_MGG_IMAGE_ATTA.NEXTVAL FROM DUAL
+  	</selectKey>
+    insert into ${schema.interPlat}.MGG_IMAGE_ATTA (ATTA_ID, TRAN_CODE, TRANS_ID, ATTA_TYPE, ATTA_NAME, 
+      ATTA_URL, ATTA_DIR_URL, ATTA_SIZE, ATTA_UPDA_TIME, 
+      ATTA_USER, ATTA_RES1, ATTA_RES2)
+    values (#attaId:CHAR#, #tranCode:CHAR#, #transId:CHAR#, #attaType:CHAR#, #attaName:VARCHAR#, 
+      #attaUrl:VARCHAR#, #attaDirUrl:VARCHAR#, #attaSize:DECIMAL#, #attaUpdaTime:TIMESTAMP#, 
+      #attaUser:VARCHAR#, #attaRes1:VARCHAR#, #attaRes2:VARCHAR#)
+  </insert>
+  <insert id="insertSelective" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    <selectKey resultClass="java.lang.String" keyProperty="attaId" type="pre" >
+  		SELECT to_char(current timestamp, 'YYYYMMDD') || ${schema.interPlat}.SEQ_MGG_IMAGE_ATTA.NEXTVAL FROM DUAL
+  	</selectKey>
+    insert into ${schema.interPlat}.MGG_IMAGE_ATTA
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="attaId" >
+        ATTA_ID
+      </isNotNull>
+      <isNotNull prepend="," property="tranCode" >
+        TRAN_CODE
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        TRANS_ID
+      </isNotNull>
+      <isNotNull prepend="," property="attaType" >
+        ATTA_TYPE
+      </isNotNull>
+      <isNotNull prepend="," property="attaName" >
+        ATTA_NAME
+      </isNotNull>
+      <isNotNull prepend="," property="attaUrl" >
+        ATTA_URL
+      </isNotNull>
+      <isNotNull prepend="," property="attaDirUrl" >
+        ATTA_DIR_URL
+      </isNotNull>
+      <isNotNull prepend="," property="attaSize" >
+        ATTA_SIZE
+      </isNotNull>
+      <isNotNull prepend="," property="attaUpdaTime" >
+        ATTA_UPDA_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="attaUser" >
+        ATTA_USER
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes1" >
+        ATTA_RES1
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes2" >
+        ATTA_RES2
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="attaId" >
+        #attaId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tranCode" >
+        #tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        #transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaType" >
+        #attaType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaName" >
+        #attaName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUrl" >
+        #attaUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaDirUrl" >
+        #attaDirUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaSize" >
+        #attaSize:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUpdaTime" >
+        #attaUpdaTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUser" >
+        #attaUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes1" >
+        #attaRes1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes2" >
+        #attaRes2:VARCHAR#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from ${schema.interPlat}.MGG_IMAGE_ATTA
+    <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+  </select>
+  
+    <!-- 分页查询 -->
+  <select id="findPageByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+  	<include refid="public.pageBegin" />
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MGG_IMAGE_ATTA.Base_Column_List" />
+    from ${schema.interPlat}.MGG_IMAGE_ATTA
+    <isParameterPresent >
+      <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+    <include refid="public.pageEnd" />
+  </select>
+  
+  <update id="updateByExampleSelective" >
+    update ${schema.interPlat}.MGG_IMAGE_ATTA
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.attaId" >
+        ATTA_ID = #record.attaId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.tranCode" >
+        TRAN_CODE = #record.tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.transId" >
+        TRANS_ID = #record.transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaType" >
+        ATTA_TYPE = #record.attaType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaName" >
+        ATTA_NAME = #record.attaName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaUrl" >
+        ATTA_URL = #record.attaUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaDirUrl" >
+        ATTA_DIR_URL = #record.attaDirUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaSize" >
+        ATTA_SIZE = #record.attaSize:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaUpdaTime" >
+        ATTA_UPDA_TIME = #record.attaUpdaTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaUser" >
+        ATTA_USER = #record.attaUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaRes1" >
+        ATTA_RES1 = #record.attaRes1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.attaRes2" >
+        ATTA_RES2 = #record.attaRes2:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update ${schema.interPlat}.MGG_IMAGE_ATTA
+    set ATTA_ID = #record.attaId:CHAR#,
+      TRAN_CODE = #record.tranCode:CHAR#,
+      TRANS_ID = #record.transId:CHAR#,
+      ATTA_TYPE = #record.attaType:CHAR#,
+      ATTA_NAME = #record.attaName:VARCHAR#,
+      ATTA_URL = #record.attaUrl:VARCHAR#,
+      ATTA_DIR_URL = #record.attaDirUrl:VARCHAR#,
+      ATTA_SIZE = #record.attaSize:DECIMAL#,
+      ATTA_UPDA_TIME = #record.attaUpdaTime:TIMESTAMP#,
+      ATTA_USER = #record.attaUser:VARCHAR#,
+      ATTA_RES1 = #record.attaRes1:VARCHAR#,
+      ATTA_RES2 = #record.attaRes2:VARCHAR#
+    <isParameterPresent >
+      <include refid="MGG_IMAGE_ATTA.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    update ${schema.interPlat}.MGG_IMAGE_ATTA
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="tranCode" >
+        TRAN_CODE = #tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        TRANS_ID = #transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaType" >
+        ATTA_TYPE = #attaType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaName" >
+        ATTA_NAME = #attaName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUrl" >
+        ATTA_URL = #attaUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaDirUrl" >
+        ATTA_DIR_URL = #attaDirUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaSize" >
+        ATTA_SIZE = #attaSize:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUpdaTime" >
+        ATTA_UPDA_TIME = #attaUpdaTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="attaUser" >
+        ATTA_USER = #attaUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes1" >
+        ATTA_RES1 = #attaRes1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="attaRes2" >
+        ATTA_RES2 = #attaRes2:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ATTA_ID = #attaId:CHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.MggImageAtta" >
+    update ${schema.interPlat}.MGG_IMAGE_ATTA
+    set TRAN_CODE = #tranCode:CHAR#,
+      TRANS_ID = #transId:CHAR#,
+      ATTA_TYPE = #attaType:CHAR#,
+      ATTA_NAME = #attaName:VARCHAR#,
+      ATTA_URL = #attaUrl:VARCHAR#,
+      ATTA_DIR_URL = #attaDirUrl:VARCHAR#,
+      ATTA_SIZE = #attaSize:DECIMAL#,
+      ATTA_UPDA_TIME = #attaUpdaTime:TIMESTAMP#,
+      ATTA_USER = #attaUser:VARCHAR#,
+      ATTA_RES1 = #attaRes1:VARCHAR#,
+      ATTA_RES2 = #attaRes2:VARCHAR#
+    where ATTA_ID = #attaId:CHAR#
+  </update>
+  
+  
+  	<!-- 分页查询 -->
+	<select id="queryImageAttaByTransId" parameterClass="map" resultMap="BaseResultMap2">
+		SELECT 
+			ATTA_ID,TRAN_CODE,TRANS_ID,ATTA_TYPE,ATTA_NAME,ATTA_URL,ATTA_DIR_URL,ATTA_SIZE,to_char(ATTA_UPDA_TIME,'yyyy-mm-dd hh24:mi:ss') as ATTA_UPDA_TIME,ATTA_USER,ATTA_RES1,ATTA_RES2 
+		FROM ${schema.interPlat}.MGG_IMAGE_ATTA T
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="transId">
+			t.TRANS_ID = #transId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="tranCode">
+			t.TRAN_CODE = #tranCode:CHAR#
+		</isNotNull>
+		</dynamic>
+		
+	</select>
+	
+	
+</sqlMap>

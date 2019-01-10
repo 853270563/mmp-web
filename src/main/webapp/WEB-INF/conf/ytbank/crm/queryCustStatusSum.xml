@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryCustStatusSum" desc="客户总数（支行情况）" serviceId="00850000000003">
+    <!--请求报文 -->
+    <snd>
+            <!--请求体 -->
+                <field name="orgId" length="20" type="C" desc="机构id" required="false"/>
+                <field name="usrId" length="20" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="name" length="20" type="C" desc="机构名称" required="true"/>
+            <field name="kpiValue" length="20" type="C" desc="指标当前值" required="true"/>
+            <field name="kpiValueld" length="20" type="N" desc="比上日（计算）" required="true"/>
+            <field name="kpiValuelm" length="20" type="N" desc="比上月（计算）" />
+            <field name="kpiValuely" length="20" type="N" desc="比年初（计算）" />
+        </field>
+    </rcv>
+</trans>

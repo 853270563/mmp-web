@@ -85,23 +85,7 @@
 	<insert id="boundDevice" parameterClass="map">
 		INSERT INTO ${schema.configPlat}.ARES_DEVICE_BOUND_RELATION
 		(DEVICE_UUID, USER_ID, REGISTER_TIME) VALUES (#DEVICE_UUID#, #USER_ID#, #REGISTER_TIME#)
-	</insert>
-
-    <!-- 设备权限登入 -->
-    <insert id="insertDeviceAuth" parameterClass="map">
-        INSERT INTO ${schema.configPlat}.ARES_DEVICE_AUTH
-        (DEVICE_UUID ,APP_ID,DEVICE_INFO,GPS,AUTH_TYPE ,UPDATE_TIME) VALUES (#DEVICE_UUID#,#APP_ID#, #DEVICE_INFO#,#GPS#,#AUTH_TYPE#, #UPDATE_TIME#)
-    </insert>
-
-    <!-- 查询设备权限登入 -->
-    <select id="selectDeviceAuth" parameterClass="map" resultClass="java.util.HashMap">
-        SELECT T.* FROM ${schema.configPlat}.ARES_DEVICE_AUTH T WHERE T.DEVICE_UUID = #DEVICE_UUID# AND T.APP_ID = #APP_ID#
-    </select>
-
-    <!-- 设备权限登入更新 -->
-    <update id="updateDeviceAuth" parameterClass="map">
-        UPDATE ${schema.configPlat}.ARES_DEVICE_AUTH SET UPDATE_TIME = #UPDATE_TIME# , GPS = #GPS# WHERE DEVICE_UUID = #DEVICE_UUID# AND APP_ID = #APP_ID#
-    </update>
-
+	</insert> 
+    
 </sqlMap>
 

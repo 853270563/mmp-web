@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="BannerList" ibatisStatement="MZJ_BANNER_DATA.pageQuery" desc="广告列表">
+	<!-- 请求报文 -->
+	<snd>  
+	</snd>
+	<!-- 响应报文 -->
+	<rcv> 
+		<!--公共字段-->
+		<field name="STATUS" length="6" type="C" desc="返回码" /> 
+		<field name="MSG" length="100" type="C" desc="返回消息" />
+		<field-list name="LIST" type="E"> 
+			<field name="RID" length="6" type="C" desc="产品编号" xpath="BANNER_ID" />	
+			<field name="PROD_NAME" length="6" type="C" desc="产品名称" xpath="BANNER_NAME"/>	
+			<field name="PROD_TYP" length="6" type="C" desc="产品分类" xpath="BANNER_TYPE"/>	
+			<field name="PROD_MEMO" length="6" type="C" desc="产品说明" xpath="FILE_NAME"/>	
+			<field name="FILE_ID" length="100" type="C" desc="资源编号" />
+			<field name="FILE_URL" length="100" type="C" desc="资源路径" xpath="FILE_ADDR"/>
+			<field name="FILE_TYP" length="100" type="C" desc="资源类型" />
+			<field name="IMG_ID" length="100" type="C" desc="封面图片" />
+			<field name="IMG_URL" length="100" type="C" desc="封面图片" xpath="BANNER_PIC"/>
+			<field name="AUDI_ID" length="6" type="C" desc="版本号" />		
+		</field-list> 
+	</rcv>
+</trans>

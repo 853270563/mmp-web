@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TURN_INTRODUCE">
+	<!-- 动态查询 and 列表分页 -->
+	<sql id="queryDynSql">
+	    <isNotEmpty prepend="and" property="user_id">
+		   (T.TURN_PRODUCT_MANAGE_ID= #user_id# or T.TURN_USER_ID = #user_id# )
+		</isNotEmpty> 
+		<isNotEmpty prepend="and" property="TURN_INTERSET_DATE">
+			<![CDATA[DATE_FORMAT(TURN_INTERSET_DATE,'%Y-%m-%d')) = DATE_FORMAT(#TURN_INTERSET_DATE#,'%Y-%m-%d')]]>
+		</isNotEmpty> 
+	</sql>
+	
+	<!-- 插入数据 -->
+	<insert id="insert" parameterClass="map">
+		INSERT INTO ${schema.interPlat}.TURN_INTRODUCE
+		( AUTO_ID,TURN_ID,TURN_USER_ID,TURN_PRODUCT_CODE,TURN_PRODUCT_NAME,TURN_PRODUCT_MANAGE_ID,TURN_CUST_TYPE,
+			TURN_GRADE,TURN_CUST_NAME,TURN_CUST_CARD_TYPE,TURN_CUST_CARD_ID,TURN_CUST_PHONE,TURN_CUST_OFFI_PHONE,
+			TURN_DIRE,TURN_DATE,TURN_MONEY,TURN_STATE,TURN_REMARK,TURN_STATUS,RESERVE1,RESERVE2,RESERVE3,TURN_PRODUCT_MANAGE_RICHES,TURN_INTERSET_DATE ) 
+		VALUES ( #AUTO_ID#,#TURN_ID#,#TURN_USER_ID#,#TURN_PRODUCT_CODE#,#TURN_PRODUCT_NAME#,#TURN_PRODUCT_MANAGE_ID#,
+				#TURN_CUST_TYPE#,#TURN_GRADE#,#TURN_CUST_NAME#,#TURN_CUST_CARD_TYPE#,#TURN_CUST_CARD_ID#,#TURN_CUST_PHONE#,
+				#TURN_CUST_OFFI_PHONE#,#TURN_DIRE#,#TURN_DATE#,#TURN_MONEY#,#TURN_STATE#,#TURN_REMARK#,#TURN_STATUS#,#RESERVE1#,#RESERVE2#,#RESERVE3#,
+				#TURN_PRODUCT_MANAGE_RICHES#,#TURN_INTERSET_DATE# )
+	</insert>
+	
+	<!-- 查询SQL -->
+	<select id="ChangeIntroduce" parameterClass="map" resultClass="java.util.HashMap">
+		SELECT * FROM ${schema.interPlat}.turn_introduce WHERE TURN_PRODUCT_MANAGE_ID = #USER_ID# AND TURN_STATUS = '0'
+	</select>
+	
+	<update id="updateById" parameterClass="map">           
+		update ${schema.interPlat}.turn_introduce set TURN_STATUS='1' where TURN_PRODUCT_MANAGE_ID=#USER_ID# and TURN_STATUS='0'
+	</update>
+	
+	<select id="turn_iniroduceQuery" parameterClass="map" resultClass="java.util.HashMap">
+		select * from ${schema.interPlat}.turn_introduce t
+		<dynamic prepend="WHERE">
+        	<include refid="queryDynSql"/>
+        </dynamic> 
+	</select>
+	
+	<update id="turn_Update_off" parameterClass="map">
+		update ${schema.interPlat}.turn_introduce set TURN_STATUS='3' where AUTO_ID=#AUTO_ID#
+	</update>
+	
+	<update id="turn_Update_on" parameterClass="map">
+		update ${schema.interPlat}.turn_introduce set TURN_STATUS='2' where AUTO_ID=#AUTO_ID#
+	</update>	
+	
+	<select id="turn_queryall" parameterClass="map" resultClass="java.util.HashMap">
+		select * from ${schema.interPlat}.turn_introduce where AUTO_ID=#AUTO_ID#
+	</select>
+	
+</sqlMap>
+

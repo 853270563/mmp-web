@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="showJudgeSign" desc="是否显示贷审会意见">
+	<!--请求报文 -->
+	<snd>
+		<!--报文头 -->
+		<head>
+			<field name="service_id"     required="true" length="19"  xpath="Service_Header/service_id"   type="C" default="00080000100005" desc="ESB 服务码"/>
+			<field name="requester_id" required="true" length="4"   xpath="Service_Header/requester_id" type="C" default="8160097" desc="请求方系统代码"/>
+			<field name="branch_id"      required="true" length="9"   xpath="Service_Header/branch_id"    type="C" default="802777777" desc="原始请求方机构代号 "/>
+			<field name="channel_id"    required="true" length="2"   xpath="Service_Header/channel_id"   type="C" default="39" desc="服务渠道代号"/>
+			<field name="version_id"     required="true" length="2"   xpath="Service_Header/version_id"   type="C" default="01" desc="版本号"/>
+		</head>
+		<!--报文体 -->
+		<body>
+			
+		<field-request name="request" type="S" xpath="Service_Body/request" desc="请求体">
+		 	<field  name="serialNo"  length="30"  type="C"  desc="任务流水号"/>
+		 	<field  name="flowNo"  length="30"  type="C"  desc="流程代码"/>
+		 	<field  name="phaseNo"  length="30"  type="C"  desc="阶段编号"/>
+		 	<field-extend name="page_control" type="S" xpath="Service_Body/page_control" desc="分页">
+					<field name="control_flag" client="control_flag" type="C" required="true"  default="1" desc="分页标非零0分页!0不分页" />
+					<field name="pageindex" client="PAGE_NO" type="C" required="true"  default="1"    desc="分页角码" />
+					<field name="pagesize" client="PAGE_SIZE" type="C" required="true"  default="10"    desc="分页大小" />
+			</field-extend>	
+		</field-request>
+		</body>
+	</snd>
+	<rcv>
+			<field name="status"     required="true" length="19"  xpath="Service_Header/service_response/status"   type="C" default="" desc=""/>
+			<field name="code"     required="true" length="19"  xpath="Service_Header/service_response/code"   type="C" default="" desc=""/>
+			<field name="desc"     required="true" length="19"  xpath="Service_Header/service_response/desc"   type="C" default="" desc=""/>
+			<field name="total"     required="true" length="10"   xpath="Service_Body/response/total"   type="C" default="01" desc="总数"/>
+			<field name="request" type="S" xpath="Service_Body/request" desc="请求体">
+				<field name="serialNo" client="serialNo" type="C"  required="true"  default=""    desc="任务流水号" />  
+				<field name="flowNo" client="flowNo" type="C"  required="true"  default=""    desc="流程代码" /> 
+				<field name="phaseNo" client="phaseNo" type="C"  required="true"  default=""    desc="阶段编号" />  
+			</field>
+			<field name="item"  xpath="Service_Body/response/item"  type="E"  desc="解析响应报文体">
+   					<field name="displaySpecialOpinion" client="displaySpecialOpinion" type="C" required="true"  default="100"    desc="是否显示贷审会意见" /> 
+   					<field name="specialOpinionHeader" client="specialOpinionHeader" type="C" required="true"  default="100"    desc="显示标题" />  
+   					<field name="phaseOpinionValue" client="phaseOpinionValue" type="C" required="true"  default="100"    desc="审批意见" />  
+   					<field name="specialOpinionValue" client="specialOpinionValue" type="C" required="true"  default="100"    desc="贷审会意见" />  
+   					<field name="isShowRatingInfo" client="isShowRatingInfo" type="C" required="true"  default="100"    desc="是否显示评级意见" />  
+   					<field name="cognResultReadOnly" client="cognResultReadOnly" type="C" required="true"  default="100"    desc="是否显示贷审会意见" />  
+   					<field name="modelName" client="modelName" type="C" required="true"  default="100"    desc="评估模型" />  
+   					<field name="systemScore" client="systemScore" type="C" required="true"  default="100"    desc="系统评估得分" />  
+   					<field name="systemResult" client="systemResult" type="C" required="true"  default="100"    desc="系统评估结果" />   
+   					<field name="specialResult" client="specialResult" type="C" required="true"  default="100"    desc="特例调整等级" /> 
+   					<field name="cognResult" client="cognResult" type="C" required="true"  default="100"    desc="人工评定结果" />  
+   					<field name="isShowRatingLeaderInfo" client="isShowRatingLeaderInfo" type="C" required="true"  default="100"    desc="是否显示签署评级意见页面" />  
+   					<field name="ratingEndFlag" client="ratingEndFlag" type="C" required="true"  default="100"    desc="评级页面之评级意见 1:同意  4:否决" />  
+   					<field name="ratingEndOpinion" client="ratingEndOpinion" type="C" required="true"  default="100"    desc="评级页面之意见" />  
+   					<field name="isShowRatingInfo1" client="isShowRatingInfo1" type="C" required="true"  default="100"    desc="是否显示评级意见" />  
+   					<field name="cognResultReadOnly1" client="cognResultReadOnly1" type="C" required="true"  default="100"    desc="人工评定结果是否可修改" />  
+   					<field name="modelName1" client="modelName1" type="C" required="true"  default="100"    desc="评估模型" />  
+   					<field name="systemScore1" client="systemScore1" type="C" required="true"  default="100"    desc="系统评估得分" />   
+   					<field name="systemResult1" client="systemResult1" type="C" required="true"  default="100"    desc="系统评估结果" />  
+   					<field name="specialResult1" client="specialResult1" type="C" required="true"  default="100"    desc="特例调整等级" />  
+   					<field name="cognResult1" client="cognResult1" type="C" required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="displayRatingEndButton" client="displayRatingEndButton" type="C" required="true"  default="100"    desc="是否显示“评级终审确认”按钮" />   
+   			</field>
+   				<field name="specialOpinion"  xpath="Service_Body/response/item/specialOpinion"  type="E"  desc="解析响应报文体">
+   			        <field name="item0" client="item0" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item1" client="item1" type="C"  required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item2" client="item2" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item3" client="item3" type="C"   required="true"  default="100"    desc="人工评定结果" /> 
+   					<field name="item4" client="item4" type="C"   required="true"  default="100"    desc="人工评定结果" />
+   			</field>	
+	</rcv>
+</trans>

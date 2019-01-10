@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryBalance" desc="个人金融资产余额" serviceId="00850000000015">
+    <!--请求报文 -->
+    <snd>
+        <field name="indexId" length="20" type="C" desc="指标id" required="true"/>
+        <field name="userId" length="20" type="C" desc="登录号" required="true"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="acceptMan" length="120" type="C" desc="接收机构/客户经理" required="true"/>
+            <field name="indexSum" length="20" type="C" desc="累计完成指标" required="true"/>
+            <field name="unfinishedSum" length="20" type="C" desc="未完成  " required="true"/>
+        </field>
+    </rcv>
+</trans>

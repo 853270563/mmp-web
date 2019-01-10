@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="groupUpdate"   desc="群组修改同步">
+	<!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换-->
+	<snd> 
+		<field-list name="groupList" type="E" required="true">
+			<field name="GROUP_ID" length="64" type="C" desc="群组编号" required="true"/>
+			<field name="GROUP_NAME" length="64" type="C" desc="群组名称" />
+			<field name="GROUP_TYPE" length="64" type="C" desc="群组类型(0:个人群组，1:公共群组)" />
+			<field name="REMARKS" length="1024" type="C" desc="备注" />
+			<field name="GROUP_EMPLOYEES" type="C" desc="群组成员，用逗号分隔" />
+			<field name="EMP_DEL_FLAG" length="1" type="C" desc="群组成员增删标识(0:增加，1:删除)" />
+			<field name="DEL_FLAG" length="1" type="C" desc="删除标志（0:未删除，1:已删除）" required="true"/>
+		</field-list>
+	</snd>
+	
+	<!-- 响应报文，可过滤响应信息，并对数据字典进行解析-->
+	<rcv>
+		<!--公共字段 -->
+		<field name="MSG" length="100" type="C" desc="返回消息" /> 
+		<field name="STATUS" length="6" type="C" desc="返回码" />
+	</rcv>
+	
+	
+</trans>

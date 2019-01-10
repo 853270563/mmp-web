@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MGG_TRAN_CHECK" >
+  <resultMap id="BaseResultMap" class="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    <result column="APPR_ID" property="apprId" jdbcType="CHAR" />
+    <result column="TRAN_CODE" property="tranCode" jdbcType="CHAR" />
+    <result column="TRANS_ID" property="transId" jdbcType="CHAR" />
+    <result column="APPR_TIME" property="apprTime" jdbcType="TIMESTAMP" />
+    <result column="APPR_USER" property="apprUser" jdbcType="VARCHAR" />
+    <result column="APPR_STAT_CODE" property="apprStatCode" jdbcType="VARCHAR" />
+    <result column="APPR_STAT" property="apprStat" jdbcType="CHAR" />
+    <result column="APPR_RETN_INFO" property="apprRetnInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    APPR_ID, TRAN_CODE, TRANS_ID, APPR_TIME, APPR_USER, APPR_STAT_CODE, APPR_STAT, APPR_RETN_INFO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MGG_TRAN_CHECK.Base_Column_List" />
+    from MGG_TRAN_CHECK
+    <isParameterPresent >
+      <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    select 
+    <include refid="MGG_TRAN_CHECK.Base_Column_List" />
+    from MGG_TRAN_CHECK
+    where APPR_ID = #apprId:CHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    delete from MGG_TRAN_CHECK
+    where APPR_ID = #apprId:CHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="criteriaExample" >
+    delete from MGG_TRAN_CHECK
+    <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+ 	<selectKey resultClass="java.lang.String" keyProperty="attaId" type="pre" >
+  		SELECT CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), ${schema.interPlat}.nextval('SEQ_MGG_TRAN_CHECK_SqlMap')) FROM DUAL
+  	</selectKey>
+    insert into MGG_TRAN_CHECK (APPR_ID, TRAN_CODE, TRANS_ID, APPR_TIME, APPR_USER, 
+      APPR_STAT_CODE, APPR_STAT, APPR_RETN_INFO)
+    values (#apprId:CHAR#, #tranCode:CHAR#, #transId:CHAR#, #apprTime:TIMESTAMP#, #apprUser:VARCHAR#, 
+      #apprStatCode:VARCHAR#, #apprStat:CHAR#, #apprRetnInfo:VARCHAR#)
+  </insert>
+  <insert id="insertSelective" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    <selectKey resultClass="java.lang.String" keyProperty="attaId" type="pre" >
+      SELECT CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), ${schema.interPlat}.nextval('SEQ_MGG_TRAN_CHECK_SqlMap')) FROM DUAL
+  	</selectKey>
+    insert into MGG_TRAN_CHECK
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="apprId" >
+        APPR_ID
+      </isNotNull>
+      <isNotNull prepend="," property="tranCode" >
+        TRAN_CODE
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        TRANS_ID
+      </isNotNull>
+      <isNotNull prepend="," property="apprTime" >
+        APPR_TIME
+      </isNotNull>
+      <isNotNull prepend="," property="apprUser" >
+        APPR_USER
+      </isNotNull>
+      <isNotNull prepend="," property="apprStatCode" >
+        APPR_STAT_CODE
+      </isNotNull>
+      <isNotNull prepend="," property="apprStat" >
+        APPR_STAT
+      </isNotNull>
+      <isNotNull prepend="," property="apprRetnInfo" >
+        APPR_RETN_INFO
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="apprId" >
+        #apprId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="tranCode" >
+        #tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        #transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprTime" >
+        #apprTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="apprUser" >
+        #apprUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprStatCode" >
+        #apprStatCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprStat" >
+        #apprStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprRetnInfo" >
+        #apprRetnInfo:VARCHAR#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="criteriaExample" resultClass="java.lang.Integer" >
+    select count(*) from MGG_TRAN_CHECK
+    <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+  </select>
+  
+  <!-- 分页查询 -->
+  <select id="findPageByExample" resultMap="BaseResultMap" parameterClass="criteriaExample" >
+  	<include refid="public.pageBegin" />
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="MGG_TRAN_CHECK.Base_Column_List" />
+    from ${schema.interPlat}.MGG_TRAN_CHECK
+    <isParameterPresent >
+      <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+    <include refid="public.pageEnd" />
+  </select>
+  
+  <update id="updateByExampleSelective" >
+    update MGG_TRAN_CHECK
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.apprId" >
+        APPR_ID = #record.apprId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.tranCode" >
+        TRAN_CODE = #record.tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.transId" >
+        TRANS_ID = #record.transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.apprTime" >
+        APPR_TIME = #record.apprTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.apprUser" >
+        APPR_USER = #record.apprUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.apprStatCode" >
+        APPR_STAT_CODE = #record.apprStatCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.apprStat" >
+        APPR_STAT = #record.apprStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.apprRetnInfo" >
+        APPR_RETN_INFO = #record.apprRetnInfo:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update MGG_TRAN_CHECK
+    set APPR_ID = #record.apprId:CHAR#,
+      TRAN_CODE = #record.tranCode:CHAR#,
+      TRANS_ID = #record.transId:CHAR#,
+      APPR_TIME = #record.apprTime:TIMESTAMP#,
+      APPR_USER = #record.apprUser:VARCHAR#,
+      APPR_STAT_CODE = #record.apprStatCode:VARCHAR#,
+      APPR_STAT = #record.apprStat:CHAR#,
+      APPR_RETN_INFO = #record.apprRetnInfo:VARCHAR#
+    <isParameterPresent >
+      <include refid="MGG_TRAN_CHECK.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    update MGG_TRAN_CHECK
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="tranCode" >
+        TRAN_CODE = #tranCode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transId" >
+        TRANS_ID = #transId:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprTime" >
+        APPR_TIME = #apprTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="apprUser" >
+        APPR_USER = #apprUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprStatCode" >
+        APPR_STAT_CODE = #apprStatCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprStat" >
+        APPR_STAT = #apprStat:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="apprRetnInfo" >
+        APPR_RETN_INFO = #apprRetnInfo:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where APPR_ID = #apprId:CHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="cn.com.yitong.market.jjk.model.MggTranCheck" >
+    update MGG_TRAN_CHECK
+    set TRAN_CODE = #tranCode:CHAR#,
+      TRANS_ID = #transId:CHAR#,
+      APPR_TIME = #apprTime:TIMESTAMP#,
+      APPR_USER = #apprUser:VARCHAR#,
+      APPR_STAT_CODE = #apprStatCode:VARCHAR#,
+      APPR_STAT = #apprStat:CHAR#,
+      APPR_RETN_INFO = #apprRetnInfo:VARCHAR#
+    where APPR_ID = #apprId:CHAR#
+  </update>
+</sqlMap>

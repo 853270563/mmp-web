@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ROLE_MENU">
+
+    <!-- 查询SQL -->
+    <select id="queryMenuList" parameterClass="map" resultClass="java.util.HashMap">
+        SELECT distinct MENU_CODE from TZPOC_ROLE_MENU t where 1=1
+        <isNotEmpty prepend="AND" property="userId">
+            t.ROLE_ID in(select a.ROLE_ID from SYS_USER_ROLE a ,SYS_USER b where a.USER_ID = b.ID and b.LOGIN_NAME = #userId#)
+        </isNotEmpty>
+    </select>
+</sqlMap>
+

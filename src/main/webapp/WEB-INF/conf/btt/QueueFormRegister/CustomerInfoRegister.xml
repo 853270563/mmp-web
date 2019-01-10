@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trans name="CustomerInfoRegister" desc="排队填单信息登记">
+	<snd-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号"  required="true"/>
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号"  required="true"/>
+		<field name="TRAN_FLAG" length="100" type="C" desc=""  required="true"/>
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期"  required="true"/>
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号"  required="true"/>
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户"  required="true"/>
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间"  required="true"/>
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号"  required="true"/>
+		<!-- <field name="SOURCE_TYPE" length="2" type="C" desc="渠道类型"  required="true"/> -->
+	<!-- 	<field name="USER_ID" length="20" type="C" desc="操作员"  required="true"/>
+		<field name="BRANCH_ID" length="20" type="C" desc="机构码"  required="true"/> -->
+	</snd-sys-header>
+	<snd>
+		<field name="APP_BRANCH_ID" length="20" desc="办理机构代码" type="C"  required="false"/>
+		<field name="SUB_BRANCH_ID" length="20" desc="办理机构代码" type="C"  required="false"/>
+		<field name="EMBRANCH_ID" length="30" desc="分行号" type="C" required="false" />
+		<field name="SUBSIDIARY_BRANCH_ID" length="20" desc="支行号" type="C"  required="false" />
+		<field name="FORM_DATE" length="8" desc="填单日期" type="C"  required="false"/>
+		<field name="QUEUE_NO" length="20" desc="队列号码" type="C"  required="false"/>
+		<field name="FORM_TYPE" length="6" desc="填单类型" type="C"  required="false"/>
+		<field name="FORM_CONTENT" length="300" desc="填单内容" type="C"  required="false"/>
+		<field name="PRINT_TIMES" length="10" desc="打印次数" type="C"   required="false"/>
+		<field name="REMARK1" length="300" desc="备注1" type="C" required="false" />
+		<field name="REMARK2" length="300" desc="备注2" type="C"  required="false"/>
+		<field name="USER_ID" length="20" type="C" desc="操作员"  required="true"/>
+		<field name="SOURCE_TYPE" length="20" type="C" desc="渠道代码" required="false"/>
+	</snd>
+	<rev-sys-header>
+		<field name="SERVICE_CODE" length="100" type="C" desc="服务编号"  />
+		<field name="SERVICE_SCENE" length="100" type="C" desc="场景编号"  />
+		<field name="TRAN_FLAG" length="100" type="C" desc=""  />
+		<field name="TRAN_DATE" length="100" type="C" desc="交易日期"  />
+		<field name="CONSUMER_ID" length="100" type="C" desc="编号序号"  />
+		<field name="CONSUMER_SEQ_NO" length="100" type="C" desc="客户客户" />
+		<field name="TRAN_TIMESTAMP" length="100" type="C" desc="交易时间" />
+		<field name="BUSS_SEQ_NO" length="100" type="C" desc="业务流水号" />
+	</rev-sys-header>
+</trans>

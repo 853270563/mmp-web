@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="user" desc="查询人员列表">
+    <snd>
+        <!--<field name="USER_ID" type="C" length="20" desc="当前人员编号" required="true"/>-->
+        <field name="MAP_CODE" length="20" type="C" desc="角色映射编号" mapKey="0：客户经理，1：主管，2：集中录入员" required="true" />
+        <field name="LOGIN_NAME" length="64" type="C" desc="登录账号" required="true" />
+    </snd>
+
+    <rcv>
+        <field name="STATUS" length="6" type="C" desc="返回码"/>
+        <field name="MSG" length="100" type="C" desc="返回消息"/>
+
+        <!-- 产品列表 -->
+        <field-list name="LIST" type="E">
+            <field name="USER_ID" length="64" type="C" desc="用户编号" />
+            <field name="LOGIN_NAME" length="64" type="C" desc="登录账号" />
+            <field name="USER_NAME" length="64" type="C" desc="用户名称" />
+        </field-list>
+    </rcv>
+</trans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="violatePolicyLog" desc="违规日志上传" ibatisStatement="">
+    <!-- 请求报文，可进行必需项检查，设置缺省值，以及进行字段转换 -->
+    <snd>
+        <!-- 用户Id -->
+        <field name="USER_ID" length="32" type="C" desc="登陆用户Id" />
+        <!-- 设备标识 -->
+        <field name="DEVICE_UUID" length="32" required="true" type="C" desc="设备UUID" />
+        <!-- 设备操作系统 -->
+        <field name="OS_SYSTEM" length="2" required="true" type="C" desc="设备操作系统1：IOS，2：Android" />
+        <!-- 执行的策略项编码 -->
+        <field name="POLICY_CODE" length="32" required="true" type="C" desc="策略项编码" />
+        <!-- 执行的违规策略标识 -->
+        <field name="VIOLATE_POLICY_ID" length="32" type="C" desc="违规策略标识" />
+        <!-- 执行结果 0：失败，1；成功 -->
+        <field name="EXC_RESULT" length="32" required="true" type="C" desc="执行结果" />
+        <!-- 执行结果（错误信息） -->
+        <field name="RESULT_MEMO" length="32" type="C" desc="执行结果描述" />
+        <!-- 策略执行时间 2015-10-28 00:00:00 -->
+        <field name="EXC_DTIME" length="32" type="C" desc="策略执行时间" />
+    </snd>
+    
+    <!-- 响应报文，可过滤响应信息，并对数据字典进行解析 -->
+    <rcv>
+        <!--公共字段 -->
+        <field name="STATUS" length="6" type="C" desc="返回码" />
+        <field name="MSG" length="100" type="C" desc="返回消息" />
+    </rcv>
+</trans>

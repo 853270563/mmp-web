@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trans name="queryCustVisit" desc="客户访谈详细信息(工作任务下)" serviceId="00850000000031">
+    <!--请求报文 -->
+    <snd>
+        <field name="twId" length="20" type="C" desc="任务序号" required="false"/>
+        <field name="twSetMan" length="20" type="C" desc="下发人" required="false"/>
+    </snd>
+    <!-- 响应报文 -->
+    <rcv>
+        <field name="item"  xpath="/Service/Service_Body/response/item" client="LIST" type="E"  desc="解析响应报文体">
+            <field name="twTitle " length="120" type="C" desc="任务标题 " required="true"/>
+            <field name="twBeginDate" length="20" type="C" desc="任务开始时间"  required="true"/>
+            <field name="twEndDate" length="20" type="C" desc="任务结束时间" required="true" />
+            <field name="twCont" length="20" type="C" desc="任务内容"  required="true"/>
+            <field name="visitType" length="20" type="C" desc="访谈类型"  />
+        </field>
+    </rcv>
+</trans>
